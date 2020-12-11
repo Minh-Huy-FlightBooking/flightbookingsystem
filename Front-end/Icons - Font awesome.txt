@@ -1,0 +1,73 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+https://fontawesome.com/v4.7.0/icons/
+<i class="fa fa-facebook-official" aria-hidden="true"></i>
+            <i class="fa fa-youtube" aria-hidden="true"></i>
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+            <i class="fa fa-cloud"></i>
+
+ <!-- Social buttons -->
+                <ul class="list-unstyled list-inline text-center">
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-fb mx-1">
+                            <i class="fab fa-facebook-f"> </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-tw mx-1">
+                            <i class="fab fa-twitter"> </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-gplus mx-1">
+                            <i class="fab fa-google-plus-g"> </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-li mx-1">
+                            <i class="fab fa-linkedin-in"> </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn-floating btn-dribbble mx-1">
+                            <i class="fab fa-dribbble"> </i>
+                        </a>
+                    </li>
+                </ul>
+
+creative-time
+Qatar Airways
+
+About us
+Awards
+Careers
+Press releases
+Sponsorship
+Travel alerts
+Al Darb Qatarisation
+Environmental awareness
+
+
+Group companies
+
+Hamad International Airport
+Qatar Executive
+Qatar Duty Free
+Qatar Airways Cargo
+More about Group companies
+
+Business solutions
+
+Corporate travel
+Beyond Business
+QMICE Meetings and Events
+
+Contact us
+
+Help
+
+Business partners
+
+Affiliate marketing
+e-Procurement
+Trade partners
