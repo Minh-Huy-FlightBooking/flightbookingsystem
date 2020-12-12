@@ -27,6 +27,7 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
+    @Column(name = "price")
     private double price;
 
 

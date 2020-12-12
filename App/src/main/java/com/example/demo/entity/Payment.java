@@ -15,7 +15,7 @@ public class Payment {
     private boolean status;
 
     @OneToOne(mappedBy = "payment")
-    private Payment payment;
+    private Booking booking;
 
     public Payment() {
     }
@@ -44,11 +44,11 @@ public class Payment {
         this.status = status;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Booking getBooking() {
+        return booking;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }
