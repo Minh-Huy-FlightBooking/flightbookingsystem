@@ -1,9 +1,9 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Passenger;
+import com.example.demo.entity.Payment;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PassengerRepository extends CrudRepository<Passenger, Integer> {
+public interface PaymentRepository extends CrudRepository<Payment, Integer> {
 }
