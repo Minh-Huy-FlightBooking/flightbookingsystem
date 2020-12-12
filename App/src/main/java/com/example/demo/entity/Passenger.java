@@ -1,4 +1,4 @@
 package com.example.demo.entity;
 
-public class Client {
+public class Passenger {
 }
