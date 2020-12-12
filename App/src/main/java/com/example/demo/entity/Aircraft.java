@@ -1,0 +1,106 @@
+package com.example.demo.entity;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "aircraft")
+public class Aircraft {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "aircraft_id")
+    private int aircraftId;
+    @Column(name = "model")
+    private String model;
+    @Column(name = "enabled")
+    private boolean enabled;
+    @Column(name = "total_economy")
+    private int total_economy;
+    @Column(name = "total_business")
+    private int total_business;
+    @ManyToOne
+    @JoinColumn(name = "airport_id")
+    private Airport airport;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+    @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
+    private List<Seat> seatList;
+    @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
+    private List<Flight> flightList;
+
+    public int getAircraftId() {
+        return aircraftId;
+    }
+
+    public void setAircraftId(int aircraftId) {
+        this.aircraftId = aircraftId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getTotal_economy() {
+        return total_economy;
+    }
+
+    public void setTotal_economy(int total_economy) {
+        this.total_economy = total_economy;
+    }
+
+    public int getTotal_business() {
+        return total_business;
+    }
+
+    public void setTotal_business(int total_business) {
+        this.total_business = total_business;
+    }
+
+    public Airport getAirport() {
+        return airport;
+    }
+
+    public void setAirport(Airport airport) {
+        this.airport = airport;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public List<Seat> getSeatList() {
+        return seatList;
+    }
+
+    public void setSeatList(List<Seat> seatList) {
+        this.seatList = seatList;
+    }
+
+    public List<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(List<Flight> flightList) {
+        this.flightList = flightList;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Aircraft() {
+    }
+}
