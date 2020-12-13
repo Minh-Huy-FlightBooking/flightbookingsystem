@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -14,9 +15,14 @@ public class Account {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @ManyToMany(fetch  = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "account_role",
+            joinColumns = {@JoinColumn(name = "account_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private List<Role> roles;
 
     @OneToOne(mappedBy = "account")
     private Guest guest;
@@ -56,11 +62,11 @@ public class Account {
         this.password = password;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

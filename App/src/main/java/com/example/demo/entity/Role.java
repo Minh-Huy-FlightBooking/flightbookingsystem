@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user_role")
-public class UserRole {
+@Table(name = "role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
@@ -13,10 +13,13 @@ public class UserRole {
     @Column(name = "role")
     private String role;
 
-    @OneToMany(mappedBy = "userRole")
+    @ManyToMany
+    @JoinTable(name = "account_role",
+            joinColumns = {@JoinColumn(name = "role_id"),},
+            inverseJoinColumns = {@JoinColumn(name = "account_id")})
     private List<Account> accounts;
 
-    public UserRole() {
+    public Role() {
     }
 
     public int getRoleId() {
