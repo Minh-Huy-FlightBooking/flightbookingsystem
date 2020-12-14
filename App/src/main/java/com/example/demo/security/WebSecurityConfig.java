@@ -53,17 +53,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        ;
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/administrator").hasAuthority(ADMINISTRATOR_ROLE)
-                .antMatchers("/employee").hasAuthority(EMPLOYEE_ROLE)
-                .antMatchers("/passenger").hasAuthority(PASSENGER_ROLE)
-                .and()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/administrator").hasAuthority(ADMINISTRATOR_ROLE)
+                    .antMatchers("/employee").hasAuthority(EMPLOYEE_ROLE)
+                    .antMatchers("/passenger").hasAuthority(PASSENGER_ROLE)
+                    .and()
                 .formLogin()
-                .permitAll()
-                .successHandler(authenticationSuccessHandlerCustom)
-                .and()
+                    .permitAll()
+                    .successHandler(authenticationSuccessHandlerCustom)
+                    .and()
                 .logout()
-                .permitAll()
+                    .permitAll()
         ;
     }
 }
