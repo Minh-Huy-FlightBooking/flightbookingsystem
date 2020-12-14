@@ -6,19 +6,241 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home Page of login page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<h1>This is the header!!!</h1>
-    <table>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </table>
+<header>
+    <div class="container-fluid bg-light ">
+        <div class="row">
+            <div class="col-sm-7">
+                <img src="img/logo/Qatar-Airways-Logo.png" width="120px" height="auto">
+            </div>
+            <div class="col-sm-5 align-self-center justify-content-end">
+                Let's stay connected to get bonuses and thousands of benefits
+            </div>
+
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container-fluid py-5" style="background-color: rgb(180, 180, 180, 0.7); height: 90vh;">
+        <div class=" container ">
+            <div class="row ">
+                <div class="col-md-5 mx-auto ">
+                    <div class="myform form ">
+                        <div class="logo mb-3 ">
+                            <div class="col-md-12 text-center ">
+                                <h1>Login</h1>
+                            </div>
+                        </div>
+                        <form action=" " method="post " name="login">
+                            <div class="form-group ">
+                                <label for="username">Username</label>
+                                <input type="text " name="username " class="form-control " id="username" aria-describedby="emailHelp " placeholder="Enter email ">
+                            </div>
+                            <div class="form-group ">
+                                <label for="password">Password</label>
+                                <input type="password " name="password " id="password" class="form-control " aria-describedby="emailHelp " placeholder="Enter Password ">
+                            </div>
+                            <div class="form-group ">
+                                <p class="text-center ">By signing up you accept our <a href="# ">Terms Of Use</a></p>
+                            </div>
+                            <div class="col-md-12 text-center ">
+                                <button type="submit " class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="login-or ">
+                                    <hr class="hr-or ">
+                                    <span class="span-or"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3 ">
+                                <p class="text-center ">
+                                    <a href="javascript:void(); " class="google btn mybtn "><i class="fa fa-google-plus ">
+                                    </i> Signup using Google
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="form-group ">
+                                <p class="text-center ">Don't have account? <a href="# " id="signup ">Sign up here</a></p>
+                            </div>
+                        </form>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="container-fluid page-footer font-small indigo pt-4" style="background-color: rgb(117, 108, 81);">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-6 ">
+                <img src="img/logo/Qatar-Airways-Logo.png" width="150px" height="auto">
+            </div>
+            <div class="col-md-2 align-self-center ">
+                Let's stay connected
+            </div>
+            <div class="col-md-3 align-self-center align-items-end " style="font-size: 15px; ">
+                <i class="fa fa-facebook-official fa-2x px-2" aria-hidden="true "></i>
+                <i class="fa fa-youtube fa-2x  px-2" aria-hidden="true "></i>
+                <i class="fa fa-twitter-square fa-2x  px-2" aria-hidden="true "></i>
+                <i class="fa fa-instagram fa-2x  px-2" aria-hidden="true "></i>
+                <i class="fa fa-cloud fa-2x  px-2"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left ">
+        <!-- Grid row -->
+        <div class="row ">
+            <!-- Grid column -->
+            <div class="col-md-3 mx-auto ">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Qatar Airways</h5>
+
+                <ul class="list-unstyled ">
+                    <li>
+                        <a href="#! ">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Awards</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Careers</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Press releases</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none ">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mx-auto ">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Group Companies</h5>
+
+                <ul class="list-unstyled ">
+                    <li>
+                        <a href="#! ">Hamad International Airport</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Qatar Executive</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Qatar Duty Free</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Qatar Airways Cargo</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none ">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mx-auto ">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Business Solution</h5>
+
+                <ul class="list-unstyled ">
+                    <li>
+                        <a href="#! ">Corporate travel</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Beyond Business</a>
+                    </li>
+                    <li>
+                        <a href="#! ">QMICE Meetings and Events</a>
+                    </li>
+                    <li>
+                        <a href="#! ">Visions</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none ">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mx-auto ">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Contact us</h5>
+
+                <ul class="list-unstyled ">
+                    <li>
+                        <a href="#! "><i class="fa fa-envelope mr-3 "></i> info@example.com</a>
+                    </li>
+                    <li>
+                        <a href="#! "><i class="fa fa-phone mr-3 "></i> + 01 234 567 88</a>
+                    </li>
+                    <li>
+                        <a href="#! "><i class="fa fa-print mr-3 "></i> + 01 234 567 89</a>
+                    </li>
+                    <li>
+                        <a href="#! "> <i class="fas fa-home "></i></i> New York, NY 10012, US</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+    <!-- <div class="container ">
+        <img class="img-fluid " src="img/total-awards-2.PNG " />
+    </div> -->
+    <!-- Copyright -->
+    <div class="container footer-copyright text-start py-3 ">
+        <div class="row ">
+            <div class="col-4.5 ">
+                © 2020 Copyright:
+                <a href="# ">Qatar Airways. All rights reserved
+                </a>
+            </div>
+            <div class="col-2 ">
+                |
+                <span>Cookie policy</span>
+            </div>
+            <div class="col-2 ">
+                Legal Privacy
+            </div>
+            <div class="col-2 ">
+                Accessibility
+            </div>
+            <div class="col-2 ">
+                Optional services
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
+
 </html>

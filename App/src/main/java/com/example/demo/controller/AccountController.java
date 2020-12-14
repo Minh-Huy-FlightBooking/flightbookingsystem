@@ -22,4 +22,9 @@ public class AccountController {
     public String goToHomepage(){
         return "security";
     }
+
+    @RequestMapping(value = "/loginPage")
+    public String goToCustomLoginPage (){
+        return "login";
+    }
 }
