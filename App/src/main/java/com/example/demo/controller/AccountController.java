@@ -10,6 +10,14 @@ public class AccountController {
     public String goToPassengerPage(){
         return "passenger";
     }
+    @RequestMapping(value = "/administrator", method = RequestMethod.GET)
+    public String goToAdministratorPage(){
+        return "admin";
+    }
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    public String goToEmployeePage(){
+        return "employee";
+    }
     @RequestMapping("/")
     public String goToPassengerPage2(){
         return "security";
