@@ -12,5 +12,6 @@
 </head>
 <body>
     <h1>Passenger Page</h1>
+<a href="/logout">Log out</a>
 </body>
 </html>

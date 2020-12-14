@@ -12,5 +12,7 @@
 </head>
 <body>
     <h1>Security Page</h1>
+home page
+<a href="/login">Login</a>
 </body>
 </html>

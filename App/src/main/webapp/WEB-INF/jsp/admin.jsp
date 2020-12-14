@@ -12,5 +12,6 @@
 </head>
 <body>
 Admin
+<a href="/logout">Log out</a>
 </body>
 </html>

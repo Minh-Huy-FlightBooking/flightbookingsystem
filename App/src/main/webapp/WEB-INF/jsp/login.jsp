@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home Page</title>
+    <title>Home Page of login page</title>
 </head>
 <body>
 <h1>This is the header!!!</h1>

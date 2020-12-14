@@ -12,5 +12,7 @@
 </head>
 <body>
 Employee
+<a href="/logout">Log out</a>
+
 </body>
 </html>

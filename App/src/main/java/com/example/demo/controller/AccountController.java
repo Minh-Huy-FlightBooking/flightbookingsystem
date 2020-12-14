@@ -18,8 +18,8 @@ public class AccountController {
     public String goToEmployeePage(){
         return "employee";
     }
-    @RequestMapping("/")
-    public String goToPassengerPage2(){
+    @RequestMapping(value = "/")
+    public String goToHomepage(){
         return "security";
     }
 }
