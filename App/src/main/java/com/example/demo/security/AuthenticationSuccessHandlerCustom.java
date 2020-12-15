@@ -44,7 +44,7 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
         } else if (isEmployeeRole) {
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "employee/employee");
         } else if (isPassengerRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/passenger");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "passenger/passenger");
         } else {
             throw new IllegalStateException();
         }
