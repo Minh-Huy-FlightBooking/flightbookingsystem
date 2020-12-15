@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-
-
-
-
     @RequestMapping(value = "/loginPage")
     public String goToCustomLoginPage (){
         return "login";
