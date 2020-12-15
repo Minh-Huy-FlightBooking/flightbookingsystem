@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PassengerController {
     @RequestMapping(value = "/")
     public String goToHomepage(){
-        return "security";
+        return "index";
     }
 
     @RequestMapping(value = "/passenger", method = RequestMethod.GET)
