@@ -15,7 +15,7 @@
     <a href="/logout">Log out</a>
     <br>
     <a href="flightList">Go to Flight List</a>
-    <a href="flight-list.jsp">Go to Flight List 2</a>
+
 
 
 </body>
