@@ -10,4 +10,9 @@ public class AccountController {
     public String goToLoginPage (){
         return "login";
     }
+    @RequestMapping(value = "/handleLogin", method = RequestMethod.POST)
+    public String handleLoginData (){
+
+    }
+
 }

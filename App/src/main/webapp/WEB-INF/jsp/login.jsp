@@ -20,7 +20,7 @@
     <div class="container-fluid bg-light ">
         <div class="row">
             <div class="col-sm-7">
-                <img src="image/logo/logo-one-world.png" width="120px" height="auto">
+                <img src="image/logo/Qatar-Airways-Logo.png" width="120px" height="auto">
             </div>
             <div class="col-sm-5 align-self-center justify-content-end">
                 Let's stay connected to get bonuses and thousands of benefits
@@ -85,7 +85,7 @@
     <div class="container ">
         <div class="row ">
             <div class="col-md-6 ">
-                <img src="img/logo/Qatar-Airways-Logo.png" width="150px" height="auto"/>
+                <img src="image/logo/Qatar-Airways-Logo.png" width="150px" height="auto"/>
             </div>
             <div class="col-md-2 align-self-center ">
                 Let's stay connected
