@@ -1,0 +1,34 @@
+airport_id,airport_name,city_id
+1,"Da Nang(DAD)",1
+2,"Tan Son Nhat(SGN)",2
+3,"Noi Bai(HAN)",3
+4,"Nha Trang(NHA)",4
+5,Dalat(DAL),5
+6,Hue(HUI),6
+7,Suvarnabhumi(BKK),7
+8,Krabi(KBV),8
+9,"Chiang Mai(CNX)",9
+10,"Koh Samui(USM)",10
+11,Changi(SIN),11
+12,Hamad(DOH),12
+13,Attapeu(AOU),13
+14,Pakse(PKZ),14
+15,"Luang Prabang(LPQ)",15
+16,Savannakhet(ZVK),16
+17,Wattay(VTE),17
+18,"Phnom Penh(PNH)",18
+19,"Svay Rieng(SVR)",19
+20,"Siem Reap(REP)",20
+21,Sihanoukville(KOS),21
+22,Roxas(RXS),22
+23,Basco(BSO),23
+24,"Ninoy Aquino(MNL)",24
+25,Mactan(CEB),25
+26,"Soekarno Hatta(CGK)",26
+27,"Ngurah Rai(DPS)",27
+28,Ambon(AMQ),28
+29,Kupang(KOE),29
+30,Mingaladon(RGN),30
+31,Bagan(NYU),31
+32,Dawei(TVY),32
+33,Heho(HEH),33
