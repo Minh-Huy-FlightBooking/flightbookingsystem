@@ -20,7 +20,7 @@
     <div class="container-fluid bg-light ">
         <div class="row">
             <div class="col-sm-7">
-                <img src="image/logo/Qatar-Airways-Logo.png" width="120px" height="auto">
+                <img src="image/logo/logo-one-world.png" width="120px" height="auto">
             </div>
             <div class="col-sm-5 align-self-center justify-content-end">
                 Let's stay connected to get bonuses and thousands of benefits
@@ -80,11 +80,12 @@
     </div>
 </main>
 
+<!-- Footer -->
 <footer class="container-fluid page-footer font-small indigo pt-4" style="background-color: rgb(117, 108, 81);">
     <div class="container ">
         <div class="row ">
             <div class="col-md-6 ">
-                <img src="image/logo/Qatar-Airways-Logo.png" width="150px" height="auto">
+                <img src="img/logo/Qatar-Airways-Logo.png" width="150px" height="auto">
             </div>
             <div class="col-md-2 align-self-center ">
                 Let's stay connected
@@ -215,22 +216,21 @@
     <!-- Copyright -->
     <div class="container footer-copyright text-start py-3 ">
         <div class="row ">
-            <div class="col-4.5 ">
+            <div class="col-4.5 border-right border-dark pr-2 mr-2">
                 © 2020 Copyright:
                 <a href="# ">Qatar Airways. All rights reserved
                 </a>
             </div>
-            <div class="col-2 ">
-                |
+            <div class="col ">
                 <span>Cookie policy</span>
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Legal Privacy
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Accessibility
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Optional services
             </div>
         </div>
