@@ -40,9 +40,9 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
             }
         }
         if (isAdministratorRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/administrator");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/administrator");
         } else if (isEmployeeRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/employee");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "employee/employee");
         } else if (isPassengerRole) {
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/passenger");
         } else {
