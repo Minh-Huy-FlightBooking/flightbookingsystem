@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
     </div>
 </header>
 <main>
-    <div class="container-fluid py-5" style="background-color: rgb(180, 180, 180, 0.7); height: 90vh;">
+    <div class="container-fluid py-5" style="background-color: rgb(180, 180, 180); height: 90vh;">
         <div class=" container ">
             <div class="row ">
                 <div class="col-md-5 mx-auto ">
@@ -40,20 +40,20 @@
                                 <h1>Login</h1>
                             </div>
                         </div>
-                        <form action=" " method="post " name="login">
+                        <form action="handleLogin" method="post" name="login">
                             <div class="form-group ">
                                 <label for="username">Username</label>
-                                <input type="text " name="username " class="form-control " id="username" aria-describedby="emailHelp " placeholder="Enter email ">
+                                <input type="text " name="username" class="form-control " id="username" aria-describedby="emailHelp " placeholder="Enter email ">
                             </div>
                             <div class="form-group ">
                                 <label for="password">Password</label>
-                                <input type="password " name="password " id="password" class="form-control " aria-describedby="emailHelp " placeholder="Enter Password ">
+                                <input type="password " name="password" id="password" class="form-control " aria-describedby="emailHelp " placeholder="Enter Password ">
                             </div>
                             <div class="form-group ">
-                                <p class="text-center ">By signing up you accept our <a href="# ">Terms Of Use</a></p>
+                                <p class="text-center">By signing up you accept our <a href="# ">Terms Of Use</a></p>
                             </div>
                             <div class="col-md-12 text-center ">
-                                <button type="submit " class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
                             </div>
                             <div class="col-md-12 ">
                                 <div class="login-or ">
@@ -80,11 +80,12 @@
     </div>
 </main>
 
-<footer class="container-fluid page-footer font-small indigo pt-4" style="background-color: rgb(117, 108, 81);">
+<!-- Footer -->
+<footer class="container-fluid page-footer font-small indigo pt-4" style="background-color: rgb(81,117,94);">
     <div class="container ">
         <div class="row ">
             <div class="col-md-6 ">
-                <img src="image/logo/Qatar-Airways-Logo.png" width="150px" height="auto">
+                <img src="image/logo/Qatar-Airways-Logo.png" width="150px" height="auto"/>
             </div>
             <div class="col-md-2 align-self-center ">
                 Let's stay connected
@@ -215,22 +216,21 @@
     <!-- Copyright -->
     <div class="container footer-copyright text-start py-3 ">
         <div class="row ">
-            <div class="col-4.5 ">
+            <div class="col-4.5 border-right border-dark pr-2 mr-2">
                 © 2020 Copyright:
                 <a href="# ">Qatar Airways. All rights reserved
                 </a>
             </div>
-            <div class="col-2 ">
-                |
+            <div class="col ">
                 <span>Cookie policy</span>
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Legal Privacy
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Accessibility
             </div>
-            <div class="col-2 ">
+            <div class="col ">
                 Optional services
             </div>
         </div>
