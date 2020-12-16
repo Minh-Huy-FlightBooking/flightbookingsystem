@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Airport;
+import com.example.demo.entity.FlightRoute;
 import com.example.demo.repository.FlightRouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,36 @@ import java.util.List;
 @Service
 public class FlightRouteService {
     @Autowired
-    private static FlightRouteRepository flightRouteRepository;
-    @Autowired
-    private static AirportService airportService;
+    private FlightRouteRepository flightRouteRepository;
 
-
-    public static void main(String[] args) {
-        System.out.println(airportService.getAll());
+    public List<FlightRoute> getAllFlightRoute(){
+        return (List<FlightRoute>) flightRouteRepository.findAll();
+    }
+    public FlightRoute getFlightRouteById(int id){
+        return flightRouteRepository.findByRouteId(id);
+    }
+    public boolean saveFlightRoute(FlightRoute flightRoute){
+        try {
+            flightRouteRepository.save(flightRoute);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean deleteFlightRoute(int id){
+        try {
+            flightRouteRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean updateFlightRoute(FlightRoute flightRoute){
+        try {
+            flightRouteRepository.save(flightRoute);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

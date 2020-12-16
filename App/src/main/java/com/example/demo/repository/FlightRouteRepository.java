@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FlightRouteRepository extends CrudRepository<FlightRoute,Integer> {
+    FlightRoute findByRouteId(int id);
 }
