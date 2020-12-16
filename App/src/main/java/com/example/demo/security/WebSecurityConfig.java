@@ -39,14 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
                     .antMatchers("/admin/**").hasAuthority(ADMINISTRATOR_ROLE)
                     .antMatchers("/employee/**").hasAuthority(EMPLOYEE_ROLE)
                     .antMatchers("/passenger/**").hasAuthority(PASSENGER_ROLE)
+                    .antMatchers("/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/loginPage")
+                    .loginPage("/login")
                     .loginProcessingUrl("/j_spring_security_check")
                     .usernameParameter("username")
                     .passwordParameter("password")

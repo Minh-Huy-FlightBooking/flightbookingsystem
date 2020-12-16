@@ -10,4 +10,9 @@ public class SystemController {
     public String goToHomepage(){
         return "index";
     }
+    @RequestMapping(value = "/test")
+    public String goToTest (){
+        return "test";
+    }
+
 }
