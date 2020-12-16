@@ -4,6 +4,9 @@ import com.example.demo.entity.Airport;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AirportRepository extends CrudRepository<Airport, Integer> {
+    List<Airport> findByAirportId(int id);
 }
