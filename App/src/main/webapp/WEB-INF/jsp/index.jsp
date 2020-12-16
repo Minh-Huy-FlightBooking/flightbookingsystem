@@ -15,10 +15,7 @@
     <jsp:include page="css/homepage_css.jsp"/>
 </head>
 <body>
-<div>
-    Homepage
-    <a href="loginPage">Log in</a>
-</div>
+
 <div class="img-header bg-header">
     <header>
         <!-- nav logo -->
@@ -42,7 +39,15 @@
     </div>
 
 </div>
+<div>
+    Homepage
+    <a href="loginPage">Log in</a>
+    <br>
+    <br>
+    <br>
+    <br>
 
+</div>
 <section class="banner"></section>
 <script type="text/javascript">
     window.addEventListener("scroll",function(){

@@ -10,10 +10,10 @@ public class AdminController {
 
     @RequestMapping(value = "/flightList")
     public String goToFlightListPage (){
-        return "admin/flight-list";
+        return "administration/flight-list";
     }
 
-    @RequestMapping(value = "/administrator", method = RequestMethod.GET)
+    @RequestMapping(value = "/adminSite", method = RequestMethod.GET)
     public String goToAdministratorPage(){
         return "admin2";
     }

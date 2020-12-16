@@ -40,11 +40,11 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
             }
         }
         if (isAdministratorRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/administrator");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/adminSite");
         } else if (isEmployeeRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "employee/employee");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "employee/employeePage");
         } else if (isPassengerRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "passenger/passenger");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "passenger/passengerPage");
         } else {
             throw new IllegalStateException();
         }
