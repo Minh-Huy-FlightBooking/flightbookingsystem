@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,21 +45,21 @@
                                 <h1>Login</h1>
                             </div>
                         </div>
-                        <form action="/perform_login" method="post" name="login">
+                        <form:form action="j_spring_security_check" method="post" name="login">
                             <div class="form-group ">
                                 <label for="username">Username</label>
-                                <input type="text " name="username" class="form-control " id="username" aria-describedby="emailHelp " placeholder="Enter email ">
+                                <input type="text" name="username" class="form-control " id="username" aria-describedby="emailHelp" placeholder="Enter username ">
                             </div>
                             <div class="form-group ">
                                 <label for="password">Password</label>
-                                <input type="password " name="password" id="password" class="form-control " aria-describedby="emailHelp " placeholder="Enter Password ">
+                                <input type="password " name="password" id="password" class="form-control " aria-describedby="emailHelp" placeholder="Enter Password ">
                             </div>
                             <div class="form-group ">
                                 <p class="text-center">By signing up you accept our <a href="# ">Terms Of Use</a></p>
                             </div>
                             <div class="col-md-12 text-center ">
-                                <button type="submit" name="${_csrf.parameterName}" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
-                                <input type="hidden" name="${_csrf.parameterName}"/>
+                                <button type="submit" name="" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </div>
                             <div class="col-md-12">
                                 <div class="login-or ">
@@ -76,9 +77,8 @@
                             <div class="form-group ">
                                 <p class="text-center ">Don't have account? <a href="# " id="signup ">Sign up here</a></p>
                             </div>
-                        </form>
+                        </form:form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

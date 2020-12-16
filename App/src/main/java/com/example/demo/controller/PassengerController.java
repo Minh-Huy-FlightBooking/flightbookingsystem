@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/passenger")
 public class PassengerController {
 
-
     @RequestMapping(value = "/passenger", method = RequestMethod.GET)
     public String goToPassengerPage(){
         return "passenger";
