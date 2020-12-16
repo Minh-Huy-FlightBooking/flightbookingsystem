@@ -5,6 +5,7 @@
   Time: 7:21 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="<c:url value="image" />" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 
@@ -20,7 +22,9 @@
     <div class="container-fluid bg-light ">
         <div class="row">
             <div class="col-sm-7">
-                <img src="image/logo/Qatar-Airways-Logo.png" width="120px" height="auto">
+<%--                <img src="resource/image/logo/Qatar-Airways-Logo.png" width="120px" height="auto">--%>
+                <img src="<c:url value="image/logo/Qatar-Airways-Logo.png"/>" width="120px" height="auto">
+
             </div>
             <div class="col-sm-5 align-self-center justify-content-end">
                 Let's stay connected to get bonuses and thousands of benefits
@@ -40,7 +44,7 @@
                                 <h1>Login</h1>
                             </div>
                         </div>
-                        <form action="handleLogin" method="post" name="login">
+                        <form action="/perform_login" method="post" name="login">
                             <div class="form-group ">
                                 <label for="username">Username</label>
                                 <input type="text " name="username" class="form-control " id="username" aria-describedby="emailHelp " placeholder="Enter email ">
@@ -53,9 +57,10 @@
                                 <p class="text-center">By signing up you accept our <a href="# ">Terms Of Use</a></p>
                             </div>
                             <div class="col-md-12 text-center ">
-                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                                <button type="submit" name="${_csrf.parameterName}" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                                <input type="hidden" name="${_csrf.parameterName}"/>
                             </div>
-                            <div class="col-md-12 ">
+                            <div class="col-md-12">
                                 <div class="login-or ">
                                     <hr class="hr-or ">
                                     <span class="span-or"></span>
