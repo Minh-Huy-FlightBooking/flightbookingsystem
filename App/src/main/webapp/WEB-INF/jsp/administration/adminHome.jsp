@@ -21,6 +21,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>
     <script src="<c:url value="/resources/js/adminHome.js"/>"></script>
+    <style>
+        Dashboard function button
+        a.functionButton {
+            color: white;
+            text-decoration: none;
+        }
+        a.functionButton:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+
+    </style>
+
 </head>
 
 <body>
@@ -77,6 +91,11 @@
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
                         <div class="c-menu-item__title"><span>Gifts</span></div>
+                    </div>
+                </li>
+                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
+                    <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                        <div class="c-menu-item__title"><span><a href="addAircraft" class="functionButton">Add Aircraft</a></span></div>
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
