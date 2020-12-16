@@ -13,8 +13,8 @@ public class AdminController {
         return "administration/flight-list";
     }
 
-    @RequestMapping(value = "/adminSite", method = RequestMethod.GET)
+    @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
-        return "admin2";
+        return "administration/adminHome";
     }
 }
