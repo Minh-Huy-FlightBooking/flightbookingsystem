@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Admin</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+
+		<form action="${pageContext.request.contextPath}/login" method="post">
+			<!-- Side bar -->
+			<div class="sidebar">
+		        <a href="${pageContext.request.contextPath}/admin_userManager"><i class="fa fa fa-users "></i>&nbspUser</a>
+		        <a href="${pageContext.request.contextPath}/admin_productManager"><i class="fa fa-product-hunt " aria-hidden="true"></i>Product</a>
+		        <a href="${pageContext.request.contextPath}/admin_changePassword"><i class="fa fa-user "></i>Account</a>
+		        <a href="${pageContext.request.contextPath}/login"><i class="fa fa-sign-out "></i>Logout</a>
+		    </div>
+		    <!-- Page content -->
+			<div style="margin-left: 170px ">
+				<h1 style="color: red;">Dừng lại!</h1>
+			<h2>Bạn có chắc là admin?</h2>
+			<h3>Đây là một tính năng của trình duyệt dành cho các nhà phát triển. Nếu ai đó bảo bạn sao chép-dán nội dung nào đó vào đây để bật một tính năng của trang web hoặc "hack" tài khoản của người khác, thì đó là hành vi lừa đảo và sẽ khiến họ có thể truy cập vào tài khoản trang web của bạn.</h2>
+			</div>
+			
+		</form>
+	</body>
+</html>

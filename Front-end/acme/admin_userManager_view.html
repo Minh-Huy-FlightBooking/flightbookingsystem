@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- Chỉnh lại tiếng việt nếu muốn -->
+		<title>User Detail</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<style>
+			.mycolor{
+				background-color: #0dd6b8;
+				border-color: #0dd6b8;
+				color: white
+			}
+		</style>
+	</head>
+	<body>
+		<i class="fa fa-facebook" aria-hidden="true"></i>
+		<jsp:include page="_header.jsp"></jsp:include>
+		<form action="${pageContext.request.contextPath}/login" method="post">
+			<!-- phần này view cả panel -->
+		<div class="container" style="margin-top: 30px;">
+    		
+				<div class="card">
+					<div class="card-header">
+						<h3>Admin</h3>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Thông tin chi tiết</h5>
+						<input type="hidden" name="userId" value="${user.id}">
+						<div class="col-xs-12 col-sm-12 ">
+					<table class="table table-condensed table-hover" id="myTable">
+		          		<tbody>
+		          		<tr>
+					<td>Họ tên: </td>
+					<td>${user.name}</td>
+		          		</tr>
+		          		<tr>
+		          			<td>Giới tính: </td>
+		          			<td>${user.gender}</td>
+		          		</tr>
+		          		<tr>
+		          			<td>Địa chỉ: </td>
+		          			<td>${user.address}</td>
+		          		</tr>
+		          		<tr>
+		          			<td>Số điện thoại: </td>
+		          			<td>${user.phone}</td>
+		          		</tr>
+		          		<tr>
+		          			<td>Gmail: </td>
+		          			<td>${user.gmail}</td>
+		          		</tr>
+		          		<tr>
+		          			<td>Giỏ hàng: </td>
+		          			<td><a href="admin_userCart_view?userId=${user.id}" class="btn btn-sm mycolor">
+		          				<i class="fa fa-shopping-cart"></i></a>
+		          			</td>
+		          		</tr>
+		          	</tbody>
+					</table>
+						</div>
+					</div>
+				</div>
+			</form>
+		<!-- Phần này script phần tìm kiếm -->
+		<script>
+		$(document).ready(function(){
+		  $('[data-toggle="tooltip"]').tooltip();   
+		});
+		</script>
+	</body>
+</html>
