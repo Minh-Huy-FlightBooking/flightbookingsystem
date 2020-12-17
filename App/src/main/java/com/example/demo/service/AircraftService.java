@@ -26,4 +26,6 @@ public class AircraftService {
     public Aircraft getAircraftById (int aircraftId){
         return aircraftRepository.findByAircraftId(aircraftId);
     }
+
+    public List<Aircraft> getAircraftByAirportId(int id){return aircraftRepository.findAircraftsByAirport_AirportId(id);}
 }

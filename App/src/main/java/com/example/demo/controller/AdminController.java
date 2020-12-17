@@ -3,10 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Aircraft;
 import com.example.demo.entity.Flight;
 import com.example.demo.entity.FlightRoute;
-<<<<<<< HEAD
-import com.example.demo.repository.FlightRepository;
-=======
->>>>>>> 093500dea5f41d403abfbd7f8227223ca1a38425
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +25,7 @@ public class AdminController {
 
     @Autowired
     private SeatService seatService;
-    
+
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
         return "administration/adminHome";
@@ -127,6 +123,12 @@ public class AdminController {
     public String returnFlightList(Model model){
         model.addAttribute("flightList",flightService.getAllFlight());
         return "administration/flight-list";
+    }
+    @RequestMapping("/addFlight")
+    public String addFlight(Model model){
+        model.addAttribute("flight",new Flight());
+        model.addAttribute("flightRoute",flightRouteService.getAllFlightRoute());
+        model.addAttribute("aircraft",aircraftService.);
     }
 
 }
