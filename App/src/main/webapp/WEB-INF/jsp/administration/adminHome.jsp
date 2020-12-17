@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>
     <script src="<c:url value="/resources/js/adminHome.js"/>"></script>
@@ -34,7 +34,13 @@
 
 
     </style>
-
+    <script>
+        $(document).ready(function(){
+            $("#content-flight-route").click(function(){
+                $("#page-content").load("flight-route-list");
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -69,7 +75,7 @@
             <ul class="u-list">
                 <li class="c-menu__item is-active" data-toggle="tooltip" title="Flights">
                     <div class="c-menu__item__inner"><i class="fa fa-plane"></i>
-                        <div class="c-menu-item__title"><span>Flights</span></div>
+                        <div class="c-menu-item__title" id="content-flight-route"><span>Flights</span></div>
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Modules">
@@ -120,7 +126,7 @@
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
-        <div class="page-content">Content goes here</div>
+        <div class="page-content" id="page-content">Content goes here</div>
     </div>
 </main>
 <script>
