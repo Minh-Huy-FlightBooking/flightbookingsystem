@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AircraftRepository extends CrudRepository<Aircraft,Integer> {
+    Aircraft findByAircraftId(int aircraftId);
 }

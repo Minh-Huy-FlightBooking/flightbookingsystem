@@ -17,6 +17,6 @@ public class FlightRouteService {
 
 
     public static void main(String[] args) {
-        System.out.println(airportService.getAll());
+        System.out.println(airportService.getAllAirports());
     }
 }

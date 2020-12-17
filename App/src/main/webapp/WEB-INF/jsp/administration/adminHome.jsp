@@ -94,9 +94,18 @@
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
+                    <a href="addAircraft" class="functionButton">
                     <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                        <div class="c-menu-item__title"><span><a href="addAircraft" class="functionButton">Add Aircraft</a></span></div>
+                        <div class="c-menu-item__title"><span>Add Aircraft</span></div>
                     </div>
+                    </a>
+                </li>
+                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
+                    <a href="viewAircraft" class="functionButton">
+                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                            <div class="c-menu-item__title"><span>View Aircraft</span></div>
+                        </div>
+                    </a>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
                     <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>

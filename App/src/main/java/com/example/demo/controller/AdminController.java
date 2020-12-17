@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -30,6 +31,7 @@ public class AdminController {
         return "administration/adminHome";
     }
 
+    //For editing and viewing Aircraft!!!
     @RequestMapping(value = "/addAircraft")
     public String goToAircraftAdditionPage (Model model){
         model.addAttribute("aircraft", new Aircraft());
@@ -42,5 +44,27 @@ public class AdminController {
     public String handleAircraftAddition (Aircraft aircraft) {
         aircraftService.saveAircraft(aircraft);
         return "administration/adminHome";
+    }
+
+    @RequestMapping(value = "/viewAircraft")
+    public String viewAircraft (Model model){
+        model.addAttribute("aircraft", aircraftService.getAllAircraft());
+        return "administration/aircraft-list";
+    }
+
+    @RequestMapping(value = "/deleteAircraft")
+    public String deleteAircraft (@RequestParam(value = "aircraftId")int aircraftId){
+        aircraftService.deleteAircraftById(aircraftId);
+        return "redirect:/admin/viewAircraft";
+    }
+
+    @RequestMapping(value = "/editAircraft", method = RequestMethod.GET)
+    public String editAircraft (@RequestParam(value = "aircraftId") int aircraftId, Model model){
+        model.addAttribute("aircraft", aircraftService.getAircraftById(aircraftId));
+        model.addAttribute("status", "Edit Aircraft");
+
+        model.addAttribute("brands", brandService.getAllAircraftBrandsWithMapType());
+        model.addAttribute("airports", airportService.getAllAirportsWithMapType());
+        return "administration/aircraftAddition";
     }
 }

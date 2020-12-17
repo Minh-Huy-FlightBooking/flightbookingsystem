@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -16,6 +17,12 @@
     <i>Please fill in the form to create a new aircraft</i>
     <div>
         <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
+            <c:if test="${status == 'Edit Aircraft'}">
+                <div>
+                    <h3>Id:</h3>
+                    <form:input path="aircraftId" readonly="true"/>
+                </div>
+            </c:if>
             <div>
                 <h3>Model Name:</h3>
                 <form:input path="model"/>
