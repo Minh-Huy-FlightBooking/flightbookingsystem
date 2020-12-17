@@ -12,10 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
-=======
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
->>>>>>> 1344cc8def042ad17f0ce04cbd8a1f032d52ab99
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -51,7 +49,6 @@ public class AdminController {
         aircraftService.saveAircraft(aircraft);
         return "administration/adminHome";
     }
-<<<<<<< HEAD
 
     @RequestMapping(value = "/viewAircraft")
     public String viewAircraft (Model model){
@@ -74,7 +71,6 @@ public class AdminController {
         model.addAttribute("airports", airportService.getAllAirportsWithMapType());
         return "administration/aircraftAddition";
     }
-=======
     // CRUD Flight Route
     @Autowired
     private FlightRouteService flightRouteService;
@@ -118,5 +114,4 @@ public class AdminController {
         return "administration/flight-route-action";
     }
     // End Flight Route
->>>>>>> 1344cc8def042ad17f0ce04cbd8a1f032d52ab99
 }
