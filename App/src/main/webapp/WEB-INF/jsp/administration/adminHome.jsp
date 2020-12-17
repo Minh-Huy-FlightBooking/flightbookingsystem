@@ -120,21 +120,21 @@
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
-        <div class="page-content">Content goes here</div>
+        <div class="page-content">Content goes here <jsp:body ></jsp:body></div>
     </div>
 </main>
 <script>
     "use strict";
-    var Dashboard = function() {
-        var global = {
+    let Dashboard = function() {
+        let global = {
             tooltipOptions: {
                 placement: "right"
             },
             menuClass: ".c-menu"
         };
 
-        var menuChangeActive = function menuChangeActive(el) {
-            var hasSubmenu = $(el).hasClass("has-submenu");
+        let menuChangeActive = function menuChangeActive(el) {
+            let hasSubmenu = $(el).hasClass("has-submenu");
             $(global.menuClass + " .is-active").removeClass("is-active");
             $(el).addClass("is-active");
 
@@ -143,8 +143,8 @@
             // }
         };
 
-        var sidebarChangeWidth = function sidebarChangeWidth() {
-            var $menuItemsTitle = $("li .menu-item__title");
+        let sidebarChangeWidth = function sidebarChangeWidth() {
+            let $menuItemsTitle = $("li .menu-item__title");
 
             $("body").toggleClass("sidebar-is-reduced sidebar-is-expanded");
             $(".hamburger-toggle").toggleClass("is-opened");
