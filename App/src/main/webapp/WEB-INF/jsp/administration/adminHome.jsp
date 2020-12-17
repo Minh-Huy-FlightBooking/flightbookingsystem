@@ -37,7 +37,7 @@
     <script>
         $(document).ready(function(){
             $("#content-flight-route").click(function(){
-                $("#page-content").load("flight-route-list");
+                $("#load-here").load("<c:url value="/admin/flightRouteList"/>");
             });
         });
     </script>
@@ -74,8 +74,8 @@
         <nav class="c-menu js-menu">
             <ul class="u-list">
                 <li class="c-menu__item is-active" data-toggle="tooltip" title="Flights">
-                    <div class="c-menu__item__inner"><i class="fa fa-plane"></i>
-                        <div class="c-menu-item__title" id="content-flight-route"><span>Flights</span></div>
+                    <div class="c-menu__item__inner" id="content-flight-route"><i class="fa fa-plane"></i>
+                        <div class="c-menu-item__title"><span>Flights</span></div>
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Modules">
@@ -122,13 +122,14 @@
         </nav>
     </div>
 </div>
-</body>
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
-        <div class="page-content" id="page-content">Content goes here</div>
+<%--        <div id="load-here"></div>--%>
     </div>
 </main>
+</body>
+
 <script>
     "use strict";
     let Dashboard = function() {

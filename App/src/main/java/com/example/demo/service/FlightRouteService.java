@@ -36,12 +36,4 @@ public class FlightRouteService {
             return false;
         }
     }
-    public boolean updateFlightRoute(FlightRoute flightRoute){
-        try {
-            flightRouteRepository.save(flightRoute);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
 }

@@ -23,4 +23,47 @@ public class Promotion {
     @OneToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
+
+    public Promotion() {
+    }
+
+    public int getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(int promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public LocalDate getEndDateOfEvent() {
+        return endDateOfEvent;
+    }
+
+    public void setEndDateOfEvent(LocalDate endDateOfEvent) {
+        this.endDateOfEvent = endDateOfEvent;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 }
