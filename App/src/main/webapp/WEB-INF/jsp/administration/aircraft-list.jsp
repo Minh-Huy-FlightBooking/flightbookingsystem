@@ -108,16 +108,16 @@
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
 <%--        --------------%>
-        <div class="page-content" id="page-content">
-<%--            ---------------------------%>
+        <div class="page-content" id="page-content" style="padding: 0">
 <%--            Content Goes Here--%>
             <div class="card">
-                <div class="card-header">
-                    <%--Adding Button--%>
-                    <h3>Admin<a href="/admin/addAircraft" title="new addition" class="btn btn-sm float-right mycolor"  ><i class="fa fa-plus"></i></a></h3>
-                </div>
+<%--                <div class="card-header">--%>
+<%--                    &lt;%&ndash;Adding Button&ndash;%&gt;--%>
+<%--                    <h3>Admin</h3>--%>
+<%--                </div>--%>
                 <div class="card-body">
                     <h5 class="card-title">Aircraft List
+                        <a href="/admin/addAircraft" title="new addition" class="btn btn-sm mycolor ml-2"  ><i class="fa fa-plus"></i></a>
                         <div class="input-group col-sm-4 mb-4 float-right">
                                                 <input class="form-control" id="myInput" type="text"
                                                        placeholder="searching" aria-label="Search"
@@ -152,8 +152,8 @@
                                     <td>${a.airport.airportName}</td>
 
                                     <td>
-                                        <a href="editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
-                                        <a href="deleteAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
+                                        <a href="deleteAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor mt-1" title="Delete"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
