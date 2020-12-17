@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.Aircraft;
 import com.example.demo.entity.Flight;
 import com.example.demo.entity.FlightRoute;
+<<<<<<< HEAD
 import com.example.demo.repository.FlightRepository;
+=======
+>>>>>>> 093500dea5f41d403abfbd7f8227223ca1a38425
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,17 @@ public class AdminController {
     @Autowired
     private AirportService airportService;
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private SeatService seatService;
+
+    @RequestMapping(value = "/flightList")
+    public String goToFlightListPage (){
+        return "administration/flight-list";
+    }
+
+>>>>>>> 093500dea5f41d403abfbd7f8227223ca1a38425
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
         return "administration/adminHome";
@@ -41,7 +55,12 @@ public class AdminController {
     @RequestMapping(value = "/handlingAircraftAddition")
     public String handleAircraftAddition (Aircraft aircraft) {
         aircraftService.saveAircraft(aircraft);
-        return "administration/adminHome";
+        int totalEconomySeats = aircraft.getTotal_economy();
+        int totalBusinessSeats = aircraft.getTotal_business();
+
+        //Auto-Generated Seats For a newly aircraft
+        seatService.generateSeatsForAircraft(aircraft);
+        return "redirect:/admin/viewAircraft";
     }
 
     @RequestMapping(value = "/viewAircraft")
@@ -52,6 +71,7 @@ public class AdminController {
 
     @RequestMapping(value = "/deleteAircraft")
     public String deleteAircraft (@RequestParam(value = "aircraftId")int aircraftId){
+        seatService.deleteSeatsByAircraftId(aircraftId);
         aircraftService.deleteAircraftById(aircraftId);
         return "redirect:/admin/viewAircraft";
     }
@@ -88,7 +108,7 @@ public class AdminController {
         }else {
             attributes.addFlashAttribute("message","failed");
         }
-        return "redirect:flightRouteList";
+        return "redirect:/admin/flightRouteList";
     }
     @RequestMapping("/deleteFlightRoute")
     public String deleteFlightRoute(@RequestParam("id") int id, Model model){
@@ -97,7 +117,7 @@ public class AdminController {
         }else {
             model.addAttribute("message","Delete failed");
         }
-        return "redirect:flightRouteList";
+        return "redirect:/admin/flightRouteList";
     }
     @RequestMapping("/editFlightRoute")
     public String gotoActionFlightRoute(@RequestParam("id") int id, Model model){
