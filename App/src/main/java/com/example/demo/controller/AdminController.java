@@ -27,13 +27,9 @@ public class AdminController {
     @Autowired
     private AirportService airportService;
 
-<<<<<<< HEAD
-=======
     @Autowired
     private SeatService seatService;
-
-
->>>>>>> 093500dea5f41d403abfbd7f8227223ca1a38425
+    
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
         return "administration/adminHome";
