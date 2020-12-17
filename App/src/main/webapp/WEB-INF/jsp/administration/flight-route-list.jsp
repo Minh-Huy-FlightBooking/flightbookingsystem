@@ -28,9 +28,8 @@
        
     <div class="card">
         <div class="card-header">
-            <!-- Đây là nút thêm mới -->
-            <h3>Admin<a href="addFlightRoute" title="thêm mới" class="btn btn-sm float-right mycolor"  ><i class="fa fa-plus"></i></a></h3>
-
+<%--            Adding Button--%>
+            <h3>Admin<a href="addFlightRoute" title="new addition" class="btn btn-sm float-right mycolor"  ><i class="fa fa-plus"></i></a></h3>
         </div>
         <div class="card-body">
             <h5 class="card-title">Flight Route List
@@ -71,10 +70,10 @@
         </div>
     </div>
     </div>
-    <!-- Phần này script phần tìm kiếm -->
+    <%--    Searching Engine--%>
     <script>
         function myFunction() {
-            var input, filter, table, tr, td, i;
+            let input, filter, table, tr, td, i;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("myTable");

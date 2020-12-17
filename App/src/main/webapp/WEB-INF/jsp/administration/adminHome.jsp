@@ -120,7 +120,7 @@
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
-        <div class="page-content">Content goes here <jsp:body ></jsp:body></div>
+        <div class="page-content">Content goes here</div>
     </div>
 </main>
 <script>
