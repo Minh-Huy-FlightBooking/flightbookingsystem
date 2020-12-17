@@ -25,10 +25,6 @@ public class AdminController {
     @Autowired
     private SeatService seatService;
 
-    @RequestMapping(value = "/flightList")
-    public String goToFlightListPage (){
-        return "administration/flight-list";
-    }
 
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
