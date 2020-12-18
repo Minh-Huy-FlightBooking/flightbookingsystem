@@ -31,8 +31,6 @@
             color: white;
             text-decoration: none;
         }
-
-
     </style>
     <script>
         $(document).ready(function(){
@@ -66,7 +64,7 @@
         </div>
     </div>
 </header>
-<div class="l-sidebar">
+<div class="l-sidebar" style="position:fixed">
     <div class="logo">
         <div class="logo__txt">D</div>
     </div>
@@ -108,8 +106,15 @@
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <a href="viewAircraft" class="functionButton">
-                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                        <div class="c-menu__item__inner"><i class="fa fa-plane" aria-hidden="true"></i>
                             <div class="c-menu-item__title"><span>View Aircraft</span></div>
+                        </div>
+                    </a>
+                </li>
+                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="View Route">
+                    <a href="flightRouteList" class="functionButton">
+                        <div class="c-menu__item__inner"><i class="fa fa-road" aria-hidden="true"></i>
+                            <div class="c-menu-item__title"><span>Route</span></div>
                         </div>
                     </a>
                 </li>

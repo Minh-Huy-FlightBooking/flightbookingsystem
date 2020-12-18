@@ -45,7 +45,7 @@
             </div>
             <div class="header-icons-group">
                 <div class="c-header-icon basket"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-shopping-basket"></i></div>
-                <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+                <div class="c-header-icon logout"><a href="/logout"><i class="fa fa-power-off"></i></a></div>
             </div>
         </div>
     </header>
@@ -118,7 +118,7 @@
             <div class="page-content" id="page-content" style="padding: 2rem">
                 <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
                     <c:if test="${status == 'Edit Aircraft'}">
-                        <div class="form-group">
+                        <div class="form-group col-md-4 px-0">
                             <label for="">Id</label>
                             <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
                         </div>
