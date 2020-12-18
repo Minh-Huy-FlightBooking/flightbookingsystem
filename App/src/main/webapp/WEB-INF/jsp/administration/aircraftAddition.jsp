@@ -27,50 +27,7 @@
     </style>
 </head>
 <body>
-    <h1>Aircraft Addition: </h1>
-    <i>Please fill in the form to create a new aircraft</i>
-    <div>
-        <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
-            <c:if test="${status == 'Edit Aircraft'}">
-                <div>
-                    <h3>Id:</h3>
-                    <form:input path="aircraftId" readonly="true"/>
-                </div>
-            </c:if>
-            <div>
-                <h3>Model Name:</h3>
-                <form:input path="model"/>
-            </div>
-            <div>
-                <h3>Total Business Seats:</h3>
-                <form:input path="total_business"/>
-            </div>
-            <div>
-                <h3>Total Economy Seats:</h3>
-                <form:input path="total_economy"/>
-            </div>
-            <div>
-                <h3>Enabled (0:inactive/ not ready; 1: active/ ready)</h3>
-                <form:input path="enabled"/>
-            </div>
-            <div>
-                <h3>Brand:</h3>
-                <form:select path="brand.brandId" items="${brands}">
 
-                </form:select>
-            </div>
-            <div>
-                <h3>Airport:</h3>
-                <form:select path="airport.airportId" items="${airports}">
-                </form:select>
-            </div>
-            <div>
-                <button type="submit">Add Aircraft</button>
-            </div>
-
-        </form:form>
-
-    </div>
     <body class="sidebar-is-reduced">
     <header class="l-header">
         <div class="l-header__inner clearfix">
@@ -152,61 +109,52 @@
     <main class="l-main">
         <div class="content-wrapper content-wrapper--with-bg">
             <h1 class="page-title">Dashboard</h1>
-            <%--        --------------%>
-            <div class="page-content" id="page-content" style="padding: 0">
-                <%--            Content Goes Here--%>
-                <div class="card">
-                    <%--                <div class="card-header">--%>
-                    <%--                    &lt;%&ndash;Adding Button&ndash;%&gt;--%>
-                    <%--                    <h3>Admin</h3>--%>
-                    <%--                </div>--%>
-                    <div class="card-body">
-                        <h5 class="card-title">Aircraft List
-                            <a href="/admin/addAircraft" title="new addition" class="btn btn-sm mycolor ml-2"  ><i class="fa fa-plus"></i></a>
-                            <div class="input-group col-sm-4 mb-4 float-right">
-                                                    <input class="form-control" id="myInput" type="text"
-                                                           placeholder="searching" aria-label="Search"
-                                                           onkeyup="myFunction()" title="Searching">
-                            </div>
-                            <p class="col">${message}</p>
-                        </h5>
-
-                        <div class="col-xs-12 col-sm-12 ">
-                            <table class="table table-condensed table-hover" id="myTable">
-                                <thead>
-                                <tr align="center">
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Model</th>
-                                    <th scope="col">Total Economy Seats</th>
-                                    <th scope="col">Total Business Seats</th>
-                                    <th scope="col">Enabled</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Airport</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="a" items="${aircraft}">
-                                    <tr align="center">
-                                        <td scope="row">${a.aircraftId}</td>
-                                        <td>${a.model}</td>
-                                        <td>${a.total_economy}</td>
-                                        <td>${a.total_business}</td>
-                                        <td>${a.enabled}</td>
-                                        <td>${a.brand.brandName}</td>
-                                        <td>${a.airport.airportName}</td>
-
-                                        <td>
-                                            <a href="editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
-                                            <a href="deleteAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor mt-1" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+            <%--................--%>
+            <div class="page-content" style="background: rgb(180,180,180)">
+                <h1>Aircraft Addition: </h1>
+                <i>Please fill in the form to create a new aircraft</i>
+            </div>
+            <%----------------%>
+            <div class="page-content" id="page-content" style="padding: 2rem">
+                <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
+                    <c:if test="${status == 'Edit Aircraft'}">
+                        <div class="form-group">
+                            <label for="">Id</label>
+                            <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
+                        </div>
+                    </c:if>
+                    <div class="form-group col-md-4 px-0">
+                        <label for="">Model</label>
+                        <form:input path="model"  class="form-control" id="" placeholder="model"/>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="">Total Business</label>
+                            <form:input path="total_business" class="form-control" id="" placeholder="Email"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Total Economy</label>
+                            <form:input path="total_economy" class="form-control" id="" placeholder="Password"/>
                         </div>
                     </div>
-                </div>
+                    <div class="form-group col-md-4 px-0">
+                        <label for="">Enabled (Active: true, Inactive: false</label>
+                        <form:input path="enabled" class="form-control" id="" placeholder="1234 Main St"/>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="">Airport:</label>
+                            <form:select path="airport.airportId" items="${airports}" class="form-control">
+                            </form:select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Brand:</label>
+                            <form:select path="brand.brandId" items="${brands}" class="form-control">
+                            </form:select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Aircraft</button>
+                </form:form>
             </div>
         </div>
     </main>

@@ -124,11 +124,11 @@ public class AdminController {
         model.addAttribute("flightList",flightService.getAllFlight());
         return "administration/flight-list";
     }
-    @RequestMapping("/addFlight")
+    /*@RequestMapping("/addFlight")
     public String addFlight(Model model){
         model.addAttribute("flight",new Flight());
         model.addAttribute("flightRoute",flightRouteService.getAllFlightRoute());
-        model.addAttribute("aircraft",aircraftService.);
-    }
+//        model.addAttribute("aircraft",aircraftService.);
+    }*/
 
 }
