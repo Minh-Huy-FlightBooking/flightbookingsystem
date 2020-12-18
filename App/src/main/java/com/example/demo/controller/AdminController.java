@@ -26,11 +26,14 @@ public class AdminController {
     @Autowired
     private SeatService seatService;
 
+    @Autowired
+    private FlightRouteService flightRouteService;
+
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage(){
         return "administration/adminHome";
     }
-
+/////////////////////////////////
     //For editing and viewing Aircraft!!!
     @RequestMapping(value = "/addAircraft")
     public String goToAircraftAdditionPage (Model model){
@@ -73,9 +76,10 @@ public class AdminController {
         model.addAttribute("airports", airportService.getAllAirportsWithMapType());
         return "administration/aircraftAddition";
     }
+
+    /////////////////////////////////
     // CRUD Flight Route
-    @Autowired
-    private FlightRouteService flightRouteService;
+
     @RequestMapping(value = "/flightRouteList")
     public String returnListFlightRoute(Model model){
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
@@ -115,7 +119,11 @@ public class AdminController {
         model.addAttribute("message","edit");
         return "administration/flight-route-action";
     }
+
     // End Flight Route
+
+    /////////////////////////////
+
     // Flight Manager
     @Autowired
     private FlightService flightService;
@@ -124,11 +132,12 @@ public class AdminController {
         model.addAttribute("flightList",flightService.getAllFlight());
         return "administration/flight-list";
     }
-    /*@RequestMapping("/addFlight")
+    @RequestMapping("/addFlight")
     public String addFlight(Model model){
         model.addAttribute("flight",new Flight());
         model.addAttribute("flightRoute",flightRouteService.getAllFlightRoute());
-//        model.addAttribute("aircraft",aircraftService.);
-    }*/
+        model.addAttribute("aircraft",aircraftService.getAllAircraftWithMapType());
+        return "administration/flight-addition";
+    }
 
 }
