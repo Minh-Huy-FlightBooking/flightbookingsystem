@@ -123,24 +123,20 @@
                         <form:input path="flightId" readonly="true" class="form-control" placeholder=""/>
                     </div>
                 </c:if>
-<%--                <div class="form-group col-md-4 px-0">--%>
-<%--                    <label for="">Model</label>--%>
-<%--                    <form:input path="departureTime"  class="form-control" id="" placeholder="model"/>--%>
-<%--                </div>--%>
-                <%--<div class="form-row">
-                    <div class="form-group col-md-4">
-                        <form:select path="flightRoute" class="form-control">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="">Origin:</label>
+                        <form:select path="flightRoute.originAirport" class="form-control">
                             <form:options items="${originAirport}" itemLabel="airportName"/>
                         </form:select>
-
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="">Total Economy</label>
-                        <form:select path="destinationAirport" class="form-control">
+                    <div class="form-group col-md-2">
+                        <label for="">Destination:</label>
+                        <form:select path="flightRoute.destinationAirport" class="form-control">
                             <form:options items="${destinationAirport}" itemLabel="airportName"/>
                         </form:select>
                     </div>
-                </div>--%>
+                </div>
 
 <%--                <div class="form-row">--%>
 <%--                    <div class="form-group col-md-2">--%>
@@ -164,14 +160,12 @@
                 </div>
                 <div class="form-group col-md-4 px-0">
                     <label for="">Aircraft</label>
-                    <form:select path="aircraft" class="form-control" items="${aircraft}">
-<%--                        <form:options items="${aircraft}" itemLabel="airportName"/>--%>
+                    <form:select path="aircraft.aircraftId" class="form-control" items="${aircraft}">
                     </form:select>
-<%--                    <form:input path="aircraft"  class="form-control" id="" placeholder="1234 Main St"/>--%>
                 </div>
                 <div class="form-group col-md-4 px-0">
                     <label for="">Flight Status:</label>
-                    <form:input path="flightStatus" class="form-control" id="" placeholder="1234 Main St"/>
+                    <form:input path="flightStatus" class="form-control" id="" placeholder="Delay/ Onprogress/ ..."/>
                 </div>
 <%--                <div class="form-row">--%>
 <%--                    <div class="form-group col-md-4">--%>

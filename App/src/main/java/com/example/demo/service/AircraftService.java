@@ -21,7 +21,7 @@ public class AircraftService {
     public Map<Integer, String> getAllAircraftWithMapType(){
         Map<Integer, String> aircraftListMap = new HashMap<>();
         List<Aircraft> aircraft = getAllAircraft();
-        if (aircraft != null){
+        if (!aircraft.isEmpty()){
             for (Aircraft a: aircraft){
                 aircraftListMap.put(a.getAircraftId(), a.getModel());
             }

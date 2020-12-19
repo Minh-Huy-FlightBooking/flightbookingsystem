@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FlightRouteService {
@@ -17,6 +19,16 @@ public class FlightRouteService {
     public List<FlightRoute> getAllFlightRoute(){
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
+
+//    public Map<Integer, String> getAllFlightRouteNameWithMap (){
+//        List<FlightRoute> routeList = getAllFlightRoute();
+//        Map<Integer, String> routes = new HashMap<>();
+//        if (!routeList.isEmpty()){
+//            for (FlightRoute fr: routeList){
+//                routes.put(fr.)
+//            }
+//        }
+//    }
     public FlightRoute getFlightRouteById(int id){
         return flightRouteRepository.findByRouteId(id);
     }
