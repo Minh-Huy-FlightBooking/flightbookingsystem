@@ -12,7 +12,7 @@ body{
     min-height: 300vh;
 }
 .img-header{
-    height: 600px;
+    height: 500px;
     width: 100%;
     overflow: hidden;
     background: linear-gradient(180deg ,rgba(0, 0, 0, 0.3),rgba(255, 255, 255, 0) 75%) ,url('/resources/image/h1-homepage.jpg') no-repeat center center;
@@ -23,8 +23,8 @@ body{
 }
 header a img.logo-home{
     display: block;
-    max-width:250px;
-    max-height:90px;
+    max-width:220px;
+    max-height:80px;
     width: auto;
     height: auto;
 }
@@ -58,7 +58,7 @@ header ul {
     align-items: center;
 }
 header.sticky{
-    padding:  5px 100px;
+    padding:  0px 100px;
     background:  #fff;
     box-shadow: 0px 0px 10px 0px;
 }
@@ -82,10 +82,11 @@ header ul li a{
     transition: 0.6s;
 }
 header ul li:hover{
-    background-color: white ;
+    background-color: #5f9cfd ;
     color: #5C0931;
 }
 header ul li a:hover{
+    text-decoration: none;
     color: #5C0931;
 }
 .banner{
