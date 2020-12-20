@@ -17,4 +17,9 @@ public class SystemController {
         return "home";
     }
 
+    @RequestMapping(value = "/ticketSearch")
+    public String goToTicketSearch(){
+        return "ticket-searching-test";
+    }
+
 }
