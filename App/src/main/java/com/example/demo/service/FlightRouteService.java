@@ -20,15 +20,17 @@ public class FlightRouteService {
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
 
-//    public Map<Integer, String> getAllFlightRouteNameWithMap (){
-//        List<FlightRoute> routeList = getAllFlightRoute();
-//        Map<Integer, String> routes = new HashMap<>();
-//        if (!routeList.isEmpty()){
-//            for (FlightRoute fr: routeList){
-//                routes.put(fr.)
-//            }
-//        }
-//    }
+    public Map<Integer, String> getAllFlightRouteNameWithMap (){
+        List<FlightRoute> routeList = getAllFlightRoute();
+        Map<Integer, String> routes = new HashMap<>();
+        if (!routeList.isEmpty()){
+            for (FlightRoute fr: routeList){
+                routes.put(fr.getRouteId(), fr.getOriginAirport().getAirportName());
+            }
+        }
+        return routes;
+    }
+
     public FlightRoute getFlightRouteById(int id){
         return flightRouteRepository.findByRouteId(id);
     }
