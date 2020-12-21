@@ -34,34 +34,43 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("input#origin").autocomplete({
-                width: 300,
-                max: 10,
-                delay: 100,
-                minLength: 1,
-                autoFocus: true,
-                cacheLength: 1,
-                scroll: true,
-                highlight: false,
-                source: function(request, response) {
-                    $.ajax({
-                        url: "origin",
-                        dataType: "json",
-                        data: request,
-                        success: function( data, textStatus, jqXHR) {
-                            console.log( data);
-                            var items = data;
-                            response(items);
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            console.log( textStatus);
-                        }
-                    });
-                }
+            $("input#origin").on("keyup", function() {
+                /*let value = $(this).val().toLowerCase();*/
+                let value = $(this).val();
+
+                $("input#origin").autocomplete({
+                    width: 300,
+                    max: 10,
+                    delay: 0,
+                    minLength: 1,
+                    autoFocus: true,
+                    cacheLength: 1,
+                    scroll: true,
+                    highlight: false,
+                    source: function(request, response) {
+                        $.ajax({
+                            url: "origin2",
+                            dataType: "json",
+                            data: request,
+                            success: function( data, textStatus, jqXHR) {
+                                console.log( data);
+                                let items = data;
+                                let data_filter = items.filter( origin => origin == value);
+                                console.log(value);
+                                console.log(data_filter);
+                                response(data_filter);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                console.log( textStatus);
+                            }
+                        });
+                    }
+
+                });
 
             });
-        });
 
+        });
     </script>
 </head>
 <body>
