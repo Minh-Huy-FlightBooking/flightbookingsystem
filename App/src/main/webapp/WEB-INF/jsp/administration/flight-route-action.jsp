@@ -94,9 +94,11 @@
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
-                    <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                        <div class="c-menu-item__title"><span>Gifts</span></div>
-                    </div>
+                    <a href="flightRouteList" class="functionButton">
+                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                            <div class="c-menu-item__title"><span>FLight Route</span></div>
+                        </div>
+                    </a>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <a href="addAircraft" class="functionButton">
@@ -140,13 +142,13 @@
                             class="fa fa-plus"></i></a></h3>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Add New Flight Route</h5>
+                    <h5 class="card-title">Add New Flight Route <span>${message}</span></h5>
                     <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
                         <div class="col-xs-12 col-sm-12 ">
                             <table class="table table-condensed table-hover" id="myTable">
                                 <thead>
                                 <tr align="center">
-                                    <c:if test="${message=='edit'}">
+                                    <c:if test="${type=='edit'}">
                                         <th>Route Id</th>
                                     </c:if>
                                     <th>Origin Airport</th>
@@ -155,7 +157,7 @@
                                 </thead>
                                 <tbody>
                                 <tr align="center">
-                                    <c:if test="${message=='edit'}">
+                                    <c:if test="${type=='edit'}">
                                         <td>
                                             <form:input path="routeId" type="text" readonly="true"/>
                                         </td>

@@ -90,15 +90,19 @@ public class AdminController {
         model.addAttribute("flightRoute", new FlightRoute());
         model.addAttribute("originAirport", airportService.getAllAirports());
         model.addAttribute("destinationAirport", airportService.getAllAirports());
-        model.addAttribute("message","add");
         return "administration/flight-route-action";
     }
     @RequestMapping("/handlingSaveFlightRoute")
     public String handleSaveFlightRoute(FlightRoute flightRoute, Model model, RedirectAttributes attributes){
-        if(flightRouteService.saveFlightRoute(flightRoute)){
-            attributes.addFlashAttribute("message","Successfully");
-        }else {
-            attributes.addFlashAttribute("message","failed");
+        if (flightRoute.getOriginAirport().getAirportName().equals(flightRoute.getDestinationAirport().getAirportName())){
+            model.addAttribute("message","Invalid value");
+            return "administration/flight-route-action";
+        }else{
+            if(flightRouteService.saveFlightRoute(flightRoute)){
+                attributes.addFlashAttribute("message","Successfully");
+            }else {
+                attributes.addFlashAttribute("message","failed");
+            }
         }
         return "redirect:/admin/flightRouteList";
     }
@@ -116,7 +120,7 @@ public class AdminController {
         model.addAttribute("flightRoute",flightRouteService.getFlightRouteById(id));
         model.addAttribute("originAirport", airportService.getAllAirports());
         model.addAttribute("destinationAirport", airportService.getAllAirports());
-        model.addAttribute("message","edit");
+        model.addAttribute("type","edit");
         return "administration/flight-route-action";
     }
 

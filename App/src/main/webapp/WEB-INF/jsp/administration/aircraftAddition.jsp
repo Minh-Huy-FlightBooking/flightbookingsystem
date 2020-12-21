@@ -78,9 +78,11 @@
                         </div>
                     </li>
                     <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
-                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                            <div class="c-menu-item__title"><span>Gifts</span></div>
-                        </div>
+                        <a href="flightRouteList" class="functionButton">
+                            <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                                <div class="c-menu-item__title"><span>FLight Route</span></div>
+                            </div>
+                        </a>
                     </li>
                     <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                         <a href="addAircraft" class="functionButton">
@@ -110,12 +112,13 @@
         <div class="content-wrapper content-wrapper--with-bg">
             <h1 class="page-title">Dashboard</h1>
             <%--................--%>
-            <div class="page-content" style="background: rgb(180,180,180)">
+            <div class="page-content" style="background: #e67e22;color: #fff">
                 <h1>Aircraft Addition: </h1>
                 <i>Please fill in the form to create a new aircraft</i>
             </div>
             <%----------------%>
-            <div class="page-content" id="page-content" style="padding: 2rem">
+            <div class="card" id="page-content" style="padding: 2rem">
+                <div class="card-body mb-3">
                 <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
                     <c:if test="${status == 'Edit Aircraft'}">
                         <div class="form-group col-md-4 px-0">
@@ -155,6 +158,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Add Aircraft</button>
                 </form:form>
+                </div>
             </div>
         </div>
     </main>

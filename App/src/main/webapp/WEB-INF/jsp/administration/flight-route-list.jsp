@@ -76,9 +76,11 @@
                     </div>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
-                    <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                        <div class="c-menu-item__title"><span>Gifts</span></div>
-                    </div>
+                    <a href="flightRouteList" class="functionButton">
+                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
+                            <div class="c-menu-item__title"><span>FLight Route</span></div>
+                        </div>
+                    </a>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <a href="addAircraft" class="functionButton">
@@ -110,7 +112,6 @@
         <%--        --------------%>
         <div class="page-content" id="page-content" style="padding: 0">
             <%--            Content Goes Here--%>
-            <div class="card">
                 <%--                <div class="card-header">--%>
                 <%--                    &lt;%&ndash;Adding Button&ndash;%&gt;--%>
                 <%--                    <h3>Admin</h3>--%>
@@ -159,7 +160,6 @@
                             </div>
                         </div>
                     </div>
-            </div>
         </div>
     </div>
 </main>
