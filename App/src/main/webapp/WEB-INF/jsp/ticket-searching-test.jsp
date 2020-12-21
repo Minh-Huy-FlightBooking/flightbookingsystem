@@ -22,21 +22,34 @@
             type="text/javascript"></script>
     <link
             href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
-            rel="stylesheet" type="text/css" />
+            rel="stylesheet" type="text/css"/>
     <STYLE TYPE="text/css" media="all">
         .ui-autocomplete {
             position: absolute;
             cursor: default;
             height: 200px;
             overflow-y: scroll;
-            overflow-x: hidden;}
+            overflow-x: hidden;
+        }
     </STYLE>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("input#origin").on("keyup", function() {
-                /*let value = $(this).val().toLowerCase();*/
-                let value = $(this).val();
+        let value;
+        $(document).ready(function () {
+            $("#tripType").change(function(){
+                $(this).find("option:selected").each(function(){
+                    let optionValue = $(this).attr("value");
+                    if (optionValue == "oneWay"){
+                        $("#returnDate").hide();
+                    } else {
+                        $("#returnDate").show();
+                    }
+                });
+            }).change();
+
+
+            $("input#origin").on("keyup", function () {
+                value = $(this).val().toLowerCase();
 
                 $("input#origin").autocomplete({
                     width: 300,
@@ -47,21 +60,19 @@
                     cacheLength: 1,
                     scroll: true,
                     highlight: false,
-                    source: function(request, response) {
+                    source: function (request, response) {
                         $.ajax({
-                            url: "origin2",
+                            url: "origin",
                             dataType: "json",
                             data: request,
-                            success: function( data, textStatus, jqXHR) {
-                                console.log( data);
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
                                 let items = data;
-                                let data_filter = items.filter( origin => origin == value);
-                                console.log(value);
-                                console.log(data_filter);
+                                let data_filter = items.filter(origin => origin.toLowerCase().indexOf(value) > -1);
                                 response(data_filter);
                             },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                console.log( textStatus);
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus);
                             }
                         });
                     }
@@ -70,22 +81,81 @@
 
             });
 
+            $("input#destination").on("keyup", function () {
+                let value2 = $(this).val().toLowerCase();
+                console.log(value2);
+                $("input#destination").autocomplete({
+                    width: 300,
+                    max: 10,
+                    delay: 0,
+                    minLength: 1,
+                    autoFocus: true,
+                    cacheLength: 1,
+                    scroll: true,
+                    highlight: false,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "destination/" + value.toString(),
+                            dataType: "json",
+                            data: request,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+                                let items2 = data;
+                                console.log(items2);
+                                let data_filter2 = items2.filter(origin => origin.toLowerCase().indexOf(value2) > -1);
+                                response(data_filter2);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus);
+                            }
+                        });
+                    }
+
+                });
+            });
+
         });
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Let's find a flight to a certain place!!!</h1>
-        <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
-            <h3>Origin:</h3>
-            <form:input path="origin" name="origin" id="origin"/>
+<div class="container">
+    <h1>Let's find a flight to a certain place!!!</h1>
+    <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
+        <h3>Origin:</h3>
+        <form:input path="origin" name="origin" id="origin"/>
 
-            <h3>Destination:</h3>
-            <form:input path="destination"/>
-            <br/>
-            <br/>
-            <button type="submit">Search</button>
-        </form:form>
-    </div>
+        <h3>Destination:</h3>
+        <form:input path="destination" id="destination"/>
+
+        <h3>Trip type:</h3>
+        <select id="tripType" name="type">
+            <option value="oneWay" selected>One Way</option>
+            <option value="roundTrip" >Round Trip</option>
+        </select>
+
+        <h3>Departure Date:</h3>
+        <form:input path="departureDate" type="date"/>
+        <div id="returnDate">
+            <h3>Return Date:</h3>
+            <form:input path="returnDate" type="date"/>
+        </div>
+
+
+        <div>
+            <h3>Passenger Type:</h3>
+            <span>Adults</span>
+            <form:input path="passengerType.numberOfAdults" value="1"/>
+
+            <span>Children</span>
+            <form:input path="passengerType.numberOfChildren"/>
+
+            <span></span>Infant
+            <form:input path="passengerType.numberOfInfant"/>
+        </div>
+
+        <br>
+        <button type="submit">Search</button>
+    </form:form>
+</div>
 </body>
 </html>

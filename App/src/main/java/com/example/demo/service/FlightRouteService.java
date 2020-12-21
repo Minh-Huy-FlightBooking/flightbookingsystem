@@ -24,6 +24,18 @@ public class FlightRouteService {
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
 
+    public List<FlightRoute> getAllFlightRoutesByOriginName(String origin){
+        return flightRouteRepository.findByOriginName(origin);
+    }
+
+    public List<String> getAllDestinationsNameByOriginName (String origin){
+        List<String> destinations = new ArrayList<>();
+
+        for (FlightRoute fr: getAllFlightRoutesByOriginName(origin)){
+            destinations.add(fr.getDestinationAirport().getAirportName());
+        }
+        return destinations;
+    }
 /*    public Map<Integer, String> getAllFlightRouteNameWithMap (){
         List<FlightRoute> routeList = getAllFlightRoute();
         Map<Integer, String> routes = new HashMap<>();

@@ -7,6 +7,7 @@ import com.example.demo.service.FlightRouteService;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,18 +26,18 @@ public class WebAPI {
     @Autowired
     private AirportService airportService;
 
+
     @GetMapping("/origin")
     public Object getOrigins (){
-        return flightRouteService.getAllOriginsWithMapType();
-    }
-
-    @GetMapping("/origin2")
-    public Object getOrigins2 (){
         List<String> airports = new ArrayList<>();
         for (Airport a: airportService.getAllAirports()){
             airports.add(a.getAirportName());
         }
         return airports;
+    }
+    @GetMapping("/destination/{origin}")
+    public Object getDestinationCorrespondingOrigin (@PathVariable(value = "origin")String origin) {
+        return flightRouteService.getAllDestinationsNameByOriginName(origin);
     }
 
 }
