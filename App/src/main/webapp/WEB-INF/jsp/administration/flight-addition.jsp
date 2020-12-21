@@ -12,14 +12,19 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>
     <script src="<c:url value="/resources/js/adminHome.js"/>"></script>
     <style>
-        .mycolor{
+        .mycolor {
             background-color: #0dd6b8;
             border-color: #0dd6b8;
             color: white
@@ -32,19 +37,22 @@
 <header class="l-header">
     <div class="l-header__inner clearfix">
         <div class="c-header-icon js-hamburger">
-            <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
+            <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span
+                    class="bar-bot"></span></div>
         </div>
-        <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">87</span><i class="fa fa-bell"></i>
+        <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">87</span><i
+                class="fa fa-bell"></i>
             <div class="c-dropdown c-dropdown--notifications">
                 <div class="c-dropdown__header"></div>
                 <div class="c-dropdown__content"></div>
             </div>
         </div>
         <div class="c-search">
-            <input class="c-search__input u-input" placeholder="Search..." type="text" />
+            <input class="c-search__input u-input" placeholder="Search..." type="text"/>
         </div>
         <div class="header-icons-group">
-            <div class="c-header-icon basket"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-shopping-basket"></i></div>
+            <div class="c-header-icon basket"><span class="c-badge c-badge--header-icon animated shake">12</span><i
+                    class="fa fa-shopping-basket"></i></div>
             <div class="c-header-icon logout"><a href="/logout"><i class="fa fa-power-off"></i></a></div>
         </div>
     </div>
@@ -111,6 +119,7 @@
         <h1 class="page-title">Dashboard</h1>
         <%--................--%>
         <div class="page-content" style="background: rgb(180,180,180)">
+
             <h1>Flight Addition: </h1>
             <i>Please fill in the form to create a new flight</i>
         </div>
@@ -138,16 +147,16 @@
                     </div>
                 </div>
 
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group col-md-2">--%>
-<%--                        <label for="">Departure Time:</label>--%>
-<%--                        <form:input path="" class="form-control" id="" placeholder="model"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group col-md-2">--%>
-<%--                        <label for="">Arrival Time:</label>--%>
-<%--                        <form:input path="" class="form-control" id="" placeholder="1234 Main St"/>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div class="form-row">--%>
+                <%--                    <div class="form-group col-md-2">--%>
+                <%--                        <label for="">Departure Time:</label>--%>
+                <%--                        <form:input path="" class="form-control" id="" placeholder="model"/>--%>
+                <%--                    </div>--%>
+                <%--                    <div class="form-group col-md-2">--%>
+                <%--                        <label for="">Arrival Time:</label>--%>
+                <%--                        <form:input path="" class="form-control" id="" placeholder="1234 Main St"/>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="">Departure Time:</label>
@@ -155,7 +164,8 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="">Arrival Time:</label>
-                        <form:input path="arrivalTime" type="date" class="form-control" id="" placeholder="1234 Main St"/>
+                        <form:input path="arrivalTime" type="date" class="form-control" id=""
+                                    placeholder="1234 Main St"/>
                     </div>
                 </div>
                 <div class="form-group col-md-4 px-0">
@@ -167,18 +177,18 @@
                     <label for="">Flight Status:</label>
                     <form:input path="flightStatus" class="form-control" id="" placeholder="Delay/ Onprogress/ ..."/>
                 </div>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group col-md-4">--%>
-<%--                        <label for="">Airport:</label>--%>
-<%--                        <form:select path="" items="${airports}" class="form-control">--%>
-<%--                        </form:select>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group col-md-4">--%>
-<%--                        <label for="">Brand:</label>--%>
-<%--                        <form:select path="" items="${brands}" class="form-control">--%>
-<%--                        </form:select>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div class="form-row">--%>
+                <%--                    <div class="form-group col-md-4">--%>
+                <%--                        <label for="">Airport:</label>--%>
+                <%--                        <form:select path="" items="${airports}" class="form-control">--%>
+                <%--                        </form:select>--%>
+                <%--                    </div>--%>
+                <%--                    <div class="form-group col-md-4">--%>
+                <%--                        <label for="">Brand:</label>--%>
+                <%--                        <form:select path="" items="${brands}" class="form-control">--%>
+                <%--                        </form:select>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <button type="submit" class="btn btn-primary">Add Aircraft</button>
             </form:form>
         </div>
@@ -186,7 +196,7 @@
 </main>
 <script>
     "use strict";
-    let Dashboard = function() {
+    let Dashboard = function () {
         let global = {
             tooltipOptions: {
                 placement: "right"
@@ -221,7 +231,7 @@
             init: function init() {
                 $(".js-hamburger").on("click", sidebarChangeWidth);
 
-                $(".js-menu li").on("click", function(e) {
+                $(".js-menu li").on("click", function (e) {
                     menuChangeActive(e.currentTarget);
                 });
 
@@ -234,10 +244,10 @@
     //# sourceURL=pen.js
 </script>
 <script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
+            $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
