@@ -33,9 +33,10 @@
     </STYLE>
 
     <script type="text/javascript">
+        let value;
         $(document).ready(function() {
             $("input#origin").on("keyup", function() {
-                let value = $(this).val().toLowerCase();
+                value = $(this).val().toLowerCase();
 
                 $("input#origin").autocomplete({
                     width: 300,
@@ -48,15 +49,13 @@
                     highlight: false,
                     source: function(request, response) {
                         $.ajax({
-                            url: "origin2",
+                            url: "origin",
                             dataType: "json",
                             data: request,
                             success: function( data, textStatus, jqXHR) {
                                 console.log( data);
                                 let items = data;
                                 let data_filter = items.filter( origin => origin.toLowerCase().indexOf(value) > -1);
-                                console.log(value);
-                                console.log(data_filter);
                                 response(data_filter);
                             },
                             error: function(jqXHR, textStatus, errorThrown){
@@ -67,6 +66,39 @@
 
                 });
 
+            });
+
+            $("input#destination").on("keyup", function() {
+                let value2 = $(this).val().toLowerCase();
+                console.log(value2);
+                $("input#destination").autocomplete({
+                    width: 300,
+                    max: 10,
+                    delay: 0,
+                    minLength: 1,
+                    autoFocus: true,
+                    cacheLength: 1,
+                    scroll: true,
+                    highlight: false,
+                    source: function(request, response) {
+                        $.ajax({
+                            url: "destination/" + value.toString(),
+                            dataType: "json",
+                            data: request,
+                            success: function( data, textStatus, jqXHR) {
+                                console.log( data);
+                                let items2 = data;
+                                console.log(items2);
+                                let data_filter2 = items2.filter( origin => origin.toLowerCase().indexOf(value2) > -1);
+                                response(data_filter2);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                console.log( textStatus);
+                            }
+                        });
+                    }
+
+                });
             });
 
         });
@@ -80,7 +112,7 @@
             <form:input path="origin" name="origin" id="origin"/>
 
             <h3>Destination:</h3>
-            <form:input path="destination"/>
+            <form:input path="destination" id="destination"/>
             <br/>
             <br/>
             <button type="submit">Search</button>
