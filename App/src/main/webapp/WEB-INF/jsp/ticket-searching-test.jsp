@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -17,16 +18,16 @@
 <body>
     <div class="container">
         <h1>Let's find a flight to a certain place!!!</h1>
-        <form action="handleTicketSearch" method="get">
+        <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
             <h3>Origin:</h3>
-            <input type="text"/>
+            <form:input path="origin" name="origin"/>
 
             <h3>Destination:</h3>
-            <input type="text"/>
+            <form:input path="destination"/>
             <br/>
             <br/>
             <button type="submit">Search</button>
-        </form>
+        </form:form>
     </div>
 </body>
 </html>
