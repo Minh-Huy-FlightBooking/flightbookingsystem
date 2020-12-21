@@ -104,11 +104,11 @@
     </div>
 </div>
 </body>
-<main class="l-main">
+<main class="l-main" >
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
 <%--        --------------%>
-        <div class="page-content" id="page-content" style="padding: 0">
+        <div class="page-content" id="page-content" style="padding: 0;">
 <%--            Content Goes Here--%>
             <div class="card">
 <%--                <div class="card-header">--%>

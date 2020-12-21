@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Airport;
 import com.example.demo.entity.FlightRoute;
+import com.example.demo.repository.AirportRepository;
 import com.example.demo.repository.FlightRouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,14 @@ public class FlightRouteService {
     @Autowired
     private FlightRouteRepository flightRouteRepository;
 
+    @Autowired
+    private AirportRepository airportRepository;
+
     public List<FlightRoute> getAllFlightRoute(){
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
 
-    public Map<Integer, String> getAllFlightRouteNameWithMap (){
+/*    public Map<Integer, String> getAllFlightRouteNameWithMap (){
         List<FlightRoute> routeList = getAllFlightRoute();
         Map<Integer, String> routes = new HashMap<>();
         if (!routeList.isEmpty()){
@@ -29,8 +33,21 @@ public class FlightRouteService {
             }
         }
         return routes;
-    }
+    }*/
 
+    //Get All Origins (places) to fill in origin input
+    public Map<Integer, String> getAllOriginsWithMapType () {
+        List<Airport> airports = (List<Airport>) airportRepository.findAll();
+        Map<Integer, String> origins = new HashMap<>();
+
+        if (!airports.isEmpty()){
+            int count = 1;
+            for (Airport a: airports){
+                origins.put(count++, a.getAirportName());
+            }
+        }
+        return origins;
+    }
     public FlightRoute getFlightRouteById(int id){
         return flightRouteRepository.findByRouteId(id);
     }

@@ -19,6 +19,9 @@ public class WebAPI {
 
     @GetMapping("/origin")
     public Object getOrigins (){
-        return flightRouteService.getAllFlightRouteNameWithMap();
+        return flightRouteService.getAllOriginsWithMapType();
     }
+
+    @GetMapping("/")
+
 }
