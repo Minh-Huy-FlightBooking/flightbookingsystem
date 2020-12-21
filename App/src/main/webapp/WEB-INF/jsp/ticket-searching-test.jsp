@@ -35,8 +35,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("input#origin").on("keyup", function() {
-                /*let value = $(this).val().toLowerCase();*/
-                let value = $(this).val();
+                let value = $(this).val().toLowerCase();
 
                 $("input#origin").autocomplete({
                     width: 300,
@@ -55,7 +54,7 @@
                             success: function( data, textStatus, jqXHR) {
                                 console.log( data);
                                 let items = data;
-                                let data_filter = items.filter( origin => origin == value);
+                                let data_filter = items.filter( origin => origin.toLowerCase().indexOf(value) > -1);
                                 console.log(value);
                                 console.log(data_filter);
                                 response(data_filter);
