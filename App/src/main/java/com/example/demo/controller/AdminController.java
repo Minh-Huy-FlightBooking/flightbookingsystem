@@ -139,9 +139,23 @@ public class AdminController {
     @RequestMapping("/addFlight")
     public String addFlight(Model model){
         model.addAttribute("flight",new Flight());
-        model.addAttribute("flightRoute",flightRouteService.getAllFlightRoute());
+        model.addAttribute("flightRouteList",flightRouteService.getAllFlightRoute());
         model.addAttribute("aircraft",aircraftService.getAllAircraftWithMapType());
         return "administration/flight-addition";
+    }
+    @RequestMapping("/handlingFLightAddition")
+    public String handlingFLightAddition(Flight flight,Model model,RedirectAttributes attributes){
+        if (flight.getArrivalTime().toString()==flight.getDepartureTime().toString()){
+            model.addAttribute("message","Invalid value");
+            return "administration/flight-route-action";
+        }else{
+            if(flightService.saveFlight(flight)){
+                attributes.addFlashAttribute("message","Successfully");
+            }else {
+                attributes.addFlashAttribute("message","failed");
+            }
+        }
+        return "administration/flight-route-action";
     }
 
 }

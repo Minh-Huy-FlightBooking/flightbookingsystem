@@ -112,77 +112,57 @@
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>
         <%--................--%>
-        <div class="page-content" style="background: rgb(180,180,180)">
+        <div class="page-content" style="background: #e67e22;color: #fff">
             <h1>Flight Addition: </h1>
             <i>Please fill in the form to create a new flight</i>
         </div>
         <%----------------%>
         <div class="page-content" id="page-content" style="padding: 2rem">
-            <form:form action="handlingAircraftAddition" modelAttribute="flight">
-                <c:if test="${status == 'Edit Flight'}">
-                    <div class="form-group col-md-4 px-0">
-                        <label for="">Id</label>
-                        <form:input path="flightId" readonly="true" class="form-control" placeholder=""/>
-                    </div>
-                </c:if>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="">Origin:</label>
-                        <form:select path="flightRoute.originAirport" class="form-control">
-                            <form:options items="${originAirport}" itemLabel="airportName"/>
-                        </form:select>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="">Destination:</label>
-                        <form:select path="flightRoute.destinationAirport" class="form-control">
-                            <form:options items="${destinationAirport}" itemLabel="airportName"/>
-                        </form:select>
-                    </div>
-                </div>
+            <div class="container d-flex justify-content-center">
+                <form:form action="handlingFLightAddition" modelAttribute="flight" cssClass="w-35">
+                            <c:if test="${status == 'Edit Flight'}">
+                                <div class="form-group col-md-4 px-0">
+                                    <label for="">Id</label>
+                                    <form:input path="flightId" readonly="true" class="form-control" placeholder=""/>
+                                </div>
+                            </c:if>
 
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group col-md-2">--%>
-<%--                        <label for="">Departure Time:</label>--%>
-<%--                        <form:input path="" class="form-control" id="" placeholder="model"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group col-md-2">--%>
-<%--                        <label for="">Arrival Time:</label>--%>
-<%--                        <form:input path="" class="form-control" id="" placeholder="1234 Main St"/>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="">Departure Time:</label>
-                        <form:input path="departureTime" type="date" class="form-control" id="" placeholder="model"/>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="">Arrival Time:</label>
-                        <form:input path="arrivalTime" type="date" class="form-control" id="" placeholder="1234 Main St"/>
-                    </div>
-                </div>
-                <div class="form-group col-md-4 px-0">
-                    <label for="">Aircraft</label>
-                    <form:select path="aircraft.aircraftId" class="form-control" items="${aircraft}">
-                    </form:select>
-                </div>
-                <div class="form-group col-md-4 px-0">
-                    <label for="">Flight Status:</label>
-                    <form:input path="flightStatus" class="form-control" id="" placeholder="Delay/ Onprogress/ ..."/>
-                </div>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group col-md-4">--%>
-<%--                        <label for="">Airport:</label>--%>
-<%--                        <form:select path="" items="${airports}" class="form-control">--%>
-<%--                        </form:select>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group col-md-4">--%>
-<%--                        <label for="">Brand:</label>--%>
-<%--                        <form:select path="" items="${brands}" class="form-control">--%>
-<%--                        </form:select>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <button type="submit" class="btn btn-primary">Add Aircraft</button>
-            </form:form>
+                            <div class="form-group">
+                                <label for="">Flight_Route:</label>
+                                <form:select path="flightRoute" class="form-control">
+                                    <c:forEach var="route" items="${flightRouteList}">
+                                        <form:option value="${route.routeId}"><c:out value="${route.originAirport.airportName}"/>&rarr;&nbsp;<c:out value="${route.destinationAirport.airportName}"/></form:option>
+                                    </c:forEach>
+                                </form:select>
+                            </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="">Departure Time: &nbsp;<img src="/resources/image/logo/clock.png" alt="clock" width="18" height="18"></label>
+                                <form:input path="departureTime" type="date" class="form-control" id="" placeholder="model"/>
+                            </div>
+                            <div class="form-group ml-2">
+                                <label for="">Arrival Time: &nbsp;<img src="/resources/image/logo/clock.png" alt="clock" width="18" height="18"></label>
+                                <form:input path="arrivalTime" type="date" class="form-control" id=""/>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label for="">Aircraft &nbsp; <img src="/resources/image/logo/travel-airport-landing-calzjk7rnfq70wow8vakd4.png" alt="plane" width="21" height="21"></label>
+                                <form:select path="aircraft.aircraftId" class="form-control" items="${aircraft}">
+                                </form:select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Flight Status:</label>
+                                <form:input path="flightStatus" class="form-control" id="" placeholder="Delay/ Onprogress/ ..."/>
+                            </div>
+                            <div class="form-group">
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" class="btn col-sm-4 form-control" style="background-color: #34495e;color: #fff;border-radius: 20px" onMouseOut="this.style.background='#40739e'"
+                                           onMouseOver="this.style.background='#102c58'" value="Add Flight">
+                                </div>
+                            </div>
+                        </form:form>
+            </div>
         </div>
     </div>
 </main>

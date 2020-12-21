@@ -25,7 +25,7 @@
         }
     </style>
 </head>
-<body>
+
 <body class="sidebar-is-reduced">
 <header class="l-header">
     <div class="l-header__inner clearfix">
@@ -105,7 +105,7 @@
         </nav>
     </div>
 </div>
-</body>
+
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <h1 class="page-title">Dashboard</h1>

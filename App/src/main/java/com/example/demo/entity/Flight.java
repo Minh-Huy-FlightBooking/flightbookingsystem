@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -12,9 +16,9 @@ public class Flight {
     @Column(name = "flight_id")
     private int flightId;
     @Column(name = "departure_time")
-    private LocalDate departureTime;
+    private LocalDateTime departureTime;
     @Column(name = "arrival_time")
-    private LocalDate arrivalTime;
+    private LocalDateTime arrivalTime;
     @Column(name = "flight_status")
     private String flightStatus;
     @ManyToOne
@@ -36,19 +40,19 @@ public class Flight {
         this.flightId = flightId;
     }
 
-    public LocalDate getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalDate departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
 
-    public LocalDate getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalDate arrivalTime) {
+    public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 

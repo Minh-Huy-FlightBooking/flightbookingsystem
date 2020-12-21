@@ -38,7 +38,8 @@
                                                placeholder="Tìm kiếm" aria-label="Search"
                                                onkeyup="myFunction()" title="tìm kiếm theo tên sản phẩm">
                 </div>
-                <p>${message}</p>
+                <c:if test="${message!=null}"><p>${message}</p></c:if>
+
             </h5>
 
             <div class="col-xs-12 col-sm-12 ">

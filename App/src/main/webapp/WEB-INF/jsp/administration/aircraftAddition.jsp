@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body>
+
 
     <body class="sidebar-is-reduced">
     <header class="l-header">
@@ -107,7 +107,7 @@
             </nav>
         </div>
     </div>
-    </body>
+
     <main class="l-main">
         <div class="content-wrapper content-wrapper--with-bg">
             <h1 class="page-title">Dashboard</h1>
@@ -117,49 +117,49 @@
                 <i>Please fill in the form to create a new aircraft</i>
             </div>
             <%----------------%>
-            <div class="card" id="page-content" style="padding: 2rem">
+            <div class="card mb-3"  style="padding: 2rem">
                 <div class="card-body mb-3">
-                <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
-                    <c:if test="${status == 'Edit Aircraft'}">
+                    <form:form action="handlingAircraftAddition" modelAttribute="aircraft">
+                        <c:if test="${status == 'Edit Aircraft'}">
+                            <div class="form-group col-md-4 px-0">
+                                <label for="">Id</label>
+                                <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
+                            </div>
+                        </c:if>
                         <div class="form-group col-md-4 px-0">
-                            <label for="">Id</label>
-                            <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
+                            <label for="">Model</label>
+                            <form:input path="model"  class="form-control" id="" placeholder="model"/>
                         </div>
-                    </c:if>
-                    <div class="form-group col-md-4 px-0">
-                        <label for="">Model</label>
-                        <form:input path="model"  class="form-control" id="" placeholder="model"/>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="">Total Business</label>
-                            <form:input path="total_business" class="form-control" id="" placeholder="Email"/>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Total Business</label>
+                                <form:input path="total_business" class="form-control" id="" placeholder="Email"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Total Economy</label>
+                                <form:input path="total_economy" class="form-control" id="" placeholder="Password"/>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Total Economy</label>
-                            <form:input path="total_economy" class="form-control" id="" placeholder="Password"/>
+                        <div class="form-group col-md-4 px-0">
+                            <label for="">Enabled (Active: true, Inactive: false</label>
+                            <form:input path="enabled" class="form-control" id="" placeholder="1234 Main St"/>
                         </div>
-                    </div>
-                    <div class="form-group col-md-4 px-0">
-                        <label for="">Enabled (Active: true, Inactive: false</label>
-                        <form:input path="enabled" class="form-control" id="" placeholder="1234 Main St"/>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="">Airport:</label>
-                            <form:select path="airport.airportId" items="${airports}" class="form-control">
-                            </form:select>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Airport:</label>
+                                <form:select path="airport.airportId" items="${airports}" class="form-control">
+                                </form:select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Brand:</label>
+                                <form:select path="brand.brandId" items="${brands}" class="form-control">
+                                </form:select>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Brand:</label>
-                            <form:select path="brand.brandId" items="${brands}" class="form-control">
-                            </form:select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Aircraft</button>
-                </form:form>
+                        <button type="submit" class="btn btn-primary">Add Aircraft</button>
+                    </form:form>
                 </div>
-            </div>
+        </div>
         </div>
     </main>
     <script>
