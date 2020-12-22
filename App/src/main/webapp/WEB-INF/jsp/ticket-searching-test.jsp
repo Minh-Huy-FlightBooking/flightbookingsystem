@@ -34,7 +34,7 @@
     </STYLE>
 
     <script type="text/javascript">
-        let value;
+        /*get trip type */
         $(document).ready(function () {
             $("#tripType").change(function(){
                 $(this).find("option:selected").each(function(){
@@ -47,10 +47,17 @@
                 });
             }).change();
 
-
+            /*autocomplete for origin input*/
+            let value;
             $("input#origin").on("keyup", function () {
                 value = $(this).val().toLowerCase();
 
+                /*Force user to enter origin first!!!*/
+                if ($('#destination').val() != ''){
+                    $('#destination').val('');
+                }
+
+                /*autocomplete*/
                 $("input#origin").autocomplete({
                     width: 300,
                     max: 10,
@@ -80,7 +87,7 @@
                 });
 
             });
-
+            /*Auto sugguest for destination input*/
             $("input#destination").on("keyup", function () {
                 let value2 = $(this).val().toLowerCase();
                 console.log(value2);
@@ -128,10 +135,10 @@
         <form:input path="destination" id="destination"/>
 
         <h3>Trip type:</h3>
-        <select id="tripType" name="type">
+        <form:select path="tripType" id="tripType" name="type">
             <option value="oneWay" selected>One Way</option>
             <option value="roundTrip" >Round Trip</option>
-        </select>
+        </form:select>
 
         <h3>Departure Date:</h3>
         <form:input path="departureDate" type="date"/>
@@ -140,7 +147,12 @@
             <form:input path="returnDate" type="date"/>
         </div>
 
-
+        <h3>Travel Class</h3>
+        <form:select path="travelClass" >
+            <option value=""></option>
+            <option value="economy">Economy</option>
+            <option value="business">Business</option>
+        </form:select>
         <div>
             <h3>Passenger Type:</h3>
             <span>Adults</span>
