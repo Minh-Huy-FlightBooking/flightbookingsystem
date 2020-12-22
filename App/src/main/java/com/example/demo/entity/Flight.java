@@ -44,16 +44,16 @@ public class Flight {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = LocalDateTime.parse(departureTime);
     }
 
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalDateTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = LocalDateTime.parse(arrivalTime);
     }
 
     public String getFlightStatus() {

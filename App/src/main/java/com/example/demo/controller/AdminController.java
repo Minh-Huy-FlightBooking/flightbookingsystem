@@ -146,8 +146,8 @@ public class AdminController {
     @RequestMapping("/handlingFLightAddition")
     public String handlingFLightAddition(Flight flight,Model model,RedirectAttributes attributes){
         if (flight.getArrivalTime().toString()==flight.getDepartureTime().toString()){
-            model.addAttribute("message","Invalid value");
-            return "administration/flight-route-action";
+            attributes.addAttribute("message","Invalid value");
+            return "redirect:/admin/addFlight";
         }else{
             if(flightService.saveFlight(flight)){
                 attributes.addFlashAttribute("message","Successfully");
@@ -155,7 +155,6 @@ public class AdminController {
                 attributes.addFlashAttribute("message","failed");
             }
         }
-        return "administration/flight-route-action";
+        return "redirect:/admin/flightList";
     }
-
 }
