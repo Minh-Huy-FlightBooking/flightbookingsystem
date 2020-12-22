@@ -24,15 +24,14 @@
         <h1 class="page-title ml-2">Flight Manager</h1>
         <%--................--%>
         <div class="page-content" style="background: #e67e22;color: #fff">
-            <h1>Flight: </h1>
-            <i>Please fill in the form to create a new flight</i>
+            <h1>Flight List: </h1>
         </div>
 
-        <div class="page-content" id="page-content" style="padding: 2rem">
-            <div class="container d-flex justify-content-center">
+        <div class="page-content" id="page-content" style="padding: 0;">
+            <%--<div class="container-fluid d-flex justify-content-center">--%>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Flight Route List&nbsp;&nbsp;&nbsp;<a href="addFlight" title="thêm mới" class="btn btn-sm mycolor"  >
+                        <h5 class="card-title">Flight List&nbsp;&nbsp;&nbsp;<a href="addFlight" title="thêm mới" class="btn btn-sm mycolor"  >
                             <i class="fa fa-plus"></i></a>
                             <c:if test="${message!=null}"><p>${message}</p></c:if>
                         </h5>
@@ -63,8 +62,8 @@
                                         <td>${f.aircraft.brand.brandName}</td>
                                         <!-- Đây là các icon thao tác -->
                                         <td>
-                                            <a href="editFligh?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa"><i class='fa fa-pencil'></i></a>
-                                            <a href="deleteFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="xóa"><i class="fa fa-trash-o"></i></a>
+                                            <a href="editFligh?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa" style="margin: 1px;"><i class='fa fa-pencil' ></i></a>
+                                            <a href="deleteFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="xóa" style="margin: 1px;"><i class="fa fa-trash-o" ></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -73,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <%--</div>--%>
         </div>
         <br>
         &nbsp;

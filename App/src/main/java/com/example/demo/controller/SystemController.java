@@ -49,8 +49,6 @@ public class SystemController {
     //For Date Time formatter
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
-        /* DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");*/
-
         //The date format to parse or output your dates
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

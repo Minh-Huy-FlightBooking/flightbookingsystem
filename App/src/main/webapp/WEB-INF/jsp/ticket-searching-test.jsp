@@ -9,11 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>jQuery Autocomplete</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>jQuery Autocomplete</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="http://code.jquery.com/jquery-1.7.js"
             type="text/javascript"></script>
@@ -32,7 +33,11 @@
             overflow-x: hidden;
         }
     </STYLE>
-
+    <script>
+        $(document).ready(function(){
+            $(".dropdown-toggle").dropdown();
+        });
+    </script>
     <script type="text/javascript">
         /*get trip type */
         $(document).ready(function () {
@@ -126,6 +131,17 @@
 </head>
 <body>
 <div class="container">
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 2</a>
+            <a class="dropdown-item" href="#">Link 3</a>
+        </div>
+    </div>
+</div>
+<div class="container">
     <h1>Let's find a flight to a certain place!!!</h1>
     <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
         <h3>Origin:</h3>
@@ -149,7 +165,6 @@
 
         <h3>Travel Class</h3>
         <form:select path="travelClass" >
-            <option value=""></option>
             <option value="economy">Economy</option>
             <option value="business">Business</option>
         </form:select>

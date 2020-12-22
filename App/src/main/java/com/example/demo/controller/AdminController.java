@@ -163,8 +163,7 @@ public class AdminController {
         }
         return "redirect:/admin/flightList";
     }
-<<<<<<< HEAD
-=======
+
 
     //For Date time formatter!!!
     /*@InitBinder
@@ -181,5 +180,5 @@ public class AdminController {
         binder.registerCustomEditor(Date.class, editor);
     }*/
 
->>>>>>> 8ae9b25305b5920bc13b8e8d82cbdc1fb93de105
+
 }
