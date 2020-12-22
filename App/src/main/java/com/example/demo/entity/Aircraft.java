@@ -25,8 +25,6 @@ public class Aircraft {
     @JoinColumn(name = "brand_id")
     private Brand brand;
     @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
-    private List<Seat> seatList;
-    @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
     private List<Flight> flightList;
 
     public int getAircraftId() {
@@ -75,14 +73,6 @@ public class Aircraft {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
-    }
-
-    public List<Seat> getSeatList() {
-        return seatList;
-    }
-
-    public void setSeatList(List<Seat> seatList) {
-        this.seatList = seatList;
     }
 
     public List<Flight> getFlightList() {

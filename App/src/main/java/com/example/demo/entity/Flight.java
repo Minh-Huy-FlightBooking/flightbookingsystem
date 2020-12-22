@@ -19,6 +19,10 @@ public class Flight {
     private LocalDateTime arrivalTime;
     @Column(name = "flight_status")
     private String flightStatus;
+    @Column(name = "economyPrice")
+    private String economyPrice;
+    @Column(name = "businessPrice")
+    private String businessPrice;
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
@@ -29,6 +33,22 @@ public class Flight {
     private List<Ticket> ticketList;
     @OneToOne(mappedBy = "flight")
     private Promotion promotion;
+
+    public String getEconomyPrice() {
+        return economyPrice;
+    }
+
+    public void setEconomyPrice(String economyPrice) {
+        this.economyPrice = economyPrice;
+    }
+
+    public String getBusinessPrice() {
+        return businessPrice;
+    }
+
+    public void setBusinessPrice(String businessPrice) {
+        this.businessPrice = businessPrice;
+    }
 
     public int getFlightId() {
         return flightId;
@@ -42,16 +62,16 @@ public class Flight {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = LocalDateTime.parse(departureTime);
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = LocalDateTime.parse(arrivalTime);
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public String getFlightStatus() {
