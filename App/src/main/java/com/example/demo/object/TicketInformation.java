@@ -1,16 +1,38 @@
 package com.example.demo.object;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class TicketInformation {
     private int id;
     private String origin;
     private String destination;
+    private String tripType;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate returnDate;
     private PassengerType passengerType;
+    private String travelClass;
 
     public TicketInformation() {
+    }
+
+    public String getTravelClass() {
+        return travelClass;
+    }
+
+    public void setTravelClass(String travelClass) {
+        this.travelClass = travelClass;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
     }
 
     public PassengerType getPassengerType() {
