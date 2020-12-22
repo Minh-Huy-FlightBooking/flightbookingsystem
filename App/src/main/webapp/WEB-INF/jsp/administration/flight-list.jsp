@@ -41,26 +41,28 @@
                             <table class="table table-condensed table-hover" id="myTable">
                                 <thead>
                                 <tr align="center">
-                                    <th>ID</th>
                                     <th>Departure time</th>
                                     <th>Arrival time</th>
                                     <th>Origin Airport</th>
                                     <th>Destination Airport</th>
                                     <th>Flight Status</th>
                                     <th>Aircraft</th>
+                                    <th>Economy Price</th>
+                                    <th>Business Price</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${flightList}" var="f">
                                     <tr align="center">
-                                        <td>${f.flightId}</td>
                                         <td>${f.departureTime}</td>
                                         <td>${f.arrivalTime}</td>
                                         <td>${f.flightRoute.originAirport.airportName}</td>
                                         <td>${f.flightRoute.destinationAirport.airportName}</td>
                                         <td>${f.flightStatus}</td>
                                         <td>${f.aircraft.brand.brandName}</td>
+                                        <td>${f.economyPrice}</td>
+                                        <td>${f.businessPrice}</td>
                                         <!-- Đây là các icon thao tác -->
                                         <td>
                                             <a href="editFligh?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa"><i class='fa fa-pencil'></i></a>
