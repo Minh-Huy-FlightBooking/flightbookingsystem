@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class SystemController {
         return "home";
     }
 
+    //////////////////////////////
     // a function to looking for a flight / ticket !!!
     @RequestMapping(value = "/ticketSearch")
     public String goToTicketSearch(Model model){
@@ -74,6 +76,25 @@ public class SystemController {
         }
         return "ticket-list";
     }
+    //////////////////////////////
+    // Passengers' information
+    @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET)
+    public String getPassengerDetails (Model model) {
+        model.addAttribute("passenger", new PassengerInformation());
+        return "passenger-details";
+    }
+
+    // Payment Method
+    @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
+    public String goToPaymentMethod (Model model){
+        return "payment-method";
+    }
+
+
+
+
+
+
 
     //For Date Time formatter
     @InitBinder
