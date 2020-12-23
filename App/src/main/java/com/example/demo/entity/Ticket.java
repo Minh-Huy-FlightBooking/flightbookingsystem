@@ -12,6 +12,9 @@ public class Ticket {
     @Column(name = "ticket_type")
     private String ticketType;
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
@@ -25,6 +28,14 @@ public class Ticket {
     private Passenger passenger;
     @Column(name = "price")
     private double price;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public int getTicketId() {
         return ticketId;
