@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -19,33 +20,60 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Departure Time</th>
+        <th scope="col">Arrival Time</th>
+        <th scope="col">Economy Price</th>
+        <th scope="col">Business Price</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    <c:forEach var="f" items="${departFlights}">
+        <tr>
+            <th scope="row">${f.flightRoute.originAirport.airportName}</th>
+            <td>${f.flightRoute.destinationAirport.airportName}</td>
+            <td>${f.departureTime}</td>
+            <td>${f.arrivalTime}</td>
+            <td>${f.economyPrice}</td>
+            <td>${f.businessPrice}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
+    <br/>
+    <br/>
+    <c:if test="${returnStatus == 'true'}">
+
+        <div class="container-fluid">
+            <h3>Return Flight</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Departure Time</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Economy Price</th>
+                    <th scope="col">Business Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="rf" items="${returnFlights}">
+                    <tr>
+                        <th scope="row">${rf.flightRoute.originAirport.airportName}</th>
+                        <td>${rf.flightRoute.destinationAirport.airportName}</td>
+                        <td>${rf.departureTime}</td>
+                        <td>${rf.arrivalTime}</td>
+                        <td>${rf.economyPrice}</td>
+                        <td>${rf.businessPrice}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
+
 </div>
 </body>
 </html>

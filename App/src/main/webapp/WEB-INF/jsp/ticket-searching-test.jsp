@@ -57,7 +57,6 @@
                 if ($('#destination').val() != '') {
                     $('#destination').val('');
                 }
-
                 /*autocomplete*/
                 $("input#origin").autocomplete({
                     width: 300,

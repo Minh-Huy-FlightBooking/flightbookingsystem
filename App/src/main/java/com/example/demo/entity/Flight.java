@@ -15,9 +15,7 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_id")
     private int flightId;
-
     @Column(name = "departure_time")
-
     private LocalDateTime departureTime;
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
