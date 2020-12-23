@@ -13,12 +13,12 @@ public class Ticket {
     private String ticketType;
 
     @ManyToOne
-    @JoinColumn(name = "fligt_id")
+    @JoinColumn(name = "flight_id")
     private Flight flight;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "booking_id")
-    private Booking booking;
+    private Booking booking;*/
 
     @ManyToOne
     @JoinColumn(name = "passenger_id")
@@ -50,13 +50,13 @@ public class Ticket {
         this.flight = flight;
     }
 
-    public Booking getBooking() {
+    /*public Booking getBooking() {
         return booking;
     }
 
     public void setBooking(Booking booking) {
         this.booking = booking;
-    }
+    }*/
 
     public Passenger getPassenger() {
         return passenger;

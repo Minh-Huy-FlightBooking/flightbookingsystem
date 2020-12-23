@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +15,9 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_id")
     private int flightId;
+
     @Column(name = "departure_time")
+
     private LocalDateTime departureTime;
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;

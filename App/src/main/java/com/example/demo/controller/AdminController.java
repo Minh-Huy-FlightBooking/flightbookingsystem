@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.text.DateFormatter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -171,12 +172,14 @@ public class AdminController {
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
         //The date format to parse or output your dates
-        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        /*SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
         //Create a new CustomDateEditor
         CustomDateEditor editor = new CustomDateEditor(dateTimeFormatter, true);
 
         //Register it as custom editor for the Date type
         binder.registerCustomEditor(Date.class, editor);
+
     }
 }

@@ -20,8 +20,8 @@ public class Booking {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @OneToMany(mappedBy = "booking")
-    private List<Ticket> tickets;
+   /* @OneToMany(mappedBy = "booking")
+    private List<Ticket> tickets;*/
 
     public Booking() {
     }
@@ -50,11 +50,11 @@ public class Booking {
         this.payment = payment;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
+//    public List<Ticket> getTickets() {
+//        return tickets;
+//    }
+//
+//    public void setTickets(List<Ticket> tickets) {
+//        this.tickets = tickets;
+//    }
 }
