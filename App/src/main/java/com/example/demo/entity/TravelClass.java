@@ -15,8 +15,6 @@ public class TravelClass {
     @Column(name = "rate")
     private double rate;
 
-    @Column(name = "description")
-    private String description;
    /* @OneToMany(mappedBy = "travelClass",fetch = FetchType.LAZY)
     private List<Seat> seatList;
 */
@@ -56,14 +54,6 @@ public class TravelClass {
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
    /* public List<Seat> getSeatList() {

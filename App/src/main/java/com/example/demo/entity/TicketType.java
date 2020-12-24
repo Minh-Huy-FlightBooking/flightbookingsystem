@@ -17,8 +17,6 @@ public class TicketType {
     @Column(name = "rate")
     private double rate;
 
-    @Column(name = "description")
-    private String description;
 
     @OneToMany(mappedBy = "ticketType")
     private List<Ticket> tickets;
@@ -50,13 +48,7 @@ public class TicketType {
         this.rate = rate;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public List<Ticket> getTickets() {
         return tickets;
