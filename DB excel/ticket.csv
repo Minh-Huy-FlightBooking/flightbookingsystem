@@ -1,0 +1,12 @@
+ticket_id,price,ticket_type,booking_id,flight_id,passenger_id,enabled,ticket_type_id,travel_class
+6,200,eco,1,3,1,1,NULL,NULL
+7,300,busi,1,4,1,1,NULL,NULL
+8,400,eco,1,3,1,1,NULL,NULL
+9,500,eco,1,4,1,1,NULL,NULL
+10,600,eco,1,4,1,1,NULL,NULL
+11,300,eco,1,6,1,1,NULL,NULL
+12,400,eco,1,6,1,1,NULL,NULL
+13,500,eco,1,7,1,1,NULL,NULL
+14,1000,eco,1,7,1,1,NULL,NULL
+15,800,busi,1,8,1,1,NULL,NULL
+16,900,busi,1,8,1,1,NULL,NULL

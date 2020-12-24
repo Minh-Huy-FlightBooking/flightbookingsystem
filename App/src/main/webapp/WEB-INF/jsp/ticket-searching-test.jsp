@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -33,18 +34,13 @@
             overflow-x: hidden;
         }
     </STYLE>
-    <script>
-        $(document).ready(function(){
-            $(".dropdown-toggle").dropdown();
-        });
-    </script>
     <script type="text/javascript">
         /*get trip type */
         $(document).ready(function () {
-            $("#tripType").change(function(){
-                $(this).find("option:selected").each(function(){
+            $("#tripType").change(function () {
+                $(this).find("option:selected").each(function () {
                     let optionValue = $(this).attr("value");
-                    if (optionValue == "oneWay"){
+                    if (optionValue == "oneWay") {
                         $("#returnDate").hide();
                     } else {
                         $("#returnDate").show();
@@ -58,10 +54,9 @@
                 value = $(this).val().toLowerCase();
 
                 /*Force user to enter origin first!!!*/
-                if ($('#destination').val() != ''){
+                if ($('#destination').val() != '') {
                     $('#destination').val('');
                 }
-
                 /*autocomplete*/
                 $("input#origin").autocomplete({
                     width: 300,
@@ -131,17 +126,6 @@
 </head>
 <body>
 <div class="container">
-    <div class="dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 2</a>
-            <a class="dropdown-item" href="#">Link 3</a>
-        </div>
-    </div>
-</div>
-<div class="container">
     <h1>Let's find a flight to a certain place!!!</h1>
     <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
         <h3>Origin:</h3>
@@ -153,7 +137,7 @@
         <h3>Trip type:</h3>
         <form:select path="tripType" id="tripType" name="type">
             <option value="oneWay" selected>One Way</option>
-            <option value="roundTrip" >Round Trip</option>
+            <option value="roundTrip">Round Trip</option>
         </form:select>
 
         <h3>Departure Date:</h3>
@@ -164,7 +148,8 @@
         </div>
 
         <h3>Travel Class</h3>
-        <form:select path="travelClass" >
+        <form:select path="travelClass">
+            <option></option>
             <option value="economy">Economy</option>
             <option value="business">Business</option>
         </form:select>
