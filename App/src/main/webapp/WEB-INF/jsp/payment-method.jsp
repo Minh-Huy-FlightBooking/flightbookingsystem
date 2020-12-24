@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-
+    <h1>Payment Page</h1>
+<h1>Pay through credit card</h1>
+<button>Online bank</button>
 </body>
 </html>

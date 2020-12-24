@@ -26,7 +26,12 @@
             rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid  bg-warning">Logo is here</div>
+
+<div class="container-fluid bg-danger">
+    Booking Process is displayed here
+</div>
+<div class="container border mt-2">
     <h3>
         Adult 1
     </h3>
@@ -108,6 +113,10 @@
         <button type="submit" class="btn btn-primary" style="width: 100px">Back</button>
         <button type="submit" class="btn btn-primary" style="width: 100px">Continue</button>
     </form:form>
+
 </div>
+<%--<div class="container border mt-2">
+
+</div>--%>
 </body>
 </html>
