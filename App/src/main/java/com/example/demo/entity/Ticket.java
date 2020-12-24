@@ -9,8 +9,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticket_id")
     private int ticketId;
-    @Column(name = "ticket_type")
-    private String ticketType;
+/*    @Column(name = "ticket_type")
+    private String ticketType;*/
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -26,8 +26,19 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
-    @Column(name = "price")
-    private double price;
+    /*@Column(name = "price")
+    private double price;*/
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_type_id")
+    private TicketType ticketType;
+
+    @ManyToOne
+    @JoinColumn(name = "travel_class")
+    private TravelClass travelClass;
+
+    public Ticket() {
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -45,13 +56,13 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-    public String getTicketType() {
+/*    public String getTicketType() {
         return ticketType;
     }
 
     public void setTicketType(String ticketType) {
         this.ticketType = ticketType;
-    }
+    }*/
 
     public Flight getFlight() {
         return flight;
@@ -77,14 +88,29 @@ public class Ticket {
         this.passenger = passenger;
     }
 
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public TravelClass getTravelClass() {
+        return travelClass;
+    }
+
+    public void setTravelClass(TravelClass travelClass) {
+        this.travelClass = travelClass;
+    }
+
+    /*
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
+    }*/
 
-    public Ticket() {
-    }
 }
