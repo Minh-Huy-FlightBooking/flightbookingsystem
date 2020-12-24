@@ -12,6 +12,9 @@ public class TravelClass {
     private int travelClassId;
     @Column(name = "class_name")
     private String className;
+    @Column(name = "rate")
+    private double rate;
+
     @Column(name = "description")
     private String description;
    /* @OneToMany(mappedBy = "travelClass",fetch = FetchType.LAZY)
@@ -21,6 +24,22 @@ public class TravelClass {
     private List<Ticket> tickets;
 
     public TravelClass() {
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public int getTravelClassId() {
