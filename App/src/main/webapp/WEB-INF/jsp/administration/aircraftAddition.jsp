@@ -15,7 +15,6 @@
 
     <main class="l-main">
         <div class="content-wrapper content-wrapper--with-bg">
-            <h1 class="page-title ml-3">Aircraft</h1>
             <%--................--%>
             <div class="page-content" style="background: #e67e22;color: #fff">
                 <h1>Aircraft Addition: </h1>

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,8 +16,10 @@ public class Flight {
     @Column(name = "flight_id")
     private int flightId;
     @Column(name = "departure_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime departureTime;
     @Column(name = "arrival_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime arrivalTime;
     @Column(name = "flight_status")
     private String flightStatus;
@@ -62,16 +66,16 @@ public class Flight {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = LocalDateTime.parse(departureTime);
     }
 
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalDateTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = LocalDateTime.parse(arrivalTime);
     }
 
     public String getFlightStatus() {

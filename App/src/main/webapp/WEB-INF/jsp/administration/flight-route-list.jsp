@@ -15,7 +15,6 @@
 
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title ml-3">All Flight Route</h1>
         <div class="page-content" style="background: #e67e22;color: #fff">
             <h1>Flight Route: </h1>
             <i>Please fill in the form to create a new aircraft</i>
@@ -30,7 +29,7 @@
                     </h5>
 
                     <div class="col-xs-12 col-sm-12 ">
-                        <table class="table table-condensed table-hover" id="myTable">
+                        <table id="example" class="table table-hover table-bordered w-100">
                             <thead>
                             <tr align="center">
                                 <th>ID</th>

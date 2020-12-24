@@ -13,7 +13,6 @@
 <jsp:include page="_sidebar.jsp"/>
 <main class="l-main" >
     <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title">All Aircraft</h1>
         <div class="page-content" style="background: #e67e22;color: #fff">
             <h1>Aircraft Information: </h1>
             <i>Please fill in the form to create a new flight</i>
@@ -27,18 +26,8 @@
 <%--                    <h3>Admin</h3>--%>
 <%--                </div>--%>
                 <div class="card-body">
-                    <h5 class="card-title">Aircraft List
-                        <a href="/admin/addAircraft" title="new addition" class="btn btn-sm mycolor ml-2"  ><i class="fa fa-plus"></i></a>
-                        <div class="input-group col-sm-4 mb-4 float-right">
-                                                <input class="form-control" id="myInput" type="text"
-                                                       placeholder="searching" aria-label="Search"
-                                                       onkeyup="myFunction()" title="Searching">
-                        </div>
-                        <p class="col">${message}</p>
-                    </h5>
-
                     <div class="col-xs-12 col-sm-12 ">
-                        <table class="table table-condensed table-hover" id="myTable">
+                        <table class="table table-bordered table-hover" id="example">
                             <thead>
                             <tr align="center">
                                 <th scope="col">Id</th>

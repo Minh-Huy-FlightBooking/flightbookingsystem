@@ -29,7 +29,7 @@
                             class="fa fa-plus"></i></a> <span>${message}</span></h5>
                     <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
                         <div class="col-xs-12 col-sm-12 ">
-                            <table class="table table-condensed table-hover" id="myTable">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                 <tr align="center">
                                     <c:if test="${type=='edit'}">

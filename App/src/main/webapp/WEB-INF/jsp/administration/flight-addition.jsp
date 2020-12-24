@@ -14,73 +14,42 @@
 <body class="sidebar-is-reduced">
 <jsp:include page="_sidebar.jsp"/>
 <main class="l-main">
-    <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title">Add Aircraft</h1>
-        <%--................--%>
-        <div class="page-content" style="background: #e67e22;color: #fff">
-            <h1>Flight Addition: </h1>
-            <i>Please fill in the form to create a new flight</i>
-        </div>
+    <div class="content-wrapper bg-white">
         <%----------------%>
-        <div class="page-content" id="page-content" style="padding: 2rem">
-            <div class="container d-flex justify-content-center">
-                <form:form action="handlingFLightAddition" modelAttribute="flight">
-                            <c:if test="${status == 'Edit Flight'}">
-                                <div class="form-group">
-                                    <label for="">Id</label>
-                                    <form:input path="flightId" readonly="true" class="form-control" placeholder=""/>
-                                </div>
-                            </c:if>
+        <div id="page-content" style="padding: 2rem">
 
-                            <div class="form-group">
-                                <label for="">Flight_Route:</label>
-                                <form:select path="flightRoute" class="form-control">
-                                    <c:forEach var="route" items="${flightRouteList}">
-                                        <form:option value="${route.routeId}"><c:out value="${route.originAirport.airportName}"/>&rarr;&nbsp;<c:out value="${route.destinationAirport.airportName}"/></form:option>
-                                    </c:forEach>
-                                </form:select>
-                            </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="">Departure Time: &nbsp;<img src="/resources/image/logo/clock.png" alt="clock" width="18" height="18"></label>
-                                <form:input path="departureTime" type="datetime-local" class="form-control" id="" placeholder="model"/>
-                            </div>
-                            <div class="form-group ml-2">
-                                <label for="">Arrival Time: &nbsp;<img src="/resources/image/logo/clock.png" alt="clock" width="18" height="18"></label>
-                                <form:input path="arrivalTime" type="datetime-local" class="form-control" id=""/>
-                            </div>
-                        </div>
-                            <div class="form-group">
-                                <label for="">Aircraft &nbsp; <img src="/resources/image/logo/travel-airport-landing-calzjk7rnfq70wow8vakd4.png" alt="plane" width="21" height="21"></label>
-                                <form:select path="aircraft.aircraftId" class="form-control" items="${aircraft}">
-                                </form:select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Flight Status:</label>
-                                <form:input path="flightStatus" class="form-control" id="" placeholder="Delay/ Onprogress/ ..."/>
-                            </div>
-                            <div class="form-group">
-                                <div class="d-flex justify-content-center">
-                                    <input type="submit" class="btn col-sm-4 form-control" style="background-color: #34495e;color: #fff;border-radius: 20px" onMouseOut="this.style.background='#40739e'"
-                                           onMouseOver="this.style.background='#102c58'" value="Add Flight">
-                                </div>
-                            </div>
-                        </form:form>
+        <div class="container mt-5 col-sm-6">
+            <div class="card shadow-lg p-3 border-0">
+                <div class="card-body ">
+                    <form:form action="handlingFLightAddition" modelAttribute="flight">
+                        <table class="table table-borderless border-0">
+                            <tr>
+                                <th>Flight Route</th>
+                                <td>
+                                    <form:select path="flightRoute" class="form-control" items="${flightRouteList}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form:form>
+                </div>
             </div>
+        </div>
         </div>
         <br><br>
     </div>
 </main>
 <script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
+    // $(document).ready(function () {
+    //     $("#myInput").on("keyup", function () {
+    //         var value = $(this).val().toLowerCase();
+    //         $("#myTable tr").filter(function () {
+    //             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //         });
+    //     });
+    // });
+    // $(function () {
+    //     $('#datetimepicker1').datetimepicker();
+    // });
 </script>
 
 </body>

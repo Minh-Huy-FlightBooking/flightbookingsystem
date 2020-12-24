@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -168,15 +169,12 @@ public class AdminController {
         return "redirect:/admin/flightList";
     }
     //For Date time formatter!!!
-    @InitBinder
-    private void dateBinder(WebDataBinder binder) {
-        //The date format to parse or output your dates
-        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-        //Create a new CustomDateEditor
-        CustomDateEditor editor = new CustomDateEditor(dateTimeFormatter, true);
-
-        //Register it as custom editor for the Date type
-        binder.registerCustomEditor(Date.class, editor);
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        DateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+//
+//        CustomDateEditor editor = new CustomDateEditor(dateTimeFormat,true);
+//
+//        binder.registerCustomEditor(LocalDateTime.class,editor);
+//    }
 }

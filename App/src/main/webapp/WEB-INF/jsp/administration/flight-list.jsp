@@ -21,7 +21,6 @@
 <jsp:include page="_sidebar.jsp"/>
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title ml-2">Flight Manager</h1>
         <%--................--%>
         <div class="page-content" style="background: #e67e22;color: #fff">
             <h1>Flight List: </h1>
@@ -37,7 +36,7 @@
                         </h5>
 
                         <div class="col-xs-12 col-sm-12 ">
-                            <table class="table table-condensed table-hover" id="myTable">
+                            <table class="table table-bordered table-hover" id="example">
                                 <thead>
                                 <tr align="center">
                                     <th>Departure time</th>
@@ -80,16 +79,6 @@
         &nbsp;
     </div>
 </main>
-<script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
 </body>
 </html>
 

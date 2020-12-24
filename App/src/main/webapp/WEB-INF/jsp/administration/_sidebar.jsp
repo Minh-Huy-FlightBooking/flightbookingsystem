@@ -42,17 +42,6 @@
                         </div>
                     </a>
                 </li>
-                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Modules">
-                    <div class="c-menu__item__inner"><i class="fa fa-puzzle-piece"></i>
-                        <div class="c-menu-item__title"><span>Modules</span></div>
-                        <div class="c-menu-item__expand js-expand-submenu"><i class="fa fa-angle-down"></i></div>
-                    </div>
-                    <ul class="c-menu__submenu u-list">
-                        <li>Payments</li>
-                        <li>Maps</li>
-                        <li>Notifications</li>
-                    </ul>
-                </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
                     <div class="c-menu__item__inner"><i class="fa fa-bar-chart"></i>
                         <div class="c-menu-item__title"><span>Statistics</span></div>

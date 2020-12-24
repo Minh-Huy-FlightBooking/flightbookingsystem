@@ -16,7 +16,7 @@
 <jsp:include page="_sidebar.jsp"/>
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title">Admin Page</h1>
+
     </div>
 </main>
 
