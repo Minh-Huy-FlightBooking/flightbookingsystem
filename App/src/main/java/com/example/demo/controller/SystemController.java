@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.object.FlightInformation;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.service.FlightService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.sql.Date;
@@ -61,7 +63,8 @@ public class SystemController {
 
         //Format!!!
         System.out.println(initialTimeOfDepartureDate);
-
+        model.addAttribute("ticketInformation", t);
+        model.addAttribute("flightInformation", new FlightInformation());
         if (t.getTripType().equals("oneWay")){
             model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
         } else if (t.getTripType().equals("roundTrip")) {
