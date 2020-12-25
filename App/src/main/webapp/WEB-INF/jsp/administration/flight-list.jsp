@@ -18,22 +18,33 @@
 <html>
 <jsp:include page="_head.jsp"/>
 <body class="sidebar-is-reduced mb-3">
+<c:if test="${message!=null}">
+    <script>
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="alert alert-warning mb-0" role="alert">
+                    ${message}
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 <jsp:include page="_sidebar.jsp"/>
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
-        <%--................--%>
-        <div class="page-content" style="background: #e67e22;color: #fff">
-            <h1>Flight List: </h1>
-        </div>
 
-        <div class="page-content" id="page-content" style="padding: 0;">
+        <div id="page-content" style="padding: 0;">
             <%--<div class="container-fluid d-flex justify-content-center">--%>
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Flight List&nbsp;&nbsp;&nbsp;<a href="addFlight" title="thêm mới" class="btn btn-sm mycolor"  >
+                        <h2 class="card-title ml-3">Flight List&nbsp;&nbsp;&nbsp;<a href="addFlight" class="btn btn-sm mycolor"  >
                             <i class="fa fa-plus"></i></a>
-                            <c:if test="${message!=null}"><p>${message}</p></c:if>
-                        </h5>
+                        </h2>
 
                         <div class="col-xs-12 col-sm-12 ">
                             <table class="table table-bordered table-hover" id="example">
@@ -63,7 +74,7 @@
                                         <td>${f.businessPrice}</td>
                                         <!-- Đây là các icon thao tác -->
                                         <td>
-                                            <a href="editFligh?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa" style="margin: 1px;"><i class='fa fa-pencil' ></i></a>
+                                            <a href="editFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa" style="margin: 1px;"><i class='fa fa-pencil' ></i></a>
                                             <a href="deleteFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="xóa" style="margin: 1px;"><i class="fa fa-trash-o" ></i></a>
                                         </td>
                                     </tr>

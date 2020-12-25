@@ -15,20 +15,10 @@ public class Airport {
     @OneToOne
     @JoinColumn(name = "city_id")
     private City city;
-    @OneToMany(mappedBy = "airport",fetch = FetchType.LAZY)
-    private List<Aircraft> aircraftList;
     @OneToMany(mappedBy = "originAirport")
     private List<FlightRoute> originRouteList;
     @OneToMany(mappedBy = "destinationAirport")
     private List<FlightRoute> destinationRouteList;
-
-    public List<Aircraft> getAircraftList() {
-        return aircraftList;
-    }
-
-    public void setAircraftList(List<Aircraft> aircraftList) {
-        this.aircraftList = aircraftList;
-    }
 
     public int getAirportId() {
         return airportId;
