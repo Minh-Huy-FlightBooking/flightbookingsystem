@@ -68,7 +68,7 @@ public class SystemController {
         if (t.getTripType().equals("oneWay")){
             model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
         } else if (t.getTripType().equals("roundTrip")) {
-            //This is an easy way to show data (Vietjet's Idea) --> upgrade later!!!
+            //This is an easy way to show data --> upgrade later!!!
             model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
             LocalDateTime initialTimeOfReturnDate = t.getReturnDate().atStartOfDay();
             LocalDateTime endTimeOfReturnDate = t.getReturnDate().atTime(23, 59);
@@ -92,12 +92,6 @@ public class SystemController {
     public String goToPaymentMethod (Model model){
         return "payment-method";
     }
-
-
-
-
-
-
 
     //For Date Time formatter
     @InitBinder

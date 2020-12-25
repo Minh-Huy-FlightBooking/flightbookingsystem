@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <%-------------%>
+    <script>
+        let sendJson = function () {
+            let departureTrip = {
+
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container-fluid  bg-warning">Logo is here</div>
@@ -26,59 +35,64 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col">
-            <h3>Departure Trip</h3>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Dates</th>
-                    <th scope="col">Origin</th>
-                    <th scope="col">Arrival Place</th>
-                    <th scope="col">Flight</th>
-                    <th scope="col">Economy Price</th>
-                    <th scope="col">Business Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="f" items="${departFlights}">
+            <div class="container-fluid" id="departure-container">
+                <h3>Departure Trip</h3>
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td scope="row">
-                            <input type="hidden" value="${f.flightId}">
-                                ${f.departureTime.toLocalDate()}
-                            <br/>
-                                ${f.arrivalTime.toLocalDate()}
-                        </td>
-                        <td>
-                                ${f.departureTime.toLocalTime()}
-                            <br/>
-                                ${f.flightRoute.originAirport.airportName}
-                        </td>
-                        <td>
-                                ${f.arrivalTime.toLocalTime()}
-                            <br/>
-                                ${f.flightRoute.destinationAirport.airportName}
-                        </td>
-                        <td>
-                                ${f.aircraft.model}
-                            <br/>
-                        </td>
-                        <td>
-                            <input type="radio" name="departPrice" value=" ${f.economyPrice}">
-                            <br/>
-                                ${f.economyPrice}
-                        </td>
-                        <td>
-                            <input type="radio" name="departPrice" value="${f.businessPrice}">
-                            <br/>
-                                ${f.businessPrice}
-                        </td>
+                        <th scope="col">Dates</th>
+                        <th scope="col">Origin</th>
+                        <th scope="col">Arrival Place</th>
+                        <th scope="col">Flight</th>
+                        <th scope="col">Economy Price</th>
+                        <th scope="col">Business Price</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="f" items="${departFlights}">
+                        <tr>
+                            <td scope="row">
+
+                                    ${f.departureTime.toLocalDate()}
+                                <br/>
+                                    ${f.arrivalTime.toLocalDate()}
+                            </td>
+                            <td>
+                                    ${f.departureTime.toLocalTime()}
+                                <br/>
+                                    ${f.flightRoute.originAirport.airportName}
+                            </td>
+                            <td>
+                                    ${f.arrivalTime.toLocalTime()}
+                                <br/>
+                                    ${f.flightRoute.destinationAirport.airportName}
+                            </td>
+                            <td>
+                                    ${f.aircraft.model}
+                                <br/>
+                            </td>
+                            <td >
+                                <input type="hidden" value="${f.flightId}" id="flightId">
+                                <input type="radio" name="departPrice" value=" ${f.economyPrice}">
+                                <br/>
+                                    ${f.economyPrice}
+                            </td>
+                            <td >
+                                <input type="hidden" value="${f.flightId}" id="flightId">
+                                <input type="radio" name="departPrice" value="${f.businessPrice}">
+                                <br/>
+                                    ${f.businessPrice}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
             <%--<br/>
             <br/>--%>
             <c:if test="${returnStatus == 'true'}">
-                <div class="container-fluid">
+                <div class="container-fluid" id="return-container">
                     <h3>Return Flight</h3>
                     <table class="table table-striped">
                         <thead>
