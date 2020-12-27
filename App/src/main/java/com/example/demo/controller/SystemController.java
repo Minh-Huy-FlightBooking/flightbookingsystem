@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.object.FlightInformation;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
+import com.example.demo.restAPI.WebAPI;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -24,6 +24,9 @@ import java.time.LocalDateTime;
 public class SystemController {
     @Autowired
     private FlightService flightService;
+    
+    @Autowired
+    private WebAPI webAPI;
     @RequestMapping(value = "/")
     public String goToHomepage(){
         return "index";
@@ -44,7 +47,7 @@ public class SystemController {
 
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
     public String goToTicketList (@ModelAttribute("ticketForm") TicketInformation t, Model model) {
-        System.out.println(t.getOrigin());
+      /*  System.out.println(t.getOrigin());
         System.out.println(t.getDestination());
         System.out.println(t.getTripType());
         System.out.println(t.getDepartureDate());
@@ -52,7 +55,7 @@ public class SystemController {
         System.out.println(t.getPassengerType().getNumberOfAdults());
         System.out.println(t.getPassengerType().getNumberOfChildren());
         System.out.println(t.getPassengerType().getNumberOfInfant());
-        System.out.println(t.getTravelClass());
+        System.out.println(t.getTravelClass());*/
 
         int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();
         /////////////
@@ -62,9 +65,8 @@ public class SystemController {
 
 
         //Format!!!
-        System.out.println(initialTimeOfDepartureDate);
+        /*System.out.println(initialTimeOfDepartureDate);*/
         model.addAttribute("ticketInformation", t);
-        model.addAttribute("flightInformation", new FlightInformation());
         if (t.getTripType().equals("oneWay")){
             model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
         } else if (t.getTripType().equals("roundTrip")) {
@@ -83,6 +85,8 @@ public class SystemController {
     // Passengers' information
     @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET)
     public String getPassengerDetails (Model model) {
+        String val = webAPI.getOrigins().toString();
+        System.out.println(val);
         model.addAttribute("passenger", new PassengerInformation());
         return "passenger-details";
     }
