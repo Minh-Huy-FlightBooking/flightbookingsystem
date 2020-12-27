@@ -25,7 +25,6 @@ public class FlightService {
         List<Flight> flightsFiltered = new ArrayList<>();
         if (!flights.isEmpty()){
             for (Flight f: flights){
-                System.out.println(f.getFlightId());
                 List<Ticket> tickets = ticketRepository.findByFlightAndEnabled(f, true);
                 if (tickets.size() >= numberOfPeople) {
                     System.out.println(f.getFlightId());

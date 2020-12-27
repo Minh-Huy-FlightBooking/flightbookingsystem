@@ -2,17 +2,16 @@ package com.example.demo.restAPI;
 
 import com.example.demo.entity.Airport;
 import com.example.demo.entity.Flight;
-import com.example.demo.entity.FlightRoute;
+import com.example.demo.object.FlightPicker;
 import com.example.demo.service.AirportService;
 import com.example.demo.service.FlightRouteService;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/")
@@ -27,7 +26,7 @@ public class WebAPI {
     private AirportService airportService;
 
 
-    @GetMapping("/origin")
+    @RequestMapping(value = "/origin",method = RequestMethod.GET)
     public Object getOrigins (){
         List<String> airports = new ArrayList<>();
         for (Airport a: airportService.getAllAirports()){
@@ -39,11 +38,12 @@ public class WebAPI {
     public Object getDestinationCorrespondingOrigin (@PathVariable(value = "origin")String origin) {
         return flightRouteService.getAllDestinationsNameByOriginName(origin);
     }
-    @PostMapping("/admin/destination")
-    public Object getDestinationById(@RequestBody int id){
-        List<String> json = new ArrayList<>();
-        json.add(flightRouteService.getFlightRouteById(id).getDestinationAirport().getAirportName());
-        System.out.println("ji");
-        return json;
+
+    @RequestMapping(value = "/flightPickerHandler",method = RequestMethod.POST, produces = "application/json")
+    public Object getFlightsPicked (@RequestBody FlightPicker flightPicker){
+        System.out.println("Here i go flight picker handler...");
+        System.out.println(flightPicker);
+        return flightPicker;
     }
+
 }
