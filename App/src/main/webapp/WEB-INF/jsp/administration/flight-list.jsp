@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: DELL
   Date: 12/16/2020
@@ -17,18 +17,144 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="_head.jsp"/>
+
 <body class="sidebar-is-reduced mb-3">
-<c:if test="${message!=null}">
+<%
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+%>
+<c:if test="${type!=null}">
     <script>
         $(document).ready(function(){
             $("#myModal").modal('show');
         });
     </script>
     <div id="myModal" class="modal fade">
-        <div class="modal-dialog modal-login">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="alert alert-warning mb-0" role="alert">
-                    ${message}
+                <c:if test="${type=='delete'}">
+                    <div class="alert alert-warning mb-0" role="alert">
+                        <h4 class="alert-heading">${message}</h4>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td>ID</td>
+                                <td class="font-weight-bold"><del>${newFlight.flightId}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Flight Route</td>
+                                <td class="font-weight-bold"><del><small>From</small> ${newFlight.flightRoute.originAirport.airportName} <small>To</small> ${newFlight.flightRoute.destinationAirport.airportName}</del> </td>
+                            </tr>
+                            <tr>
+                                <td>Departure time</td>
+                                <td class="font-weight-bold"><del>${newFlight._departureTime}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Arrival time</td>
+                                <td class="font-weight-bold"><del>${newFlight._arrivalTime}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Aircraft</td>
+                                <td class="font-weight-bold"><del>${newFlight.aircraft.model}, ${newFlight.aircraft.brand.brandName}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Economy Price</td>
+                                <td class="font-weight-bold"><del>${newFlight.economyPrice}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Business Price</td>
+                                <td class="font-weight-bold"><del>${newFlight.businessPrice}</del></td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td class="font-weight-bold"><del>${newFlight.flightStatus}</del></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                </c:if>
+                <c:if test="${type=='add'}">
+                    <div class="alert alert-warning mb-0" role="alert">
+                        <h4 class="alert-heading">${message}</h4>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td>Flight Route</td>
+                                <td class="font-weight-bold"><small>From</small> ${newFlight.flightRoute.originAirport.airportName} <small>To</small> ${newFlight.flightRoute.destinationAirport.airportName} </td>
+                            </tr>
+                            <tr>
+                                <td>Departure time</td>
+                                <td class="font-weight-bold">${newFlight._departureTime}</td>
+                            </tr>
+                            <tr>
+                                <td>Arrival time</td>
+                                <td class="font-weight-bold">${newFlight._arrivalTime}</td>
+                            </tr>
+                            <tr>
+                                <td>Aircraft</td>
+                                <td class="font-weight-bold">${newFlight.aircraft.model}, ${newFlight.aircraft.brand.brandName}</td>
+                            </tr>
+                            <tr>
+                                <td>Economy Price</td>
+                                <td class="font-weight-bold">${newFlight.economyPrice}</td>
+                            </tr>
+                            <tr>
+                                <td>Business Price</td>
+                                <td class="font-weight-bold">${newFlight.businessPrice}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td class="font-weight-bold">${newFlight.flightStatus}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                </c:if>
+                <c:if test="${type=='edit'}">
+                        <div class="alert alert-info mb-0" role="alert">
+                            <h4 class="alert-heading">${message}</h4>
+                            <hr>
+                            <h5>New Flight</h5>
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td>Flight Route</td>
+                                    <td class="font-weight-bold"><small>From</small> ${newFlight.flightRoute.originAirport.airportName} <small>To</small> ${newFlight.flightRoute.destinationAirport.airportName} </td>
+                                </tr>
+                                <tr>
+                                    <td>Departure time</td>
+                                    <td class="font-weight-bold">${newFlight._departureTime}</td>
+                                </tr>
+                                <tr>
+                                    <td>Arrival time</td>
+                                    <td class="font-weight-bold">${newFlight._arrivalTime}</td>
+                                </tr>
+                                <tr>
+                                    <td>Aircraft</td>
+                                    <td class="font-weight-bold">${newFlight.aircraft.model}, ${newFlight.aircraft.brand.brandName}</td>
+                                </tr>
+                                <tr>
+                                    <td>Economy Price</td>
+                                    <td class="font-weight-bold">${newFlight.economyPrice}</td>
+                                </tr>
+                                <tr>
+                                    <td>Business Price</td>
+                                    <td class="font-weight-bold">${newFlight.businessPrice}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td class="font-weight-bold">${newFlight.flightStatus}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </c:if>
+                <c:if test="${message1=='fail'}">
+                    <div class="alert alert-danger mb-0" role="alert">
+                    <h4 class="alert-heading">${message}</h4>
+                    <p>May be: Flight On time Or Forence key</p>
+                    <hr>
+                </div>
+                </c:if>
                 </div>
             </div>
         </div>
@@ -63,17 +189,17 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${flightList}" var="f">
-                                    <tr align="center">
-                                        <td>${f.departureTime}</td>
-                                        <td>${f.arrivalTime}</td>
-                                        <td>${f.flightRoute.originAirport.airportName}</td>
-                                        <td>${f.flightRoute.destinationAirport.airportName}</td>
-                                        <td>${f.flightStatus}</td>
-                                        <td>${f.aircraft.brand.brandName}</td>
-                                        <td>${f.economyPrice}</td>
-                                        <td>${f.businessPrice}</td>
+                                    <tr align="center" style="height: 100px">
+                                        <td style="vertical-align: middle; width: 11.6%">${f._departureTime}</td>
+                                        <td style="vertical-align: middle; width: 11.6%">${f._arrivalTime}</td>
+                                        <td style="vertical-align: middle">${f.flightRoute.originAirport.airportName}</td>
+                                        <td style="vertical-align: middle">${f.flightRoute.destinationAirport.airportName}</td>
+                                        <td style="vertical-align: middle">${f.flightStatus}</td>
+                                        <td style="vertical-align: middle">${f.aircraft.model}<br>${f.aircraft.brand.brandName}</td>
+                                        <td style="vertical-align: middle">${f.economyPrice}</td>
+                                        <td style="vertical-align: middle">${f.businessPrice}</td>
                                         <!-- Đây là các icon thao tác -->
-                                        <td>
+                                        <td style="vertical-align: middle">
                                             <a href="editFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa" style="margin: 1px;"><i class='fa fa-pencil' ></i></a>
                                             <a href="deleteFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="xóa" style="margin: 1px;"><i class="fa fa-trash-o" ></i></a>
                                         </td>

@@ -1,12 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Flight;
-import com.example.demo.entity.Ticket;
+import com.example.demo.entity.*;
 import com.example.demo.repository.FlightRepository;
 import com.example.demo.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,6 +52,8 @@ public class FlightService {
     }
 
     public boolean deleteFLight(int id){
+        Flight flight = flightRepository.findByFlightId(id);
+        if (flight.getFlightStatus().equals("On time")) return false;
         try{
             flightRepository.deleteById(id);
             return true;
@@ -67,4 +69,17 @@ public class FlightService {
             return false;
         }
     }
+    public boolean checkFlight(Flight flight){
+        if(flight.getFlightId()!=0){
+            return flight.getDepartureTime().isAfter(flight.getArrivalTime());
+        }
+        boolean e1 ;
+        // kiểm tra tình trạng máy bay của chuyến bay muốn thêm
+        e1 = flight.getAircraft().isEnabled();
+        // kiểm tra thời gian đi và về của chuyến bay muốn thêm
+        if(flight.getDepartureTime().isAfter(flight.getArrivalTime()))e1=true;
+        boolean e2 = flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime(),flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft());
+        return (e1||e2);
+    }
+
 }

@@ -52,25 +52,36 @@
                                 <tr>
                                     <th>Model</th>
                                     <td>
-                                        <form:input path="model"  class="form-control" id=""/>
+                                        <form:input path="model"  class="form-control"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Total business</th>
                                     <td>
-                                        <form:input path="total_business" class="form-control" id="" placeholder="Email"/>
+                                        <form:input path="total_business" class="form-control" placeholder="Email"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Total Economy</th>
                                     <td>
-                                        <form:input path="total_economy" class="form-control" id="" placeholder="Password"/>
+                                        <form:input path="total_economy" class="form-control" placeholder="Password"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Enabled <br><p class="text-muted mb-0">(Active: true, Inactive: false)</p></th>
-                                    <td>
-                                        <form:input path="enabled" class="form-control" id=""/>
+                                    <td class="d-flex flex-row">
+                                        <span class="border pl-2 pt-2 rounded mr-2 mb-1">
+                                            <label class="form-check form-check-inline">
+                                            <span class="form-check-label mr-5" style="font-size: 18px"> Active </span>
+                                            <form:radiobutton path="enabled" cssClass="form-check-input" value="1"/>
+                                            </label>
+                                        </span>
+                                        <span class="border pl-2 pt-2 rounded mr-2 mb-1">
+                                            <label class="form-check form-check-inline">
+                                            <span class="form-check-label mr-5" style="font-size: 18px"> Inactive </span>
+                                            <form:radiobutton path="enabled" cssClass="form-check-input" value="0"/>
+                                            </label>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -82,9 +93,9 @@
                                 <tr>
                                     <th></th>
                                     <td>
-                                        <div class="form-inline">
-                                            <input type="submit" class="btn btn-outline-primary w-50" value="Save"/>
-                                            <a href="/admin/flightRouteList" class="btn btn-outline-danger w-50">Cancel</a>
+                                        <div class="button mt-2 d-flex flex-row align-items-center">
+                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
+                                            <a href="/admin/viewAircraft"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -95,6 +106,8 @@
             </div>
         </div>
     </div>
+    <br><br><br><br>
 </main>
+
 </body>
 </html>

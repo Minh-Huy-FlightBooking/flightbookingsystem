@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.Aircraft;
 import com.example.demo.entity.Flight;
+import com.example.demo.entity.FlightRoute;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,10 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends CrudRepository<Flight,Integer> {
     Flight findByFlightId(int id);
+    // xu ly loi add va edit flight
+    boolean existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(LocalDateTime var1, LocalDateTime var2, FlightRoute var3, Aircraft var4);
+    List<Flight> findByFlightRouteAndAircraft(FlightRoute var1, Aircraft var2);
+    // end
 
     @Query("select f from Flight f " +
             "where f.flightRoute.originAirport.airportName like %:origin% " +

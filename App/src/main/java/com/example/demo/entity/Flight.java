@@ -3,9 +3,11 @@ package com.example.demo.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -15,16 +17,22 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_id")
     private int flightId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "departure_time")
     private LocalDateTime departureTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
     @Column(name = "flight_status")
     private String flightStatus;
     @Column(name = "economyPrice")
-    private String economyPrice;
+    private double economyPrice;
     @Column(name = "businessPrice")
-    private String businessPrice;
+    private double businessPrice;
+    @Transient
+    private String _departureTime;
+    @Transient
+    private String _arrivalTime;
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
@@ -36,19 +44,19 @@ public class Flight {
     @OneToOne(mappedBy = "flight")
     private Promotion promotion;
 
-    public String getEconomyPrice() {
+    public double getEconomyPrice() {
         return economyPrice;
     }
 
-    public void setEconomyPrice(String economyPrice) {
+    public void setEconomyPrice(double economyPrice) {
         this.economyPrice = economyPrice;
     }
 
-    public String getBusinessPrice() {
+    public double getBusinessPrice() {
         return businessPrice;
     }
 
-    public void setBusinessPrice(String businessPrice) {
+    public void setBusinessPrice(double businessPrice) {
         this.businessPrice = businessPrice;
     }
 
@@ -60,20 +68,20 @@ public class Flight {
         this.flightId = flightId;
     }
 
-    public String getDepartureTime() {
-        return String.valueOf(departureTime);
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = LocalDateTime.parse(departureTime);
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public String getArrivalTime() {
-        return String.valueOf(arrivalTime);
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = LocalDateTime.parse(arrivalTime);
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public String getFlightStatus() {
@@ -114,6 +122,16 @@ public class Flight {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    public String get_departureTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return this.getDepartureTime().format(formatter);
+    }
+
+    public String get_arrivalTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return this.getArrivalTime().format(formatter);
     }
 
     public Flight() {

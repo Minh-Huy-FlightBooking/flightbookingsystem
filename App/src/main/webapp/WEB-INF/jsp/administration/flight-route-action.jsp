@@ -66,9 +66,9 @@
                                 <tr>
                                     <th></th>
                                     <td>
-                                        <div class="form-inline">
-                                            <input type="submit" class="btn btn-outline-primary w-50" value="Save"/>
-                                            <a href="/admin/flightRouteList" class="btn btn-outline-danger w-50">Cancel</a>
+                                        <div class="button mt-2 d-flex flex-row align-items-center">
+                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
+                                            <a href="/admin/flightRouteList"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>

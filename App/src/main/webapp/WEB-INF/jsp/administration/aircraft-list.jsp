@@ -45,7 +45,7 @@
                                     <td>${a.model}</td>
                                     <td>${a.total_economy}</td>
                                     <td>${a.total_business}</td>
-                                    <td>${a.enabled}</td>
+                                    <td class="status_aircraft">${a.enabled}</td>
                                     <td>${a.brand.brandName}</td>
                                     <td>
                                         <a href="editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
@@ -62,5 +62,17 @@
         <br><br>
     </div>
 </main>
+<script>
+    var status_aircraft = document.getElementsByClassName("status_aircraft");
+    for (let i=0; i<status_aircraft.length; i++){
+        if(status_aircraft.item(i).innerText=='true'){
+            console.log(status_aircraft.item(i).innerText)
+            status_aircraft.item(i).innerHTML = 'Active'
+        }else{
+            console.log(status_aircraft.item(i).value)
+            status_aircraft.item(i).innerHTML = 'Inactive'
+        }
+    }
+</script>
 </body>
 </html>
