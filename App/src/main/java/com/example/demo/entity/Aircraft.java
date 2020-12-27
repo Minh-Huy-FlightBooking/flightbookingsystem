@@ -19,9 +19,6 @@ public class Aircraft {
     @Column(name = "total_business")
     private int total_business;
     @ManyToOne
-    @JoinColumn(name = "airport_id")
-    private Airport airport;
-    @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
     @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
@@ -57,14 +54,6 @@ public class Aircraft {
 
     public void setTotal_business(int total_business) {
         this.total_business = total_business;
-    }
-
-    public Airport getAirport() {
-        return airport;
-    }
-
-    public void setAirport(Airport airport) {
-        this.airport = airport;
     }
 
     public Brand getBrand() {

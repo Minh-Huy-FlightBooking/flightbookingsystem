@@ -42,11 +42,6 @@
                         </div>
                     </a>
                 </li>
-                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
-                    <div class="c-menu__item__inner"><i class="fa fa-bar-chart"></i>
-                        <div class="c-menu-item__title"><span>Statistics</span></div>
-                    </div>
-                </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <a href="flightRouteList" class="functionButton">
                         <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
@@ -55,23 +50,11 @@
                     </a>
                 </li>
                 <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
-                    <a href="addAircraft" class="functionButton">
-                        <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                            <div class="c-menu-item__title"><span>Add Aircraft</span></div>
-                        </div>
-                    </a>
-                </li>
-                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                     <a href="viewAircraft" class="functionButton">
                         <div class="c-menu__item__inner"><i class="fa fa-gift"></i>
-                            <div class="c-menu-item__title"><span>View Aircraft</span></div>
+                            <div class="c-menu-item__title"><span>Aircraft</span></div>
                         </div>
                     </a>
-                </li>
-                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
-                    <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
-                        <div class="c-menu-item__title"><span>Settings</span></div>
-                    </div>
                 </li>
             </ul>
         </nav>

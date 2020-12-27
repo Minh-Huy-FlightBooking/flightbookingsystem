@@ -16,10 +16,8 @@ public class Flight {
     @Column(name = "flight_id")
     private int flightId;
     @Column(name = "departure_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime departureTime;
     @Column(name = "arrival_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime arrivalTime;
     @Column(name = "flight_status")
     private String flightStatus;
@@ -62,16 +60,16 @@ public class Flight {
         this.flightId = flightId;
     }
 
-    public LocalDateTime getDepartureTime() {
-        return departureTime;
+    public String getDepartureTime() {
+        return String.valueOf(departureTime);
     }
 
     public void setDepartureTime(String departureTime) {
         this.departureTime = LocalDateTime.parse(departureTime);
     }
 
-    public LocalDateTime getArrivalTime() {
-        return arrivalTime;
+    public String getArrivalTime() {
+        return String.valueOf(arrivalTime);
     }
 
     public void setArrivalTime(String arrivalTime) {

@@ -11,21 +11,35 @@
 <jsp:include page="_head.jsp"/>
 
 <body class="sidebar-is-reduced">
+
 <jsp:include page="_sidebar.jsp"/>
+
+<c:if test="${message!=null}">
+    <script>
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="alert alert-warning mb-0" role="alert">
+                        ${message}
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 
 <main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
-        <div class="page-content" style="background: #e67e22;color: #fff">
-            <h1>Flight Route: </h1>
-            <i>Please fill in the form to create a new aircraft</i>
-        </div>
         <%--        --------------%>
-        <div class="page-content" id="page-content" style="padding: 0">
-            <div class="card">
+        <div id="page-content" style="padding: 0">
+            <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Flight Route List&nbsp;&nbsp;&nbsp;<a href="addFlightRoute" title="thêm mới" class="btn btn-sm mycolor">
+                    <h5 class="card-title">Flight Route List&nbsp;&nbsp;&nbsp;
+                        <a href="addFlightRoute" title="thêm mới" class="btn btn-sm mycolor">
                         <i class="fa fa-plus"></i></a>
-                        <p>${message}</p>
                     </h5>
 
                     <div class="col-xs-12 col-sm-12 ">
@@ -62,5 +76,6 @@
     </div>
 
 </main>
+
 </body>
 </html>

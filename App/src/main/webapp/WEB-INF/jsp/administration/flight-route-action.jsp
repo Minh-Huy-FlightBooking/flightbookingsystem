@@ -9,90 +9,77 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
 <html>
+
 <jsp:include page="_head.jsp"/>
+
 <body class="sidebar-is-reduced">
+
 <jsp:include page="_sidebar.jsp"/>
-<main class="l-main">
-    <div class="content-wrapper content-wrapper--with-bg">
-        <h1 class="page-title">Add Flight Route</h1>
-        <div class="page-content" style="background: #e67e22;color: #fff">
-            <h1>Flight Route Action: </h1>
-            <i>Please fill in the form to create a new aircraft</i>
-        </div>
-        <div class="page-content" id="page-content" style="padding: 0">
-            <!-- phần này view cả panel -->
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Add New Flight Route &nbsp;&nbsp;&nbsp;<a href="admin_productManager_add" class="btn btn-sm mycolor" title="thêm mới"><i
-                            class="fa fa-plus"></i></a> <span>${message}</span></h5>
-                    <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
-                        <div class="col-xs-12 col-sm-12 ">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr align="center">
-                                    <c:if test="${type=='edit'}">
-                                        <th>Route Id</th>
-                                    </c:if>
-                                    <th>Origin Airport</th>
-                                    <th>Destination Airport</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr align="center">
-                                    <c:if test="${type=='edit'}">
-                                        <td>
-                                            <form:input path="routeId" type="text" readonly="true"/>
-                                        </td>
-                                    </c:if>
-                                    <td>
-                                        <form:select path="originAirport" class="form-control">
-                                            <form:options items="${originAirport}" itemLabel="airportName"/>
-                                        </form:select>
-                                    </td>
-                                    <td>
-                                        <form:select path="destinationAirport" class="form-control">
-                                            <form:options items="${destinationAirport}" itemLabel="airportName"/>
-                                        </form:select>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <input type="submit" class="btn btn-sm btn-success" value="Save">
-                        </div>
-                    </form:form>
+
+<c:if test="${message!=null}">
+    <script>
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="alert alert-warning mb-0" role="alert">
+                        ${message}
                 </div>
             </div>
+        </div>
+    </div>
+</c:if>
 
+<main class="l-main">
+    <div class="content-wrapper content-wrapper--with-bg">
+        <div id="page-content" style="padding: 0">
+            <!-- phần này view cả panel -->
+            <div class="container mt-5 col-sm-6">
+                <div class="card shadow border-0">
+                    <div class="card-body ">
+                        <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
+                            <table class="table table-borderless">
+                                <c:if test="${type=='edit'}">
+                                    <tr>
+                                        <th>ID</th>
+                                        <td>
+                                            <form:input path="routeId" cssClass="form-control" readonly="true"/>
+                                        </td>
+                                    </tr>
+                                </c:if>
+                                <tr>
+                                    <th>Origin Airport</th>
+                                    <td>
+                                        <form:select path="originAirport" cssClass="form-control" items="${originAirport}" itemLabel="airportName"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Destination Airport</th>
+                                    <td>
+                                        <form:select path="destinationAirport" cssClass="form-control" items="${destinationAirport}" itemLabel="airportName"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="submit" class="btn btn-outline-primary w-50" value="Save"/>
+                                            <a href="/admin/flightRouteList" class="btn btn-outline-danger w-50">Cancel</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
-</body>
 
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    };
-</script>
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 </body>
 </html>

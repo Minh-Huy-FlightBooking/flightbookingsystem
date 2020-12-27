@@ -5,24 +5,15 @@ import com.example.demo.entity.Flight;
 import com.example.demo.entity.FlightRoute;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
-
-import java.text.DateFormat;
-import javax.swing.text.DateFormatter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -101,28 +92,62 @@ public class AdminController {
     }
 
     @RequestMapping("/handlingSaveFlightRoute")
-    public String handleSaveFlightRoute(FlightRoute flightRoute, Model model, RedirectAttributes attributes) {
-        if (flightRoute.getOriginAirport().getAirportName().equals(flightRoute.getDestinationAirport().getAirportName())) {
-            model.addAttribute("message", "Invalid value");
+    public String handleSaveFlightRoute(FlightRoute flightRoute, Model model) {
+        String origin = flightRoute.getOriginAirport().getAirportName();
+        String destination = flightRoute.getDestinationAirport().getAirportName();
+        if (origin==destination) {
+            if(flightRoute.getRouteId()!=0){
+                model.addAttribute("message", "Invalid value.");
+                model.addAttribute("flightRoute", flightRouteService.getFlightRouteById(flightRoute.getRouteId()));
+                model.addAttribute("originAirport", airportService.getAllAirports());
+                model.addAttribute("destinationAirport", airportService.getAllAirports());
+                model.addAttribute("type", "edit");
+                return "administration/flight-route-action";
+            }
+            model.addAttribute("message", "Invalid value.");
+            model.addAttribute("flightRoute", new FlightRoute());
+            model.addAttribute("originAirport", airportService.getAllAirports());
+            model.addAttribute("destinationAirport", airportService.getAllAirports());
             return "administration/flight-route-action";
         } else {
-            if (flightRouteService.saveFlightRoute(flightRoute)) {
-                attributes.addFlashAttribute("message", "Successfully");
-            } else {
-                attributes.addFlashAttribute("message", "failed");
+            for (FlightRoute f : flightRouteService.getAllFlightRoute()){
+                String origin_db = f.getOriginAirport().getAirportName();
+                String destination_db = f.getDestinationAirport().getAirportName();
+                if(origin_db==origin&&destination_db==destination){
+                    if(flightRoute.getRouteId()!=0){
+                        model.addAttribute("message", "Data is existed.");
+                        model.addAttribute("flightRoute", flightRouteService.getFlightRouteById(flightRoute.getRouteId()));
+                        model.addAttribute("originAirport", airportService.getAllAirports());
+                        model.addAttribute("destinationAirport", airportService.getAllAirports());
+                        model.addAttribute("type", "edit");
+                        return "administration/flight-route-action";
+                    }
+                    model.addAttribute("message", "Data is existed.");
+                    model.addAttribute("flightRoute", new FlightRoute());
+                    model.addAttribute("originAirport", airportService.getAllAirports());
+                    model.addAttribute("destinationAirport", airportService.getAllAirports());
+                    return "administration/flight-route-action";
+                }
             }
+            if (flightRouteService.saveFlightRoute(flightRoute)) {
+                model.addAttribute("message", "Save Success!!!");
+                model.addAttribute("flightRouteList",flightRouteService.getAllFlightRoute());
+            } else {
+                model.addAttribute("message", "Save Fail!!!");
+            }
+            return "administration/flight-route-list";
         }
-        return "redirect:/admin/flightRouteList";
     }
 
     @RequestMapping("/deleteFlightRoute")
     public String deleteFlightRoute(@RequestParam("id") int id, Model model) {
+        model.addAttribute("flightRouteList",flightRouteService.getAllFlightRoute());
         if (flightRouteService.deleteFlightRoute(id)) {
             model.addAttribute("message", "Delete Successed");
         } else {
             model.addAttribute("message", "Delete failed");
         }
-        return "redirect:/admin/flightRouteList";
+        return "administration/flight-route-list";
     }
 
     @RequestMapping("/editFlightRoute")
@@ -155,41 +180,34 @@ public class AdminController {
         model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
         return "administration/flight-addition";
     }
+    @RequestMapping("/editFlight")
+    public String editFlight(@RequestParam("id")int id,Model model) {
+        model.addAttribute("flight", flightService.getFlightById(id));
+        model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
+        model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
+        return "administration/flight-addition";
+    }
+    @RequestMapping("/deleteFlight")
+    public String deleteFlight(@RequestParam("id") int id, Model model) {
+        try{
+            flightService.deleteFLight(id);
+            model.addAttribute("message", "Delete Successed");
+        } catch (Exception e){
+            model.addAttribute("message", e.getMessage());
+        }
+        return "redirect:/admin/flightList";
+    }
 
     @RequestMapping("/handlingFLightAddition")
     public String handlingFLightAddition(Flight flight, Model model, RedirectAttributes attributes) {
-        if (flight.getArrivalTime().toString() == flight.getDepartureTime().toString()) {
-            attributes.addAttribute("message", "Invalid value");
-            return "redirect:/admin/addFlight";
-        } else {
-            if (flightService.saveFlight(flight)) {
-                attributes.addFlashAttribute("message", "Successfully");
-            } else {
-                attributes.addFlashAttribute("message", "failed");
-            }
+        try{
+            flightService.saveFlight(flight);
+            attributes.addFlashAttribute("message", "Successfully!!!");
+        } catch (Exception e){
+            attributes.addFlashAttribute("message", e.getMessage());
         }
         return "redirect:/admin/flightList";
     }
     //For Date time formatter!!!
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        DateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-//
-//        CustomDateEditor editor = new CustomDateEditor(dateTimeFormat,true);
-//
-//        binder.registerCustomEditor(LocalDateTime.class,editor);
-//    }
-    @InitBinder
-    private void dateBinder(WebDataBinder binder) {
-        //The date format to parse or output your dates
-        /*SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
-        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
-        //Create a new CustomDateEditor
-        CustomDateEditor editor = new CustomDateEditor(dateTimeFormatter, true);
-
-        //Register it as custom editor for the Date type
-        binder.registerCustomEditor(Date.class, editor);
-
-    }
 }

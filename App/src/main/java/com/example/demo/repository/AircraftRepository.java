@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface AircraftRepository extends CrudRepository<Aircraft,Integer> {
     Aircraft findByAircraftId(int aircraftId);
-    List<Aircraft> findAircraftsByAirport_AirportId(int id);
 }
