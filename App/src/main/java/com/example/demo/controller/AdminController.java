@@ -28,6 +28,8 @@ public class AdminController {
     @Autowired
     private FlightRouteService flightRouteService;
 
+    @Autowired
+    private FlightService flightService;
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage() {
         return "administration/adminHome";
@@ -164,8 +166,7 @@ public class AdminController {
     /////////////////////////////
 
     // Flight Manager
-    @Autowired
-    private FlightService flightService;
+
 
     @RequestMapping("/flightList")
     public String returnFlightList(Model model) {
@@ -191,8 +192,8 @@ public class AdminController {
     public String deleteFlight(@RequestParam("id") int id, Model model) {
         try{
             flightService.deleteFLight(id);
-            model.addAttribute("message", "Delete Successed");
-        } catch (Exception e){
+            model.addAttribute("message", "Delete Succeed");
+        } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
         }
         return "redirect:/admin/flightList";
@@ -209,5 +210,4 @@ public class AdminController {
         return "redirect:/admin/flightList";
     }
     //For Date time formatter!!!
-
 }

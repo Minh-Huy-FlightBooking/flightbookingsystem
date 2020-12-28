@@ -26,6 +26,7 @@
             rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<input hidden type="text" value="${sessionId}" id="sessionId"/>
 <div class="container-fluid  bg-warning">Logo is here</div>
 
 <div class="container-fluid bg-danger">
@@ -47,11 +48,13 @@
 
             <form:form action="" modelAttribute="passenger">
                 <div class="form-row">
-                    <div class="form-group col-md-1">
+                    <div class="form-group col-md-2">
                         <label for="title">Title</label>
                         <form:select path="title" class="form-control" id="title">
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
+                            <option value="Mrs">Ms</option>
+                            <option value="Mrs">Miss</option>
                         </form:select>
                             <%--<input type="email" class="form-control" id="inputEmail4" placeholder="Email">--%>
                     </div>
@@ -74,7 +77,7 @@
                             <option>Homosexuality</option>
                         </form:select>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                         <label for="dateOfBirth">Date Of Birth</label>
                         <form:input path="dateOfBirth" type="date" class="form-control" id="dateOfBirth"/>
                     </div>
@@ -89,24 +92,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="email">Email:</label>
-                        <form:input path="email" class="form-control" id="email"/>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="phoneNumber">Phone Number:</label>
-                        <form:input path="phoneNumber"  class="form-control" id="phoneNumber"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                        <label class="form-check-label" for="invalidCheck">
-                            Send Booking Data to this Email
-                        </label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
                         <label for="lastName">Passport Number:</label>
                         <form:input path="passportNumber" class="form-control"/>
                     </div>
@@ -117,10 +102,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100px">Back</button>
                 <button type="submit" class="btn btn-primary" style="width: 100px">Continue</button>
+                <button>Go To Home Page (Test)</button>
             </form:form>
         </div>
     </div>
 </div>
+
 </div>
 </body>
 </html>

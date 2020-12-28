@@ -36,6 +36,96 @@ public class Flight {
     @OneToOne(mappedBy = "flight")
     private Promotion promotion;
 
+    public Flight() {
+    }
+
+    public int getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getFlightStatus() {
+        return flightStatus;
+    }
+
+    public void setFlightStatus(String flightStatus) {
+        this.flightStatus = flightStatus;
+    }
+
+    public String getEconomyPrice() {
+        return economyPrice;
+    }
+
+    public void setEconomyPrice(String economyPrice) {
+        this.economyPrice = economyPrice;
+    }
+
+    public String getBusinessPrice() {
+        return businessPrice;
+    }
+
+    public void setBusinessPrice(String businessPrice) {
+        this.businessPrice = businessPrice;
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
+    }
+
+    public FlightRoute getFlightRoute() {
+        return flightRoute;
+    }
+
+    public void setFlightRoute(FlightRoute flightRoute) {
+        this.flightRoute = flightRoute;
+    }
+
+    public List<Ticket> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(List<Ticket> ticketList) {
+        this.ticketList = ticketList;
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+    /*  public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
     public String getEconomyPrice() {
         return economyPrice;
     }
@@ -117,5 +207,5 @@ public class Flight {
     }
 
     public Flight() {
-    }
+    }*/
 }

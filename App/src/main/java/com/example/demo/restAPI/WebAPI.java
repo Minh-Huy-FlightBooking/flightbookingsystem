@@ -7,6 +7,7 @@ import com.example.demo.service.AirportService;
 import com.example.demo.service.FlightRouteService;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,9 +41,11 @@ public class WebAPI {
     }
 
     @RequestMapping(value = "/flightPickerHandler",method = RequestMethod.POST, produces = "application/json")
-    public Object getFlightsPicked (@RequestBody FlightPicker flightPicker){
+    public FlightPicker getFlightsPicked (@RequestBody FlightPicker flightPicker, HttpServletRequest request){
+        System.out.println(request.getSession().getId());
         System.out.println("Here i go flight picker handler...");
-        System.out.println(flightPicker);
+        System.out.println(flightPicker.getDepartureTrip().getTravelClass());
+        System.out.println(flightPicker.getReturnTrip().getTravelClass());
         return flightPicker;
     }
 

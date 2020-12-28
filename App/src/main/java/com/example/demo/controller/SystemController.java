@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.restAPI.WebAPI;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,6 +29,7 @@ public class SystemController {
     
     @Autowired
     private WebAPI webAPI;
+
     @RequestMapping(value = "/")
     public String goToHomepage(){
         return "index";
@@ -40,14 +43,15 @@ public class SystemController {
     //////////////////////////////
     // a function to looking for a flight / ticket !!!
     @RequestMapping(value = "/ticketSearch")
-    public String goToTicketSearch(Model model){
+    public String goToTicketSearch(Model model, HttpServletRequest request){
+        model.addAttribute("sessionId", request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
         return "ticket-searching-test";
     }
 
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
-    public String goToTicketList (@ModelAttribute("ticketForm") TicketInformation t, Model model) {
-      /*  System.out.println(t.getOrigin());
+    public String goToTicketList (@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
+        /*System.out.println(t.getOrigin());
         System.out.println(t.getDestination());
         System.out.println(t.getTripType());
         System.out.println(t.getDepartureDate());
@@ -56,14 +60,14 @@ public class SystemController {
         System.out.println(t.getPassengerType().getNumberOfChildren());
         System.out.println(t.getPassengerType().getNumberOfInfant());
         System.out.println(t.getTravelClass());*/
-
+        model.addAttribute("sessionId", request.getSession().getId());
         int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();
         /////////////
         // Departure Time
         LocalDateTime initialTimeOfDepartureDate = t.getDepartureDate().atStartOfDay();
         LocalDateTime endTimeOfDepartureDate = t.getDepartureDate().atTime(23,59);
 
-
+        model.addAttribute("sessionId", request.getSession().getId());
         //Format!!!
         /*System.out.println(initialTimeOfDepartureDate);*/
         model.addAttribute("ticketInformation", t);
@@ -83,20 +87,28 @@ public class SystemController {
     }
     //////////////////////////////
     // Passengers' information
-    @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET)
-    public String getPassengerDetails (Model model) {
-        String val = webAPI.getOrigins().toString();
-        System.out.println(val);
+    @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET )
+    public String getPassengerDetails (Model model, HttpServletRequest request) {
+//        FlightPicker flightPicker = webAPI.getFlightsPicked();
+        /*System.out.println(flightPicker.getDepartureTrip().getTravelClass());*/
+        model.addAttribute("sessionId", request.getSession().getId());
         model.addAttribute("passenger", new PassengerInformation());
         return "passenger-details";
     }
 
     // Payment Method
     @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
-    public String goToPaymentMethod (Model model){
+    public String goToPaymentMethod (Model model, HttpServletRequest request){
+        model.addAttribute("sessionId", request.getSession().getId());
         return "payment-method";
     }
 
+    @RequestMapping(value = "/seatSelection", method = RequestMethod.GET)
+    public String goToSeatSelection (Model model, HttpServletRequest request) {
+        model.addAttribute("sessionId", request.getSession().getId());
+        System.out.println(request.getSession().getId());
+        return "seat-selection";
+    }
     //For Date Time formatter
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
@@ -108,6 +120,7 @@ public class SystemController {
 
         //Register it as custom editor for the Date type
         binder.registerCustomEditor(Date.class, editor);
+
     }
 
 }
