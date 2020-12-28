@@ -359,6 +359,9 @@
                     $('#continue a').attr("href","passengerDetails");
                 }
             }
+
+            //Send Json object
+            sendJson();
         }
         /*let departureObject = '{ "departureTrip": [{"flightId": ""}, {"travelClass": ""}, {"adults": ""}, {"children": ""},{"infant": ""}]}';*/
 
@@ -402,6 +405,8 @@
                     $('#continue a').attr("href","passengerDetails");
                 }
             }
+            //Send Json object
+            sendJson();
         }
         function sendJson() {
             /////////////////////////////////////////////////////////////////////

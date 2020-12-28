@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Flight;
 import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
@@ -15,10 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -87,13 +91,38 @@ public class SystemController {
     }
     //////////////////////////////
     // Passengers' information
-    @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET )
-    public String getPassengerDetails (Model model, HttpServletRequest request) {
+    @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET)
+    public String getPassengerDetails (Model model, HttpServletRequest request, HttpSession session) {
 //        FlightPicker flightPicker = webAPI.getFlightsPicked();
         /*System.out.println(flightPicker.getDepartureTrip().getTravelClass());*/
         model.addAttribute("sessionId", request.getSession().getId());
-        model.addAttribute("passenger", new PassengerInformation());
+        FlightPicker flightPicker = (FlightPicker) session.getAttribute(session.getId());
+        System.out.println("Hello: " + flightPicker.getDepartureTrip().getTravelClass());
+        int adults, infants, children;
+        adults = flightPicker.getDepartureTrip().getAdults();
+        infants = flightPicker.getDepartureTrip().getInfant();
+        children = flightPicker.getDepartureTrip().getChildren();
+        System.out.println("Adult, Children, Infants: " + adults + children + infants);
+
+        //Handle Form -->
+        List<PassengerInformation> passengerList = new ArrayList<>();
+
+        for (int i = 1; i <= (adults + children + infants) ; i++){
+            PassengerInformation passengerInformation = new PassengerInformation();
+            if (i <= adults) {
+                passengerInformation.setTitle("adult");
+            } else if (i <= (adults + children)) {
+                passengerInformation.setTitle("child");
+            } else {
+                passengerInformation.setTitle("infant");
+            }
+            passengerList.add(passengerInformation);
+        }
+
+        model.addAttribute("passengerList", passengerList);
+        /*model.addAttribute("passenger", new PassengerInformation());*/
         return "passenger-details";
+
     }
 
     // Payment Method
