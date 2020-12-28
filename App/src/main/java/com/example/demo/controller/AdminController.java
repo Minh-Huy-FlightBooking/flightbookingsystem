@@ -5,14 +5,21 @@ import com.example.demo.entity.Flight;
 import com.example.demo.entity.FlightRoute;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Controller
@@ -28,8 +35,6 @@ public class AdminController {
     @Autowired
     private FlightRouteService flightRouteService;
 
-    @Autowired
-    private FlightService flightService;
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage() {
         return "administration/adminHome";
@@ -37,6 +42,7 @@ public class AdminController {
 
     /////////////////////////////////
     //For editing and viewing Aircraft!!!
+    // go to add new aircraft page
     @RequestMapping(value = "/addAircraft")
     public String goToAircraftAdditionPage(Model model) {
         model.addAttribute("aircraft", new Aircraft());
@@ -44,7 +50,7 @@ public class AdminController {
         model.addAttribute("airports", airportService.getAllAirportsWithMapType());
         return "administration/aircraftAddition";
     }
-
+    // Save new aircraft
     @RequestMapping(value = "/handlingAircraftAddition")
     public String handleAircraftAddition(Aircraft aircraft) {
         aircraftService.saveAircraft(aircraft);
@@ -53,23 +59,23 @@ public class AdminController {
 
         return "redirect:/admin/viewAircraft";
     }
-
+    // go to view aircraft page
     @RequestMapping(value = "/viewAircraft")
     public String viewAircraft(Model model) {
         model.addAttribute("aircraft", aircraftService.getAllAircraft());
         return "administration/aircraft-list";
     }
-
+    // delete aircraft
     @RequestMapping(value = "/deleteAircraft")
     public String deleteAircraft(@RequestParam(value = "aircraftId") int aircraftId) {
         aircraftService.deleteAircraftById(aircraftId);
         return "redirect:/admin/viewAircraft";
     }
-
+    // go to edit aircraft page
     @RequestMapping(value = "/editAircraft", method = RequestMethod.GET)
     public String editAircraft(@RequestParam(value = "aircraftId") int aircraftId, Model model) {
         model.addAttribute("aircraft", aircraftService.getAircraftById(aircraftId));
-        model.addAttribute("status", "Edit Aircraft");
+        model.addAttribute("type", "edit");
 
         model.addAttribute("brands", brandService.getAllAircraftBrandsWithMapType());
         model.addAttribute("airports", airportService.getAllAirportsWithMapType());
@@ -166,48 +172,86 @@ public class AdminController {
     /////////////////////////////
 
     // Flight Manager
-
-
+    @Autowired
+    private FlightService flightService;
+    //go to view flight page
     @RequestMapping("/flightList")
     public String returnFlightList(Model model) {
         model.addAttribute("flightList", flightService.getAllFlight());
         return "administration/flight-list";
     }
-
+    // go to add flight page
     @RequestMapping("/addFlight")
     public String addFlight(Model model) {
         model.addAttribute("flight", new Flight());
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
-        model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
+        model.addAttribute("aircraft", aircraftService.getAllAircraft());
+        model.addAttribute("brand",brandService.getAllAircraftBrands());
         return "administration/flight-addition";
     }
+    // go to edit flight page
     @RequestMapping("/editFlight")
     public String editFlight(@RequestParam("id")int id,Model model) {
         model.addAttribute("flight", flightService.getFlightById(id));
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
         model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
+        model.addAttribute("type","edit");
         return "administration/flight-addition";
     }
+    // delete flight
     @RequestMapping("/deleteFlight")
     public String deleteFlight(@RequestParam("id") int id, Model model) {
-        try{
-            flightService.deleteFLight(id);
-            model.addAttribute("message", "Delete Succeed");
-        } catch (Exception e) {
-            model.addAttribute("message", e.getMessage());
+        Flight flight = flightService.getFlightById(id);
+        if(flightService.deleteFLight(id)){
+            model.addAttribute("message", "Deleted Flight!!!");
+            model.addAttribute("type","delete");
+            model.addAttribute("newFlight",flight);
+        } else {
+            model.addAttribute("message", "Don't Delete Flight "+flight.getFlightId());
+            model.addAttribute("type","fail");
         }
-        return "redirect:/admin/flightList";
+        model.addAttribute("flightList", flightService.getAllFlight());
+        return "administration/flight-list";
     }
 
+    // Save new Flight
     @RequestMapping("/handlingFLightAddition")
-    public String handlingFLightAddition(Flight flight, Model model, RedirectAttributes attributes) {
-        try{
-            flightService.saveFlight(flight);
-            attributes.addFlashAttribute("message", "Successfully!!!");
-        } catch (Exception e){
-            attributes.addFlashAttribute("message", e.getMessage());
+    public String handlingFLightAddition(Flight flight, Model model) {
+
+
+        if(flightService.checkFlight(flight))
+        {
+            model.addAttribute("message", "Invalid value");
+            model.addAttribute("flight", new Flight());
+            model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
+            model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
+            return "administration/flight-addition";
+        }else{
+            try{
+                Flight oldFlight = flightService.getFlightById(flight.getFlightId());
+                flightService.saveFlight(flight);
+                if(flightService.getFlightById(flight.getFlightId()).getAircraft()!=null){
+                    model.addAttribute("type","edit");
+                    model.addAttribute("oldFlight",oldFlight);
+                    model.addAttribute("message","Edit Flight "+flight.getFlightId());
+                }
+                else {
+                    model.addAttribute("type","add");
+                    model.addAttribute("message", "Added New Flight !!!");}
+                model.addAttribute("newFlight", flight);
+            } catch (Exception e){
+                model.addAttribute("message", e.getMessage());
+            }
+            model.addAttribute("flightList", flightService.getAllFlight());
+            return "administration/flight-list";
         }
-        return "redirect:/admin/flightList";
+
     }
-    //For Date time formatter!!!
+    // For Date time formatter!!!
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        final DateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS'Z'");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(timeFormat, true));
+    }
+    // test ajax
 }
