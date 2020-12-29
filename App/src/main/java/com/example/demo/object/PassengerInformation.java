@@ -11,8 +11,26 @@ public class PassengerInformation {
     private String nationality;
     private String passportNumber;
     private LocalDate expiryDate;
+    private String email;
+    private String phoneNumber;
 
     public PassengerInformation() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getTitle() {

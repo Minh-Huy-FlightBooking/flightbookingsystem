@@ -49,7 +49,6 @@ public class WebAPI {
         System.out.println(flightPicker.getReturnTrip().getTravelClass());
         System.out.println(session.getId());
         session.setAttribute(session.getId(), flightPicker);
-
         return flightPicker;
     }
 
