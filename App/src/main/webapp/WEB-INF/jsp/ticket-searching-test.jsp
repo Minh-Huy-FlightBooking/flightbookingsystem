@@ -36,7 +36,9 @@
     </STYLE>
     <script type="text/javascript">
         /*get trip type */
+
         $(document).ready(function () {
+            sessionId = $('#sessionId').val();
             $("#tripType").change(function () {
                 $(this).find("option:selected").each(function () {
                     let optionValue = $(this).attr("value");
@@ -87,7 +89,7 @@
                 });
 
             });
-            /*Auto sugguest for destination input*/
+            /*Auto suggest for destination input*/
             $("input#destination").on("keyup", function () {
                 let value2 = $(this).val().toLowerCase();
                 /*console.log(value2);*/
@@ -135,9 +137,9 @@
             /*console.log(departureDate);*/
             returnDate = $('input#returnDate').val();
             console.log(returnDate);
-            adults = $('#adults').val();
-            children = $('#children').val();
-            infants = $('#infants').val();
+            adults = parseInt($('#adults').val());
+            children = parseInt($('#children').val());
+            infants = parseInt($('#infants').val());
             tripType = $('#tripType').val();
 
             flightPicker = {
@@ -201,13 +203,13 @@
         <div>
             <h3>Passenger Type:</h3>
             <span>Adults</span>
-            <form:input path="passengerType.numberOfAdults" value="1" id="adults"/>
+            <form:input path="adults" value="1" id="adults"/>
 
             <span>Children</span>
-            <form:input path="passengerType.numberOfChildren" id="children"/>
+            <form:input path="children" id="children"/>
 
             <span></span>Infants:
-            <form:input path="passengerType.numberOfInfant" id="infants"/>
+            <form:input path="infant" id="infants"/>
         </div>
 
         <br>

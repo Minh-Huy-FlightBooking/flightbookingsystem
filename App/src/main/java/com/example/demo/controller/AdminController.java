@@ -25,6 +25,9 @@ import java.time.format.DateTimeFormatter;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+    // Flight Manager
+    @Autowired
+    private FlightService flightService;
     @Autowired
     private AircraftService aircraftService;
     @Autowired
@@ -44,7 +47,7 @@ public class AdminController {
     //For editing and viewing Aircraft!!!
     // go to add new aircraft page
     @RequestMapping(value = "/addAircraft")
-    public String goToAircraftAdditionPage(Model model) {
+    public String goToAircraftAdditionPage (Model model) {
         model.addAttribute("aircraft", new Aircraft());
         model.addAttribute("brands", brandService.getAllAircraftBrandsWithMapType());
         model.addAttribute("airports", airportService.getAllAirportsWithMapType());
@@ -52,7 +55,7 @@ public class AdminController {
     }
     // Save new aircraft
     @RequestMapping(value = "/handlingAircraftAddition")
-    public String handleAircraftAddition(Aircraft aircraft) {
+    public String handleAircraftAddition (Aircraft aircraft) {
         aircraftService.saveAircraft(aircraft);
         int totalEconomySeats = aircraft.getTotal_economy();
         int totalBusinessSeats = aircraft.getTotal_business();
@@ -61,19 +64,19 @@ public class AdminController {
     }
     // go to view aircraft page
     @RequestMapping(value = "/viewAircraft")
-    public String viewAircraft(Model model) {
+    public String viewAircraft (Model model) {
         model.addAttribute("aircraft", aircraftService.getAllAircraft());
         return "administration/aircraft-list";
     }
     // delete aircraft
     @RequestMapping(value = "/deleteAircraft")
-    public String deleteAircraft(@RequestParam(value = "aircraftId") int aircraftId) {
+    public String deleteAircraft (@RequestParam(value = "aircraftId") int aircraftId) {
         aircraftService.deleteAircraftById(aircraftId);
         return "redirect:/admin/viewAircraft";
     }
     // go to edit aircraft page
     @RequestMapping(value = "/editAircraft", method = RequestMethod.GET)
-    public String editAircraft(@RequestParam(value = "aircraftId") int aircraftId, Model model) {
+    public String editAircraft (@RequestParam(value = "aircraftId") int aircraftId, Model model) {
         model.addAttribute("aircraft", aircraftService.getAircraftById(aircraftId));
         model.addAttribute("type", "edit");
 
@@ -86,7 +89,7 @@ public class AdminController {
     // CRUD Flight Route
 
     @RequestMapping(value = "/flightRouteList")
-    public String returnListFlightRoute(Model model) {
+    public String returnListFlightRoute (Model model) {
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
         return "administration/flight-route-list";
     }
@@ -148,7 +151,7 @@ public class AdminController {
     }
 
     @RequestMapping("/deleteFlightRoute")
-    public String deleteFlightRoute(@RequestParam("id") int id, Model model) {
+    public String deleteFlightRoute (@RequestParam("id") int id, Model model) {
         model.addAttribute("flightRouteList",flightRouteService.getAllFlightRoute());
         if (flightRouteService.deleteFlightRoute(id)) {
             model.addAttribute("message", "Delete Successed");
@@ -159,7 +162,7 @@ public class AdminController {
     }
 
     @RequestMapping("/editFlightRoute")
-    public String gotoActionFlightRoute(@RequestParam("id") int id, Model model) {
+    public String gotoActionFlightRoute (@RequestParam("id") int id, Model model) {
         model.addAttribute("flightRoute", flightRouteService.getFlightRouteById(id));
         model.addAttribute("originAirport", airportService.getAllAirports());
         model.addAttribute("destinationAirport", airportService.getAllAirports());
@@ -171,18 +174,15 @@ public class AdminController {
 
     /////////////////////////////
 
-    // Flight Manager
-    @Autowired
-    private FlightService flightService;
     //go to view flight page
     @RequestMapping("/flightList")
-    public String returnFlightList(Model model) {
+    public String returnFlightList (Model model) {
         model.addAttribute("flightList", flightService.getAllFlight());
         return "administration/flight-list";
     }
     // go to add flight page
     @RequestMapping("/addFlight")
-    public String addFlight(Model model) {
+    public String addFlight (Model model) {
         model.addAttribute("flight", new Flight());
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
         model.addAttribute("aircraft", aircraftService.getAllAircraft());
@@ -191,7 +191,7 @@ public class AdminController {
     }
     // go to edit flight page
     @RequestMapping("/editFlight")
-    public String editFlight(@RequestParam("id")int id,Model model) {
+    public String editFlight (@RequestParam("id") int id, Model model) {
         model.addAttribute("flight", flightService.getFlightById(id));
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
         model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
@@ -200,14 +200,14 @@ public class AdminController {
     }
     // delete flight
     @RequestMapping("/deleteFlight")
-    public String deleteFlight(@RequestParam("id") int id, Model model) {
+    public String deleteFlight (@RequestParam("id") int id, Model model) {
         Flight flight = flightService.getFlightById(id);
-        if(flightService.deleteFLight(id)){
+        if ( flightService.deleteFLight(id) ) {
             model.addAttribute("message", "Deleted Flight!!!");
             model.addAttribute("type","delete");
             model.addAttribute("newFlight",flight);
         } else {
-            model.addAttribute("message", "Don't Delete Flight "+flight.getFlightId());
+            model.addAttribute("message", "Don't Delete Flight " + flight.getFlightId());
             model.addAttribute("type","fail");
         }
         model.addAttribute("flightList", flightService.getAllFlight());
@@ -217,8 +217,6 @@ public class AdminController {
     // Save new Flight
     @RequestMapping("/handlingFLightAddition")
     public String handlingFLightAddition(Flight flight, Model model) {
-
-
         if(flightService.checkFlight(flight))
         {
             model.addAttribute("message", "Invalid value");

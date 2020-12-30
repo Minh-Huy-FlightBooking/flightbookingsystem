@@ -288,7 +288,6 @@
             <div class="mt-2">
                 <button><a href="ticketSearch">Back</a></button>
                 <button id="continue"><a href="seatSelection" onclick="sendPassengerData()">Continue</a></button>
-                <button onclick="sendPassengerData()">Click me !!!</button>
             </div>
             <%--<form:form action="" modelAttribute="passenger">
                 <div class="form-row">

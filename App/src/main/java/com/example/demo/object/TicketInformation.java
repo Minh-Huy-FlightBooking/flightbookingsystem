@@ -13,7 +13,9 @@ public class TicketInformation {
     private LocalDate departureDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate returnDate;
-    private PassengerType passengerType;
+    private int adults;
+    private int children;
+    private int infant;
     private String travelClass;
 
     public TicketInformation() {
@@ -35,12 +37,28 @@ public class TicketInformation {
         this.tripType = tripType;
     }
 
-    public PassengerType getPassengerType() {
-        return passengerType;
+    public int getAdults() {
+        return adults;
     }
 
-    public void setPassengerType(PassengerType passengerType) {
-        this.passengerType = passengerType;
+    public void setAdults(int adults) {
+        this.adults = adults;
+    }
+
+    public int getChildren() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children = children;
+    }
+
+    public int getInfant() {
+        return infant;
+    }
+
+    public void setInfant(int infant) {
+        this.infant = infant;
     }
 
     public LocalDate getDepartureDate() {

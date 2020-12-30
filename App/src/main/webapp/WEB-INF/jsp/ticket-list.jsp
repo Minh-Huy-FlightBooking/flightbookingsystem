@@ -446,7 +446,6 @@
     </style>
 </head>
 <body>
-<button onclick="sendJson()">Click me</button>
 <input hidden type="text" value="${sessionId}" id="sessionId"/>
 <%--<input hidden type="text" value="${ticketInformation.tripType}" id="tripTypeSearched"/>--%>
 <div class="container-fluid  bg-warning">Logo is here</div>
@@ -498,9 +497,9 @@
                                 <input type="hidden" value="${f.flightId}" id="flightId" name="flightId"/>
                                 <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
                                 <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfAdults}" id="adults" name="adults"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfChildren}" id="children" name="children"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfInfant}" id="infants" name="infants"/>
+                                <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
+                                <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                 <br/>
                                     ${f.economyPrice}
                             </td>
@@ -509,9 +508,9 @@
                                 <input type="hidden" value="${f.flightId}" id="flightId" name="flightId" />
                                 <input type="hidden" value="business" id="travelClass" name="travelClass" />
                                 <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfAdults}" id="adults" name="adults"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfChildren}" id="children"  name="children"/>
-                                <input type="hidden" value="${ticketInformation.passengerType.numberOfInfant}" id="infants" name="infants"/>
+                                <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
+                                <input type="hidden" value="${ticketInformation.children}" id="children"  name="children"/>
+                                <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                 <br/>
                                     ${f.businessPrice}
                             </td>
@@ -564,9 +563,9 @@
                                     <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
                                     <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
                                     <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfAdults}" id="adults" name="adults"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfChildren}" id="children" name="children"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfInfant}" id="infants" name="infants"/>
+                                    <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
+                                    <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                    <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                     <br/>
                                         ${rf.economyPrice}
                                 </td>
@@ -575,9 +574,9 @@
                                     <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
                                     <input type="hidden" value="business" id="travelClass" name="travelClass" />
                                     <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfAdults}" id="adults" name="adults"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfChildren}" id="children" name="children"/>
-                                    <input type="hidden" value="${ticketInformation.passengerType.numberOfInfant}" id="infants" name="infants"/>
+                                    <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
+                                    <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                    <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                     <br/>
                                         ${rf.businessPrice}
                                 </td>
@@ -630,18 +629,18 @@
                     <p>
                         <span>
                             Adults:
-                            ${ticketInformation.passengerType.numberOfAdults}
-                            <input type="hidden" value="${ticketInformation.passengerType.numberOfAdults}" name="adults" id="adults"/>
+                            ${ticketInformation.adults}
+                            <input type="hidden" value="${ticketInformation.adults}" name="adults" id="adults"/>
                         </span>
                         <span>
                             Children:
-                            ${ticketInformation.passengerType.numberOfChildren}
-                            <input type="hidden" value="${ticketInformation.passengerType.numberOfChildren}" name="children" id="children"/>
+                            ${ticketInformation.children}
+                            <input type="hidden" value="${ticketInformation.children}" name="children" id="children"/>
                         </span>
                         <span>
                             Infant:
-                            ${ticketInformation.passengerType.numberOfInfant}
-                            <input type="hidden" value="${ticketInformation.passengerType.numberOfInfant}" name="infants" id="infants"/>
+                            ${ticketInformation.infant}
+                            <input type="hidden" value="${ticketInformation.infant}" name="infants" id="infants"/>
                         </span>
                     </p>
                 </div>

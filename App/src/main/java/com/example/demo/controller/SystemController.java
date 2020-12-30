@@ -49,10 +49,11 @@ public class SystemController {
     @RequestMapping(value = "/ticketSearch")
     public String goToTicketSearch(Model model, HttpServletRequest request){
         model.addAttribute("sessionId", request.getSession().getId());
+        System.out.println(request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
         return "ticket-searching-test";
     }
-
+    // Return Ticket Searched's Results
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
     public String goToTicketList (@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
         /*System.out.println(t.getOrigin());
@@ -65,7 +66,8 @@ public class SystemController {
         System.out.println(t.getPassengerType().getNumberOfInfant());
         System.out.println(t.getTravelClass());*/
         model.addAttribute("sessionId", request.getSession().getId());
-        int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();
+        /*int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();*/
+        int numberOfPeople = t.getAdults() + t.getChildren() + t.getInfant();
         /////////////
         // Departure Time
         LocalDateTime initialTimeOfDepartureDate = t.getDepartureDate().atStartOfDay();
@@ -125,18 +127,46 @@ public class SystemController {
 
     }
 
+    //Seat Selection Function while booking flight ticket!!!
+    @RequestMapping(value = "/seatSelection", method = RequestMethod.GET)
+    public String goToSeatSelection (Model model, HttpServletRequest request, HttpSession session) {
+        model.addAttribute("sessionId", request.getSession().getId());
+        System.out.println(request.getSession().getId());
+        FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
+        String tripType = "";
+
+        // get the initial values
+        if (flightPicker != null) {
+            //Print out to test if this is either null or not...
+            System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
+
+            int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
+            int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
+            System.out.println("Economy: " + numberOfEconomySeats + ", Business: " + numberOfBusinessSeats);
+
+            if (tripType.equals("roundTrip")) {
+
+                
+            }
+            tripType = flightPicker.getTicketInformation().getTripType();
+            System.out.println(tripType);
+        } else {
+            System.out.println("FLight Picker is null!!!");
+        }
+
+        // branch out each circumstance
+
+
+
+        System.out.println("Reach the final line of codes in this request!!!");
+        return "seat-selection";
+    }
+
     // Payment Method
     @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
     public String goToPaymentMethod (Model model, HttpServletRequest request){
         model.addAttribute("sessionId", request.getSession().getId());
         return "payment-method";
-    }
-
-    @RequestMapping(value = "/seatSelection", method = RequestMethod.GET)
-    public String goToSeatSelection (Model model, HttpServletRequest request) {
-        model.addAttribute("sessionId", request.getSession().getId());
-        System.out.println(request.getSession().getId());
-        return "seat-selection";
     }
     //For Date Time formatter
     @InitBinder
