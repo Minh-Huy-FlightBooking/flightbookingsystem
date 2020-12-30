@@ -165,10 +165,6 @@ public class SystemController {
             System.out.println("FLight Picker is null!!!");
         }
 
-
-
-
-
         System.out.println("Reach the final line of codes in this request!!!");
         return "seat-selection";
     }
