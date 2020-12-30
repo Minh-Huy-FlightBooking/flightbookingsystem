@@ -194,7 +194,7 @@ public class AdminController {
     public String editFlight (@RequestParam("id") int id, Model model) {
         model.addAttribute("flight", flightService.getFlightById(id));
         model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
-        model.addAttribute("aircraft", aircraftService.getAllAircraftWithMapType());
+        model.addAttribute("aircraft", aircraftService.getAllAircraft());
         model.addAttribute("type","edit");
         return "administration/flight-addition";
     }

@@ -134,13 +134,10 @@ public class SystemController {
         System.out.println(request.getSession().getId());
 
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
-<<<<<<< HEAD
 //        my edit
         model.addAttribute("flight",flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
 //        end
-=======
 
->>>>>>> 8f92e9271639d416f9afa82dfc67ff5ad31338a5
         String tripType = "";
 
         // get the initial values
