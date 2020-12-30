@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -8,6 +9,7 @@
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
     <%--Javascript External Link is placed here--%>
+    <jsp:include page="administration/_head.jsp"/>
     <link rel="stylesheet" type="text/css" href="/resources/js/seat-charts.js">
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 
@@ -275,6 +277,35 @@
         </div>
     </div>
 </div>
+
+<center>
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body">
+                <table class="table-borderless">
+                    <thead>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th></th>
+                        <th>D</th>
+                        <th>E</th>
+                        <th>F</th>
+                    </thead>
+                    <tbody>
+                        <c:forEach begin="1" end="${flight.aircraft.total_economy/6+1}">
+                            <tr>
+                                <c:forEach begin="1" end="6">
+                                    <td align="center">${flight.aircraft.total_economy}</td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</center>
 </body>
 </html>
 

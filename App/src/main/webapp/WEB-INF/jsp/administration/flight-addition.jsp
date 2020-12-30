@@ -78,7 +78,7 @@
                             <tr>
                                 <th>Aircraft</th>
                                 <td>
-                                    <form:select path="aircraft" cssClass="form-control" items="${aircraft}" itemLabel="model" required="true"/>
+<%--                                    <form:select path="aircraft" cssClass="form-control" items="${aircraft}" itemLabel="model" required="true"/>--%>
                                 </td>
                             </tr>
                             <tr>
