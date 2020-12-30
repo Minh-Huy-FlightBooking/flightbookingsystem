@@ -14,6 +14,103 @@
     <jsp:include page="administration/_head.jsp"/>
     <link rel="stylesheet" type="text/css" href="/resources/js/seat-charts.js">
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //Number of Rows and number of columns per row
+            let numberOfColumns = $('#departure-table .seat-container td').length;
+            console.log(numberOfColumns);
+            let table = document.getElementById("departure-table");
+            let tr = table.getElementsByTagName("tr");
+            let td;
+            console.log(tr.length);
+            console.log(numberOfColumns / (tr.length - 1));
+
+            let alphabet = new Array("A", "B", "C","","D", "E", "F");
+            console.log(alphabet[1]);
+
+            /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
+            for (let i = 1; i < tr.length; i++) {
+                for (let j = 0; j < (numberOfColumns / (tr.length - 1)); j++) {
+                    td = tr[i].getElementsByTagName("td")[j];
+                    td.setAttribute("id", "seatCode-" + alphabet[j] + i);
+                    if (j != 3) {
+                        td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");
+                        td.append("" + alphabet[j] + i);
+                        let key = "seatCode-" + alphabet[j] + i;
+                        seatBookedData.push({key: key, value: true});
+                    }
+                    if (j == 3) {
+                        td.innerHTML = "" + i;
+                    }
+                }
+            }
+            console.log(seatBookedData);
+
+
+        })
+
+        let seatBookedData = [];
+        /*let x = {
+            key : "",
+            value: true
+        }*/
+        /*let numberOfPassengers = 2;
+        let seatCodeIsClicked = "";*/
+        function getSeatCode(seatCode) {
+            console.log("clicked!!: " + seatCode);
+            /*$('#' + seatCode + ' button').attr("style","background: red");*/
+
+            for (let m = 0; m < seatBookedData.length; m++) {
+                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
+                    console.log("HI!!");
+                    seatBookedData[m].value = false;
+                    /*if (seatCodeIsClicked != "") {
+                        $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
+                    }*/
+                    $('#' + seatCode + ' button').attr("style","background: red");
+                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
+                    $('#' + seatCode + ' button').attr("style","background: white");
+                    seatBookedData[m].value = true;
+                }
+            }
+            /*let count = 0;
+            for (let n = 0; n < seatBookedData.length; n++) {
+                if (seatBookedData[n].value == false){
+                    count++;
+                }
+            }
+
+            console.log(count)
+            if (count < numberOfPassengers) {
+                for (let m = 0; m < seatBookedData.length; m++) {
+                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
+                        console.log("HI!!");
+                        seatBookedData[m].value = false;
+                        $('#' + seatCode + ' button').attr("style","background: red");
+                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
+                        $('#' + seatCode + ' button').attr("style","background: white");
+                        seatBookedData[m].value = true;
+                    }
+                }
+            } else if (count >= numberOfPassengers){
+                for (let m = 0; m < seatBookedData.length; m++) {
+                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
+                        console.log("HI!!");
+                        seatBookedData[m].value = false;
+                        if (seatCodeIsClicked != "") {
+                            $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
+                        }
+                        $('#' + seatCode + ' button').attr("style","background: red");
+                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
+                        $('#' + seatCode + ' button').attr("style","background: white");
+                        seatBookedData[m].value = true;
+                    }
+                }
+            }
+
+            seatCodeIsClicked = seatCode;*/
+        }
+    </script>
 </head>
 <body style="font-family: 'Poppins', sans-serif;">
 <div class="container">
@@ -35,7 +132,6 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-5">
-
                                 </div>
                                 <div class="col-sm-7">
                                     <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">Departure Trip</h1>
@@ -53,7 +149,7 @@
                                             </tr>
 
                                             </thead>
-                                            <tbody class="seat-container">
+                                            <tbody class="departure-seat-container">
                                             <c:forEach begin="1" end="${flightDepature.aircraft.total_economy/6+1}">
                                                 <tr class="seat-row">
                                                     <c:forEach begin="1" end="3">
