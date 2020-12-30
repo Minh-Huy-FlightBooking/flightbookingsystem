@@ -252,6 +252,9 @@
 </head>
 
 <body>
+<div>
+
+</div>
 <input type="hidden" value="${sessionId}" id="sessionId">
 <div id="jquery-script-menu">
     <div class="jquery-script-center">

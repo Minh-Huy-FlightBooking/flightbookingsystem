@@ -141,6 +141,9 @@ public class SystemController {
         if (flightPicker != null) {
             //Print out to test if this is either null or not...
             System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
+            for (PassengerInformation p : flightPicker.getPassengerInformation()){
+                System.out.println("Full name: " + p.getFirstName() + p.getLastName());
+            }
 
             int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();

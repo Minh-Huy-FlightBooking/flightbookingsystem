@@ -31,8 +31,9 @@
         let departurePrice, departureFlightId, departureTravelClass;
         let returnPrice, returnFlightId, returnTravelClass;
         let flightPicker;
-        let tripType;
         let flightData;
+        let tripType;
+
         $(document).ready(function () {
             console.log("HI am ready to go!!");
             console.log(sessionId.value);
@@ -142,8 +143,6 @@
 
             //Send Data to Server here !! Ha ha!!
             sessionStorage.setItem(sessionId, JSON.stringify(flightData));
-            /*console.log(flightPicker);
-            console.log(JSON.stringify(flightPicker));*/
             $.ajax({
                 type: "POST",
                 url: "flightPickerHandler",
@@ -167,6 +166,7 @@
     </script>
 </head>
 <body>
+<button onclick="sendPassengerData()">Click me</button>
 <input hidden type="text" value="${sessionId}" id="sessionId"/>
 <div class="container-fluid  bg-warning">Logo is here</div>
 
