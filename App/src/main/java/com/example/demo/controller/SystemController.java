@@ -136,7 +136,8 @@ public class SystemController {
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
 //        my edit
-        model.addAttribute("flight",flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
+        model.addAttribute("flightDepature",flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
+        model.addAttribute("flightReturn",flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
 //        end
 
         String tripType = "";
