@@ -282,35 +282,37 @@
         </div>
     </div>
 </div>
-
-<center>
-    <div class="container">
-        <div class="card shadow">
-            <div class="card-body">
-                <table class="table-borderless">
-                    <thead>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                        <th></th>
-                        <th>D</th>
-                        <th>E</th>
-                        <th>F</th>
-                    </thead>
-                    <tbody>
-                        <c:forEach begin="1" end="${flight.aircraft.total_economy/6+1}">
-                            <tr>
-                                <c:forEach begin="1" end="6">
-                                    <td align="center">${flight.aircraft.total_economy}</td>
-                                </c:forEach>
-                            </tr>
+<div class="container">
+    <div class="card shadow col-sm-6">
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                <th class="text-center" width="100" height="50">A</th>
+                <th class="text-center" width="100" height="50">B</th>
+                <th class="text-center" width="100" height="50">C</th>
+                <th class="text-center" width="100" height="50"></th>
+                <th class="text-center" width="100" height="50">D</th>
+                <th class="text-center" width="100" height="50">E</th>
+                <th class="text-center" width="100" height="50">F</th>
+                </thead>
+                <tbody class="seat-container">
+                <c:forEach begin="1" end="${flight.aircraft.total_economy/6+1}">
+                    <tr class="seat-row">
+                        <c:forEach begin="1" end="3">
+                            <td align="center"><button class="btn btn-sm btn-outline-primary seat-item"></button></td>
                         </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+                        <td></td>
+                        <c:forEach begin="1" end="3">
+                            <td align="center"><button class="btn btn-sm btn-outline-primary seat-item"></button></td>
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
-</center>
+</div>
+
 </body>
 </html>
 
