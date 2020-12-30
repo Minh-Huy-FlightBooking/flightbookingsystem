@@ -132,24 +132,33 @@ public class SystemController {
     public String goToSeatSelection (Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
+
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
+<<<<<<< HEAD
 //        my edit
         model.addAttribute("flight",flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
 //        end
+=======
+
+>>>>>>> 8f92e9271639d416f9afa82dfc67ff5ad31338a5
         String tripType = "";
 
         // get the initial values
         if (flightPicker != null) {
             //Print out to test if this is either null or not...
             System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
+            for (PassengerInformation p : flightPicker.getPassengerInformation()){
+                System.out.println("Full name: " + p.getFirstName() + p.getLastName());
+            }
 
             int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             System.out.println("Economy: " + numberOfEconomySeats + ", Business: " + numberOfBusinessSeats);
 
+            // branch out each circumstance
             if (tripType.equals("roundTrip")) {
 
-                
+
             }
             tripType = flightPicker.getTicketInformation().getTripType();
             System.out.println(tripType);
@@ -157,7 +166,7 @@ public class SystemController {
             System.out.println("FLight Picker is null!!!");
         }
 
-        // branch out each circumstance
+
 
 
 

@@ -26,7 +26,7 @@
                                 $("#myModal").modal('show');
                             });
                         </script>
-                        <br>- Aircraft is actived
+                        <br>- Aircraft is activated
                         <br>- This Flight is existed</p>
                     <hr>
                     <p class="mb-0">Please fill data again!!! Thanks.</p>

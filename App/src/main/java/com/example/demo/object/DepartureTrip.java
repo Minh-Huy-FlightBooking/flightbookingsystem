@@ -3,6 +3,7 @@ package com.example.demo.object;
 public class DepartureTrip {
     private int departureFlightId;
     private String travelClass;
+    private String seatCode;
     private int adults;
     private int children;
     private int infant;
