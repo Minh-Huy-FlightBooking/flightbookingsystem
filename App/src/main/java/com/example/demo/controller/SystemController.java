@@ -132,7 +132,9 @@ public class SystemController {
     public String goToSeatSelection (Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
+
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
+
         String tripType = "";
 
         // get the initial values
@@ -144,9 +146,10 @@ public class SystemController {
             int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             System.out.println("Economy: " + numberOfEconomySeats + ", Business: " + numberOfBusinessSeats);
 
+            // branch out each circumstance
             if (tripType.equals("roundTrip")) {
 
-                
+
             }
             tripType = flightPicker.getTicketInformation().getTripType();
             System.out.println(tripType);
@@ -154,7 +157,7 @@ public class SystemController {
             System.out.println("FLight Picker is null!!!");
         }
 
-        // branch out each circumstance
+
 
 
 
