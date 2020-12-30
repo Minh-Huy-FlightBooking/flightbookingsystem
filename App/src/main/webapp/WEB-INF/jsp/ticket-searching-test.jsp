@@ -41,9 +41,9 @@
                 $(this).find("option:selected").each(function () {
                     let optionValue = $(this).attr("value");
                     if (optionValue == "oneWay") {
-                        $("#returnDate").hide();
+                        $("#returnDate-container").hide();
                     } else {
-                        $("#returnDate").show();
+                        $("#returnDate-container").show();
                     }
                 });
             }).change();
@@ -90,7 +90,7 @@
             /*Auto sugguest for destination input*/
             $("input#destination").on("keyup", function () {
                 let value2 = $(this).val().toLowerCase();
-                console.log(value2);
+                /*console.log(value2);*/
                 $("input#destination").autocomplete({
                     width: 300,
                     max: 10,
@@ -106,7 +106,6 @@
                             dataType: "json",
                             data: request,
                             success: function (data, textStatus, jqXHR) {
-                                console.log(data);
                                 let items2 = data;
                                 console.log(items2);
                                 let data_filter2 = items2.filter(origin => origin.toLowerCase().indexOf(value2) > -1);
@@ -123,8 +122,54 @@
 
         });
     </script>
+    <script>
+        let sessionId;
+        function saveFlightJsonData() {
+            let  adults, children, infants;
+            let origin, destination, departureDate, returnDate, tripType;
+            origin = $('input#origin').val();
+            /*console.log(origin);*/
+            destination = $('input#destination').val();
+            console.log(destination);
+            departureDate = $('input#departureDate').val();
+            /*console.log(departureDate);*/
+            returnDate = $('input#returnDate').val();
+            console.log(returnDate);
+            adults = $('#adults').val();
+            children = $('#children').val();
+            infants = $('#infants').val();
+            tripType = $('#tripType').val();
+
+            flightPicker = {
+                ticketInformation : {
+                    origin : origin,
+                    destination : destination,
+                    tripType : tripType,
+                    departureDate : departureDate,
+                    returnDate : returnDate,
+                    adults : adults,
+                    children : children,
+                    infants : infants
+                },
+                departureTrip : {
+
+                },
+                returnTrip : {
+
+                },
+                passengerInformation : [
+
+                ]
+            };
+            sessionId = $('#sessionId').val();
+            sessionStorage.setItem(sessionId, JSON.stringify(flightPicker));
+            console.log(flightPicker);
+            console.log(JSON.stringify(flightPicker));
+        }
+    </script>
 </head>
 <body>
+<input hidden type="text" value="${sessionId}" id="sessionId"/>
 <div class="container">
     <h1>Let's find a flight to a certain place!!!</h1>
     <form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
@@ -141,10 +186,10 @@
         </form:select>
 
         <h3>Departure Date:</h3>
-        <form:input path="departureDate" type="date"/>
-        <div id="returnDate">
+        <form:input path="departureDate" type="date" id="departureDate"/>
+        <div id="returnDate-container">
             <h3>Return Date:</h3>
-            <form:input path="returnDate" type="date"/>
+            <form:input path="returnDate" type="date" id="returnDate"/>
         </div>
 
         <h3>Travel Class</h3>
@@ -156,17 +201,17 @@
         <div>
             <h3>Passenger Type:</h3>
             <span>Adults</span>
-            <form:input path="passengerType.numberOfAdults" value="1"/>
+            <form:input path="passengerType.numberOfAdults" value="1" id="adults"/>
 
             <span>Children</span>
-            <form:input path="passengerType.numberOfChildren"/>
+            <form:input path="passengerType.numberOfChildren" id="children"/>
 
-            <span></span>Infant
-            <form:input path="passengerType.numberOfInfant"/>
+            <span></span>Infants:
+            <form:input path="passengerType.numberOfInfant" id="infants"/>
         </div>
 
         <br>
-        <button type="submit">Search</button>
+        <button type="submit" onclick="saveFlightJsonData()">Search</button>
     </form:form>
 </div>
 </body>

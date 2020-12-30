@@ -3,7 +3,6 @@ package com.example.demo.object;
 import java.time.LocalDate;
 
 public class PassengerInformation {
-    private int id;
     private String title;
     private String firstName;
     private String lastName;
@@ -18,12 +17,20 @@ public class PassengerInformation {
     public PassengerInformation() {
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getTitle() {
@@ -90,19 +97,4 @@ public class PassengerInformation {
         this.expiryDate = expiryDate;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

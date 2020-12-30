@@ -15,9 +15,6 @@ public class TravelClass {
     @Column(name = "rate")
     private double rate;
 
-   /* @OneToMany(mappedBy = "travelClass",fetch = FetchType.LAZY)
-    private List<Seat> seatList;
-*/
     @OneToMany(mappedBy = "travelClass")
     private List<Ticket> tickets;
 
@@ -56,11 +53,5 @@ public class TravelClass {
         this.className = className;
     }
 
-   /* public List<Seat> getSeatList() {
-        return seatList;
-    }
 
-    public void setSeatList(List<Seat> seatList) {
-        this.seatList = seatList;
-    }*/
 }
