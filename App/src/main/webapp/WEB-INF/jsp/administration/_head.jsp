@@ -16,11 +16,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>
+
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <script src="<c:url value="/resources/js/adminHome.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>
     <style>
         .mycolor {
             background-color: #40739e;
