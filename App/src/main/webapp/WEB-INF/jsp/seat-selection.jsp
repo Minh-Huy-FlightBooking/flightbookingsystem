@@ -23,7 +23,9 @@
             <ul class="nav nav-pills list-group" role="tablist">
                 <div class="list-group">
                     <a href="#departure" data-toggle="pill" class="list-group-item">Departure Trip</a>
-                    <a href="#return" data-toggle="pill" class="list-group-item">Return Trip</a>
+                    <c:if test="${flightReturn!=null}">
+                        <a href="#return" data-toggle="pill" class="list-group-item">Return Trip</a>
+                    </c:if>
                 </div>
             </ul>
         </div>
@@ -80,56 +82,59 @@
                         </div>
                     </div>
                 </div>
-                <div id="return" class="container tab-pane fade"><br>
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-5">
+                <c:if test="${flightReturn!=null}">
+                    <div id="return" class="container tab-pane fade"><br>
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-5">
 
-                                </div>
-                                <div class="col-sm-7">
-                                    <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">Return Trip</h1>
-                                    <div class="table-responsive" style="height: 400px;overflow-y: scroll">
-                                        <table class="table table-borderless">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">Return Trip</h1>
+                                        <div class="table-responsive" style="height: 400px;overflow-y: scroll">
+                                            <table class="table table-borderless">
 
-                                            <thead>
-                                            <tr>
-                                                <th class="text-center px-0">A</th>
-                                                <th class="text-center px-0">B</th>
-                                                <th class="text-center px-0">C</th>
-                                                <th class="text-center px-0"></th>
-                                                <th class="text-center px-0">D</th>
-                                                <th class="text-center px-0">E</th>
-                                                <th class="text-center px-0">F</th>
-                                            </tr>
-                                            </thead>
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center px-0">A</th>
+                                                    <th class="text-center px-0">B</th>
+                                                    <th class="text-center px-0">C</th>
+                                                    <th class="text-center px-0"></th>
+                                                    <th class="text-center px-0">D</th>
+                                                    <th class="text-center px-0">E</th>
+                                                    <th class="text-center px-0">F</th>
+                                                </tr>
+                                                </thead>
 
-                                            <tbody class="seat-container">
-                                            <c:forEach begin="1" end="${flightReturn.aircraft.total_economy/6+1}">
-                                                <tr class="seat-row">
-                                                    <c:forEach begin="1" end="3">
-                                                        <td align="center" style="padding: 0.0%">
+                                                <tbody class="seat-container">
+                                                <c:forEach begin="1" end="${flightReturn.aircraft.total_economy/6+1}">
+                                                    <tr class="seat-row">
+                                                        <c:forEach begin="1" end="3">
+                                                            <td align="center" style="padding: 0.0%">
                                                     <span class="btn btn-sm btn-outline seat-item">
                                                     <img src="/resources/image/logo/s-couch.png" width="100%">
                                                     </span>
-                                                        </td>
-                                                    </c:forEach>
-                                                    <td width="12%"></td>
-                                                    <c:forEach begin="1" end="3">
-                                                        <td align="center" style="padding: 0.0%"><span class="btn btn-sm btn-outline seat-item">
+                                                            </td>
+                                                        </c:forEach>
+                                                        <td width="12%"></td>
+                                                        <c:forEach begin="1" end="3">
+                                                            <td align="center" style="padding: 0.0%"><span class="btn btn-sm btn-outline seat-item">
                                                 <img src="/resources/image/logo/s-couch.png" width="100%"></span></td>
-                                                    </c:forEach>
-                                                </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
+                                                        </c:forEach>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                            </div>
-                            </div>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
+
             </div>
         </div>
 
