@@ -7,17 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jQuery Seat Charts Plugin Demo</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,500&display=swap"
+          rel="stylesheet">
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
     <%--Javascript External Link is placed here--%>
     <jsp:include page="administration/_head.jsp"/>
-    <link rel="stylesheet" type="text/css" href="/resources/js/seat-charts.js">
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
         $(document).ready(function () {
+            //Auto fill id and value for departure seats
             //Number of Rows and number of columns per row
-            let numberOfColumns = $('#departure-table .seat-container td').length;
+            let numberOfColumns = $('#departure-table .departure-seat-container td').length;
             console.log(numberOfColumns);
             let table = document.getElementById("departure-table");
             let tr = table.getElementsByTagName("tr");
@@ -25,18 +26,18 @@
             console.log(tr.length);
             console.log(numberOfColumns / (tr.length - 1));
 
-            let alphabet = new Array("A", "B", "C","","D", "E", "F");
+            let alphabet = new Array("A", "B", "C", "", "D", "E", "F");
             console.log(alphabet[1]);
 
             /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
             for (let i = 1; i < tr.length; i++) {
                 for (let j = 0; j < (numberOfColumns / (tr.length - 1)); j++) {
                     td = tr[i].getElementsByTagName("td")[j];
-                    td.setAttribute("id", "seatCode-" + alphabet[j] + i);
+                    td.setAttribute("id", "departure-seatCode-" + alphabet[j] + i);
                     if (j != 3) {
-                        td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");
+                        td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");
                         td.append("" + alphabet[j] + i);
-                        let key = "seatCode-" + alphabet[j] + i;
+                        let key = "departure-seatCode-" + alphabet[j] + i;
                         seatBookedData.push({key: key, value: true});
                     }
                     if (j == 3) {
@@ -46,30 +47,53 @@
             }
             console.log(seatBookedData);
 
+            //Auto fill id and value for return seats
+            //Number of Rows and number of columns per row
+            let numberOfColumns2 = $('#return-table .return-seat-container td').length;
+            console.log(numberOfColumns2);
+            let table2 = document.getElementById("return-table");
+            let tr2 = table2.getElementsByTagName("tr");
+            let td2;
+            console.log(tr2.length);
+            console.log(numberOfColumns2 / (tr2.length - 1));
 
+            /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
+            for (let i = 1; i < tr2.length; i++) {
+                for (let j = 0; j < (numberOfColumns2 / (tr2.length - 1)); j++) {
+                    td2 = tr2[i].getElementsByTagName("td")[j];
+                    td2.setAttribute("id", "return-seatCode-" + alphabet[j] + i);
+                    if (j != 3) {
+                        td2.getElementsByTagName("span").namedItem("return-seat-item").setAttribute("onclick", "getSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
+                        td2.append("" + alphabet[j] + i);
+                        let key = "return-seatCode-" + alphabet[j] + i;
+                        seatBookedData.push({key: key, value: true});
+                    }
+                    if (j == 3) {
+                        td2.innerHTML = "" + i;
+                    }
+                }
+            }
+            console.log(seatBookedData);
         })
 
         let seatBookedData = [];
-        /*let x = {
-            key : "",
-            value: true
-        }*/
+
         /*let numberOfPassengers = 2;
         let seatCodeIsClicked = "";*/
         function getSeatCode(seatCode) {
             console.log("clicked!!: " + seatCode);
-            /*$('#' + seatCode + ' button').attr("style","background: red");*/
 
             for (let m = 0; m < seatBookedData.length; m++) {
-                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
+                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true) {
                     console.log("HI!!");
                     seatBookedData[m].value = false;
                     /*if (seatCodeIsClicked != "") {
                         $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
                     }*/
-                    $('#' + seatCode + ' button').attr("style","background: red");
-                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                    $('#' + seatCode + ' button').attr("style","background: white");
+                    $('#' + seatCode + ' button').attr("style", "background: red");
+
+                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false) {
+                    $('#' + seatCode + ' button').attr("style", "background: white");
                     seatBookedData[m].value = true;
                 }
             }
@@ -120,7 +144,7 @@
             <ul class="nav nav-pills list-group" role="tablist">
                 <div class="list-group">
                     <a href="#departure" data-toggle="pill" class="list-group-item">Departure Trip</a>
-                    <c:if test="${flightReturn!=null}">
+                    <c:if test="${flightReturn != null}">
                         <a href="#return" data-toggle="pill" class="list-group-item">Return Trip</a>
                     </c:if>
                 </div>
@@ -136,9 +160,10 @@
                                 <div class="col-sm-5">
                                 </div>
                                 <div class="col-sm-7">
-                                    <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">Departure Trip</h1>
-                                    <div class="table-responsive"style="height: 400px;overflow-y: scroll">
-                                        <table class="table table-borderless" >
+                                    <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">
+                                        Departure Trip</h1>
+                                    <div class="table-responsive" style="height: 80vh ;overflow-y: scroll">
+                                        <table class="table table-borderless" id="departure-table">
                                             <thead>
                                             <tr>
                                                 <th class="text-center px-0">A</th>
@@ -152,26 +177,29 @@
 
                                             </thead>
                                             <tbody class="departure-seat-container">
-                                            <c:forEach begin="1" end="${flightDepature.aircraft.total_economy/6+1}">
+                                            <c:forEach begin="1" end="${flightDeparture.aircraft.total_economy/6+1}">
                                                 <tr class="seat-row">
                                                     <c:forEach begin="1" end="3">
-                                                        <td align="center" style="padding: 0.0%"><span class="btn btn-sm btn-outline seat-item">
-                                                <img src="/resources/image/logo/s-couch.png" width="100%"></span></td>
+                                                        <td align="center" style="padding: 0.0%">
+                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
+                                                                <img src="/resources/image/logo/s-couch.png"width="100%" >
+                                                            </span>
+                                                        </td>
                                                     </c:forEach>
                                                     <td width="12%"></td>
                                                     <c:forEach begin="1" end="3">
                                                         <td align="center" style="padding: 0.0%">
-                                                        <span class="btn btn-sm btn-outline seat-item">
-                                                        <img src="/resources/image/logo/s-couch.png" width="100%">
-                                                        </span></td>
+                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item" >
+                                                                <img src="/resources/image/logo/s-couch.png"
+                                                                     width="100%">
+                                                            </span>
+                                                        </td>
                                                     </c:forEach>
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
-
-
                                 </div>
                             </div>
 
@@ -187,9 +215,10 @@
 
                                     </div>
                                     <div class="col-sm-7">
-                                        <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">Return Trip</h1>
-                                        <div class="table-responsive" style="height: 400px;overflow-y: scroll">
-                                            <table class="table table-borderless">
+                                        <h1 style="font-weight: 600;font-size: 35px;color: #f39c12" class="text-center">
+                                            Return Trip</h1>
+                                        <div class="table-responsive" style="height: 80vh;overflow-y: scroll">
+                                            <table class="table table-borderless" id="return-table">
 
                                                 <thead>
                                                 <tr>
@@ -202,21 +231,23 @@
                                                     <th class="text-center px-0">F</th>
                                                 </tr>
                                                 </thead>
-
-                                                <tbody class="seat-container">
+                                                <tbody class="return-seat-container">
                                                 <c:forEach begin="1" end="${flightReturn.aircraft.total_economy/6+1}">
                                                     <tr class="seat-row">
                                                         <c:forEach begin="1" end="3">
                                                             <td align="center" style="padding: 0.0%">
-                                                    <span class="btn btn-sm btn-outline seat-item">
-                                                    <img src="/resources/image/logo/s-couch.png" width="100%">
-                                                    </span>
+                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
+                                                                    <img src="/resources/image/logo/s-couch.png" width="100%" >
+                                                                </span>
                                                             </td>
                                                         </c:forEach>
                                                         <td width="12%"></td>
                                                         <c:forEach begin="1" end="3">
-                                                            <td align="center" style="padding: 0.0%"><span class="btn btn-sm btn-outline seat-item">
-                                                <img src="/resources/image/logo/s-couch.png" width="100%"></span></td>
+                                                            <td align="center" style="padding: 0.0%">
+                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
+                                                                    <img src="/resources/image/logo/s-couch.png" width="100%" >
+                                                                </span>
+                                                            </td>
                                                         </c:forEach>
                                                     </tr>
                                                 </c:forEach>
