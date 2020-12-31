@@ -16,7 +16,7 @@
 
 <c:if test="${message!=null}">
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#myModal").modal('show');
         });
     </script>
@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Flight Route List&nbsp;&nbsp;&nbsp;
                         <a href="addFlightRoute" title="thêm mới" class="btn btn-sm mycolor">
-                        <i class="fa fa-plus"></i></a>
+                            <i class="fa fa-plus"></i></a>
                     </h5>
 
                     <div class="col-xs-12 col-sm-12 ">
@@ -60,8 +60,10 @@
                                     <td>${f.destinationAirport.airportName}</td>
                                     <!-- Đây là các icon thao tác -->
                                     <td>
-                                        <a href="editFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor" title="chỉnh sửa"><i class='fa fa-pencil'></i></a>
-                                        <a href="deleteFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor" title="xóa"><i class="fa fa-trash-o"></i></a>
+                                        <a href="editFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor"
+                                           title="chỉnh sửa"><i class='fa fa-pencil'></i></a>
+                                        <a href="deleteFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor"
+                                           title="xóa"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>

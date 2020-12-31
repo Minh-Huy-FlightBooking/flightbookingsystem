@@ -29,17 +29,19 @@
             border-color: #102c58;
             color: white
         }
-        .page-item.active .page-link{
+
+        .page-item.active .page-link {
             background-color: #40739e;
         }
-        a.page-link{
+
+        a.page-link {
             color: #40739e;
         }
     </style>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#example').DataTable();
-        } );
+        });
     </script>
 </head>
 </html>

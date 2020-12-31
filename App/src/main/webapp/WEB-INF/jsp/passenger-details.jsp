@@ -68,24 +68,28 @@
             }
         })
         let isDataSentChecked;
-        function sendDataToEmail(passengerDataItem){
+
+        function sendDataToEmail(passengerDataItem) {
             let inputTag = document.getElementById(passengerDataItem).getElementsByTagName("input");
-            if (inputTag.namedItem("sendInformationCheckbox").checked){
+            if (inputTag.namedItem("sendInformationCheckbox").checked) {
                 inputTag.namedItem("email").removeAttribute("disabled");
                 inputTag.namedItem("phoneNumber").removeAttribute("disabled");
                 isDataSentChecked = true;
             } else {
                 inputTag.namedItem("email").setAttribute("disabled", "true");
-                inputTag.namedItem("phoneNumber").setAttribute("disabled", "true");;
+                inputTag.namedItem("phoneNumber").setAttribute("disabled", "true");
+                ;
             }
         }
+
         let passengerInformation = new Array();
 
         //Send Data back to Server --> Using Ajax
         function sendPassengerData() {
             for (let i = 1; i <= (adults + children + infants); i++) {
                 let passengerData = document.getElementById("passenger-" + i);
-                let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email, phoneNumber;
+                let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
+                    phoneNumber;
 
                 title = passengerData.getElementsByTagName("select").namedItem("title").value;
 
@@ -95,7 +99,7 @@
                 firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
                 lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
                 dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
-                if (title != "infant"){
+                if (title != "infant") {
                     passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
                     expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
                 }
@@ -111,11 +115,11 @@
                 console.log(dateOfBirth);
                 console.log(gender);
                 console.log(nationality);
-                if (title != "infant"){
+                if (title != "infant") {
                     console.log(passportNumber);
                     console.log(expiryDate);
                 }
-                if ( i  == (adults + children + infants)){
+                if (i == (adults + children + infants)) {
                     console.log("The last one");
                 } else {
                     console.log("Not The last one");
@@ -278,7 +282,8 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Send Booking Data to this email</label>
-                                    <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2"/>
+                                    <input type="checkbox" name="sendInformationCheckbox"
+                                           class="form-control  col-md-2"/>
                                 </div>
                             </div>
                         </c:if>

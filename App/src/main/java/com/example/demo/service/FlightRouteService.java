@@ -20,18 +20,18 @@ public class FlightRouteService {
     @Autowired
     private AirportRepository airportRepository;
 
-    public List<FlightRoute> getAllFlightRoute(){
+    public List<FlightRoute> getAllFlightRoute() {
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
 
-    public List<FlightRoute> getAllFlightRoutesByOriginName(String origin){
+    public List<FlightRoute> getAllFlightRoutesByOriginName(String origin) {
         return flightRouteRepository.findByOriginName(origin);
     }
 
-    public List<String> getAllDestinationsNameByOriginName (String origin){
+    public List<String> getAllDestinationsNameByOriginName(String origin) {
         List<String> destinations = new ArrayList<>();
 
-        for (FlightRoute fr: getAllFlightRoutesByOriginName(origin)){
+        for (FlightRoute fr : getAllFlightRoutesByOriginName(origin)) {
             destinations.add(fr.getDestinationAirport().getAirportName());
         }
         return destinations;
@@ -48,34 +48,37 @@ public class FlightRouteService {
     }*/
 
     //Get All Origins (places) to fill in origin input
-    public Map<Integer, String> getAllOriginsWithMapType () {
+    public Map<Integer, String> getAllOriginsWithMapType() {
         List<Airport> airports = (List<Airport>) airportRepository.findAll();
         Map<Integer, String> origins = new HashMap<>();
 
-        if (!airports.isEmpty()){
+        if (!airports.isEmpty()) {
             int count = 1;
-            for (Airport a: airports){
+            for (Airport a : airports) {
                 origins.put(count++, a.getAirportName());
             }
         }
         return origins;
     }
-    public FlightRoute getFlightRouteById(int id){
+
+    public FlightRoute getFlightRouteById(int id) {
         return flightRouteRepository.findByRouteId(id);
     }
-    public boolean saveFlightRoute(FlightRoute flightRoute){
+
+    public boolean saveFlightRoute(FlightRoute flightRoute) {
         try {
             flightRouteRepository.save(flightRoute);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-    public boolean deleteFlightRoute(int id){
+
+    public boolean deleteFlightRoute(int id) {
         try {
             flightRouteRepository.deleteById(id);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

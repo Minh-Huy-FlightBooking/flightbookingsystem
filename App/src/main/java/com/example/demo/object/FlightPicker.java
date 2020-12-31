@@ -7,6 +7,7 @@ public class FlightPicker {
     private ReturnTrip returnTrip;
     private List<PassengerInformation> passengerInformation;
     private TicketInformation ticketInformation;
+
     public FlightPicker() {
     }
 

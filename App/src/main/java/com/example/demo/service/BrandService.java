@@ -15,11 +15,11 @@ public class BrandService {
     @Autowired
     private BrandRepository brandRepository;
 
-    public List<Brand> getAllAircraftBrands(){
+    public List<Brand> getAllAircraftBrands() {
         return (List<Brand>) brandRepository.findAll();
     }
 
-    public Map<Integer, String> getAllAircraftBrandsWithMapType (){
+    public Map<Integer, String> getAllAircraftBrandsWithMapType() {
         Map<Integer, String> aircraftBrands = new HashMap<>();
         List<Brand> brandList = getAllAircraftBrands();
         if (!brandList.isEmpty()) {

@@ -19,7 +19,7 @@
 
 <c:if test="${message!=null}">
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#myModal").modal('show');
         });
     </script>
@@ -54,21 +54,25 @@
                                 <tr>
                                     <th>Origin Airport</th>
                                     <td>
-                                        <form:select path="originAirport" cssClass="form-control" items="${originAirport}" itemLabel="airportName"/>
+                                        <form:select path="originAirport" cssClass="form-control"
+                                                     items="${originAirport}" itemLabel="airportName"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Destination Airport</th>
                                     <td>
-                                        <form:select path="destinationAirport" cssClass="form-control" items="${destinationAirport}" itemLabel="airportName"/>
+                                        <form:select path="destinationAirport" cssClass="form-control"
+                                                     items="${destinationAirport}" itemLabel="airportName"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th></th>
                                     <td>
                                         <div class="button mt-2 d-flex flex-row align-items-center">
-                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
-                                            <a href="/admin/flightRouteList"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
+                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100"
+                                                   value="Save"/>
+                                            <a href="/admin/flightRouteList"
+                                               class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>

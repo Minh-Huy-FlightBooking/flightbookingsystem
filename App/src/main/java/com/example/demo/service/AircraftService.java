@@ -15,28 +15,30 @@ public class AircraftService {
     @Autowired
     private AircraftRepository aircraftRepository;
 
-    public List<Aircraft> getAllAircraft (){
+    public List<Aircraft> getAllAircraft() {
         return (List<Aircraft>) aircraftRepository.findAll();
     }
-    public Map<Integer, String> getAllAircraftWithMapType(){
+
+    public Map<Integer, String> getAllAircraftWithMapType() {
         Map<Integer, String> aircraftListMap = new HashMap<>();
         List<Aircraft> aircraft = getAllAircraft();
-        if (!aircraft.isEmpty()){
-            for (Aircraft a: aircraft){
+        if (!aircraft.isEmpty()) {
+            for (Aircraft a : aircraft) {
                 aircraftListMap.put(a.getAircraftId(), a.getModel());
             }
         }
         return aircraftListMap;
     }
-    public void saveAircraft (Aircraft aircraft) {
+
+    public void saveAircraft(Aircraft aircraft) {
         aircraftRepository.save(aircraft);
     }
 
-    public void deleteAircraftById (int aircraftId){
+    public void deleteAircraftById(int aircraftId) {
         aircraftRepository.deleteById(aircraftId);
     }
 
-    public Aircraft getAircraftById (int aircraftId){
+    public Aircraft getAircraftById(int aircraftId) {
         return aircraftRepository.findByAircraftId(aircraftId);
     }
 }

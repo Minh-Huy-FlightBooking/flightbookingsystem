@@ -30,32 +30,33 @@ import java.util.List;
 public class SystemController {
     @Autowired
     private FlightService flightService;
-    
+
     @Autowired
     private WebAPI webAPI;
 
     @RequestMapping(value = "/")
-    public String goToHomepage(){
+    public String goToHomepage() {
         return "index";
     }
 
     @RequestMapping(value = "/home")
-    public String goToHome (){
+    public String goToHome() {
         return "home";
     }
 
     //////////////////////////////
     // a function to looking for a flight / ticket !!!
     @RequestMapping(value = "/ticketSearch")
-    public String goToTicketSearch(Model model, HttpServletRequest request){
+    public String goToTicketSearch(Model model, HttpServletRequest request) {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
         return "ticket-searching-test";
     }
+
     // Return Ticket Searched's Results
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
-    public String goToTicketList (@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
+    public String goToTicketList(@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
         /*System.out.println(t.getOrigin());
         System.out.println(t.getDestination());
         System.out.println(t.getTripType());
@@ -71,30 +72,31 @@ public class SystemController {
         /////////////
         // Departure Time
         LocalDateTime initialTimeOfDepartureDate = t.getDepartureDate().atStartOfDay();
-        LocalDateTime endTimeOfDepartureDate = t.getDepartureDate().atTime(23,59);
+        LocalDateTime endTimeOfDepartureDate = t.getDepartureDate().atTime(23, 59);
 
         model.addAttribute("sessionId", request.getSession().getId());
         //Format!!!
         /*System.out.println(initialTimeOfDepartureDate);*/
         model.addAttribute("ticketInformation", t);
-        if (t.getTripType().equals("oneWay")){
-            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+        if (t.getTripType().equals("oneWay")) {
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
         } else if (t.getTripType().equals("roundTrip")) {
             //This is an easy way to show data --> upgrade later!!!
-            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(),initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
             LocalDateTime initialTimeOfReturnDate = t.getReturnDate().atStartOfDay();
             LocalDateTime endTimeOfReturnDate = t.getReturnDate().atTime(23, 59);
-            model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions( t.getDestination(), t.getOrigin(), initialTimeOfReturnDate,endTimeOfReturnDate, numberOfPeople));
+            model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));
 
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
         }
         return "ticket-list";
     }
+
     //////////////////////////////
     // Passengers' information
     @RequestMapping(value = "/passengerDetails", method = RequestMethod.GET)
-    public String getPassengerDetails (Model model, HttpServletRequest request, HttpSession session) {
+    public String getPassengerDetails(Model model, HttpServletRequest request, HttpSession session) {
 //        FlightPicker flightPicker = webAPI.getFlightsPicked();
         /*System.out.println(flightPicker.getDepartureTrip().getTravelClass());*/
         model.addAttribute("sessionId", request.getSession().getId());
@@ -109,7 +111,7 @@ public class SystemController {
         //Handle Form -->
         List<PassengerInformation> passengerList = new ArrayList<>();
 
-        for (int i = 1; i <= (adults + children + infants) ; i++){
+        for (int i = 1; i <= (adults + children + infants); i++) {
             PassengerInformation passengerInformation = new PassengerInformation();
             if (i <= adults) {
                 passengerInformation.setTitle("adult");
@@ -129,15 +131,15 @@ public class SystemController {
 
     //Seat Selection Function while booking flight ticket!!!
     @RequestMapping(value = "/seatSelection", method = RequestMethod.GET)
-    public String goToSeatSelection (Model model, HttpServletRequest request, HttpSession session) {
+    public String goToSeatSelection(Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
 
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
 //        my edit
-        model.addAttribute("flightDeparture",flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
-        model.addAttribute("flightReturn",flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
+        model.addAttribute("flightDeparture", flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
+        model.addAttribute("flightReturn", flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
 //        end
 
         String tripType = "";
@@ -146,7 +148,7 @@ public class SystemController {
         if (flightPicker != null) {
             //Print out to test if this is either null or not...
             System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
-            for (PassengerInformation p : flightPicker.getPassengerInformation()){
+            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
                 System.out.println("Full name: " + p.getFirstName() + p.getLastName());
             }
 
@@ -171,10 +173,11 @@ public class SystemController {
 
     // Payment Method
     @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
-    public String goToPaymentMethod (Model model, HttpServletRequest request){
+    public String goToPaymentMethod(Model model, HttpServletRequest request) {
         model.addAttribute("sessionId", request.getSession().getId());
         return "payment-method";
     }
+
     //For Date Time formatter
     @InitBinder
     private void dateBinder(WebDataBinder binder) {

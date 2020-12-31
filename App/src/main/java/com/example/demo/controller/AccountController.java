@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AccountController {
     @RequestMapping(value = "/login")
-    public String goToLoginPage (){
+    public String goToLoginPage() {
         return "login";
     }
 }

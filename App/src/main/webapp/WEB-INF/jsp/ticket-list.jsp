@@ -238,15 +238,15 @@
             console.log(radioClicked);*/
 
             for (let i = 1; i < tr.length; i++) {
-                for (let j = 4; j < (countRows1/(tr.length - 1)); j++){
+                for (let j = 4; j < (countRows1 / (tr.length - 1)); j++) {
                     td = tr[i].getElementsByTagName("td")[j];
                     let radioClicked = td.getElementsByTagName("input").namedItem("departPrice");
-                    if (j == 4){
+                    if (j == 4) {
                         td.setAttribute("id", "departure-economy-" + i);
-                        radioClicked.setAttribute("onclick","sendDepartureFlightValues(" + "'departure-economy-"+ i +"')");
+                        radioClicked.setAttribute("onclick", "sendDepartureFlightValues(" + "'departure-economy-" + i + "')");
                     } else {
                         td.setAttribute("id", "departure-business-" + i);
-                        radioClicked.setAttribute("onclick","sendDepartureFlightValues(" + "'departure-business-"+ i +"')");
+                        radioClicked.setAttribute("onclick", "sendDepartureFlightValues(" + "'departure-business-" + i + "')");
                     }
                     /*console.log(td);*/
                 }
@@ -254,7 +254,7 @@
 
             tripType = $('div#flightInformation div input#tripType').val();
             //Auto generate id for flights' ticket (Return Table)
-            if (tripType == "roundTrip"){
+            if (tripType == "roundTrip") {
                 let countRows2 = $('#return-table tbody td').length;
                 let table2 = document.getElementById("return-table");
                 let tr2 = table2.getElementsByTagName("tr");
@@ -263,15 +263,15 @@
                 let td2;
 
                 for (let i = 1; i < tr.length; i++) {
-                    for (let j = 4; j < (countRows2/(tr2.length - 1)); j++){
+                    for (let j = 4; j < (countRows2 / (tr2.length - 1)); j++) {
                         td2 = tr2[i].getElementsByTagName("td")[j];
                         let radioClicked2 = td2.getElementsByTagName("input").namedItem("returnPrice");
-                        if (j == 4){
+                        if (j == 4) {
                             td2.setAttribute("id", "return-economy-" + i);
-                            radioClicked2.setAttribute("onclick","sendReturnFlightValues(" + "'return-economy-"+ i +"')");
+                            radioClicked2.setAttribute("onclick", "sendReturnFlightValues(" + "'return-economy-" + i + "')");
                         } else {
                             td2.setAttribute("id", "return-business-" + i);
-                            radioClicked2.setAttribute("onclick","sendReturnFlightValues(" + "'return-business-"+ i +"')");
+                            radioClicked2.setAttribute("onclick", "sendReturnFlightValues(" + "'return-business-" + i + "')");
                         }
                     }
                 }
@@ -286,17 +286,17 @@
             console.log("Ready is here !!!" + flightPicker);
 
 
-
         })
         let origin, destination, departureDate, returnDate;
         ///////////
-        let  adults, children, infants;
+        let adults, children, infants;
         let departurePrice, departureFlightId, departureTravelClass;
         let returnPrice, returnFlightId, returnTravelClass;
         let flightPicker;
         let tripType;
 
         let departureFlightValClicked, returnFlightValClicked;
+
         function sendDepartureFlightValues(tableDataId) {
             tripType = $('div#flightInformation div input#tripType').val();
             departureFlightValClicked = true;
@@ -328,7 +328,7 @@
                 }
             };*/
             flightPicker = {
-                departureTrip : {
+                departureTrip: {
                     departureFlightId: departureFlightId,
                     travelClass: departureTravelClass,
                     adults: adults,
@@ -336,7 +336,7 @@
                     infant: infants
                 },
                 returnTrip: {
-                    returnFlightId : returnFlightId,
+                    returnFlightId: returnFlightId,
                     travelClass: returnTravelClass,
                     adults: adults,
                     children: children,
@@ -346,23 +346,24 @@
             /*let previousFlightPickerData = sessionStorage.getItem(sessionId);*/
             console.log(flightPicker);
 
-            if (tripType == "oneWay"){
-                if (departureFlightValClicked){
+            if (tripType == "oneWay") {
+                if (departureFlightValClicked) {
                     $('#continue').removeAttr("disabled");
                     console.log("hi!");
-                    $('#continue a').attr("href","passengerDetails");
+                    $('#continue a').attr("href", "passengerDetails");
                 }
             } else if (tripType == "roundTrip") {
-                if (returnFlightValClicked && departureFlightValClicked){
+                if (returnFlightValClicked && departureFlightValClicked) {
                     $('#continue').removeAttr("disabled");
                     console.log("hello!");
-                    $('#continue a').attr("href","passengerDetails");
+                    $('#continue a').attr("href", "passengerDetails");
                 }
             }
 
             //Send Json object
             sendJson();
         }
+
         /*let departureObject = '{ "departureTrip": [{"flightId": ""}, {"travelClass": ""}, {"adults": ""}, {"children": ""},{"infant": ""}]}';*/
 
 
@@ -376,7 +377,7 @@
 
             document.getElementById("return-flight-information").getElementsByTagName("p").namedItem("returnPrice").innerHTML = "Total:" + returnPrice + "$";
             flightPicker = {
-                departureTrip : {
+                departureTrip: {
                     departureFlightId: departureFlightId,
                     travelClass: departureTravelClass,
                     adults: adults,
@@ -384,7 +385,7 @@
                     infant: infants
                 },
                 returnTrip: {
-                    returnFlightId : returnFlightId,
+                    returnFlightId: returnFlightId,
                     travelClass: returnTravelClass,
                     adults: adults,
                     children: children,
@@ -392,22 +393,23 @@
                 }
             };
 
-            if (tripType == "oneWay"){
-                if (departureFlightValClicked){
+            if (tripType == "oneWay") {
+                if (departureFlightValClicked) {
                     $('#continue').removeAttr("disabled");
                     console.log("hi!");
-                    $('#continue a').attr("href","passengerDetails");
+                    $('#continue a').attr("href", "passengerDetails");
                 }
             } else if (tripType == "roundTrip") {
-                if (returnFlightValClicked && departureFlightValClicked){
+                if (returnFlightValClicked && departureFlightValClicked) {
                     $('#continue').removeAttr("disabled");
                     console.log("hello!");
-                    $('#continue a').attr("href","passengerDetails");
+                    $('#continue a').attr("href", "passengerDetails");
                 }
             }
             //Send Json object
             sendJson();
         }
+
         function sendJson() {
             /////////////////////////////////////////////////////////////////////
             let previousFlightPickerData = JSON.parse(sessionStorage.getItem(sessionId));
@@ -440,6 +442,7 @@
         a {
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: none;
         }
@@ -492,24 +495,27 @@
                                     ${f.aircraft.model}
                                 <br/>
                             </td>
-                            <td >
-                                <input type="radio" value=" ${f.economyPrice}" id="departPrice"  name="departPrice"/>
+                            <td>
+                                <input type="radio" value=" ${f.economyPrice}" id="departPrice" name="departPrice"/>
                                 <input type="hidden" value="${f.flightId}" id="flightId" name="flightId"/>
                                 <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
-                                <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
+                                <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime"
+                                       name="departureTime"/>
                                 <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                <input type="hidden" value="${ticketInformation.children}" id="children"
+                                       name="children"/>
                                 <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                 <br/>
                                     ${f.economyPrice}
                             </td>
-                            <td >
+                            <td>
                                 <input type="radio" name="departPrice" value="${f.businessPrice}" id="departPrice"/>
-                                <input type="hidden" value="${f.flightId}" id="flightId" name="flightId" />
-                                <input type="hidden" value="business" id="travelClass" name="travelClass" />
+                                <input type="hidden" value="${f.flightId}" id="flightId" name="flightId"/>
+                                <input type="hidden" value="business" id="travelClass" name="travelClass"/>
                                 <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime"/>
                                 <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                <input type="hidden" value="${ticketInformation.children}" id="children"  name="children"/>
+                                <input type="hidden" value="${ticketInformation.children}" id="children"
+                                       name="children"/>
                                 <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                 <br/>
                                     ${f.businessPrice}
@@ -559,24 +565,32 @@
                                     <br/>
                                 </td>
                                 <td>
-                                    <input type="radio" value=" ${rf.economyPrice}" id="departPrice"  name="returnPrice"/>
+                                    <input type="radio" value=" ${rf.economyPrice}" id="departPrice"
+                                           name="returnPrice"/>
                                     <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
                                     <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
-                                    <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
+                                    <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime"
+                                           name="departureTime"/>
                                     <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                    <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
-                                    <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
+                                    <input type="hidden" value="${ticketInformation.children}" id="children"
+                                           name="children"/>
+                                    <input type="hidden" value="${ticketInformation.infant}" id="infants"
+                                           name="infants"/>
                                     <br/>
                                         ${rf.economyPrice}
                                 </td>
                                 <td>
-                                    <input type="radio" value=" ${rf.businessPrice}" id="departPrice"  name="returnPrice"/>
+                                    <input type="radio" value=" ${rf.businessPrice}" id="departPrice"
+                                           name="returnPrice"/>
                                     <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
-                                    <input type="hidden" value="business" id="travelClass" name="travelClass" />
-                                    <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
+                                    <input type="hidden" value="business" id="travelClass" name="travelClass"/>
+                                    <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime"
+                                           name="departureTime"/>
                                     <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                    <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
-                                    <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
+                                    <input type="hidden" value="${ticketInformation.children}" id="children"
+                                           name="children"/>
+                                    <input type="hidden" value="${ticketInformation.infant}" id="infants"
+                                           name="infants"/>
                                     <br/>
                                         ${rf.businessPrice}
                                 </td>

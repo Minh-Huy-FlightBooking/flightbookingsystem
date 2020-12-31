@@ -15,7 +15,7 @@
 
 <jsp:include page="_sidebar.jsp"/>
 
-<main class="l-main" >
+<main class="l-main">
     <div class="content-wrapper content-wrapper--with-bg">
         <div id="page-content" style="padding: 0;">
             <div class="card shadow">
@@ -48,8 +48,10 @@
                                     <td class="status_aircraft">${a.enabled}</td>
                                     <td>${a.brand.brandName}</td>
                                     <td>
-                                        <a href="editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
-                                        <a href="deleteAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor mt-1" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="editAircraft?aircraftId=${a.aircraftId}"
+                                           class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
+                                        <a href="deleteAircraft?aircraftId=${a.aircraftId}"
+                                           class="btn btn-sm mycolor mt-1" title="Delete"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -64,11 +66,11 @@
 </main>
 <script>
     var status_aircraft = document.getElementsByClassName("status_aircraft");
-    for (let i=0; i<status_aircraft.length; i++){
-        if(status_aircraft.item(i).innerText=='true'){
+    for (let i = 0; i < status_aircraft.length; i++) {
+        if (status_aircraft.item(i).innerText == 'true') {
             console.log(status_aircraft.item(i).innerText)
             status_aircraft.item(i).innerHTML = 'Active'
-        }else{
+        } else {
             console.log(status_aircraft.item(i).value)
             status_aircraft.item(i).innerHTML = 'Inactive'
         }

@@ -39,7 +39,7 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "route_id")
     private FlightRoute flightRoute;
-    @OneToMany(mappedBy = "flight",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
     private List<Ticket> ticketList;
     @OneToOne(mappedBy = "flight")
     private Promotion promotion;

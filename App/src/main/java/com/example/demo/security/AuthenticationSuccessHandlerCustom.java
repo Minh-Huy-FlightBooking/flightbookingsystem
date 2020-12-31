@@ -20,6 +20,7 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
     private static final String EMPLOYEE_ROLE = "EMPLOYEE";
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         boolean isPassengerRole = false;

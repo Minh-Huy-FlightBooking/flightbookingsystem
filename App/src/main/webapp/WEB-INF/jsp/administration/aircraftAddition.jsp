@@ -17,7 +17,7 @@
 
 <c:if test="${message!=null}">
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#myModal").modal('show');
         });
     </script>
@@ -45,14 +45,15 @@
                                     <tr>
                                         <th>ID</th>
                                         <td>
-                                            <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
+                                            <form:input path="aircraftId" readonly="true" class="form-control"
+                                                        placeholder=""/>
                                         </td>
                                     </tr>
                                 </c:if>
                                 <tr>
                                     <th>Model</th>
                                     <td>
-                                        <form:input path="model"  class="form-control"/>
+                                        <form:input path="model" class="form-control"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -68,7 +69,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Enabled <br><p class="text-muted mb-0">(Active: true, Inactive: false)</p></th>
+                                    <th>Enabled <br>
+                                        <p class="text-muted mb-0">(Active: true, Inactive: false)</p></th>
                                     <td class="d-flex flex-row">
                                         <span class="border pl-2 pt-2 rounded mr-2 mb-1">
                                             <label class="form-check form-check-inline">
@@ -78,7 +80,8 @@
                                         </span>
                                         <span class="border pl-2 pt-2 rounded mr-2 mb-1">
                                             <label class="form-check form-check-inline">
-                                            <span class="form-check-label mr-5" style="font-size: 18px"> Inactive </span>
+                                            <span class="form-check-label mr-5"
+                                                  style="font-size: 18px"> Inactive </span>
                                             <form:radiobutton path="enabled" cssClass="form-check-input" value="0"/>
                                             </label>
                                         </span>
@@ -88,14 +91,16 @@
                                     <th>Brand</th>
                                     <td>
                                         <form:select path="brand.brandId" items="${brands}" class="form-control">
-                                        </form:select>                                    </td>
+                                        </form:select></td>
                                 </tr>
                                 <tr>
                                     <th></th>
                                     <td>
                                         <div class="button mt-2 d-flex flex-row align-items-center">
-                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
-                                            <a href="/admin/viewAircraft"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
+                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100"
+                                                   value="Save"/>
+                                            <a href="/admin/viewAircraft"
+                                               class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>

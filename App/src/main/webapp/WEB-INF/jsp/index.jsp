@@ -25,7 +25,7 @@
     <header>
         <!-- nav logo -->
         <a href="#" class="logo">
-            <img class="logo-home" src="/resources/image/logo/Qatar-Airways-Logo.png" />
+            <img class="logo-home" src="/resources/image/logo/Qatar-Airways-Logo.png"/>
 
         </a>
         <!-- nav link -->
@@ -48,9 +48,9 @@
 
 <section class="banner"></section>
 <script type="text/javascript">
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", function () {
         let header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 0);
+        header.classList.toggle("sticky", window.scrollY > 0);
     })
 </script>
 </body>

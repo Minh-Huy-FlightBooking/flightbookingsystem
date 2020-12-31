@@ -5,15 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery Seat Charts Plugin Demo</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,500&display=swap"
-          rel="stylesheet">
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-
+    <title>Seat Charts</title>
     <%--Javascript External Link is placed here--%>
     <jsp:include page="administration/_head.jsp"/>
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
         $(document).ready(function () {
             //Auto fill id and value for departure seats
@@ -181,17 +175,26 @@
                                                 <tr class="seat-row">
                                                     <c:forEach begin="1" end="3">
                                                         <td align="center" style="padding: 0.0%">
-                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
-                                                                <img src="/resources/image/logo/s-couch.png"width="100%" >
+                                                            <span class="btn btn-sm btn-outline departure-seat-item"
+                                                                  name="departure-seat-item">
+                                                                <button class="btn btn-info"
+                                                                        style="padding: 0; border: none; background: none;">
+                                                                    <img src="/resources/image/logo/s-couch.png"
+                                                                         width="100%"/>
+                                                                </button>
                                                             </span>
                                                         </td>
                                                     </c:forEach>
-                                                    <td width="12%"></td>
+                                                    <td width="12%" style="text-align: center"></td>
                                                     <c:forEach begin="1" end="3">
                                                         <td align="center" style="padding: 0.0%">
-                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item" >
-                                                                <img src="/resources/image/logo/s-couch.png"
-                                                                     width="100%">
+                                                            <span class="btn btn-sm btn-outline departure-seat-item"
+                                                                  name="departure-seat-item">
+                                                                <button class="btn btn-info"
+                                                                        style="padding: 0; border: none; background: none;">
+                                                                    <img src="/resources/image/logo/s-couch.png"
+                                                                         width="100%">
+                                                                </button>
                                                             </span>
                                                         </td>
                                                     </c:forEach>
@@ -236,16 +239,26 @@
                                                     <tr class="seat-row">
                                                         <c:forEach begin="1" end="3">
                                                             <td align="center" style="padding: 0.0%">
-                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
-                                                                    <img src="/resources/image/logo/s-couch.png" width="100%" >
+                                                                <span class="btn btn-sm btn-outline return-seat-item"
+                                                                      name="return-seat-item">
+                                                                    <button class="btn btn-info"
+                                                                            style="padding: 0; border: none; background: none;">
+                                                                        <img src="/resources/image/logo/s-couch.png"
+                                                                             width="100%"/>
+                                                                    </button>
                                                                 </span>
                                                             </td>
                                                         </c:forEach>
-                                                        <td width="12%"></td>
+                                                        <td width="12%" style="text-align: center"></td>
                                                         <c:forEach begin="1" end="3">
                                                             <td align="center" style="padding: 0.0%">
-                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
-                                                                    <img src="/resources/image/logo/s-couch.png" width="100%" >
+                                                                <span class="btn btn-sm btn-outline return-seat-item"
+                                                                      name="return-seat-item">
+                                                                    <button class="btn btn-info"
+                                                                            style="padding: 0; border: none; background: none;">
+                                                                        <img src="/resources/image/logo/s-couch.png"
+                                                                             width="100%"/>
+                                                                    </button>
                                                                 </span>
                                                             </td>
                                                         </c:forEach>
@@ -261,10 +274,12 @@
                         </div>
                     </div>
                 </c:if>
-
             </div>
         </div>
-
+        <div class="container">
+            <button>Back</button>
+            <button id="continue">Continue</button>
+        </div>
     </div>
 </div>
 

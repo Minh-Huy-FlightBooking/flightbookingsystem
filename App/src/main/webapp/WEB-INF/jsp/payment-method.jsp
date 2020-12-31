@@ -22,7 +22,7 @@
             console.log(tr.length);
             console.log(numberOfColumns / (tr.length - 1));
 
-            let alphabet = new Array("A", "B", "C","","D", "E", "F");
+            let alphabet = new Array("A", "B", "C", "", "D", "E", "F");
             console.log(alphabet[1]);
 
             /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
@@ -58,15 +58,15 @@
             /*$('#' + seatCode + ' button').attr("style","background: red");*/
 
             for (let m = 0; m < seatBookedData.length; m++) {
-                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
+                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true) {
                     console.log("HI!!");
                     seatBookedData[m].value = false;
                     /*if (seatCodeIsClicked != "") {
                         $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
                     }*/
-                    $('#' + seatCode + ' button').attr("style","background: red");
-                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                    $('#' + seatCode + ' button').attr("style","background: white");
+                    $('#' + seatCode + ' button').attr("style", "background: red");
+                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false) {
+                    $('#' + seatCode + ' button').attr("style", "background: white");
                     seatBookedData[m].value = true;
                 }
             }

@@ -1,9 +1,11 @@
 package com.example.demo.object;
 
+import java.util.List;
+
 public class ReturnTrip {
     private int returnFlightId;
     private String travelClass;
-    private String seatCode;
+    private List<String> returnSeatCodes;
     private int adults;
     private int children;
     private int infant;

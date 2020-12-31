@@ -20,14 +20,15 @@
                 <div class="alert alert-danger mb-0" role="alert">
                     <h4 class="alert-heading">Warning!</h4>
                     <h2>Invalid value. May be:</h2>
-                    <p class="mt-1"> <br>- Departure time After Arrival time
+                    <p class="mt-1"><br>- Departure time After Arrival time
                         <script>
-                            $(document).ready(function(){
+                            $(document).ready(function () {
                                 $("#myModal").modal('show');
                             });
                         </script>
                         <br>- Aircraft is activated
-                        <br>- This Flight is existed</p>
+                        <br>- This Flight is existed
+                    </p>
                     <hr>
                     <p class="mb-0">Please fill data again!!! Thanks.</p>
                 </div>
@@ -37,7 +38,7 @@
 </c:if>
 <main class="l-main">
     <div class="content-wrapper bg-white">
-    <%----------------%>
+        <%----------------%>
         <div id="page-content" style="padding: 2rem">
             <div class="card">
                 <div class="card-body">
@@ -60,77 +61,86 @@
                                 <tr>
                                     <th>Flight Route</th>
                                     <td>
-                                        <form:select id="flightRouteId" path="flightRoute"  cssClass="form-control" items="${flightRouteList}" required="true"/>
+                                        <form:select id="flightRouteId" path="flightRoute" cssClass="form-control"
+                                                     items="${flightRouteList}" required="true"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                <th>Departure Time</th>
-                                <td>
-                                    <form:input path="departureTime" type="datetime-local" cssClass="form-control" required="true"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Arrival Time</th>
-                                <td>
-                                    <form:input path="arrivalTime" type="datetime-local" cssClass="form-control" required="true"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Aircraft</th>
-                                <td>
-                                    <form:select path="aircraft" cssClass="form-control" items="${aircraft}" itemLabel="model" required="true"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Economy Price</th>
-                                <td>
-                                    <form:input path="economyPrice" cssClass="form-control" required="true"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Business Price</th>
-                                <td>
-                                    <form:input path="businessPrice" cssClass="form-control" required="true"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td class="d-flex flex-row">
+                                    <th>Departure Time</th>
+                                    <td>
+                                        <form:input path="departureTime" type="datetime-local" cssClass="form-control"
+                                                    required="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Arrival Time</th>
+                                    <td>
+                                        <form:input path="arrivalTime" type="datetime-local" cssClass="form-control"
+                                                    required="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Aircraft</th>
+                                    <td>
+                                        <form:select path="aircraft" cssClass="form-control" items="${aircraft}"
+                                                     itemLabel="model" required="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Economy Price</th>
+                                    <td>
+                                        <form:input path="economyPrice" cssClass="form-control" required="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Business Price</th>
+                                    <td>
+                                        <form:input path="businessPrice" cssClass="form-control" required="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td class="d-flex flex-row">
                                     <span class="border pl-2 pt-2 rounded mr-2 mb-1 bg-warning">
                                         <label class="form-check form-check-inline">
                                         <span class="form-check-label mr-5" style="font-size: 18px"> Delay </span>
-                                        <form:radiobutton path="flightStatus" cssClass="form-check-input" value="Delay"/>
+                                        <form:radiobutton path="flightStatus" cssClass="form-check-input"
+                                                          value="Delay"/>
                                         </label>
                                     </span>
-                                    <span class="border pl-2 pt-2 rounded mr-2 mb-1 bg-success">
+                                        <span class="border pl-2 pt-2 rounded mr-2 mb-1 bg-success">
                                         <label class="form-check form-check-inline">
                                         <span class="form-check-label mr-5" style="font-size: 18px"> On time </span>
-                                        <form:radiobutton path="flightStatus" cssClass="form-check-input" value="On time"/>
+                                        <form:radiobutton path="flightStatus" cssClass="form-check-input"
+                                                          value="On time"/>
                                         </label>
                                     </span>
-                                    <span class="border pl-2 pt-2 rounded mr-2 mb-1 bg-danger">
+                                        <span class="border pl-2 pt-2 rounded mr-2 mb-1 bg-danger">
                                         <label class="form-check form-check-inline">
                                         <span class="form-check-label mr-5" style="font-size: 18px"> Cancel </span>
-                                        <form:radiobutton path="flightStatus" cssClass="form-check-input" value="Cancel" onclick="doGetJSON()"/>
+                                        <form:radiobutton path="flightStatus" cssClass="form-check-input" value="Cancel"
+                                                          onclick="doGetJSON()"/>
                                         </label>
                                     </span>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <div class="button mt-2 d-flex flex-row align-items-center">
-                                        <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
-                                        <a href="/admin/flightList"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </form:form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <div class="button mt-2 d-flex flex-row align-items-center">
+                                            <input type="submit" class="btn btn-sm btn-outline-primary w-100"
+                                                   value="Save"/>
+                                            <a href="/admin/flightList"
+                                               class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form:form>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <br><br>
     </div>

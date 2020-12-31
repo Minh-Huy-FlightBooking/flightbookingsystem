@@ -14,7 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -47,17 +48,20 @@
                         <form:form action="j_spring_security_check" method="post" name="login">
                             <div class="form-group ">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" class="form-control " id="username" aria-describedby="emailHelp" placeholder="Enter username ">
+                                <input type="text" name="username" class="form-control " id="username"
+                                       aria-describedby="emailHelp" placeholder="Enter username ">
                             </div>
                             <div class="form-group ">
                                 <label for="password">Password</label>
-                                <input type="password " name="password" id="password" class="form-control " aria-describedby="emailHelp" placeholder="Enter Password ">
+                                <input type="password " name="password" id="password" class="form-control "
+                                       aria-describedby="emailHelp" placeholder="Enter Password ">
                             </div>
                             <div class="form-group ">
                                 <p class="text-center">By signing up you accept our <a href="# ">Terms Of Use</a></p>
                             </div>
                             <div class="col-md-12 text-center ">
-                                <button type="submit" name="" class=" btn btn-block mybtn btn-primary tx-tfm ">Login</button>
+                                <button type="submit" name="" class=" btn btn-block mybtn btn-primary tx-tfm ">Login
+                                </button>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </div>
                             <div class="col-md-12">
@@ -68,13 +72,15 @@
                             </div>
                             <div class="col-md-12 mb-3 ">
                                 <p class="text-center ">
-                                    <a href="javascript:void(); " class="google btn mybtn "><i class="fa fa-google-plus ">
+                                    <a href="javascript:void(); " class="google btn mybtn "><i
+                                            class="fa fa-google-plus ">
                                     </i> Signup using Google
                                     </a>
                                 </p>
                             </div>
                             <div class="form-group ">
-                                <p class="text-center ">Don't have account? <a href="# " id="signup ">Sign up here</a></p>
+                                <p class="text-center ">Don't have account? <a href="# " id="signup ">Sign up here</a>
+                                </p>
                             </div>
                         </form:form>
                     </div>
