@@ -147,6 +147,7 @@
 
             //Send Data to Server here !! Ha ha!!
             sessionStorage.setItem(sessionId, JSON.stringify(flightData));
+            console.log(sessionStorage.getItem(sessionId));
             $.ajax({
                 type: "POST",
                 url: "flightPickerHandler",
@@ -164,6 +165,7 @@
                 }
             });
         }
+
     </script>
     <script>
 
@@ -292,7 +294,7 @@
             </div>
             <div class="mt-2">
                 <button><a href="ticketSearch">Back</a></button>
-                <button id="continue"><a href="seatSelection" onclick="sendPassengerData()">Continue</a></button>
+                <button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>
             </div>
             <%--<form:form action="" modelAttribute="passenger">
                 <div class="form-row">

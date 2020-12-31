@@ -5,12 +5,20 @@ import java.util.List;
 public class ReturnTrip {
     private int returnFlightId;
     private String travelClass;
-    private List<String> returnSeatCodes;
+    private List<SeatPossession> returnSeatPossessions;
     private int adults;
     private int children;
     private int infant;
 
     public ReturnTrip() {
+    }
+
+    public List<SeatPossession> getReturnSeatPossessions() {
+        return returnSeatPossessions;
+    }
+
+    public void setReturnSeatPossessions(List<SeatPossession> returnSeatPossessions) {
+        this.returnSeatPossessions = returnSeatPossessions;
     }
 
     public int getReturnFlightId() {

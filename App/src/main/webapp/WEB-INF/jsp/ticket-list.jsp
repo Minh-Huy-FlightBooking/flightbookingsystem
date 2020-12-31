@@ -333,14 +333,16 @@
                     travelClass: departureTravelClass,
                     adults: adults,
                     children: children,
-                    infant: infants
+                    infant: infants,
+                    departureSeatPossession:[]
                 },
                 returnTrip: {
                     returnFlightId: returnFlightId,
                     travelClass: returnTravelClass,
                     adults: adults,
                     children: children,
-                    infant: infants
+                    infant: infants,
+                    returnSeatPossession: []
                 }
             };
             /*let previousFlightPickerData = sessionStorage.getItem(sessionId);*/
@@ -382,14 +384,16 @@
                     travelClass: departureTravelClass,
                     adults: adults,
                     children: children,
-                    infant: infants
+                    infant: infants,
+                    departureSeatPossession:[]
                 },
                 returnTrip: {
                     returnFlightId: returnFlightId,
                     travelClass: returnTravelClass,
                     adults: adults,
                     children: children,
-                    infant: infants
+                    infant: infants,
+                    returnSeatPossession: []
                 }
             };
 

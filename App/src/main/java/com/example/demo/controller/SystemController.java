@@ -137,12 +137,13 @@ public class SystemController {
 
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
-//        my edit
+        //my edit
         model.addAttribute("flightDeparture", flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
         model.addAttribute("flightReturn", flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
-//        end
+        //end
 
         String tripType = "";
+
 
         // get the initial values
         if (flightPicker != null) {
@@ -161,6 +162,14 @@ public class SystemController {
 
 
             }
+            //New Edit
+            List<String> passengerNames = new ArrayList<>();
+            for (PassengerInformation p: flightPicker.getPassengerInformation()){
+                passengerNames.add(p.getFirstName() + " " + p.getLastName());
+                System.out.println(p.getFirstName() + " " + p.getLastName());
+            }
+            model.addAttribute("passengerNames", passengerNames);
+
             tripType = flightPicker.getTicketInformation().getTripType();
             System.out.println(tripType);
         } else {
