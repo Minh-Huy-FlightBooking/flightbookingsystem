@@ -69,6 +69,7 @@
         })
         let isDataSentChecked;
 
+        //Get Email/ Phones Fields for the later utilization
         function sendDataToEmail(passengerDataItem) {
             let inputTag = document.getElementById(passengerDataItem).getElementsByTagName("input");
             if (inputTag.namedItem("sendInformationCheckbox").checked) {
@@ -158,10 +159,14 @@
                     console.log("send data to backend successfully: ");
                     console.log(data);
                     /*alert(data);*/
+
+                    // move to a new page
+                    location.href = "seatSelection";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus);
                     console.log("fail");
+                    alert("OOP!!! Something is wrong!!!");
                 }
             });
         }
@@ -294,7 +299,8 @@
             </div>
             <div class="mt-2">
                 <button><a href="ticketSearch">Back</a></button>
-                <button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>
+                <%--<button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>--%>
+                <button id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
             </div>
             <%--<form:form action="" modelAttribute="passenger">
                 <div class="form-row">

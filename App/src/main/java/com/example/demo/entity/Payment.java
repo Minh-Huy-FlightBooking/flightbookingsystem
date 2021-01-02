@@ -14,12 +14,24 @@ public class Payment {
     @Column(name = "status")
     private boolean status;
 
+    @ManyToOne
+    @JoinColumn(name = "credit_card_id")
+    private CreditCard creditCard;
+
     @OneToOne(mappedBy = "payment")
     private Booking booking;
+
 
     public Payment() {
     }
 
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
     public int getPaymentId() {
         return paymentId;
     }

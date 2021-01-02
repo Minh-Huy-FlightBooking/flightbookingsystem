@@ -12,8 +12,8 @@ public class TravelClass {
     private int travelClassId;
     @Column(name = "class_name")
     private String className;
-    @Column(name = "rate")
-    private double rate;
+    /*@Column(name = "rate")
+    private double rate;*/
 
     @OneToMany(mappedBy = "travelClass")
     private List<Ticket> tickets;
@@ -21,13 +21,13 @@ public class TravelClass {
     public TravelClass() {
     }
 
-    public double getRate() {
+    /*public double getRate() {
         return rate;
     }
 
     public void setRate(double rate) {
         this.rate = rate;
-    }
+    }*/
 
     public List<Ticket> getTickets() {
         return tickets;

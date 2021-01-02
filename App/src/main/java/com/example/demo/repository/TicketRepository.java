@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.entity.Flight;
 import com.example.demo.entity.Ticket;
+import com.example.demo.object.TicketInformation;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,5 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
             "where t.flight = :flight " +
             "and t.enabled = true ")*/
     List<Ticket> findByFlightAndEnabled(Flight flight, boolean enabled);
+    Ticket findByFlightFlightIdAndSeatCode(int flightId, String seatCode);
 }

@@ -7,8 +7,17 @@ public class FlightPicker {
     private ReturnTrip returnTrip;
     private List<PassengerInformation> passengerInformation;
     private TicketInformation ticketInformation;
+    private double totalPaymentAmount;
 
     public FlightPicker() {
+    }
+
+    public double getTotalPaymentAmount() {
+        return totalPaymentAmount;
+    }
+
+    public void setTotalPaymentAmount(double totalPaymentAmount) {
+        this.totalPaymentAmount = totalPaymentAmount;
     }
 
     public TicketInformation getTicketInformation() {

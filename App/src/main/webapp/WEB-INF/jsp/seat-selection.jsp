@@ -92,61 +92,8 @@
 
         let seatBookedData = [];
 
-        /*let numberOfPassengers = 2;
-        let seatCodeIsClicked = "";*/
-        function getDepartureSeatCode(seatCode) {
+        /*function getDepartureSeatCode(seatCode) {
             console.log("clicked!!: " + seatCode);
-
-            // for (let m = 0; m < seatBookedData.length; m++) {
-            //     if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true) {
-            //         console.log("HI!!");
-            //         seatBookedData[m].value = false;
-            //         /*if (seatCodeIsClicked != "") {
-            //             $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-            //         }*/
-            //         $('#' + seatCode + ' button').attr("style", "background: red");
-            //
-            //     } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false) {
-            //         $('#' + seatCode + ' button').attr("style", "background: white");
-            //         seatBookedData[m].value = true;
-            //     }
-            // }
-            /*let count = 0;
-            for (let n = 0; n < seatBookedData.length; n++) {
-                if (seatBookedData[n].value == false){
-                    count++;
-                }
-            }
-
-            console.log(count)
-            if (count < numberOfPassengers) {
-                for (let m = 0; m < seatBookedData.length; m++) {
-                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                        console.log("HI!!");
-                        seatBookedData[m].value = false;
-                        $('#' + seatCode + ' button').attr("style","background: red");
-                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                        $('#' + seatCode + ' button').attr("style","background: white");
-                        seatBookedData[m].value = true;
-                    }
-                }
-            } else if (count >= numberOfPassengers){
-                for (let m = 0; m < seatBookedData.length; m++) {
-                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                        console.log("HI!!");
-                        seatBookedData[m].value = false;
-                        if (seatCodeIsClicked != "") {
-                            $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-                        }
-                        $('#' + seatCode + ' button').attr("style","background: red");
-                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                        $('#' + seatCode + ' button').attr("style","background: white");
-                        seatBookedData[m].value = true;
-                    }
-                }
-            }
-
-            seatCodeIsClicked = seatCode;*/
 
             console.log(currentPassengerSelected);
             let x = $('#' + currentPassengerSelected + ' input').val();
@@ -179,93 +126,112 @@
             }
         }
                 function getReturnSeatCode(seatCode) {
-                    console.log("clicked!!: " + seatCode);
+                    if (!(currentPassengerSelected.indexOf("depart") > -1)){
+                        console.log("clicked!!: " + seatCode);
+                        console.log(currentPassengerSelected);
+                        let x = $('#' + currentPassengerSelected + ' input').val();
+                        console.log(x);
 
-                    // for (let m = 0; m < seatBookedData.length; m++) {
-                    //     if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true) {
-                    //         console.log("HI!!");
-                    //         seatBookedData[m].value = false;
-                    //         /*if (seatCodeIsClicked != "") {
-                    //             $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-                    //         }*/
-                    //         $('#' + seatCode + ' button').attr("style", "background: red");
-                    //
-                    //     } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false) {
-                    //         $('#' + seatCode + ' button').attr("style", "background: white");
-                    //         seatBookedData[m].value = true;
-                    //     }
-                    // }
-                    /*let count = 0;
-                    for (let n = 0; n < seatBookedData.length; n++) {
-                        if (seatBookedData[n].value == false){
-                            count++;
-                        }
-                    }
-
-                    console.log(count)
-                    if (count < numberOfPassengers) {
-                        for (let m = 0; m < seatBookedData.length; m++) {
-                            if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                                console.log("HI!!");
-                                seatBookedData[m].value = false;
-                                $('#' + seatCode + ' button').attr("style","background: red");
-                            } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                                $('#' + seatCode + ' button').attr("style","background: white");
-                                seatBookedData[m].value = true;
-                            }
-                        }
-                    } else if (count >= numberOfPassengers){
-                        for (let m = 0; m < seatBookedData.length; m++) {
-                            if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                                console.log("HI!!");
-                                seatBookedData[m].value = false;
-                                if (seatCodeIsClicked != "") {
-                                    $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-                                }
-                                $('#' + seatCode + ' button').attr("style","background: red");
-                            } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                                $('#' + seatCode + ' button').attr("style","background: white");
-                                seatBookedData[m].value = true;
-                            }
-                        }
-                    }
-
-                    seatCodeIsClicked = seatCode;*/
-
-                    console.log(currentPassengerSelected);
-                    let x = $('#' + currentPassengerSelected + ' input').val();
-                    console.log(x);
-
-                    $('#' + currentPassengerSelected + ' input:text').val(seatCode);
-                    let seatPossession = {
-                        seatCode: "",
-                        passengerName: ""
-                    };
-                    let count = 0;
-                    for (let m = 0; m < returnSeatPossession.length; m++) {
-                        if (returnSeatPossession[m].passengerName == currentPassengerSelected) {
-                            count++;
-                        }
-                    }
-
-                    if (count == 0) {
-                        returnSeatPossession.push({
-                            seatCode: $('#' + currentPassengerSelected + ' input').val(),
-                            passengerName: currentPassengerSelected
-                        });
-                    } else {
+                        $('#' + currentPassengerSelected + ' input:text').val(seatCode);
+                        let seatPossession = {
+                            seatCode: "",
+                            passengerName: ""
+                        };
+                        let count = 0;
                         for (let m = 0; m < returnSeatPossession.length; m++) {
                             if (returnSeatPossession[m].passengerName == currentPassengerSelected) {
-                                returnSeatPossession[m].passengerName = currentPassengerSelected;
+                                count++;
+                            }
+                        }
+
+                        if (count == 0) {
+                            returnSeatPossession.push({
+                                seatCode: $('#' + currentPassengerSelected + ' input').val(),
+                                passengerName: currentPassengerSelected
+                            });
+                        } else {
+                            for (let m = 0; m < returnSeatPossession.length; m++) {
+                                if (returnSeatPossession[m].passengerName == currentPassengerSelected) {
+                                    returnSeatPossession[m].passengerName = currentPassengerSelected;
+                                }
                             }
                         }
                     }
-                }
+
+                }*/
 
                 let currentPassengerSelected;
                 let departureSeatPossession = new Array();
                 let returnSeatPossession = new Array();
 
+        function getDepartureSeatCode(seatCode) {
+            if (currentPassengerSelected != null) {
+                console.log("clicked!!: " + seatCode);
+
+                console.log(currentPassengerSelected);
+                let x = $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val();
+                console.log(x);
+
+                $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(seatCode);
+                let seatPossession = {
+                    seatCode: "",
+                    passengerName: ""
+                };
+                let count = 0;
+                for (let m = 0; m < departureSeatPossession.length; m++) {
+                    if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
+                        count++;
+                    }
+                }
+
+                if (count == 0) {
+                    departureSeatPossession.push({
+                        seatCode: $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(),
+                        passengerName: $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()
+                    });
+                } else {
+                    for (let m = 0; m < departureSeatPossession.length; m++) {
+                        if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
+                            departureSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val();
+                        }
+                    }
+
+                }
+            }
+        }
+        function getReturnSeatCode(seatCode) {
+            if (!(currentPassengerSelected.indexOf("depart") > -1)){
+                console.log("clicked!!: " + seatCode);
+                console.log(currentPassengerSelected);
+                let x = $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val();
+                console.log(x);
+
+                $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val(seatCode);
+                let seatPossession = {
+                    seatCode: "",
+                    passengerName: ""
+                };
+                let count = 0;
+                for (let m = 0; m < returnSeatPossession.length; m++) {
+                    if (returnSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()) {
+                        count++;
+                    }
+                }
+
+                if (count == 0) {
+                    returnSeatPossession.push({
+                        seatCode: $('#' + currentPassengerSelected + ' input').val(),
+                        passengerName: $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()
+                    });
+                } else {
+                    for (let m = 0; m < returnSeatPossession.length; m++) {
+                        if (returnSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()) {
+                            returnSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val();
+                        }
+                    }
+                }
+            }
+        }
                 function getSeatSelectionTurn(passengerId) {
                     currentPassengerSelected = passengerId;
                 }
@@ -289,7 +255,7 @@
                 success: function (data, textStatus, jqXHR) {
                     console.log("send data to backend successfully: ");
                     console.log(data);
-                    /*alert(data);*/
+                    location.href ="paymentMethod";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus);
@@ -327,7 +293,8 @@
                                         <c:forEach var="name" items="${passengerNames}">
                                             <li class="b-1 my-1">
                                                 <button class="mb-1">${name}</button>
-                                                <input type="text" readonly value="" name="returnSeatCode">
+                                                <input type="hidden" value="${name}" name="departurePassengerName"/>
+                                                <input type="text" readonly value="" name="departureSeatCode"/>
                                             </li>
                                         </c:forEach>
                                     </ul>
@@ -393,8 +360,9 @@
                                             <c:forEach var="name" items="${passengerNames}">
                                                 <li class="b-1 my-1">
                                                     <button class="mb-1">${name}</button>
+                                                    <input type="hidden" value="${name}" name="returnPassengerName"/>
                                                     <br/>
-                                                    <input type="text" readonly value="" name="returnSeatCode">
+                                                    <input type="text" readonly value="" name="returnSeatCode"/>
                                                 </li>
                                             </c:forEach>
                                         </ul>
@@ -460,7 +428,8 @@
         </div>
         <div class="container">
             <button>Back</button>
-            <button id="continue"><a onclick="sendPassengerDataWithSeatCodes()" href="paymentMethod">Continue</a></button>
+            <%--<button id="continue"><a onclick="sendPassengerDataWithSeatCodes()" href="paymentMethod">Continue</a></button>--%>
+            <button id="continue" onclick="sendPassengerDataWithSeatCodes()">Continue</button>
         </div>
     </div>
 </div>

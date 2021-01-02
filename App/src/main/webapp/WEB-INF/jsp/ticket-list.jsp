@@ -604,6 +604,7 @@
                     </table>
                 </div>
             </c:if>
+            <%--Continue Button is placed here--%>
             <div class="">
                 <button><a href="ticketSearch">Back</a></button>
                 <button id="continue" disabled><a onclick="sendJson()">Continue</a></button>

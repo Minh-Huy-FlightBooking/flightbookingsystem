@@ -180,12 +180,18 @@ public class SystemController {
         return "seat-selection";
     }
 
-    // Payment Method
-    @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
-    public String goToPaymentMethod(Model model, HttpServletRequest request) {
-        model.addAttribute("sessionId", request.getSession().getId());
-        return "payment-method";
-    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     //For Date Time formatter
     @InitBinder
@@ -200,5 +206,6 @@ public class SystemController {
         binder.registerCustomEditor(Date.class, editor);
 
     }
+
 
 }

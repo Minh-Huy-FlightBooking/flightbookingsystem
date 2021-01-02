@@ -12,6 +12,9 @@ public class Ticket {
 /*    @Column(name = "ticket_type")
     private String ticketType;*/
 
+    @Column(name = "seat_code")
+    private String seatCode;
+
     @Column(name = "enabled")
     private boolean enabled;
 
@@ -38,6 +41,14 @@ public class Ticket {
     private TravelClass travelClass;
 
     public Ticket() {
+    }
+
+    public String getSeatCode() {
+        return seatCode;
+    }
+
+    public void setSeatCode(String seatCode) {
+        this.seatCode = seatCode;
     }
 
     public boolean isEnabled() {
