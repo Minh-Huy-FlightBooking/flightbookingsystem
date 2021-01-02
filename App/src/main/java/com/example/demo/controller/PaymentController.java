@@ -114,7 +114,6 @@ public class PaymentController {
                     if ((creditCardReceived.getBalance() - totalAmount) >= 0) {
                         model.addAttribute("message", "Booking Successfully");
                         ////////////////////Do a tons of things here to save the booking data
-                        
                         return "payment-receipt";
                     } else {
                         model.addAttribute("message", "Fail to pay for the ticket's prices --> your balance is not enough!!!");

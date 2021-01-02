@@ -19,6 +19,9 @@ public class FlightService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private TicketService ticketService;
     //Search flights
     public List<Flight> getAllOneWayFlightsBySearchConditions (String origin, String destination, LocalDateTime departureDate,LocalDateTime departureDate2,int numberOfPeople){
         List<Flight> flights = flightRepository.findFlightsByFlightRouteAndDepartureTime(origin, destination,departureDate, departureDate2);
@@ -50,10 +53,11 @@ public class FlightService {
         return flightRepository.findByFlightId(id);
     }
 
-    public boolean deleteFLight(int id){
-        Flight flight = flightRepository.findByFlightId(id);
-        if (flight.getFlightStatus().equals("On time")) return false;
+    public boolean deleteFLight (int id){
+//        Flight flight = flightRepository.findByFlightId(id);
+//        if (flight.getFlightStatus().equals("On time")) return false;
         try{
+            ticketService.deleteByFlightId(id);
             flightRepository.deleteById(id);
             return true;
         }catch (Exception e){
@@ -71,10 +75,14 @@ public class FlightService {
     public boolean isException(Flight flight){
         boolean ex = false;
         // check time input
-        if(flight.getDepartureTime().isAfter(flight.getArrivalTime())) ex = true;
+        if(flight.getDepartureTime().isAfter(flight.getArrivalTime())||flight.getDepartureTime().isEqual(flight.getArrivalTime())) ex = true;
         // check data existed
-        if (flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime()
-                ,flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft())) ex = true;
+        if(flightRepository.findByFlightId(flight.getFlightId())!=null){
+
+        }else {
+            if (flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime()
+                    ,flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft())) ex = true;
+        }
         if (flightRepository.findByFlightId(flight.getFlightId())!=null){
             List<Flight> flightList1 = flightRepository.findByFlightRouteAndAircraft(flight.getFlightRoute(),flight.getAircraft());
             LocalDateTime departure_time = flight.getDepartureTime();
