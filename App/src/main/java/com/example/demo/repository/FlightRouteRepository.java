@@ -11,13 +11,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FlightRouteRepository extends CrudRepository<FlightRoute,Integer> {
+public interface FlightRouteRepository extends CrudRepository<FlightRoute, Integer> {
     FlightRoute findByRouteId(int id);
+
     List<FlightRoute> findByOriginAirport(Airport airport);
 
-    @Query(value="select fr.* from flight_route fr\n" +
+    @Query(value = "select fr.* from flight_route fr\n" +
             "join airport a \n" +
             "on fr.destination_airport_id = a.airport_id\n" +
-            "where fr.origin_airport_id in (select airport_id from airport a2 where lower(a2.airport_name) like %:origin%)", nativeQuery=true)
-    List<FlightRoute> findByOriginName (@Param("origin") String origin);
+            "where fr.origin_airport_id in (select airport_id from airport a2 where lower(a2.airport_name) like %:origin%)", nativeQuery = true)
+    List<FlightRoute> findByOriginName(@Param("origin") String origin);
 }

@@ -19,61 +19,7 @@
 <jsp:include page="_head.jsp"/>
 
 <body>
-<%--<jsp:include page="_sidebar.jsp"/>--%>
-<%--<main class="l-main">--%>
-<%--    <div class="content-wrapper content-wrapper--with-bg">--%>
 
-<%--        <div id="page-content" style="padding: 0;">--%>
-<%--            &lt;%&ndash;<div class="container-fluid d-flex justify-content-center">&ndash;%&gt;--%>
-<%--                <div class="card shadow">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <h2 class="card-title ml-3">Flight List&nbsp;&nbsp;&nbsp;<a href="addFlight" class="btn btn-sm mycolor"  >--%>
-<%--                            <i class="fa fa-plus"></i></a>--%>
-<%--                        </h2>--%>
-
-<%--                        <div class="col-xs-12 col-sm-12 ">--%>
-<%--                            <table class="table table-bordered table-hover" id="example">--%>
-<%--                                <thead>--%>
-<%--                                <tr align="center">--%>
-<%--                                    <th>Departure time</th>--%>
-<%--                                    <th>Arrival time</th>--%>
-<%--                                    <th>Origin Airport</th>--%>
-<%--                                    <th>Destination Airport</th>--%>
-<%--                                    <th>Flight Status</th>--%>
-<%--                                    <th>Aircraft</th>--%>
-<%--                                    <th>Economy Price</th>--%>
-<%--                                    <th>Business Price</th>--%>
-<%--                                    <th>Action</th>--%>
-<%--                                </tr>--%>
-<%--                                </thead>--%>
-<%--                                <tbody>--%>
-<%--                                <c:forEach items="${flightList}" var="f">--%>
-<%--                                    <tr align="center" style="height: 100px">--%>
-<%--                                        <td style="vertical-align: middle; width: 11.6%">${f._departureTime}</td>--%>
-<%--                                        <td style="vertical-align: middle; width: 11.6%">${f._arrivalTime}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.flightRoute.originAirport.airportName}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.flightRoute.destinationAirport.airportName}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.flightStatus}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.aircraft.model}<br>${f.aircraft.brand.brandName}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.economyPrice}</td>--%>
-<%--                                        <td style="vertical-align: middle">${f.businessPrice}</td>--%>
-<%--                                        <!-- Đây là các icon thao tác -->--%>
-<%--                                        <td style="vertical-align: middle">--%>
-<%--                                            <a href="editFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="chỉnh sửa" style="margin: 1px;"><i class='fa fa-pencil' ></i></a>--%>
-<%--                                            <a href="deleteFlight?id=${f.flightId}" class="btn btn-sm mycolor" title="xóa" style="margin: 1px;"><i class="fa fa-trash-o" ></i></a>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
-<%--                                </tbody>--%>
-<%--                            </table>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            &lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--        </div>--%>
-<%--        <br>--%>
-<%--    </div>--%>
-<%--</main>--%>
 <div class="container-fluid">
     <div class="row mt-2">
         <div class="col-sm-2">

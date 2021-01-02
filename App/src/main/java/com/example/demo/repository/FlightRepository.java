@@ -13,10 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface FlightRepository extends CrudRepository<Flight,Integer> {
+public interface FlightRepository extends CrudRepository<Flight, Integer> {
     Flight findByFlightId(int id);
+
     // xu ly loi add va edit flight
     boolean existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(LocalDateTime var1, LocalDateTime var2, FlightRoute var3, Aircraft var4);
+
     List<Flight> findByFlightRouteAndAircraft(FlightRoute var1, Aircraft var2);
     // end
 

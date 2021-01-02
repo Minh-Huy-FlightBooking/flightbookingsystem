@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <style type="text/css">
-	button {
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-}
+    <style type="text/css">
+        button {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
-img { width: 200px;}
-	</style>
+        img {
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
 <p> Print image solution from http://stackoverflow.com/questions/2909033/using-javascript-to-print-images#2909070</p>
-  
-<img id="imagehtml" src="imgs/480x480.jpg" alt=""> // substitute with your image path here and the next line  
-<a href="#" onclick="PrintImage('imgs/480x480.jpg'); return false;"><button id="printImage">Print this Image</button></a>
-  
-	<script>
-function ImagetoPrint(source) {
-    return "<html><head><script>function step1(){\n" +
+
+<img id="imagehtml" src="imgs/480x480.jpg" alt=""> // substitute with your image path here and the next line
+<a href="#" onclick="PrintImage('imgs/480x480.jpg'); return false;">
+    <button id="printImage">Print this Image</button>
+</a>
+
+<script>
+    function ImagetoPrint(source) {
+        return "<html><head><script>function step1(){\n" +
             "setTimeout('step2()', 10);}\n" +
             "function step2(){window.print();window.close()}\n" +
             "</scri" + "pt></head><body onload='step1()'>\n" +
             "<img src='" + source + "' /></body></html>";
-}
-function PrintImage(source) {
-    Pagelink = "about:blank";
-    var pwa = window.open(Pagelink, "_new");
-    pwa.document.open();
-    pwa.document.write(ImagetoPrint(source));
-    pwa.document.close();
-}
-	</script>
+    }
+
+    function PrintImage(source) {
+        Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+</script>
 </html>

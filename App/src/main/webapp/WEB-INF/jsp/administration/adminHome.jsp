@@ -13,12 +13,7 @@
 <jsp:include page="_head.jsp"/>
 
 <body>
-<%--<jsp:include page="_sidebar.jsp"/>--%>
-<%--<main class="l-main">--%>
-<%--    <div class="content-wrapper content-wrapper--with-bg">--%>
 
-<%--    </div>--%>
-<%--</main>--%>
 <div class="container-fluid">
     <div class="row mt-2">
         <div class="col-sm-2">

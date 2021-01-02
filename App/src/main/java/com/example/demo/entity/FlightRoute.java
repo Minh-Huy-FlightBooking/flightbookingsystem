@@ -16,7 +16,7 @@ public class FlightRoute {
     @ManyToOne
     @JoinColumn(name = "destination_airport_id")
     private Airport destinationAirport;
-    @OneToMany(mappedBy = "flightRoute",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "flightRoute", fetch = FetchType.LAZY)
     private List<Flight> flightList;
 
     public FlightRoute() {

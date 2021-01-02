@@ -17,6 +17,8 @@ public class PassengerInformation {
     public PassengerInformation() {
     }
 
+
+
     public String getEmail() {
         return email;
     }

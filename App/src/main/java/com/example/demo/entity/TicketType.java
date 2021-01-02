@@ -49,7 +49,6 @@ public class TicketType {
     }
 
 
-
     public List<Ticket> getTickets() {
         return tickets;
     }

@@ -29,21 +29,22 @@ public class WebAPI {
     private AirportService airportService;
 
 
-    @RequestMapping(value = "/origin",method = RequestMethod.GET)
-    public Object getOrigins (){
+    @RequestMapping(value = "/origin", method = RequestMethod.GET)
+    public Object getOrigins() {
         List<String> airports = new ArrayList<>();
-        for (Airport a: airportService.getAllAirports()){
+        for (Airport a : airportService.getAllAirports()) {
             airports.add(a.getAirportName());
         }
         return airports;
     }
+
     @GetMapping("/destination/{origin}")
-    public Object getDestinationCorrespondingOrigin (@PathVariable(value = "origin")String origin) {
+    public Object getDestinationCorrespondingOrigin(@PathVariable(value = "origin") String origin) {
         return flightRouteService.getAllDestinationsNameByOriginName(origin);
     }
 
-    @RequestMapping(value = "/flightPickerHandler",method = RequestMethod.POST, produces = "application/json")
-    public FlightPicker getFlightsPicked (@RequestBody FlightPicker flightPicker, HttpSession session){
+    @RequestMapping(value = "/flightPickerHandler", method = RequestMethod.POST, produces = "application/json")
+    public FlightPicker getFlightsPicked(@RequestBody FlightPicker flightPicker, HttpSession session) {
         System.out.println("Here i go flight picker handler...");
         System.out.println(flightPicker.getDepartureTrip().getTravelClass());
         System.out.println(flightPicker.getReturnTrip().getTravelClass());

@@ -1,14 +1,24 @@
 package com.example.demo.object;
 
+import java.util.List;
+
 public class DepartureTrip {
     private int departureFlightId;
     private String travelClass;
-    private String seatCode;
+    private List<SeatPossession> departureSeatPossessions;
     private int adults;
     private int children;
     private int infant;
 
     public DepartureTrip() {
+    }
+
+    public List<SeatPossession> getDepartureSeatPossessions() {
+        return departureSeatPossessions;
+    }
+
+    public void setDepartureSeatPossessions(List<SeatPossession> departureSeatPossessions) {
+        this.departureSeatPossessions = departureSeatPossessions;
     }
 
     public int getDepartureFlightId() {

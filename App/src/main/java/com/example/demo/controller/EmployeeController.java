@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "employee")
 public class EmployeeController {
     @RequestMapping(value = "/employeePage")
-    public String goToEmployeePage (){
+    public String goToEmployeePage() {
         return "employee2";
     }
 }

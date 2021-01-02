@@ -18,7 +18,7 @@ public class Account {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany(fetch  = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "account_role",
             joinColumns = {@JoinColumn(name = "account_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<html class="no-js"  lang="en">
+<html class="no-js" lang="en">
 
 <head>
     <!-- META DATA -->
@@ -17,9 +17,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!--font-family-->
-    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet"/>
 
     <!-- TITLE OF SITE -->
     <title>Travel</title>
@@ -28,35 +28,35 @@
     <link rel="shortcut icon" type="image/icon" href="/resources/image/homepage-img/assets/logo/favicon.png"/>
 
     <!--font-awesome.min.css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/font-awesome.min.css"/>
 
     <!--animate.css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/animate.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/animate.css"/>
 
     <!--hover.css-->
     <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/hover-min.css">
 
     <!--datepicker.css-->
-    <link rel="stylesheet"  href="/resources/image/homepage-img/assets/css/datepicker.css" >
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/datepicker.css">
 
     <!--owl.carousel.css-->
     <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/owl.theme.default.min.css"/>
 
     <!-- range css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/jquery-ui.min.css"/>
 
     <!--bootstrap.min.css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/bootstrap.min.css"/>
 
     <!-- bootsnav -->
     <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/bootsnav.css"/>
 
     <!--style.css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/style.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/style.css"/>
 
     <!--responsive.css-->
-    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/responsive.css" />
+    <link rel="stylesheet" href="/resources/image/homepage-img/assets/css/responsive.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,7 +91,8 @@
 
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
                                 <i class="fa fa-bars"></i>
                             </button><!-- / button-->
                         </div><!-- /.navbar-header-->
@@ -133,7 +134,7 @@
 
                             </h2>
                             <div class="about-btn">
-                                <button  class="about-view">
+                                <button class="about-view">
                                     explore now
                                 </button>
                             </div><!--/.about-btn-->
@@ -153,7 +154,7 @@
 <!--about-us end -->
 
 <!--travel-box start-->
-<section  class="travel-box">
+<section class="travel-box">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -199,7 +200,8 @@
                                                 <div class="travel-select-icon">
                                                     <select class="form-control ">
 
-                                                        <option value="default">enter your destination country</option><!-- /.option-->
+                                                        <option value="default">enter your destination country</option>
+                                                        <!-- /.option-->
 
                                                         <option value="turkey">turkey</option><!-- /.option-->
 
@@ -212,7 +214,8 @@
                                                 <div class="travel-select-icon">
                                                     <select class="form-control ">
 
-                                                        <option value="default">enter your destination location</option><!-- /.option-->
+                                                        <option value="default">enter your destination location</option>
+                                                        <!-- /.option-->
 
                                                         <option value="istambul">istambul</option><!-- /.option-->
 
@@ -230,7 +233,8 @@
                                                 <h2>check in</h2>
                                                 <div class="travel-check-icon">
                                                     <form action="#">
-                                                        <input type="text" name="check_in" class="form-control" data-toggle="datepicker" placeholder="12 -01 - 2017 ">
+                                                        <input type="text" name="check_in" class="form-control"
+                                                               data-toggle="datepicker" placeholder="12 -01 - 2017 ">
                                                     </form>
                                                 </div><!-- /.travel-check-icon -->
                                             </div><!--/.single-tab-select-box-->
@@ -241,7 +245,8 @@
                                                 <h2>check out</h2>
                                                 <div class="travel-check-icon">
                                                     <form action="#">
-                                                        <input type="text" name="check_out" class="form-control"  data-toggle="datepicker" placeholder="22 -01 - 2017 ">
+                                                        <input type="text" name="check_out" class="form-control"
+                                                               data-toggle="datepicker" placeholder="22 -01 - 2017 ">
                                                     </form>
                                                 </div><!-- /.travel-check-icon -->
                                             </div><!--/.single-tab-select-box-->
@@ -300,7 +305,8 @@
                                                                     <div id="slider-range"></div><!--/.slider-range-->
 
                                                                     <div class="price_slider_amount">
-                                                                        <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                                                        <input type="text" id="amount" name="price"
+                                                                               placeholder="Add Your Price"/>
                                                                     </div><!--/.price_slider_amount-->
                                                                 </div><!--/.price-filter-->
                                                             </div><!--/.info_widget-->
@@ -311,7 +317,7 @@
                                         </div><!--/.col-->
                                         <div class="clo-sm-7">
                                             <div class="about-btn travel-mrt-0 pull-right">
-                                                <button  class="about-view travel-btn">
+                                                <button class="about-view travel-btn">
                                                     search
                                                 </button><!--/.travel-btn-->
                                             </div><!--/.about-btn-->
@@ -441,7 +447,7 @@
                                 <div class="tab-para">
                                     <div class="trip-circle">
                                         <div class="single-trip-circle">
-                                            <input type="radio" id="radio01" name="radio" />
+                                            <input type="radio" id="radio01" name="radio"/>
                                             <label for="radio01">
   														<span class="round-boarder">
   															<span class="round-boarder1"></span>
@@ -449,7 +455,7 @@
                                             </label>
                                         </div><!--/.single-trip-circle-->
                                         <div class="single-trip-circle">
-                                            <input type="radio" id="radio02" name="radio" />
+                                            <input type="radio" id="radio02" name="radio"/>
                                             <label for="radio02">
   														<span class="round-boarder">
   															<span class="round-boarder1"></span>
@@ -466,7 +472,8 @@
                                                 <div class="travel-select-icon">
                                                     <select class="form-control ">
 
-                                                        <option value="default">enter your location</option><!-- /.option-->
+                                                        <option value="default">enter your location</option>
+                                                        <!-- /.option-->
 
                                                         <option value="turkey">turkey</option><!-- /.option-->
 
@@ -483,7 +490,8 @@
                                                 <h2>departure</h2>
                                                 <div class="travel-check-icon">
                                                     <form action="#">
-                                                        <input type="text" name="departure" class="form-control" data-toggle="datepicker"
+                                                        <input type="text" name="departure" class="form-control"
+                                                               data-toggle="datepicker"
                                                                placeholder="12 -01 - 2017 ">
                                                     </form>
                                                 </div><!-- /.travel-check-icon -->
@@ -495,7 +503,8 @@
                                                 <h2>return</h2>
                                                 <div class="travel-check-icon">
                                                     <form action="#">
-                                                        <input type="text" name="return" class="form-control" data-toggle="datepicker" placeholder="22 -01 - 2017 ">
+                                                        <input type="text" name="return" class="form-control"
+                                                               data-toggle="datepicker" placeholder="22 -01 - 2017 ">
                                                     </form>
                                                 </div><!-- /.travel-check-icon -->
                                             </div><!--/.single-tab-select-box-->
@@ -548,7 +557,8 @@
                                                 <div class="travel-select-icon">
                                                     <select class="form-control ">
 
-                                                        <option value="default">enter your destination location</option><!-- /.option-->
+                                                        <option value="default">enter your destination location</option>
+                                                        <!-- /.option-->
 
                                                         <option value="istambul">istambul</option><!-- /.option-->
 
@@ -580,7 +590,7 @@
                                         </div><!--/.col-->
                                         <div class="clo-sm-5">
                                             <div class="about-btn pull-right">
-                                                <button  class="about-view travel-btn">
+                                                <button class="about-view travel-btn">
                                                     search
                                                 </button><!--/.travel-btn-->
                                             </div><!--/.about-btn-->
@@ -611,7 +621,7 @@
             <div class="col-md-4 col-sm-4">
                 <div class="single-service-box">
                     <div class="service-img">
-                        <img src="/resources/image/homepage-img/assets/images/service/s1.png" alt="service-icon" />
+                        <img src="/resources/image/homepage-img/assets/images/service/s1.png" alt="service-icon"/>
                     </div><!--/.service-img-->
                     <div class="service-content">
                         <h2>
@@ -627,7 +637,7 @@
             <div class="col-md-4 col-sm-4">
                 <div class="single-service-box">
                     <div class="service-img">
-                        <img src="/resources/image/homepage-img/assets/images/service/s2.png" alt="service-icon" />
+                        <img src="/resources/image/homepage-img/assets/images/service/s2.png" alt="service-icon"/>
                     </div><!--/.service-img-->
                     <div class="service-content">
                         <h2>
@@ -643,7 +653,7 @@
             <div class="col-md-4 col-sm-4">
                 <div class="single-service-box">
                     <div class="statistics-img">
-                        <img src="/resources/image/homepage-img/assets/images/service/s3.png" alt="service-icon" />
+                        <img src="/resources/image/homepage-img/assets/images/service/s3.png" alt="service-icon"/>
                     </div><!--/.service-img-->
                     <div class="service-content">
 
@@ -682,7 +692,8 @@
 
                             <div class="col-md-6">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g1.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g1.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             china
@@ -694,7 +705,8 @@
 
                             <div class="col-md-6">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g2.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g2.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             venuzuala
@@ -706,7 +718,8 @@
 
                             <div class="col-md-4">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g3.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g3.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             brazil
@@ -718,7 +731,8 @@
 
                             <div class="col-md-4">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g4.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g4.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             australia
@@ -730,7 +744,8 @@
 
                             <div class="col-md-4">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g5.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g5.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             netharlands
@@ -742,7 +757,8 @@
 
                             <div class="col-md-8">
                                 <div class="filtr-item">
-                                    <img src="/resources/image/homepage-img/assets/images/gallary/g6.jpg" alt="portfolio image"/>
+                                    <img src="/resources/image/homepage-img/assets/images/gallary/g6.jpg"
+                                         alt="portfolio image"/>
                                     <div class="item-title">
                                         <a href="#">
                                             turkey
@@ -788,7 +804,7 @@
                         </div><!--/.timer-->
                     </div><!--/.campaign-timer-->
                     <div class="about-btn">
-                        <button  class="about-view discount-offer-btn">
+                        <button class="about-view discount-offer-btn">
                             join now
                         </button>
                     </div><!--/.about-btn-->
@@ -810,7 +826,7 @@
                 special packages
             </h2>
             <p>
-                Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.
+                Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla.
             </p>
         </div><!--/.gallery-header-->
         <div class="packages-content">
@@ -826,7 +842,7 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 3 Days 2 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
@@ -846,7 +862,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -865,13 +881,13 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 6 Days 7 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  transportation
 											</span>
-                                    <i class="fa fa-angle-right"></i>  Free food
+                                    <i class="fa fa-angle-right"></i> Free food
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="packages-review">
@@ -885,7 +901,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -904,13 +920,13 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 5 Days 6 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  transportation
 											</span>
-                                    <i class="fa fa-angle-right"></i>  food facilities
+                                    <i class="fa fa-angle-right"></i> food facilities
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="packages-review">
@@ -924,7 +940,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -943,13 +959,13 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 4 Days 5 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  transportation
 											</span>
-                                    <i class="fa fa-angle-right"></i>  food facilities
+                                    <i class="fa fa-angle-right"></i> food facilities
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="packages-review">
@@ -963,7 +979,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -982,13 +998,13 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 4 Days 4 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  transportation
 											</span>
-                                    <i class="fa fa-angle-right"></i>  food facilities
+                                    <i class="fa fa-angle-right"></i> food facilities
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="packages-review">
@@ -1002,7 +1018,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -1021,13 +1037,13 @@
 											<span>
 												<i class="fa fa-angle-right"></i> 5 Days 6 nights
 											</span>
-                                    <i class="fa fa-angle-right"></i>  5 star accomodation
+                                    <i class="fa fa-angle-right"></i> 5 star accomodation
                                 </p>
                                 <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  transportation
 											</span>
-                                    <i class="fa fa-angle-right"></i>  food facilities
+                                    <i class="fa fa-angle-right"></i> food facilities
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="packages-review">
@@ -1041,7 +1057,7 @@
                                 </p>
                             </div><!--/.packages-review-->
                             <div class="about-btn">
-                                <button  class="about-view packages-btn">
+                                <button class="about-view packages-btn">
                                     book now
                                 </button>
                             </div><!--/.about-btn-->
@@ -1058,7 +1074,7 @@
 <!--packages end-->
 
 <!-- testemonial Start -->
-<section   class="testemonial">
+<section class="testemonial">
     <div class="container">
 
         <div class="gallary-header text-center">
@@ -1066,7 +1082,7 @@
                 clients reviews
             </h2>
             <p>
-                Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.
+                Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla.
             </p>
 
         </div><!--/.gallery-header-->
@@ -1083,7 +1099,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1106,7 +1123,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1129,7 +1147,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1152,7 +1171,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1175,7 +1195,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1198,7 +1219,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1221,7 +1243,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1244,7 +1267,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1267,7 +1291,8 @@
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 								</span>
                         <p>
-                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam.
                         </p>
                         <h3>
                             <a href="#">
@@ -1327,17 +1352,19 @@
 											</span>
                                 </p>
                                 <p class="offer-para">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tem ut labore et dolore magna  aliqua. Ut enim ad minim veniam, quis nostrud exercitation una <br> ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tem ut
+                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    una <br> ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </p>
                             </div><!--/.packages-para-->
                             <div class="offer-btn-group">
                                 <div class="about-btn">
-                                    <button  class="about-view packages-btn offfer-btn">
+                                    <button class="about-view packages-btn offfer-btn">
                                         make tour
                                     </button>
                                 </div><!--/.about-btn-->
                                 <div class="about-btn">
-                                    <button  class="about-view packages-btn">
+                                    <button class="about-view packages-btn">
                                         book now
                                     </button>
                                 </div><!--/.about-btn-->
@@ -1348,7 +1375,8 @@
                 <div class="col-sm-4">
                     <div class="single-special-offer">
                         <div class="single-special-offer-bg">
-                            <img src="/resources/image/homepage-img/assets/images/offer/offer-shape.png" alt="offer-shape">
+                            <img src="/resources/image/homepage-img/assets/images/offer/offer-shape.png"
+                                 alt="offer-shape">
                         </div><!--/.single-special-offer-bg-->
                         <div class="single-special-shape-txt">
                             <h3>special offer</h3>
@@ -1396,7 +1424,8 @@
                                         </a>
                                     </h3>
                                     <p>
-                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam
                                     </p>
                                     <a href="#">Read More</a>
                                 </div><!--/.blog-txt-->
@@ -1421,7 +1450,8 @@
                                         </a>
                                     </h3>
                                     <p>
-                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam
                                     </p>
                                     <a href="#">Read More</a>
                                 </div><!--/.blog-txt-->
@@ -1442,7 +1472,8 @@
                                 <div class="blog-txt">
                                     <h3><a href="#">10 Most Natural place to Discover</a></h3>
                                     <p>
-                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                        Lorem ipsum dolor sit amet, contur adip elit, sed do mod incid ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam
                                     </p>
                                     <a href="#">Read More</a>
                                 </div><!--/.blog-txt-->
@@ -1490,7 +1521,7 @@
 <!--subscribe end-->
 
 <!-- footer-copyright start -->
-<footer  class="footer-copyright">
+<footer class="footer-copyright">
     <div class="container">
         <div class="footer-content">
             <div class="row">
@@ -1562,7 +1593,8 @@
 
         </div><!--/.foot-icons-->
         <div id="scroll-Top">
-            <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+            <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top"
+               title="" data-original-title="Back to Top" aria-hidden="true"></i>
         </div><!--/.scroll-Top-->
     </div><!-- /.container-->
 
@@ -1570,17 +1602,15 @@
 <!-- footer-copyright end -->
 
 
-
-
 <script src="/resources/image/homepage-img/assets/js/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 <!--modernizr.min.js-->
-<script  src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
 
 <!--bootstrap.min.js-->
-<script  src="/resources/image/homepage-img/assets/js/bootstrap.min.js"></script>
+<script src="/resources/image/homepage-img/assets/js/bootstrap.min.js"></script>
 
 <!-- bootsnav js -->
 <script src="/resources/image/homepage-img/assets/js/bootsnav.js"></script>
@@ -1588,7 +1618,7 @@
 <!-- jquery.filterizr.min.js -->
 <script src="/resources/image/homepage-img/assets/js/jquery.filterizr.min.js"></script>
 
-<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
 <!--jquery-ui.min.js-->
 <script src="/resources/image/homepage-img/assets/js/jquery-ui.min.js"></script>
@@ -1598,13 +1628,13 @@
 <script src="/resources/image/homepage-img/assets/js/waypoints.min.js"></script>
 
 <!--owl.carousel.js-->
-<script  src="/resources/image/homepage-img/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/image/homepage-img/assets/js/owl.carousel.min.js"></script>
 
 <!-- jquery.sticky.js -->
 <script src="/resources/image/homepage-img/assets/js/jquery.sticky.js"></script>
 
 <!--datepicker.js-->
-<script  src="/resources/image/homepage-img/assets/js/datepicker.js"></script>
+<script src="/resources/image/homepage-img/assets/js/datepicker.js"></script>
 
 <!--Custom JS-->
 <script src="/resources/image/homepage-img/assets/js/custom.js"></script>

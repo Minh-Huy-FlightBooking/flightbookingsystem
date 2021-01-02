@@ -12,7 +12,7 @@ public class Brand {
     private int brandId;
     @Column(name = "brand_name")
     private String brandName;
-    @OneToMany(mappedBy = "brand",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Aircraft> aircraftList;
 
     public int getBrandId() {

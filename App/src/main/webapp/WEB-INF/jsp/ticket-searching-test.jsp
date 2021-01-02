@@ -126,8 +126,9 @@
     </script>
     <script>
         let sessionId;
+
         function saveFlightJsonData() {
-            let  adults, children, infants;
+            let adults, children, infants;
             let origin, destination, departureDate, returnDate, tripType;
             origin = $('input#origin').val();
             /*console.log(origin);*/
@@ -143,25 +144,19 @@
             tripType = $('#tripType').val();
 
             flightPicker = {
-                ticketInformation : {
-                    origin : origin,
-                    destination : destination,
-                    tripType : tripType,
-                    departureDate : departureDate,
-                    returnDate : returnDate,
-                    adults : adults,
-                    children : children,
-                    infants : infants
+                ticketInformation: {
+                    origin: origin,
+                    destination: destination,
+                    tripType: tripType,
+                    departureDate: departureDate,
+                    returnDate: returnDate,
+                    adults: adults,
+                    children: children,
+                    infants: infants
                 },
-                departureTrip : {
-
-                },
-                returnTrip : {
-
-                },
-                passengerInformation : [
-
-                ]
+                departureTrip: {},
+                returnTrip: {},
+                passengerInformation: []
             };
             sessionId = $('#sessionId').val();
             sessionStorage.setItem(sessionId, JSON.stringify(flightPicker));

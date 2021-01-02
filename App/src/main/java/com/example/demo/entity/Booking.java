@@ -49,7 +49,6 @@ public class Booking {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
-
     public List<Ticket> getTickets() {
         return tickets;
     }

@@ -19,7 +19,7 @@ public class Aircraft {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-    @OneToMany(mappedBy = "aircraft",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "aircraft", fetch = FetchType.LAZY)
     private List<Flight> flightList;
 
     public int getAircraftId() {

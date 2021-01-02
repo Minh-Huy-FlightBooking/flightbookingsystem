@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AircraftRepository extends CrudRepository<Aircraft,Integer> {
+public interface AircraftRepository extends CrudRepository<Aircraft, Integer> {
     Aircraft findByAircraftId(int aircraftId);
     boolean existsByModelAndBrand(String var1,Brand var2);
 }

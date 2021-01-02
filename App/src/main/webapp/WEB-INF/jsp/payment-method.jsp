@@ -9,146 +9,119 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <jsp:include page="administration/_head.jsp"/>
     <script>
-        $(document).ready(function () {
-            //Number of Rows and number of columns per row
-            let numberOfColumns = $('#departure-table .seat-container td').length;
-            console.log(numberOfColumns);
-            let table = document.getElementById("departure-table");
-            let tr = table.getElementsByTagName("tr");
-            let td;
-            console.log(tr.length);
-            console.log(numberOfColumns / (tr.length - 1));
-
-            let alphabet = new Array("A", "B", "C","","D", "E", "F");
-            console.log(alphabet[1]);
-
-            /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
-            for (let i = 1; i < tr.length; i++) {
-                for (let j = 0; j < (numberOfColumns / (tr.length - 1)); j++) {
-                    td = tr[i].getElementsByTagName("td")[j];
-                    td.setAttribute("id", "seatCode-" + alphabet[j] + i);
-                    if (j != 3) {
-                        td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");
-                        td.append("" + alphabet[j] + i);
-                        let key = "seatCode-" + alphabet[j] + i;
-                        seatBookedData.push({key: key, value: true});
-                    }
-                    if (j == 3) {
-                        td.innerHTML = "" + i;
-                    }
-                }
-            }
-            console.log(seatBookedData);
-
-
-        })
-
-        let seatBookedData = [];
-        /*let x = {
-            key : "",
-            value: true
-        }*/
-        /*let numberOfPassengers = 2;
-        let seatCodeIsClicked = "";*/
-        function getSeatCode(seatCode) {
-            console.log("clicked!!: " + seatCode);
-            /*$('#' + seatCode + ' button').attr("style","background: red");*/
-
-            for (let m = 0; m < seatBookedData.length; m++) {
-                if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                    console.log("HI!!");
-                    seatBookedData[m].value = false;
-                    /*if (seatCodeIsClicked != "") {
-                        $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-                    }*/
-                    $('#' + seatCode + ' button').attr("style","background: red");
-                } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                    $('#' + seatCode + ' button').attr("style","background: white");
-                    seatBookedData[m].value = true;
-                }
-            }
-            /*let count = 0;
-            for (let n = 0; n < seatBookedData.length; n++) {
-                if (seatBookedData[n].value == false){
-                    count++;
-                }
-            }
-
-            console.log(count)
-            if (count < numberOfPassengers) {
-                for (let m = 0; m < seatBookedData.length; m++) {
-                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                        console.log("HI!!");
-                        seatBookedData[m].value = false;
-                        $('#' + seatCode + ' button').attr("style","background: red");
-                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                        $('#' + seatCode + ' button').attr("style","background: white");
-                        seatBookedData[m].value = true;
-                    }
-                }
-            } else if (count >= numberOfPassengers){
-                for (let m = 0; m < seatBookedData.length; m++) {
-                    if (seatBookedData[m].key == seatCode && seatBookedData[m].value == true){
-                        console.log("HI!!");
-                        seatBookedData[m].value = false;
-                        if (seatCodeIsClicked != "") {
-                            $('#' + seatCodeIsClicked + ' button').attr("style","background: white");
-                        }
-                        $('#' + seatCode + ' button').attr("style","background: red");
-                    } else if (seatBookedData[m].key == seatCode && seatBookedData[m].value == false){
-                        $('#' + seatCode + ' button').attr("style","background: white");
-                        seatBookedData[m].value = true;
-                    }
-                }
-            }
-
-            seatCodeIsClicked = seatCode;*/
+        function goToCreditCardPayment () {
+            location.href = "payment";
         }
     </script>
 </head>
 <body>
-<h1>Payment Page</h1>
-<h1>Pay through credit card</h1>
-<button>Online bank</button>
-
-<div class="container" id="departure-table">
-    <div class="card shadow col-sm-6">
-        <div class="card-body">
-            <table class="table table-borderless">
-                <thead>
-                <th class="text-center" width="100" height="50">A</th>
-                <th class="text-center" width="100" height="50">B</th>
-                <th class="text-center" width="100" height="50">C</th>
-                <th class="text-center" width="100" height="50"></th>
-                <th class="text-center" width="100" height="50">D</th>
-                <th class="text-center" width="100" height="50">E</th>
-                <th class="text-center" width="100" height="50">F</th>
-                </thead>
-                <tbody class="seat-container">
-                <c:forEach begin="1" end="10">
-                    <tr class="seat-row">
-                        <c:forEach begin="1" end="3">
-                            <td align="center">
-                                <button class="btn btn-sm btn-outline-primary seat-item" name="seat-item"></button>
-                            </td>
-                        </c:forEach>
-
-                        <td></td>
-
-                        <c:forEach begin="1" end="3">
-                            <td align="center">
-                                <button class="btn btn-sm btn-outline-primary seat-item" name="seat-item"></button>
-                            </td>
-                        </c:forEach>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Passenger Name</th>
+            <th scope="col">Travel Class</th>
+            <th scope="col">Seat Code</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="p" items="${paymentInformationList}">
+            <tr>
+                <td>
+                    ${p.flight.flightRoute.originAirport}
+                    ${p.flight._departureTime}
+                </td>
+                <td>
+                    ${p.flight.flightRoute.destinationAirport}
+                    ${p.flight._arrivalTime}
+                </td>
+                <td>
+                    ${p.passengerInformation.firstName}
+                    &nbsp;
+                    ${p.passengerInformation.lastName}
+                </td>
+                <td>
+                    ${p.travelClass}
+                </td>
+                <td>
+                    ${p.seatCode}
+                </td>
+                <td>
+                    ${p.passengerInformation.title}
+                </td>
+                <c:choose>
+                    <c:when test="${p.travelClass == 'economy'}">
+                        <c:choose>
+                            <c:when test="${p.passengerInformation.title} == 'infant'">
+                                <td>
+                                    ${p.flight.economyPrice * 0.1}
+                                </td>
+                            </c:when>
+                            <c:when test="${p.passengerInformation.title} == 'child'">
+                                <td>
+                                    ${p.flight.economyPrice * 0.9}
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>
+                                    ${p.flight.economyPrice}
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:when test="${p.travelClass == 'business'}">
+                        <c:choose>
+                            <c:when test="${p.passengerInformation.title} == 'infant'">
+                                <td>
+                                    ${p.flight.businessPrice * 0.1}
+                                </td>
+                            </c:when>
+                            <c:when test="${p.passengerInformation.title} == 'child'">
+                                <td>
+                                    ${p.flight.businessPrice * 0.9}
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>
+                                    ${p.businessPrice.economyPrice}
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                </c:choose>
+                <td>$</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Total</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col" id="totalPrice"></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="container">
+    <h1>Payment Page</h1>
+    <h1>Pay through credit card</h1>
+    <button  id="creditCardPayment" onclick="goToCreditCardPayment()">Credit Card</button>
 </div>
 </body>
 </html>

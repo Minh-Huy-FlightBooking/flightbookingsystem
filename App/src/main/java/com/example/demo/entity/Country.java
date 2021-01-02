@@ -14,7 +14,7 @@ public class Country {
     private String countryCode;
     @Column(name = "country_name")
     private String countryName;
-    @OneToMany(mappedBy = "country",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
     private List<City> listCity;
 
     public List<City> getListCity() {
