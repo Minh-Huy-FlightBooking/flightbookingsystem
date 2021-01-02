@@ -9,6 +9,8 @@ import com.example.demo.repository.TravelClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TicketService {
     @Autowired
@@ -24,8 +26,17 @@ public class TicketService {
         Ticket ticket = new Ticket(var4,var2,var1,var3);
         ticketRepository.save(ticket);
     }
-    public boolean deleteByFlight_FlightId(int id){
-        return ticketRepository.deleteByFlight_FlightId(id);
+    public boolean deleteByFlightId(int id){
+        try{
+            List<Ticket> tickets = ticketRepository.findByFlight_FlightId(id);
+            for(Ticket ticket : tickets){
+                ticketRepository.deleteById(ticket.getTicketId());
+            }
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
     public void createTickets(Flight flight){
         int total_economy = flight.getAircraft().getTotal_economy();

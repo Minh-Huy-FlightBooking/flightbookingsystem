@@ -228,7 +228,7 @@ public class AdminController {
     // delete flight
     @RequestMapping("/deleteFlight")
     public String deleteFlight (@RequestParam("id") int id, Model model) {
-        if ( flightService.deleteFLight(id)&&ticketService.deleteByFlight_FlightId(id)) {
+        if ( flightService.deleteFLight(id)){
             model.addAttribute("message", "Delete successed.");
         } else {
             model.addAttribute("message", "Delete failed.");
