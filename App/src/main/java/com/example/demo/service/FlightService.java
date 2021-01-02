@@ -68,17 +68,23 @@ public class FlightService {
             return false;
         }
     }
-    public boolean checkFlight(Flight flight){
-        if(flight.getFlightId()!=0){
-            return flight.getDepartureTime().isAfter(flight.getArrivalTime());
+    public boolean isException(Flight flight){
+        boolean ex = false;
+        // check time input
+        if(flight.getDepartureTime().isAfter(flight.getArrivalTime())) ex = true;
+        // check data existed
+        if (flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime()
+                ,flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft())) ex = true;
+        if (flightRepository.findByFlightId(flight.getFlightId())!=null){
+            List<Flight> flightList1 = flightRepository.findByFlightRouteAndAircraft(flight.getFlightRoute(),flight.getAircraft());
+            LocalDateTime departure_time = flight.getDepartureTime();
+            LocalDateTime arrival_time = flight.getDepartureTime();
+            for(Flight f : flightList1){
+                if (departure_time.isAfter(f.getDepartureTime())&&departure_time.isBefore(f.getArrivalTime())) ex = true;
+                if (arrival_time.isAfter(f.getDepartureTime())&&arrival_time.isBefore(f.getArrivalTime())) ex = true;
+            }
         }
-        boolean e1 ;
-        // kiểm tra tình trạng máy bay của chuyến bay muốn thêm
-        e1 = flight.getAircraft().isEnabled();
-        // kiểm tra thời gian đi và về của chuyến bay muốn thêm
-        if(flight.getDepartureTime().isAfter(flight.getArrivalTime()))e1=true;
-        boolean e2 = flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime(),flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft());
-        return (e1||e2);
+        return ex;
     }
 
 }

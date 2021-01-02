@@ -28,14 +28,27 @@ public class AircraftService {
         }
         return aircraftListMap;
     }
-    public void saveAircraft (Aircraft aircraft) {
-        aircraftRepository.save(aircraft);
+    public boolean saveAircraft (Aircraft aircraft) {
+        try{
+            aircraftRepository.save(aircraft);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
-    public void deleteAircraftById (int aircraftId){
-        aircraftRepository.deleteById(aircraftId);
+    public boolean deleteAircraftById (int aircraftId){
+        try{
+            aircraftRepository.deleteById(aircraftId);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
+    public boolean isException(Aircraft aircraft){
+        return aircraftRepository.existsByModelAndBrand(aircraft.getModel(),aircraft.getBrand());
+    }
     public Aircraft getAircraftById (int aircraftId){
         return aircraftRepository.findByAircraftId(aircraftId);
     }

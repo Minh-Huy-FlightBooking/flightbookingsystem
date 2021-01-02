@@ -12,8 +12,6 @@ public class Aircraft {
     private int aircraftId;
     @Column(name = "model")
     private String model;
-    @Column(name = "enabled")
-    private boolean enabled;
     @Column(name = "total_economy")
     private int total_economy;
     @Column(name = "total_business")
@@ -70,14 +68,6 @@ public class Aircraft {
 
     public void setFlightList(List<Flight> flightList) {
         this.flightList = flightList;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Aircraft() {
