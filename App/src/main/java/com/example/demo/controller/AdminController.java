@@ -93,7 +93,7 @@ public class AdminController {
     @RequestMapping(value = "/deleteAircraft")
     public String deleteAircraft (@RequestParam(value = "aircraftId") int aircraftId,Model model) {
         if (aircraftService.deleteAircraftById(aircraftId)){
-            model.addAttribute("message","Delete successed.");
+            model.addAttribute("message","Delete successfully.");
         }else{
             model.addAttribute("message","Delete failed.");
         }
