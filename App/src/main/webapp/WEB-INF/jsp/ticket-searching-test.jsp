@@ -156,8 +156,7 @@
                 },
                 departureTrip: {},
                 returnTrip: {},
-                passengerInformation: [],
-                totalPaymentAmount: 0
+                passengerInformation: []
             };
             sessionId = $('#sessionId').val();
             sessionStorage.setItem(sessionId, JSON.stringify(flightPicker));

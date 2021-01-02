@@ -11,9 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container">
-    <h5>Hello User !!! </h5>
-    <h5>${message}</h5>
-</div>
+
 </body>
 </html>

@@ -19,10 +19,10 @@
 </head>
 <body>
 <div class="container">
-    <form:form action="payment" modelAttribute="creditCard" method="POST">
+    <form:form action="" >
         <div class="form-group">
             <label for="cardNumber">Card Number: </label>
-            <form:input path="cardNumber" type="text" class="form-control col-md-4" id="cardNumber" placeholder="" />
+            <input type="text" class="form-control col-md-4" id="cardNumber" placeholder="" >
         </div>
         <div class="form-group">
             <label for="expiryDate">Expiry Date: </label>
@@ -30,13 +30,11 @@
         </div>
         <div class="form-group">
             <label for="otp">Enter OTP: </label>
-            <form:input path="OTP" type="text" class="form-control col-md-4" id="otp" placeholder="" />
+            <input type="text" class="form-control col-md-4" id="otp" placeholder="" >
         </div>
         <button type="submit" class="btn btn-primary">Pay</button>
-
     </form:form>
-    <h5>${totalPrice}</h5>
-    <h5>${message}</h5>
+
 
 </div>
 

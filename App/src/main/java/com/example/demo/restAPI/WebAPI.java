@@ -3,8 +3,6 @@ package com.example.demo.restAPI;
 import com.example.demo.entity.Airport;
 import com.example.demo.entity.Flight;
 import com.example.demo.object.FlightPicker;
-import com.example.demo.object.PaymentInformation;
-import com.example.demo.object.SeatPossession;
 import com.example.demo.service.AirportService;
 import com.example.demo.service.FlightRouteService;
 import com.example.demo.service.FlightService;
@@ -48,18 +46,10 @@ public class WebAPI {
     @RequestMapping(value = "/flightPickerHandler", method = RequestMethod.POST, produces = "application/json")
     public FlightPicker getFlightsPicked(@RequestBody FlightPicker flightPicker, HttpSession session) {
         System.out.println("Here i go flight picker handler...");
+        System.out.println(flightPicker.getDepartureTrip().getTravelClass());
+        System.out.println(flightPicker.getReturnTrip().getTravelClass());
         System.out.println(session.getId());
         session.setAttribute(session.getId(), flightPicker);
-        /*List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
-        if (departureSeatPossessions != null) {
-            for (SeatPossession s : departureSeatPossessions) {
-                String seatCode = s.getSeatCode();
-                System.out.println(s.getPassengerName() + ", " + seatCode);
-                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
-                System.out.println(seatCode);
-                System.out.println("I am added");
-            }
-        }*/
         return flightPicker;
     }
 

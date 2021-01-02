@@ -9,14 +9,12 @@
     <%--Javascript External Link is placed here--%>
     <jsp:include page="administration/_head.jsp"/>
     <script>
-        let flightData;
-        let currentPassengerSelected;
-        let departureSeatPossession = new Array();
-        let returnSeatPossession = new Array();
+        let sessionId ;
         $(document).ready(function () {
-            let previousObject = sessionStorage.getItem(sessionId.value);
-            flightData = JSON.parse(previousObject);
-            console.log(flightData);
+            sessionId = $('#sessionId').val();
+            let previousObject = sessionStorage.getItem(sessionId);
+            previousObject = JSON.parse(previousObject);
+            console.log(previousObject);
             //Auto fill id and value for departure seats
             //Number of Rows and number of columns per row
             let numberOfColumns = $('#departure-table .departure-seat-container td').length;
@@ -36,7 +34,7 @@
                     td = tr[i].getElementsByTagName("td")[j];
                     td.setAttribute("id", "departure-seatCode-" + alphabet[j] + i);
                     if (j != 3) {
-                        td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getDepartureSeatCode('" + "departure-seatCode-" + alphabet[j] + i + "')");
+                        td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getDepartureSeatCode('" + "seatCode-" + alphabet[j] + i + "')");
                         td.append("" + alphabet[j] + i);
                         let key = "departure-seatCode-" + alphabet[j] + i;
                         seatBookedData.push({key: key, value: true});
@@ -89,101 +87,170 @@
                 $('#returnNames li').eq(i - 1).attr("id", "returnPassenger-" + i);
                 $('#returnNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('returnPassenger-" + i + "')");
             }
+
         })
 
         let seatBookedData = [];
 
-        function getDepartureSeatCode(seatCode) {
-            if (currentPassengerSelected != null ) {
-                if (!(currentPassengerSelected.indexOf("return") > -1)){
-                    console.log("clicked!!: " + seatCode);
+        /*function getDepartureSeatCode(seatCode) {
+            console.log("clicked!!: " + seatCode);
 
-                    console.log(currentPassengerSelected);
-                    let x = $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val();
-                    console.log(x);
+            console.log(currentPassengerSelected);
+            let x = $('#' + currentPassengerSelected + ' input').val();
+            console.log(x);
 
-                    $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(seatCode);
-                    let seatPossession = {
-                        seatCode: "",
-                        passengerName: ""
-                    };
-                    let count = 0;
-                    for (let m = 0; m < departureSeatPossession.length; m++) {
-                        if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
-                            count++;
-                        }
+            $('#' + currentPassengerSelected + ' input:text').val(seatCode);
+            let seatPossession = {
+                seatCode: "",
+                passengerName: ""
+            };
+            let count = 0;
+            for (let m = 0; m < departureSeatPossession.length; m++) {
+                if (departureSeatPossession[m].passengerName == currentPassengerSelected) {
+                    count++;
+                }
+            }
+
+            if (count == 0) {
+                departureSeatPossession.push({
+                    seatCode: $('#' + currentPassengerSelected + ' input').val(),
+                    passengerName: currentPassengerSelected
+                });
+            } else {
+                for (let m = 0; m < departureSeatPossession.length; m++) {
+                    if (departureSeatPossession[m].passengerName == currentPassengerSelected) {
+                        departureSeatPossession[m].passengerName = currentPassengerSelected;
                     }
+                }
 
-                    if (count == 0) {
-                        departureSeatPossession.push({
-                            seatCode: $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(),
-                            passengerName: $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()
-                        });
-                    } else {
-                        for (let m = 0; m < departureSeatPossession.length; m++) {
-                            if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
-                                departureSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val();
+            }
+        }
+                function getReturnSeatCode(seatCode) {
+                    if (!(currentPassengerSelected.indexOf("depart") > -1)){
+                        console.log("clicked!!: " + seatCode);
+                        console.log(currentPassengerSelected);
+                        let x = $('#' + currentPassengerSelected + ' input').val();
+                        console.log(x);
+
+                        $('#' + currentPassengerSelected + ' input:text').val(seatCode);
+                        let seatPossession = {
+                            seatCode: "",
+                            passengerName: ""
+                        };
+                        let count = 0;
+                        for (let m = 0; m < returnSeatPossession.length; m++) {
+                            if (returnSeatPossession[m].passengerName == currentPassengerSelected) {
+                                count++;
                             }
                         }
 
+                        if (count == 0) {
+                            returnSeatPossession.push({
+                                seatCode: $('#' + currentPassengerSelected + ' input').val(),
+                                passengerName: currentPassengerSelected
+                            });
+                        } else {
+                            for (let m = 0; m < returnSeatPossession.length; m++) {
+                                if (returnSeatPossession[m].passengerName == currentPassengerSelected) {
+                                    returnSeatPossession[m].passengerName = currentPassengerSelected;
+                                }
+                            }
+                        }
                     }
+
+                }*/
+
+                let currentPassengerSelected;
+                let departureSeatPossession = new Array();
+                let returnSeatPossession = new Array();
+
+        function getDepartureSeatCode(seatCode) {
+            if (currentPassengerSelected != null) {
+                console.log("clicked!!: " + seatCode);
+
+                console.log(currentPassengerSelected);
+                let x = $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val();
+                console.log(x);
+
+                $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(seatCode);
+                let seatPossession = {
+                    seatCode: "",
+                    passengerName: ""
+                };
+                let count = 0;
+                for (let m = 0; m < departureSeatPossession.length; m++) {
+                    if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
+                        count++;
+                    }
+                }
+
+                if (count == 0) {
+                    departureSeatPossession.push({
+                        seatCode: $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(),
+                        passengerName: $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()
+                    });
+                } else {
+                    for (let m = 0; m < departureSeatPossession.length; m++) {
+                        if (departureSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val()) {
+                            departureSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=departurePassengerName]').val();
+                        }
+                    }
+
                 }
             }
         }
         function getReturnSeatCode(seatCode) {
-            if (currentPassengerSelected != null ) {
-                if (!(currentPassengerSelected.indexOf("depart") > -1)){
-                    console.log("return !!! clicked!!: " + seatCode);
-                    console.log(currentPassengerSelected);
-                    let x = $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val();
-                    console.log(x);
+            if (!(currentPassengerSelected.indexOf("depart") > -1)){
+                console.log("clicked!!: " + seatCode);
+                console.log(currentPassengerSelected);
+                let x = $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val();
+                console.log(x);
 
-                    $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val(seatCode);
-                    /*let returnSeatPossession = {
-                        seatCode: "",
-                        passengerName: ""
-                    };*/
-                    let count = 0;
+                $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val(seatCode);
+                let seatPossession = {
+                    seatCode: "",
+                    passengerName: ""
+                };
+                let count = 0;
+                for (let m = 0; m < returnSeatPossession.length; m++) {
+                    if (returnSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()) {
+                        count++;
+                    }
+                }
+
+                if (count == 0) {
+                    returnSeatPossession.push({
+                        seatCode: $('#' + currentPassengerSelected + ' input').val(),
+                        passengerName: $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()
+                    });
+                } else {
                     for (let m = 0; m < returnSeatPossession.length; m++) {
                         if (returnSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()) {
-                            count++;
-                        }
-                    }
-
-                    if (count == 0) {
-                        returnSeatPossession.push({
-                            seatCode: $('#' + currentPassengerSelected + ' input[name=returnSeatCode]').val(),
-                            passengerName: $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()
-                        });
-                    } else {
-                        for (let m = 0; m < returnSeatPossession.length; m++) {
-                            if (returnSeatPossession[m].passengerName == $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val()) {
-                                returnSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val();
-                            }
+                            returnSeatPossession[m].passengerName = $('#' + currentPassengerSelected + ' input[name=returnPassengerName]').val();
                         }
                     }
                 }
             }
         }
-
         function getSeatSelectionTurn(passengerId) {
             currentPassengerSelected = passengerId;
         }
     </script>
     <script>
         function sendPassengerDataWithSeatCodes() {
-            flightData.departureTrip.departureSeatPossessions = departureSeatPossession ;
-            flightData.returnTrip.returnSeatPossessions = returnSeatPossession;
+            let previousFlightPickerData = JSON.parse(sessionStorage.getItem(sessionId));
+            previousFlightPickerData.departureTrip.departureSeatPossession = departureSeatPossession ;
+            previousFlightPickerData.returnTrip.returnSeatPossession = returnSeatPossession;
             console.log("Clicked!!!");
-            console.log(flightData);
-            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
+            console.log(previousFlightPickerData);
+            sessionStorage.setItem(sessionId, JSON.stringify(previousFlightPickerData));
 
             $.ajax({
                 type: "POST",
                 url: "flightPickerHandler",
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify(flightData),
+                data: JSON.stringify(previousFlightPickerData),
                 success: function (data, textStatus, jqXHR) {
                     console.log("send data to backend successfully: ");
                     console.log(data);
@@ -287,7 +354,7 @@
                                 <div class="row">
                                     <%--Passenger's Seat Record:--%>
                                     <div class="col-sm-5">
-                                        <h5>Click your name to start selecting a seat.</h5>
+                                        Say Hi Here!
                                         <ul style="list-style: none" id="returnNames">
                                             <c:forEach var="name" items="${passengerNames}">
                                                 <li class="b-1 my-1">
@@ -321,9 +388,12 @@
                                                     <tr class="seat-row">
                                                         <c:forEach begin="1" end="3">
                                                             <td align="center" style="padding: 0.0%">
-                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
-                                                                    <button class="btn btn-info" style="padding: 0; border: none; background: none;">
-                                                                        <img src="/resources/image/logo/s-couch.png" width="100%"/>
+                                                                <span class="btn btn-sm btn-outline return-seat-item"
+                                                                      name="return-seat-item">
+                                                                    <button class="btn btn-info"
+                                                                            style="padding: 0; border: none; background: none;">
+                                                                        <img src="/resources/image/logo/s-couch.png"
+                                                                             width="100%"/>
                                                                     </button>
                                                                 </span>
                                                             </td>
@@ -331,9 +401,12 @@
                                                         <td width="12%" style="text-align: center"></td>
                                                         <c:forEach begin="1" end="3">
                                                             <td align="center" style="padding: 0.0%">
-                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
-                                                                    <button class="btn btn-info"  style="padding: 0; border: none; background: none;">
-                                                                        <img src="/resources/image/logo/s-couch.png" width="100%"/>
+                                                                <span class="btn btn-sm btn-outline return-seat-item"
+                                                                      name="return-seat-item">
+                                                                    <button class="btn btn-info"
+                                                                            style="padding: 0; border: none; background: none;">
+                                                                        <img src="/resources/image/logo/s-couch.png"
+                                                                             width="100%"/>
                                                                     </button>
                                                                 </span>
                                                             </td>

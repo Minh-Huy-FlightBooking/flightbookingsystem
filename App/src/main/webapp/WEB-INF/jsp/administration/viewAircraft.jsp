@@ -73,6 +73,7 @@
                                     <th scope="col">Model</th>
                                     <th scope="col">Total Economy Seats</th>
                                     <th scope="col">Total Business Seats</th>
+                                    <th scope="col">Enabled</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -84,6 +85,7 @@
                                         <td>${a.model}</td>
                                         <td>${a.total_economy}</td>
                                         <td>${a.total_business}</td>
+                                        <td>${a.enabled}</td>
                                         <td>${a.brand.brandName}</td>
                                         <td>
                                             <a href="/admin/editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
