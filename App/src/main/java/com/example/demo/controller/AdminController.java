@@ -29,6 +29,8 @@ public class AdminController {
     private BrandService brandService;
     @Autowired
     private AirportService airportService;
+    @Autowired
+    private TicketService ticketService;
 
     @Autowired
     private FlightRouteService flightRouteService;
@@ -226,8 +228,7 @@ public class AdminController {
     // delete flight
     @RequestMapping("/deleteFlight")
     public String deleteFlight (@RequestParam("id") int id, Model model) {
-        Flight flight = flightService.getFlightById(id);
-        if ( flightService.deleteFLight(id) ) {
+        if ( flightService.deleteFLight(id)&&ticketService.deleteByFlight_FlightId(id)) {
             model.addAttribute("message", "Delete successed.");
         } else {
             model.addAttribute("message", "Delete failed.");
@@ -258,12 +259,13 @@ public class AdminController {
                 model.addAttribute("message","Invalid value OR Data is existed.");
             }else{
                 if(flightService.saveFlight(flight)){
+                    ticketService.createTickets(flight);
                     model.addAttribute("message","Save successed.");
                 }else{
                     model.addAttribute("message","Save failed.");
                 }
             }
-            model.addAttribute("flight", flightService.getFlightById(flight.getFlightId()));
+            model.addAttribute("flight", new Flight());
             model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
             model.addAttribute("aircraft", aircraftService.getAllAircraft());
             model.addAttribute("type","Add");

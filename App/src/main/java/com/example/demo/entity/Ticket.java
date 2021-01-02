@@ -75,6 +75,13 @@ public class Ticket {
         this.ticketType = ticketType;
     }*/
 
+    public Ticket(String seatCode, boolean enabled, Flight flight, TravelClass travelClass) {
+        this.seatCode = seatCode;
+        this.enabled = enabled;
+        this.flight = flight;
+        this.travelClass = travelClass;
+    }
+
     public Flight getFlight() {
         return flight;
     }

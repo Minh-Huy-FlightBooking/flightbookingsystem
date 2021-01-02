@@ -26,4 +26,5 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
             "and t.enabled = true ")*/
     List<Ticket> findByFlightAndEnabled(Flight flight, boolean enabled);
     Ticket findByFlightFlightIdAndSeatCode(int flightId, String seatCode);
+    boolean deleteByFlight_FlightId(int id);
 }

@@ -19,6 +19,9 @@ public class FlightService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private TicketService ticketService;
     //Search flights
     public List<Flight> getAllOneWayFlightsBySearchConditions (String origin, String destination, LocalDateTime departureDate,LocalDateTime departureDate2,int numberOfPeople){
         List<Flight> flights = flightRepository.findFlightsByFlightRouteAndDepartureTime(origin, destination,departureDate, departureDate2);
@@ -71,7 +74,7 @@ public class FlightService {
     public boolean isException(Flight flight){
         boolean ex = false;
         // check time input
-        if(flight.getDepartureTime().isAfter(flight.getArrivalTime())) ex = true;
+        if(flight.getDepartureTime().isAfter(flight.getArrivalTime())||flight.getDepartureTime().isEqual(flight.getArrivalTime())) ex = true;
         // check data existed
         if (flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime()
                 ,flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft())) ex = true;

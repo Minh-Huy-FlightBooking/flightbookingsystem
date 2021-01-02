@@ -85,23 +85,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Enabled <br><p class="text-muted mb-0">(Active: true, Inactive: false)</p></th>
-                                <td class="d-flex flex-row">
-                                        <span class="border pl-2 pt-2 rounded mr-2 mb-1">
-                                            <label class="form-check form-check-inline">
-                                            <span class="form-check-label mr-5" style="font-size: 18px"> Active </span>
-                                            <form:radiobutton path="enabled" cssClass="form-check-input" value="true"/>
-                                            </label>
-                                        </span>
-                                    <span class="border pl-2 pt-2 rounded mr-2 mb-1">
-                                            <label class="form-check form-check-inline">
-                                            <span class="form-check-label mr-5" style="font-size: 18px"> Inactive </span>
-                                            <form:radiobutton path="enabled" cssClass="form-check-input" value="false"/>
-                                            </label>
-                                        </span>
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Brand</th>
                                 <td>
                                     <select name="brand.brandId" id="brandId" class="form-control">
@@ -128,5 +111,6 @@
     </div>
 </div>
 </div>
+
 </body>
 </html>
