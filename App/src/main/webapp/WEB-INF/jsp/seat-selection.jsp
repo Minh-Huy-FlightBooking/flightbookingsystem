@@ -232,10 +232,9 @@
                 }
             }
         }
-                function getSeatSelectionTurn(passengerId) {
-                    currentPassengerSelected = passengerId;
-                }
-
+        function getSeatSelectionTurn(passengerId) {
+            currentPassengerSelected = passengerId;
+        }
     </script>
     <script>
         function sendPassengerDataWithSeatCodes() {

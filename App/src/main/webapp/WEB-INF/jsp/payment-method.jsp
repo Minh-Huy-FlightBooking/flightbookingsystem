@@ -121,7 +121,7 @@
 <div class="container">
     <h1>Payment Page</h1>
     <h1>Pay through credit card</h1>
-    <button  id="creditCardPayment" onclick="goToCreditCardPayment()">Credit Card</button>
+    <button  id="creditCardPayment" onclick="   goToCreditCardPayment()">Credit Card</button>
 </div>
 </body>
 </html>
