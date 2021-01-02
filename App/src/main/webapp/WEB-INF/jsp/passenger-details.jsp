@@ -30,7 +30,7 @@
         let adults, children, infants;
         let departurePrice, departureFlightId, departureTravelClass;
         let returnPrice, returnFlightId, returnTravelClass;
-        let flightPicker;
+        /*let flightPicker;*/
         let flightData;
         let tripType;
 
@@ -143,11 +143,13 @@
                 passengerInformation.push(person);
             }
             console.log((passengerInformation));
+            console.log("Before adding passengers' Information");
+            console.log(flightData);
             flightData.passengerInformation = passengerInformation;
             console.log(flightData);
 
             //Send Data to Server here !! Ha ha!!
-            sessionStorage.setItem(sessionId, JSON.stringify(flightData));
+            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
             console.log(sessionStorage.getItem(sessionId));
             $.ajax({
                 type: "POST",
@@ -158,8 +160,8 @@
                 success: function (data, textStatus, jqXHR) {
                     console.log("send data to backend successfully: ");
                     console.log(data);
-                    /*alert(data);*/
-
+                    /*alert("passengers are saved!!!");
+                    alert(JSON.stringify(flightData));*/
                     // move to a new page
                     location.href = "seatSelection";
                 },
@@ -302,64 +304,6 @@
                 <%--<button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>--%>
                 <button id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
             </div>
-            <%--<form:form action="" modelAttribute="passenger">
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="title">Title</label>
-                        <form:select path="title" class="form-control" id="title">
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Mrs">Ms</option>
-                            <option value="Mrs">Miss</option>
-                        </form:select>
-                            &lt;%&ndash;<input type="email" class="form-control" id="inputEmail4" placeholder="Email">&ndash;%&gt;
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="firstName">First Name:</label>
-                        <form:input path="firstName" class="form-control" id="firstName" placeholder="First Name"/>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="lastName">Last Name</label>
-                        <form:input path="lastName" class="form-control" id="lastName" placeholder="Last Name"/>
-
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="lastName">Gender</label>
-                        <form:select path="gender"  class="form-control" id="gender">
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Homosexuality</option>
-                        </form:select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dateOfBirth">Date Of Birth</label>
-                        <form:input path="dateOfBirth" type="date" class="form-control" id="dateOfBirth"/>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="firstName">Nationality</label>
-                        <form:select path="nationality"  class="form-control" id="nationality">
-                            <option>Vietnam</option>
-                            <option>USA</option>
-                        </form:select>
-                    </div>
-
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="lastName">Passport Number:</label>
-                        <form:input path="passportNumber" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="dateOfBirth">Expiry Date:</label>
-                        <form:input path="expiryDate" type="date" class="form-control"/>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100px">Back</button>
-                <button type="submit" class="btn btn-primary" style="width: 100px">Continue</button>
-                <button>Go To Home Page (Test)</button>
-            </form:form>--%>
         </div>
     </div>
 </div>

@@ -57,15 +57,6 @@ public class SystemController {
     // Return Ticket Searched's Results
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
     public String goToTicketList(@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
-        /*System.out.println(t.getOrigin());
-        System.out.println(t.getDestination());
-        System.out.println(t.getTripType());
-        System.out.println(t.getDepartureDate());
-        System.out.println(t.getReturnDate());
-        System.out.println(t.getPassengerType().getNumberOfAdults());
-        System.out.println(t.getPassengerType().getNumberOfChildren());
-        System.out.println(t.getPassengerType().getNumberOfInfant());
-        System.out.println(t.getTravelClass());*/
         model.addAttribute("sessionId", request.getSession().getId());
         /*int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();*/
         int numberOfPeople = t.getAdults() + t.getChildren() + t.getInfant();

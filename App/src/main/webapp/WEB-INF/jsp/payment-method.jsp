@@ -15,14 +15,60 @@
     <title>Title</title>
     <jsp:include page="administration/_head.jsp"/>
     <script>
+
+        let totalPrice = 0;
+        let flightData;
+        $(document).ready(function () {
+            //Get the previous Value
+            flightData = JSON.parse(sessionStorage.getItem(sessionId.value));
+            console.log(flightData);
+            let numberOfColumns = $('#ticket-table-detail-container tbody td').length;
+            console.log(numberOfColumns);
+            let ticketTable = document.getElementById("ticket-table-detail-container");
+            let ticketTr = ticketTable.getElementsByTagName("tr");
+            let ticketTd;
+            console.log(ticketTr.length);
+            console.log(numberOfColumns / (ticketTr.length - 1));
+
+            for (let i = 1; i < (ticketTr.length - 1); i++) {
+                ticketTd = ticketTr[i].getElementsByTagName("td")[6].innerText;
+                console.log(ticketTd);
+                console.log(isNaN(parseInt(ticketTd)));
+                totalPrice += parseInt(ticketTd);
+            }
+            console.log(totalPrice);
+            $('#totalPrice').html(totalPrice);
+        })
         function goToCreditCardPayment () {
-            location.href = "payment";
+            flightData.totalPaymentAmount = totalPrice;
+            sessionStorage.setItem(sessionId.value, flightData);
+            $.ajax({
+                type: "POST",
+                url: "flightPickerHandler",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(flightData),
+                success: function (data, textStatus, jqXHR) {
+                    console.log("send data to backend successfully: ");
+                    console.log(data);
+
+                    // move to a new page
+                    location.href = "payment";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log("fail");
+                    alert("OOP!!! Something is wrong!!!");
+                }
+            });
+
         }
     </script>
 </head>
 <body>
+<input hidden type="text" value="${sessionId}" id="sessionId"/>
 <div class="container">
-    <table class="table">
+    <table class="table" id="ticket-table-detail-container">
         <thead>
         <tr>
             <th scope="col">Origin</th>
@@ -39,11 +85,13 @@
         <c:forEach var="p" items="${paymentInformationList}">
             <tr>
                 <td>
-                    ${p.flight.flightRoute.originAirport}
+                    ${p.flight.flightRoute.originAirport.airportName}
+                    <br/>
                     ${p.flight._departureTime}
                 </td>
                 <td>
-                    ${p.flight.flightRoute.destinationAirport}
+                    ${p.flight.flightRoute.destinationAirport.airportName}
+                    <br/>
                     ${p.flight._arrivalTime}
                 </td>
                 <td>
@@ -55,51 +103,41 @@
                     ${p.travelClass}
                 </td>
                 <td>
-                    ${p.seatCode}
+                    ${p.ticket.seatCode}
                 </td>
                 <td>
                     ${p.passengerInformation.title}
                 </td>
+                <td>
                 <c:choose>
                     <c:when test="${p.travelClass == 'economy'}">
                         <c:choose>
                             <c:when test="${p.passengerInformation.title} == 'infant'">
-                                <td>
-                                    ${p.flight.economyPrice * 0.1}
-                                </td>
+                                ${p.flight.economyPrice * 0.1}
                             </c:when>
                             <c:when test="${p.passengerInformation.title} == 'child'">
-                                <td>
-                                    ${p.flight.economyPrice * 0.9}
-                                </td>
+                                ${p.flight.economyPrice * 0.9}
                             </c:when>
                             <c:otherwise>
-                                <td>
-                                    ${p.flight.economyPrice}
-                                </td>
+                                ${p.flight.economyPrice}
                             </c:otherwise>
                         </c:choose>
                     </c:when>
                     <c:when test="${p.travelClass == 'business'}">
                         <c:choose>
                             <c:when test="${p.passengerInformation.title} == 'infant'">
-                                <td>
-                                    ${p.flight.businessPrice * 0.1}
-                                </td>
+                                ${p.flight.businessPrice * 0.1}
                             </c:when>
                             <c:when test="${p.passengerInformation.title} == 'child'">
-                                <td>
-                                    ${p.flight.businessPrice * 0.9}
-                                </td>
+                                ${p.flight.businessPrice * 0.9}
                             </c:when>
                             <c:otherwise>
-                                <td>
-                                    ${p.businessPrice.economyPrice}
-                                </td>
+                                ${p.flight.businessPrice}
                             </c:otherwise>
                         </c:choose>
                     </c:when>
                 </c:choose>
+                </td>
                 <td>$</td>
             </tr>
         </c:forEach>
@@ -112,8 +150,9 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
-            <th scope="col"></th>
             <th scope="col" id="totalPrice"></th>
+            <th scope="col">$</th>
+
         </tr>
         </thead>
     </table>
@@ -121,7 +160,7 @@
 <div class="container">
     <h1>Payment Page</h1>
     <h1>Pay through credit card</h1>
-    <button  id="creditCardPayment" onclick="   goToCreditCardPayment()">Credit Card</button>
+    <button  id="creditCardPayment" onclick="goToCreditCardPayment()">Credit Card</button>
 </div>
 </body>
 </html>

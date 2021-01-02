@@ -217,7 +217,6 @@
     </script>--%>
     <script>
         let sessionId;
-
         $(document).ready(function () {
             sessionId = $('#sessionId').val();
             console.log(JSON.parse(sessionStorage.getItem(sessionId)));
@@ -311,22 +310,7 @@
             console.log(departurePrice);
             console.log(departureFlightId);
             console.log(departureTravelClass);
-            /*flightPicker = {
-                "departureTrip": {
-                    "departureFlightId": departureFlightId,
-                    "travelClass": departureTravelClass,
-                    "adults": adults,
-                    "children": children,
-                    "infant": infants
-                },
-                "returnTrip": {
-                    "returnFlightId": returnFlightId,
-                    "travelClass": returnTravelClass,
-                    "adults": adults,
-                    "children": children,
-                    "infant": infants
-                }
-            };*/
+
             flightPicker = {
                 departureTrip: {
                     departureFlightId: departureFlightId,
@@ -334,7 +318,7 @@
                     adults: adults,
                     children: children,
                     infant: infants,
-                    departureSeatPossession:[]
+                    departureSeatPossessions:[]
                 },
                 returnTrip: {
                     returnFlightId: returnFlightId,
@@ -342,7 +326,7 @@
                     adults: adults,
                     children: children,
                     infant: infants,
-                    returnSeatPossession: []
+                    returnSeatPossessions: []
                 }
             };
             /*let previousFlightPickerData = sessionStorage.getItem(sessionId);*/
@@ -368,7 +352,6 @@
 
         /*let departureObject = '{ "departureTrip": [{"flightId": ""}, {"travelClass": ""}, {"adults": ""}, {"children": ""},{"infant": ""}]}';*/
 
-
         function sendReturnFlightValues(tableDataId) {
             tripType = $('div#flightInformation div input#tripType').val();
             returnFlightValClicked = true;
@@ -385,7 +368,7 @@
                     adults: adults,
                     children: children,
                     infant: infants,
-                    departureSeatPossession:[]
+                    departureSeatPossessions:[]
                 },
                 returnTrip: {
                     returnFlightId: returnFlightId,
@@ -393,7 +376,7 @@
                     adults: adults,
                     children: children,
                     infant: infants,
-                    returnSeatPossession: []
+                    returnSeatPossessions: []
                 }
             };
 
@@ -422,8 +405,7 @@
             console.log("Clicked!!!");
             console.log(previousFlightPickerData);
             sessionStorage.setItem(sessionId, JSON.stringify(previousFlightPickerData));
-            /*console.log(flightPicker);
-            console.log(JSON.stringify(flightPicker));*/
+
             $.ajax({
                 type: "POST",
                 url: "flightPickerHandler",
