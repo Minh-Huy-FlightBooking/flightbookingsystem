@@ -26,6 +26,11 @@ public class Booking {
     public Booking() {
     }
 
+    public Booking(Guest guest, Payment payment) {
+        this.guest = guest;
+        this.payment = payment;
+    }
+
     public int getBookingId() {
         return bookingId;
     }

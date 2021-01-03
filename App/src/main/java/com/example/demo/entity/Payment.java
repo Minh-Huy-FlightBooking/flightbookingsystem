@@ -14,6 +14,9 @@ public class Payment {
     @Column(name = "status")
     private boolean status;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
     @ManyToOne
     @JoinColumn(name = "credit_card_id")
     private CreditCard creditCard;
@@ -23,6 +26,34 @@ public class Payment {
 
 
     public Payment() {
+    }
+
+    public Payment(String paymentMethod, boolean status, CreditCard creditCard, String sessionId) {
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.sessionId = sessionId;
+        this.creditCard = creditCard;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Payment(String paymentMethod, boolean status, CreditCard creditCard, Booking booking) {
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.creditCard = creditCard;
+        this.booking = booking;
+    }
+
+    public Payment(String paymentMethod, boolean status, CreditCard creditCard) {
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.creditCard = creditCard;
     }
 
     public CreditCard getCreditCard() {
