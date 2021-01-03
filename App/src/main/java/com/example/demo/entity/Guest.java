@@ -30,13 +30,6 @@ public class Guest {
     public Guest() {
     }
 
-    public Guest(String firstName, String lastName, String phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-
     public int getGuestId() {
         return guestId;
     }

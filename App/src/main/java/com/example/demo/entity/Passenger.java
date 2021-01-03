@@ -11,8 +11,6 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passenger_id")
     private int passengerId;
-    @Column(name = "title")
-    private String title;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -34,35 +32,6 @@ public class Passenger {
     private List<Ticket> tickets;
 
     public Passenger() {
-    }
-
-    public Passenger(String firstName, String lastName, String gender, LocalDate dateOfBirth, String email, String phoneNumber, String passportId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.passportId = passportId;
-    }
-
-    public Passenger(String title, String firstName, String lastName, String gender, LocalDate dateOfBirth, String email, String phoneNumber, String passportId) {
-        this.title = title;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.passportId = passportId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public int getPassengerId() {

@@ -30,22 +30,15 @@
         let adults, children, infants;
         let departurePrice, departureFlightId, departureTravelClass;
         let returnPrice, returnFlightId, returnTravelClass;
+        /*let flightPicker;*/
         let flightData;
         let tripType;
 
-        let contactInformation;
         $(document).ready(function () {
             console.log("HI am ready to go!!");
             console.log(sessionId.value);
             let previousSessionValue = sessionStorage.getItem(sessionId.value);
             console.log(previousSessionValue);
-
-            contactInformation = {
-                firstName: "",
-                lastName: "",
-                email: "",
-                phoneNumber: ""
-            }
 
             if (previousSessionValue != null) {
                 flightData = JSON.parse(previousSessionValue);
@@ -94,13 +87,6 @@
 
         //Send Data back to Server --> Using Ajax
         function sendPassengerData() {
-            //Save contact Information
-            flightData.contactInformation.firstName = $('#firstName').val();
-            flightData.contactInformation.lastName = $('#lastName').val();
-            flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
-            flightData.contactInformation.email = $('#email').val();
-
-
             for (let i = 1; i <= (adults + children + infants); i++) {
                 let passengerData = document.getElementById("passenger-" + i);
                 let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
@@ -213,33 +199,6 @@
                     the airport. Name changes are not permitted once the booking has been finalised.
                 </h5>
             </div>
-            <div id="contact-information-container" >
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="firstName">First Name: </label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Type without tones..." required>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="lastName">Last Name: </label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Type without tones..." required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                          </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" required>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="phoneNumber">Phone Number: </label>
-                            <input type="text" class="form-control" id="phoneNumber" required>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <hr>
             <div id="passenger-data-container">
                 <c:forEach var="p" items="${passengerList}">
                     <div style="border-bottom: yellow solid 2px" class="passenger-data-item">

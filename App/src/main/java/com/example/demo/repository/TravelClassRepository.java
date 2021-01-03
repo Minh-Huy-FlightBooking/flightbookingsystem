@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TravelClassRepository extends CrudRepository<TravelClass,Integer> {
     TravelClass findByTravelClassId(int id);
-    TravelClass findByClassName(String className);
 }

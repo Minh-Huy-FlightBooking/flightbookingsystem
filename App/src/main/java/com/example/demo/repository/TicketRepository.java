@@ -24,11 +24,10 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     /*@Query("select t from Ticket t " +
             "where t.flight = :flight " +
             "and t.enabled = true ")*/
-    List<Ticket> findByFlightAndEnabled (Flight flight, boolean enabled);
-    Ticket findByFlightFlightIdAndSeatCode (int flightId, String seatCode);
-
-    Ticket findByFlightFlightIdAndSeatCodeAndAndTravelClass(int flightId, String seatCode, String travelClass);
+    List<Ticket> findByFlightAndEnabled(Flight flight, boolean enabled);
+    Ticket findByFlightFlightIdAndSeatCode(int flightId, String seatCode);
+//    @Query(value="delete from ticket where flight_id = :id", nativeQuery = true)
+//    void deleteByFlightId(@Param("id") int id);
     void deleteByTicketId(int id);
     List<Ticket> findByFlight_FlightId(int id);
-
 }

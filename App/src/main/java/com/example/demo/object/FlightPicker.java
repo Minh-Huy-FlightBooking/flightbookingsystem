@@ -6,20 +6,10 @@ public class FlightPicker {
     private DepartureTrip departureTrip;
     private ReturnTrip returnTrip;
     private List<PassengerInformation> passengerInformation;
-    //For holding search result
     private TicketInformation ticketInformation;
     private double totalPaymentAmount;
-    private ContactInformation contactInformation;
 
     public FlightPicker() {
-    }
-
-    public ContactInformation getContactInformation() {
-        return contactInformation;
-    }
-
-    public void setContactInformation(ContactInformation contactInformation) {
-        this.contactInformation = contactInformation;
     }
 
     public double getTotalPaymentAmount() {
