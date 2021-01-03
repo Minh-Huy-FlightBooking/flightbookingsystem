@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.CreditCard;
-import com.example.demo.entity.Flight;
+import com.example.demo.entity.*;
 import com.example.demo.object.*;
-import com.example.demo.service.CreditCardService;
-import com.example.demo.service.FlightService;
-import com.example.demo.service.TicketService;
+import com.example.demo.repository.BookingRepository;
+import com.example.demo.repository.GuestRepository;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,25 @@ public class PaymentController {
 
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private PassengerService passengerService;
+
+    @Autowired
+    private GuestService guestService;
+
+    @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
+    private TicketTypeService ticketTypeService;
+
+    @Autowired
+    private TravelClassService travelClassService;
+
     // Payment Method
     @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
     public String goToPaymentMethod(Model model, HttpServletRequest request, HttpSession session) {
@@ -44,12 +62,12 @@ public class PaymentController {
             Flight returnFlight = flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId());
 
             //Add passenger information for departure trip
-            for (PassengerInformation p: flightPicker.getPassengerInformation()){
+            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
                 String passengerName = p.getFirstName() + " " + p.getLastName();
                 System.out.println(passengerName);
                 List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
                 if (departureSeatPossessions != null) {
-                    for (SeatPossession s: departureSeatPossessions) {
+                    for (SeatPossession s : departureSeatPossessions) {
                         if (s.getPassengerName().equals(passengerName)) {
                             String seatCode = s.getSeatCode();
                             seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
@@ -60,12 +78,12 @@ public class PaymentController {
 
             }
             //Add passenger information for return trip
-            for (PassengerInformation p: flightPicker.getPassengerInformation()){
+            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
                 String passengerName = p.getFirstName() + " " + p.getLastName();
                 System.out.println(passengerName);
                 List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
                 if (returnSeatPossessions != null) {
-                    for (SeatPossession s: returnSeatPossessions) {
+                    for (SeatPossession s : returnSeatPossessions) {
                         if (s.getPassengerName().equals(passengerName)) {
                             String seatCode = s.getSeatCode();
                             seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
@@ -83,19 +101,19 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.GET)
-    public String goToPaymentPage (Model model, HttpSession session, HttpServletRequest request) {
+    public String goToPaymentPage(Model model, HttpSession session, HttpServletRequest request) {
         System.out.println(request.getSession().getId());
         model.addAttribute("creditCard", new CreditCard());
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
         if (flightPicker != null) {
-            model.addAttribute("totalPrice",flightPicker.getTotalPaymentAmount());
+            model.addAttribute("totalPrice", flightPicker.getTotalPaymentAmount());
         }
         System.out.println("I have gone through Payment...");
         return "payment";
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
-    public String handlePayment (@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request) {
+    public String handlePayment(@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request) {
         System.out.println(request.getSession().getId());
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
@@ -107,26 +125,126 @@ public class PaymentController {
         if (creditCard != null) {
             CreditCard creditCardReceived = creditCardService.getCreditCardByCardNumber(creditCard.getCardNumber());
             if (creditCardReceived == null) {
+                model.addAttribute("creditCard", creditCard);
                 model.addAttribute("message", "This credit card does not exist...");
                 return "payment";
             } else {
-                if ((creditCardReceived.getCardNumber().equals(creditCard.getCardNumber())) && (creditCardReceived.getOTP().equals(creditCard.getOTP()))){
+                //Check card number and password (otp)
+                if ((creditCardReceived.getCardNumber().equals(creditCard.getCardNumber())) && (creditCardReceived.getOTP().equals(creditCard.getOTP()))) {
                     if ((creditCardReceived.getBalance() - totalAmount) >= 0) {
                         model.addAttribute("message", "Booking Successfully");
                         ////////////////////Do a tons of things here to save the booking data
+
+                        creditCard.setBalance(creditCard.getBalance() - totalAmount);
+                        List<Guest> guests = guestService.getAllGuestsByFirstNameAndLastNameAndPhoneNumberAndEmail(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail());
+
+                        if (guests == null) {
+                            guestService.saveNewGuestData(new Guest(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail()));
+                        }
+
+                        Guest guest = guestService.getGuestDataByByFirstNameAndLastNameAndPhoneNumberAndEmail(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail());
+
+                        //Payment session will last only 10 minutes !!! --> have not configured , it will be okay though baby
+                        paymentService.saveNewPayment(new Payment("credit", true, creditCard, request.getSession().getId()));
+                        Payment payment = paymentService.getPaymentBySessionId(request.getSession().getId());
+
+                        //Save booking data to DB
+                        bookingService.saveNewBookingData(new Booking(guest, payment));
+                        Booking booking = bookingService.getBookingByPayment(payment);
+
+                        Flight departureFlight = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId());
+
+                        //Save passengers' data to DB
+                        List<PassengerInformation> passengerInformationList = flightPicker.getPassengerInformation();
+                        if (passengerInformationList != null) {
+                            //Make sure every passenger information saved in DB
+                            for (PassengerInformation p : passengerInformationList) {
+                                Passenger passenger = passengerService.getPassengerByPassportId(p.getPassportNumber());
+                                if (passenger != null) {
+                                    passengerService.saveNewPassenger(new Passenger(p.getTitle(), p.getFirstName(), p.getLastName(), p.getGender(), p.getDateOfBirth(), p.getEmail(), p.getPhoneNumber(), p.getPassportNumber()));
+                                }
+                            }
+                            /////
+
+                            //Ticket Information
+                            for (PassengerInformation p : passengerInformationList) {
+                                Passenger passenger = passengerService.getPassengerByPassportId(p.getPassportNumber());
+                                if (passenger != null) {
+                                    String fullName = passenger.getFirstName() + " " + passenger.getLastName();
+                                    List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
+                                    if (departureSeatPossessions != null) {
+                                        for (SeatPossession s : departureSeatPossessions) {
+                                            if (fullName.equals(s.getPassengerName())) {
+                                                String seatCode = s.getSeatCode();
+                                                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
+                                                System.out.println(seatCode);
+                                                Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(departureFlight.getFlightId(), seatCode, flightPicker.getDepartureTrip().getTravelClass());
+
+                                                double departureTicketPrice = 0;
+                                                ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
+                                                if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
+                                                    departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                } else {
+                                                    departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                }
+                                                //based on this constructor --> (int ticketId, String seatCode, boolean enabled, Flight flight, Booking booking, Passenger passenger, double price, TicketType ticketType, TravelClass travelClass)
+                                                ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, departureTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));
+                                            }
+                                        }
+                                    }
+                                    ///////
+
+                                    if (flightPicker.getTicketInformation().getTripType().equals("roundTrip")) {
+                                        Flight returnFlight = flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId());
+
+                                        List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
+                                        if (returnSeatPossessions != null) {
+                                            for (SeatPossession rs : returnSeatPossessions) {
+                                                if (fullName.equals(rs.getPassengerName())) {
+                                                    String seatCode = rs.getSeatCode();
+                                                    seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
+                                                    System.out.println(seatCode);
+                                                    Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(returnFlight.getFlightId(), seatCode, flightPicker.getReturnTrip().getTravelClass());
+
+                                                    double returnTicketPrice = 0;
+                                                    ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
+                                                    if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
+                                                        returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                    } else {
+                                                        returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                    }
+                                                    //based on this constructor --> (int ticketId, String seatCode, boolean enabled, Flight flight, Booking booking, Passenger passenger, double price, TicketType ticketType, TravelClass travelClass)
+                                                    ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, returnTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                            //////
+                        }
+
+
                         return "payment-receipt";
                     } else {
+                        model.addAttribute("creditCard", creditCard);
                         model.addAttribute("message", "Fail to pay for the ticket's prices --> your balance is not enough!!!");
                         return "payment";
                     }
+                    /////////////////////////////////////////////////////
                 } else {
+                    model.addAttribute("creditCard", creditCard);
                     model.addAttribute("message", "Please check your otp again...");
                     return "payment";
                 }
             }
-
         }
-        System.out.println("I have gone through Payment...");
+
+        System.out.println("Opp, you should check your credit card again");
         return "payment";
     }
+
 }
+
+
