@@ -7,6 +7,7 @@ import com.example.demo.repository.GuestRepository;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,6 +114,7 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
+    /*@Transactional*/
     public String handlePayment(@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request) {
         System.out.println(request.getSession().getId());
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
@@ -130,22 +132,24 @@ public class PaymentController {
                 return "payment";
             } else {
                 //Check card number and password (otp)
+
                 if ((creditCardReceived.getCardNumber().equals(creditCard.getCardNumber())) && (creditCardReceived.getOTP().equals(creditCard.getOTP()))) {
                     if ((creditCardReceived.getBalance() - totalAmount) >= 0) {
                         model.addAttribute("message", "Booking Successfully");
                         ////////////////////Do a tons of things here to save the booking data
 
-                        creditCard.setBalance(creditCard.getBalance() - totalAmount);
+                        creditCardReceived.setBalance(creditCardReceived.getBalance() - totalAmount);
+                        creditCardService.saveCreditCardData(creditCardReceived);
                         List<Guest> guests = guestService.getAllGuestsByFirstNameAndLastNameAndPhoneNumberAndEmail(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail());
 
-                        if (guests == null) {
+                        if (guests.isEmpty()) {
                             guestService.saveNewGuestData(new Guest(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail()));
                         }
 
                         Guest guest = guestService.getGuestDataByByFirstNameAndLastNameAndPhoneNumberAndEmail(flightPicker.getContactInformation().getFirstName(), flightPicker.getContactInformation().getLastName(), flightPicker.getContactInformation().getPhoneNumber(), flightPicker.getContactInformation().getEmail());
 
                         //Payment session will last only 10 minutes !!! --> have not configured , it will be okay though baby
-                        paymentService.saveNewPayment(new Payment("credit", true, creditCard, request.getSession().getId()));
+                        paymentService.saveNewPayment(new Payment("credit", true, creditCardReceived, request.getSession().getId()));
                         Payment payment = paymentService.getPaymentBySessionId(request.getSession().getId());
 
                         //Save booking data to DB
@@ -225,7 +229,7 @@ public class PaymentController {
                             //////
                         }
 
-
+                        session.invalidate();
                         return "payment-receipt";
                     } else {
                         model.addAttribute("creditCard", creditCard);
