@@ -172,7 +172,10 @@ public class SystemController {
     }
 
 
-
+    @RequestMapping(value = "/bookingDetails", method = RequestMethod.GET)
+    public String goToBookingDetails () {
+        return "booking-details";
+    }
 
 
 

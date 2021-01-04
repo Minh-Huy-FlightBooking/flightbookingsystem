@@ -31,5 +31,6 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     Ticket findByFlightFlightIdAndSeatCodeAndAndTravelClass(int flightId, String seatCode, TravelClass travelClass);
     void deleteByTicketId(int id);
     List<Ticket> findByFlight_FlightId(int id);
+    List<Ticket> findByFlightFlightIdAndTravelClassClassName (int flightId, String travelClass);
 
 }

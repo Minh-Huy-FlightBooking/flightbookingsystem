@@ -2,8 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.*;
 import com.example.demo.object.*;
-import com.example.demo.repository.BookingRepository;
-import com.example.demo.repository.GuestRepository;
+
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,20 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @Controller
 @RequestMapping(value = "/")
@@ -246,47 +237,13 @@ public class PaymentController {
                                         }
                                     }
                                 }
-                                //////
-                                // Recipient's email ID needs to be mentioned.
-                                String to = "tranvominh185@gmail.com";
 
-                                // Sender's email ID needs to be mentioned
-                                String from = "minhkaizen185@gmail.com";
-
-                                // Assuming you are sending email from localhost
-                                String host = "http://192.168.1.56:8080";
-
-                                // Get system properties
-                                Properties properties = System.getProperties();
-
-                                // Setup mail server
-                                properties.setProperty("mail.smtp.host", host);
-
-                                // Get the default Session object.
-                                Session mailSession = Session.getDefaultInstance(properties);
-
-                                try {
-                                    // Create a default MimeMessage object.
-                                    MimeMessage message = new MimeMessage(mailSession);
-
-                                    // Set From: header field of the header.
-                                    message.setFrom(new InternetAddress(from));
-
-                                    // Set To: header field of the header.
-                                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-                                    // Set Subject: header field
-                                    message.setSubject("Booking Receipt " + booking.getBookingId());
-
-                                    // Now set the actual message
-                                    message.setText("This is booking details " + booking.getBookingId());
-
-                                    // Send message
-                                    Transport.send(message);
+                                /*try {
+                                    emailService.sendMail("tranvominh185@gmail.com", "Test Subject", "Test mail");
                                     System.out.println("Sent message successfully....");
-                                } catch (MessagingException mex) {
-                                    mex.printStackTrace();
-                                }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }*/
                             }
                         } catch (Exception e)
                         {
@@ -312,6 +269,7 @@ public class PaymentController {
         System.out.println("Opp, you should check your credit card again");
         return "payment";
     }
+
 
 }
 
