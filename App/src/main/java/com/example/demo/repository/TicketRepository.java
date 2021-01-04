@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.entity.Flight;
 import com.example.demo.entity.Ticket;
+import com.example.demo.entity.TravelClass;
 import com.example.demo.object.TicketInformation;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -27,7 +28,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     List<Ticket> findByFlightAndEnabled (Flight flight, boolean enabled);
     Ticket findByFlightFlightIdAndSeatCode (int flightId, String seatCode);
 
-    Ticket findByFlightFlightIdAndSeatCodeAndAndTravelClass(int flightId, String seatCode, String travelClass);
+    Ticket findByFlightFlightIdAndSeatCodeAndAndTravelClass(int flightId, String seatCode, TravelClass travelClass);
     void deleteByTicketId(int id);
     List<Ticket> findByFlight_FlightId(int id);
 

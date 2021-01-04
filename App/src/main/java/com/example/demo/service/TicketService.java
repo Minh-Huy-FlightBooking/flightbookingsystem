@@ -21,7 +21,7 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    public Ticket getTicketByFlightIdAndSeatCodeAndTravelClass (int flightId, String seatCode, String travelClass) {
+    public Ticket getTicketByFlightIdAndSeatCodeAndTravelClass (int flightId, String seatCode, TravelClass travelClass) {
         return ticketRepository.findByFlightFlightIdAndSeatCodeAndAndTravelClass(flightId, seatCode, travelClass);
     }
 
