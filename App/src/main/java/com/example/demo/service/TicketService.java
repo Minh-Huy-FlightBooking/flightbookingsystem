@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Flight;
-import com.example.demo.entity.Ticket;
-import com.example.demo.entity.TravelClass;
+import com.example.demo.entity.*;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.repository.TicketRepository;
 import com.example.demo.repository.TravelClassRepository;
@@ -17,6 +15,15 @@ public class TicketService {
     private TicketRepository ticketRepository;
     @Autowired
     private TravelClassRepository travelClassRepository;
+
+    // Tickets are automatically generated when flight is created --> who books tickets is filled in the ticket with their information
+    public void updateTicketInformation (Ticket ticket) {
+        ticketRepository.save(ticket);
+    }
+
+    public Ticket getTicketByFlightIdAndSeatCodeAndTravelClass (int flightId, String seatCode, TravelClass travelClass) {
+        return ticketRepository.findByFlightFlightIdAndSeatCodeAndAndTravelClass(flightId, seatCode, travelClass);
+    }
 
     public Ticket getTicketByFlightIdAndSeatCode (int flightId, String seatCode) {
         return ticketRepository.findByFlightFlightIdAndSeatCode(flightId, seatCode);

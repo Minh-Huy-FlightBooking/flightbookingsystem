@@ -9,8 +9,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticket_id")
     private int ticketId;
-/*    @Column(name = "ticket_type")
-    private String ticketType;*/
 
     @Column(name = "seat_code")
     private String seatCode;
@@ -29,8 +27,9 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
-    /*@Column(name = "price")
-    private double price;*/
+
+    @Column(name = "price")
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "ticket_type_id")
@@ -41,6 +40,24 @@ public class Ticket {
     private TravelClass travelClass;
 
     public Ticket() {
+    }
+    public Ticket(String seatCode, boolean enabled, Flight flight, TravelClass travelClass) {
+        this.seatCode = seatCode;
+        this.enabled = enabled;
+        this.flight = flight;
+        this.travelClass = travelClass;
+    }
+
+    public Ticket(int ticketId, String seatCode, boolean enabled, Flight flight, Booking booking, Passenger passenger, double price, TicketType ticketType, TravelClass travelClass) {
+        this.ticketId = ticketId;
+        this.seatCode = seatCode;
+        this.enabled = enabled;
+        this.flight = flight;
+        this.booking = booking;
+        this.passenger = passenger;
+        this.price = price;
+        this.ticketType = ticketType;
+        this.travelClass = travelClass;
     }
 
     public String getSeatCode() {
@@ -67,20 +84,7 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-/*    public String getTicketType() {
-        return ticketType;
-    }
 
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
-    }*/
-
-    public Ticket(String seatCode, boolean enabled, Flight flight, TravelClass travelClass) {
-        this.seatCode = seatCode;
-        this.enabled = enabled;
-        this.flight = flight;
-        this.travelClass = travelClass;
-    }
 
     public Flight getFlight() {
         return flight;
@@ -122,13 +126,12 @@ public class Ticket {
         this.travelClass = travelClass;
     }
 
-    /*
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }*/
+    }
 
 }

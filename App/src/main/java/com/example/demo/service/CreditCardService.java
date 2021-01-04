@@ -13,4 +13,8 @@ public class CreditCardService {
     public CreditCard getCreditCardByCardNumber (String cardNumber){
         return creditCardRepository.findByCardNumber(cardNumber);
     }
+
+    public void saveCreditCardData (CreditCard creditCard) {
+        creditCardRepository.save(creditCard);
+    }
 }

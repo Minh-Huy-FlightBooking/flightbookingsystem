@@ -49,6 +49,8 @@ public class WebAPI {
     public FlightPicker getFlightsPicked(@RequestBody FlightPicker flightPicker, HttpSession session) {
         System.out.println("Here i go flight picker handler...");
         System.out.println(session.getId());
+        System.out.println(flightPicker.getDepartureTrip().getTravelClass());
+        System.out.println(flightPicker.getReturnTrip().getTravelClass());
         session.setAttribute(session.getId(), flightPicker);
         /*List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
         if (departureSeatPossessions != null) {

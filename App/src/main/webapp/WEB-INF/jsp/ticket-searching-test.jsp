@@ -157,7 +157,8 @@
                 departureTrip: {},
                 returnTrip: {},
                 passengerInformation: [],
-                totalPaymentAmount: 0
+                totalPaymentAmount: 0,
+                contactInformation: {}
             };
             sessionId = $('#sessionId').val();
             sessionStorage.setItem(sessionId, JSON.stringify(flightPicker));
@@ -211,6 +212,9 @@
         <br>
         <button type="submit" onclick="saveFlightJsonData()">Search</button>
     </form:form>
+
 </div>
+<button onclick="saveFlightJsonData()">Search</button>
+
 </body>
 </html>

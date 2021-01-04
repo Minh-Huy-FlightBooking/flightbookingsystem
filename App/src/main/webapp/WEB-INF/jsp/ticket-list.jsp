@@ -261,7 +261,7 @@
                 console.log(countRows2);
                 let td2;
 
-                for (let i = 1; i < tr.length; i++) {
+                for (let i = 1; i < tr2.length; i++) {
                     for (let j = 4; j < (countRows2 / (tr2.length - 1)); j++) {
                         td2 = tr2[i].getElementsByTagName("td")[j];
                         let radioClicked2 = td2.getElementsByTagName("input").namedItem("returnPrice");
