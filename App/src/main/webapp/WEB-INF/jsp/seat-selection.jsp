@@ -48,32 +48,43 @@
             }
             console.log(seatBookedData);
 
-            //Auto fill id and value for return seats
-            //Number of Rows and number of columns per row
-            let numberOfColumns2 = $('#return-table .return-seat-container td').length;
-            console.log(numberOfColumns2);
-            let table2 = document.getElementById("return-table");
-            let tr2 = table2.getElementsByTagName("tr");
-            let td2;
-            console.log(tr2.length);
-            console.log(numberOfColumns2 / (tr2.length - 1));
 
-            /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
-            for (let i = 1; i < tr2.length; i++) {
-                for (let j = 0; j < (numberOfColumns2 / (tr2.length - 1)); j++) {
-                    td2 = tr2[i].getElementsByTagName("td")[j];
-                    td2.setAttribute("id", "return-seatCode-" + alphabet[j] + i);
-                    if (j != 3) {
-                        td2.getElementsByTagName("span").namedItem("return-seat-item").setAttribute("onclick", "getReturnSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
-                        td2.append("" + alphabet[j] + i);
-                        let key = "return-seatCode-" + alphabet[j] + i;
-                        seatBookedData.push({key: key, value: true});
-                    }
-                    if (j == 3) {
-                        td2.innerHTML = "" + i;
+            if (flightData.ticketInformation.tripType == "roundTrip") {
+                //Auto fill id and value for return seats
+                //Number of Rows and number of columns per row
+                let numberOfColumns2 = $('#return-table .return-seat-container td').length;
+                console.log(numberOfColumns2);
+                let table2 = document.getElementById("return-table");
+                let tr2 = table2.getElementsByTagName("tr");
+                let td2;
+                console.log(tr2.length);
+                console.log(numberOfColumns2 / (tr2.length - 1));
+
+                /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
+                for (let i = 1; i < tr2.length; i++) {
+                    for (let j = 0; j < (numberOfColumns2 / (tr2.length - 1)); j++) {
+                        td2 = tr2[i].getElementsByTagName("td")[j];
+                        td2.setAttribute("id", "return-seatCode-" + alphabet[j] + i);
+                        if (j != 3) {
+                            td2.getElementsByTagName("span").namedItem("return-seat-item").setAttribute("onclick", "getReturnSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
+                            td2.append("" + alphabet[j] + i);
+                            let key = "return-seatCode-" + alphabet[j] + i;
+                            seatBookedData.push({key: key, value: true});
+                        }
+                        if (j == 3) {
+                            td2.innerHTML = "" + i;
+                        }
                     }
                 }
+
+                let returnNames = document.getElementById("returnNames").getElementsByTagName("li");
+                console.log(returnNames.length);
+                for (let i = 1; i <= returnNames.length; i++) {
+                    $('#returnNames li').eq(i - 1).attr("id", "returnPassenger-" + i);
+                    $('#returnNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('returnPassenger-" + i + "')");
+                }
             }
+
             console.log(seatBookedData);
             //Generate Id for passenger Turn
             let departureNames = document.getElementById("departureNames").getElementsByTagName("li");
@@ -83,12 +94,7 @@
                 $('#departureNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('departurePassenger-" + i + "')");
             }
 
-            let returnNames = document.getElementById("returnNames").getElementsByTagName("li");
-            console.log(returnNames.length);
-            for (let i = 1; i <= returnNames.length; i++) {
-                $('#returnNames li').eq(i - 1).attr("id", "returnPassenger-" + i);
-                $('#returnNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('returnPassenger-" + i + "')");
-            }
+
         })
 
         let seatBookedData = [];
@@ -280,7 +286,8 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${flightReturn!=null}">
+                <c:if test="${flightReturn != null}">
+
                     <div id="return" class="container tab-pane fade"><br>
                         <div class="card shadow">
                             <div class="card-body">
