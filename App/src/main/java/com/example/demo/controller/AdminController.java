@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Aircraft;
-import com.example.demo.entity.Flight;
-import com.example.demo.entity.FlightRoute;
+import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -31,9 +29,10 @@ public class AdminController {
     private AirportService airportService;
     @Autowired
     private TicketService ticketService;
-
     @Autowired
     private FlightRouteService flightRouteService;
+    @Autowired
+    private CityService cityService;
 //-----------------------------------Home---------------------------------//
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage() {
@@ -311,4 +310,133 @@ public class AdminController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(timeFormat, true));
     }
     // test ajax
+
+//-----------------------------------Brand---------------------------------//
+
+    @RequestMapping(value = "/viewBrand")
+    public String gotoViewBrandPage (Model model) {
+        model.addAttribute("brandList", brandService.getAllAircraftBrands());
+        return "administration/viewBrand";
+    }
+    @RequestMapping("/addBrand")
+    public String gotoAddBrandPage(Model model) {
+        model.addAttribute("brand",new Brand());
+        model.addAttribute("type","Add");
+        return "administration/addBrand";
+    }
+
+    @RequestMapping("/handlingSaveBrand")
+    public String handlingSaveBrand(Brand brand, Model model) {
+        if (brandService.getBrandById(brand.getBrandId())!=null){
+            if(brandService.isException(brand)){
+                model.addAttribute("message","Data is existed.");
+            }else {
+                if (brandService.saveBrand(brand)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("brand",brandService.getBrandById(brand.getBrandId()));
+            model.addAttribute("type","Edit");
+            return "administration/addBrand";
+        }else{
+            if(brandService.isException(brand)){
+                model.addAttribute("message","Data is existed");
+            }else {
+                if (brandService.saveBrand(brand)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("brand",brandService.getBrandById(brand.getBrandId()));
+            model.addAttribute("type","Add");
+            return "administration/addBrand";
+        }
+    }
+    @RequestMapping("/deleteBrand")
+    public String deleteBrand (@RequestParam("id") int id, Model model) {
+        if (brandService.deleteBrand(id)) {
+            model.addAttribute("message", "Delete successed.");
+        } else {
+            model.addAttribute("message", "Delete failed.");
+        }
+        model.addAttribute("brandList",brandService.getAllAircraftBrands());
+        return "administration/viewBrand";
+    }
+    @RequestMapping("/editBrand")
+    public String gotoEditBrandPage (@RequestParam("id") int id, Model model) {
+        model.addAttribute("brand", brandService.getBrandById(id));
+        model.addAttribute("type", "Edit");
+        return "administration/addBrand";
+    }
+    // End Brand
+
+//-----------------------------------Airport---------------------------------//
+
+    @RequestMapping(value = "/viewAirport")
+    public String gotoViewAirportPage (Model model) {
+        model.addAttribute("airportList", airportService.getAllAirports());
+        return "administration/viewAirport";
+    }
+    @RequestMapping("/addAirport")
+    public String gotoAddAirportPage(Model model) {
+        model.addAttribute("airport",new Airport());
+        model.addAttribute("cityList", cityService.getAllCities());
+        model.addAttribute("type","Add");
+        return "administration/addAirport";
+    }
+
+    @RequestMapping("/handlingSaveAirport")
+    public String handlingSaveAirport(Airport airport, Model model) {
+        if (airportService.getAirportById(airport.getAirportId())!=null){
+            if(airportService.isException(airport)){
+                model.addAttribute("message","Data is existed.");
+            }else {
+                if (airportService.saveAirport(airport)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("airport",airportService.getAirportById(airport.getAirportId()));
+            model.addAttribute("cityList", cityService.getAllCities());
+            model.addAttribute("type","Edit");
+            return "administration/addAirport";
+        }else{
+            if(airportService.isException(airport)){
+                model.addAttribute("message","Data is existed");
+            }else {
+                if (airportService.saveAirport(airport)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("airport",airportService.getAirportById(airport.getAirportId()));
+            model.addAttribute("cityList", cityService.getAllCities());
+            model.addAttribute("type","Add");
+            return "administration/addAirport";
+        }
+    }
+    @RequestMapping("/deleteAirport")
+    public String deleteAirport (@RequestParam("id") int id, Model model) {
+        if (airportService.deleteAirport(id)) {
+            model.addAttribute("message", "Delete successed.");
+        } else {
+            model.addAttribute("message", "Delete failed.");
+        }
+        model.addAttribute("airportList",airportService.getAllAirports());
+        return "administration/viewAirport";
+    }
+    @RequestMapping("/editAirport")
+    public String gotoEditAirportPage (@RequestParam("id") int id, Model model) {
+        model.addAttribute("airport", airportService.getAirportById(id));
+        model.addAttribute("cityList", cityService.getAllCities());
+        model.addAttribute("type", "Edit");
+        return "administration/addAirport";
+    }
+    // End Airport
 }
+

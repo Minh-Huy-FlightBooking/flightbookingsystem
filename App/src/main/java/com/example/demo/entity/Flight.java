@@ -41,8 +41,6 @@ public class Flight {
     private FlightRoute flightRoute;
     @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
     private List<Ticket> ticketList;
-    @OneToOne(mappedBy = "flight")
-    private Promotion promotion;
 
     public double getEconomyPrice() {
         return economyPrice;
@@ -114,14 +112,6 @@ public class Flight {
 
     public void setTicketList(List<Ticket> ticketList) {
         this.ticketList = ticketList;
-    }
-
-    public Promotion getPromotion() {
-        return promotion;
-    }
-
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
     }
 
     public String get_departureTime() {

@@ -39,6 +39,11 @@ public class SystemController {
         return "index";
     }
 
+    @RequestMapping(value = "/promo")
+    public String goToPromopage() {
+        return "promo";
+    }
+
     @RequestMapping(value = "/home")
     public String goToHome() {
         return "home";

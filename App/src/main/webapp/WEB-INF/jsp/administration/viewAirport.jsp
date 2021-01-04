@@ -24,7 +24,7 @@
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-body">
-                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Flight Route</small></h3>
+                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Airport</small></h3>
                 </div>
             </div>
         </div>
@@ -48,9 +48,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <h5 style="color: #333;font-weight: 600">Flight Route List&nbsp;&nbsp;&nbsp;
-                                <a href="addFlightRoute" title="thêm mới" class="btn btn-sm mycolor">
-                                    <i class="fa fa-plus"></i></a>
+                            <h5 style="color: #333;font-weight: 600">Airport List&nbsp;&nbsp;&nbsp;
+<%--                                <a href="/admin/addAirport" class="btn btn-sm mycolor">--%>
+<%--                                    <i class="fa fa-plus"></i></a>--%>
                             </h5>
                         </div>
                         <div class="col-sm-7">
@@ -69,32 +69,25 @@
                                 <thead>
                                 <tr align="center">
                                     <th>ID</th>
-                                    <th>Origin Airport</th>
-                                    <th>Destination Airport</th>
+                                    <th>Airport Name</th>
+                                    <th>City Name</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${flightRouteList}" var="f">
+                                <c:forEach items="${airportList}" var="a">
                                     <tr align="center">
-                                        <td>${f.routeId}</td>
-                                        <td>${f.originAirport.airportName}<br>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
-                                            <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
-                                            </svg>
-                                            ${f.originAirport.city.cityName}
-                                        </td>
-                                        <td>${f.destinationAirport.airportName}<br>
+                                        <td>${a.airportId}</td>
+                                        <td>${a.airportName}</td>
+                                        <td>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
                                                 <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
-                                            </svg>
-                                            ${f.destinationAirport.city.cityName}
+                                            </svg>   ${a.city.cityName}
                                         </td>
                                         <td>
-                                            <a href="editFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor"><i class='fa fa-pencil'></i></a>
-                                            <a href="deleteFlightRoute?id=${f.routeId}" class="btn btn-sm mycolor"><i class="fa fa-trash-o"></i></a>
+                                            <a href="/admin/editAirport?id=${a.airportId}" class="btn btn-sm mycolor"><i class='fa fa-pencil'></i></a>
+                                            <a href="/admin/deleteAirport?id=${a.airportId}" class="btn btn-sm mycolor"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -102,7 +95,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

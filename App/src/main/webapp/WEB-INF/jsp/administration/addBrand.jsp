@@ -28,7 +28,7 @@
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-body">
-                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Flight Route / ${type}</small></h3>
+                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Brand / ${type}</small></h3>
                 </div>
             </div>
         </div>
@@ -51,12 +51,12 @@
             <div class="container col-sm-6">
                 <div class="card border">
                     <div class="card-body ">
-                        <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
+                        <form:form action="handlingSaveBrand" modelAttribute="brand">
                             <div class="row">
                                 <c:if test="${message=='Save successed.'}">
                                     <div class="alert col-sm-12" style="background-color:#b7eb8f;color: #333">${message}</div>
                                 </c:if>
-                                <c:if test="${message=='Data is existed.'||message=='Invalid value.'||message=='Save failed.'}">
+                                <c:if test="${message=='Data is existed.'||message=='Save failed.'}">
                                     <div class="alert col-sm-12" style="background-color:#ffccc7;color: #333">${message}</div>
                                 </c:if>
                             </div>
@@ -65,30 +65,14 @@
                                     <tr>
                                         <th>ID</th>
                                         <td>
-                                            <form:input path="routeId" cssClass="form-control" readonly="true"/>
+                                            <form:input path="brandId" cssClass="form-control" readonly="true"/>
                                         </td>
                                     </tr>
                                 </c:if>
                                 <tr>
-                                    <th>Origin Airport</th>
+                                    <th>Brand Name</th>
                                     <td>
-                                        <select name="originAirport" id="originAirport" class="form-control" required>
-                                            <option disabled selected >Select Origin City</option>
-                                            <c:forEach var="origin" items="${originAirport}">
-                                                <option value="${origin.airportId}">${origin.city.cityName}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Destination Airport</th>
-                                    <td>
-                                        <select name="destinationAirport" id="destinationAirport" class="form-control">
-                                            <option disabled selected >Select Destination City</option>
-                                            <c:forEach var="destination" items="${destinationAirport}">
-                                                <option value="${destination.airportId}">${destination.city.cityName}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <form:input path="brandName" cssClass="form-control" required="true"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -96,7 +80,7 @@
                                     <td>
                                         <div class="button mt-2 d-flex flex-row align-items-center">
                                             <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
-                                            <a href="/admin/viewFlightRoute"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
+                                            <a href="/admin/viewBrand"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>

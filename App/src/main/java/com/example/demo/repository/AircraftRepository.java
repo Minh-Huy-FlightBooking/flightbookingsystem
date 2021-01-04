@@ -11,4 +11,5 @@ import java.util.List;
 public interface AircraftRepository extends CrudRepository<Aircraft, Integer> {
     Aircraft findByAircraftId(int aircraftId);
     boolean existsByModelAndBrand(String var1,Brand var2);
+    List<Aircraft> findByBrandAndAircraftIdNot(Brand brand,int id);
 }

@@ -11,7 +11,7 @@
 <html>
 
 <head>
-    <title></title>
+    <title>AirBook</title>
     <jsp:include page="css.jsp"/>
     <style>
         a.active{
@@ -87,7 +87,7 @@
     </script>
 </head>
 
-<body style="min-height: 1500px;font-family: 'Poppins', sans-serif;">
+<body style="min-height: 1500px;font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
 <%--fixed navbar--%>
 <nav class="navbar navbar-expand-md fixed-top bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
     <a class="navbar-brand" href="#" style="font-size: 40px;font-weight: 600;color: #f39c12">
@@ -102,7 +102,7 @@
                 <a class="nav-link" href="#">Flight</a>
             </li>
             <li class="nav-item py-3">
-                <a class="nav-link" href="#">Promo</a>
+                <a class="nav-link" href="/promo">Promo</a>
             </li>
             <li class="nav-item py-3">
                 <a class="nav-link" href="#">Order</a>
@@ -125,7 +125,7 @@
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner shadow-lg">
+        <div class="carousel-inner shadow-sm">
             <div class="carousel-item active">
                 <img src="https://cdn.airpaz.com/banner/find-cheap-flight-tickets-on-Airpaz.com-NL-3.jpg" class="img-fluid rounded-lg">
             </div>

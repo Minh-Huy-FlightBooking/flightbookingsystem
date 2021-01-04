@@ -30,4 +30,26 @@ public class AirportService {
         }
         return airports;
     }
+    public boolean saveAirport(Airport airport){
+        try{
+            airportRepository.save(airport);
+            return  true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+    public boolean deleteAirport(int id){
+        try {
+            airportRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean isException(Airport airport){
+        return airportRepository.existsByAirportName(airport.getAirportName());
+    }
+    public Airport getAirportById(int id){
+        return airportRepository.findByAirportId(id);
+    }
 }

@@ -28,7 +28,7 @@
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-body">
-                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Flight Route / ${type}</small></h3>
+                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Airport / ${type}</small></h3>
                 </div>
             </div>
         </div>
@@ -51,42 +51,42 @@
             <div class="container col-sm-6">
                 <div class="card border">
                     <div class="card-body ">
-                        <form:form action="handlingSaveFlightRoute" modelAttribute="flightRoute">
+                        <form:form action="handlingSaveAirport" modelAttribute="airport">
                             <div class="row">
                                 <c:if test="${message=='Save successed.'}">
                                     <div class="alert col-sm-12" style="background-color:#b7eb8f;color: #333">${message}</div>
                                 </c:if>
-                                <c:if test="${message=='Data is existed.'||message=='Invalid value.'||message=='Save failed.'}">
+                                <c:if test="${message=='Data is existed.'||message=='Save failed.'}">
                                     <div class="alert col-sm-12" style="background-color:#ffccc7;color: #333">${message}</div>
                                 </c:if>
                             </div>
                             <table class="table table-borderless">
-                                <c:if test="${type=='Edit'}">
+                                <c:if test="${type=='Edit'||type=='Add'}">
                                     <tr>
                                         <th>ID</th>
                                         <td>
-                                            <form:input path="routeId" cssClass="form-control" readonly="true"/>
+                                            <form:input path="airportId" cssClass="form-control" readonly="true"/>
                                         </td>
                                     </tr>
                                 </c:if>
                                 <tr>
-                                    <th>Origin Airport</th>
+                                    <th>Airport Name</th>
                                     <td>
-                                        <select name="originAirport" id="originAirport" class="form-control" required>
-                                            <option disabled selected >Select Origin City</option>
-                                            <c:forEach var="origin" items="${originAirport}">
-                                                <option value="${origin.airportId}">${origin.city.cityName}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <form:input path="airportName" cssClass="form-control" required="true"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Destination Airport</th>
+                                    <th>City Name</th>
                                     <td>
-                                        <select name="destinationAirport" id="destinationAirport" class="form-control">
-                                            <option disabled selected >Select Destination City</option>
-                                            <c:forEach var="destination" items="${destinationAirport}">
-                                                <option value="${destination.airportId}">${destination.city.cityName}</option>
+<%--                                        <form:select path="city" cssClass="form-control" required="true"/>--%>
+                                        <select name="city" id="city" class="form-control" required disabled>
+                                            <c:forEach items="${cityList}" var="city">
+                                                <c:if test="${airport!=null&&airport.city.cityId==city.cityId}">
+                                                    <option value="${city.cityId}" selected>${city.cityName}</option>
+                                                </c:if>
+                                                <c:if test="${airport.city.cityId!=city.cityId}">
+                                                    <option value="${city.cityId}">${city.cityName}</option>
+                                                </c:if>
                                             </c:forEach>
                                         </select>
                                     </td>
@@ -96,7 +96,7 @@
                                     <td>
                                         <div class="button mt-2 d-flex flex-row align-items-center">
                                             <input type="submit" class="btn btn-sm btn-outline-primary w-100" value="Save"/>
-                                            <a href="/admin/viewFlightRoute"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
+                                            <a href="/admin/viewAirport"class="btn btn-sm btn-outline-danger w-100 ml-2">Cancel</a>
                                         </div>
                                     </td>
                                 </tr>

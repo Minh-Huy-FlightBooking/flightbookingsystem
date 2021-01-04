@@ -39,9 +39,9 @@
                     <a href="/admin/viewFlight" class="list-group-item">Flight</a>
                     <a href="/admin/viewFlightRoute" class="list-group-item">FLight Route</a>
                     <a href="/admin/viewAircraft" class="list-group-item">Aircraft</a>
-                    <a href="#" class="list-group-item">Airport</a>
+                    <a href="/admin/viewAirport" class="list-group-item">Airport</a>
                     <a href="#" class="list-group-item">Customer</a>
-                    <a href="#" class="list-group-item" disabled>Brand</a>
+                    <a href="/admin/viewBrand" class="list-group-item" disabled>Brand</a>
                 </div>
             </ul>
         </div>

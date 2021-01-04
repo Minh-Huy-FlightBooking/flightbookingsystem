@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BrandRepository extends CrudRepository<Brand, Integer> {
+    boolean existsByBrandName(String var);
+    Brand findByBrandId(int id);
 }

@@ -47,7 +47,19 @@ public class AircraftService {
     }
 
     public boolean isException(Aircraft aircraft){
-        return aircraftRepository.existsByModelAndBrand(aircraft.getModel(),aircraft.getBrand());
+        boolean ex = false;
+        if (aircraftRepository.findByAircraftId(aircraft.getAircraftId())!=null){
+            for (Aircraft a : aircraftRepository.findByBrandAndAircraftIdNot(aircraft.getBrand(),aircraft.getAircraftId())){
+                if (aircraft.getModel().equals(a.getModel())){
+                    System.out.println(a.getModel());
+                    ex = true;
+                }
+            }
+        }
+        else {
+            if (aircraftRepository.existsByModelAndBrand(aircraft.getModel(),aircraft.getBrand())) ex = true;
+        }
+        return ex;
     }
     public Aircraft getAircraftById (int aircraftId){
         return aircraftRepository.findByAircraftId(aircraftId);
