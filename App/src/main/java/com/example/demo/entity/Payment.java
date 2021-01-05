@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "payment")
@@ -16,6 +19,14 @@ public class Payment {
 
     @Column(name = "session_id")
     private String sessionId;
+
+
+    @Column(name = "payment_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate paymentDate;
+
+    @Column(name = "total_payment")
+    private double totalPayment;
 
     @ManyToOne
     @JoinColumn(name = "credit_card_id")
@@ -33,6 +44,22 @@ public class Payment {
         this.status = status;
         this.sessionId = sessionId;
         this.creditCard = creditCard;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate (LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public double getTotalPayment() {
+        return totalPayment;
+    }
+
+    public void setTotalPayment(double totalPayment) {
+        this.totalPayment = totalPayment;
     }
 
     public String getSessionId() {

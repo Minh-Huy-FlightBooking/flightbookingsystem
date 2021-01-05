@@ -16,6 +16,21 @@ public class TicketService {
     @Autowired
     private TravelClassRepository travelClassRepository;
 
+    public boolean resetTicketValuesByBookingId (int bookingId) {
+        try {
+            List<Ticket> tickets = ticketRepository.findByBookingBookingId(bookingId);
+            for (Ticket t: tickets) {
+                t.setEnabled(true);
+                t.setBooking(null);
+                t.setPassenger(null);
+                ticketRepository.save(t);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public List<Ticket> getTicketsByBookingIdAndLowercaseLastName (int bookingId, String lastName) {
         return ticketRepository.findByBookingIdAndLowercaseLastName(bookingId, lastName);

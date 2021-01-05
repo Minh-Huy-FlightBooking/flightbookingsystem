@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.*;
+import com.example.demo.object.ReportRange;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Controller
@@ -33,6 +36,10 @@ public class AdminController {
     private FlightRouteService flightRouteService;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private BookingService bookingService;
+
+
 //-----------------------------------Home---------------------------------//
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage() {
@@ -423,7 +430,7 @@ public class AdminController {
     @RequestMapping("/deleteAirport")
     public String deleteAirport (@RequestParam("id") int id, Model model) {
         if (airportService.deleteAirport(id)) {
-            model.addAttribute("message", "Delete successed.");
+            model.addAttribute("message", "Delete successfully.");
         } else {
             model.addAttribute("message", "Delete failed.");
         }
@@ -436,6 +443,50 @@ public class AdminController {
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("type", "Edit");
         return "administration/addAirport";
+    }
+
+    /*Manage booking*/
+
+    @RequestMapping(value = "/viewBookingData", method = RequestMethod.GET)
+    public String goToBookingDataPage (Model model) {
+        model.addAttribute("bookingList",bookingService.getAllBookingsData());
+        model.addAttribute("reportRange", new ReportRange());
+        return "administration/viewBookings";
+    }
+
+    @RequestMapping(value = "/bookingReport", method = RequestMethod.GET)
+    public String goToBookingReportPage (Model model, ReportRange reportRange) {
+        List<Booking> bookings = bookingService.getAllBookingsByPaymentDateBetween(reportRange.getStartDate(), reportRange.getEndDate());
+
+        double totalPrice = 0;
+
+        for (Booking b: bookings) {
+            totalPrice += b.getPayment().getTotalPayment();
+        }
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("bookings", bookings);
+        return "administration/booking-report";
+    }
+
+    @RequestMapping(value = "/deleteBooking", method = RequestMethod.GET)
+    public String rejectBookingData (@RequestParam("bookingId") int bookingId, Model model) {
+        //Delete Ticket
+        boolean ticketDeleteState = ticketService.resetTicketValuesByBookingId(bookingId);
+        boolean bookingDeleteState = bookingService.deleteBookingByBookingId(bookingId);
+        if (ticketDeleteState && bookingDeleteState) {
+            model.addAttribute("message", "Delete successfully.");
+        } else {
+            model.addAttribute("message", "Delete failed.");
+        }
+        model.addAttribute("bookingList",bookingService.getAllBookingsData());
+        model.addAttribute("reportRange", new ReportRange());
+        return "administration/viewBookings";
+    }
+    @RequestMapping(value = "/viewABookingDetails", method = RequestMethod.GET)
+    public String viewABookingDetails (@RequestParam("bookingId") int bookingId, Model model) {
+        Booking booking = bookingService.getBookingByBookingId(bookingId);
+        model.addAttribute("bookingDetails", booking);
+        return "administration/viewBookingDetails";
     }
     // End Airport
 }
