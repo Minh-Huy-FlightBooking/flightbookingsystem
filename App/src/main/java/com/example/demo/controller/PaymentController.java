@@ -169,75 +169,82 @@ public class PaymentController {
                                 /////
 
                                 //Ticket Information
-                                for (PassengerInformation p : passengerInformationList) {
-                                    //try catch at this point
-                                    Passenger passenger = passengerService.getPassengerByPassportId(p.getPassportNumber());
-                                    String fullName = passenger.getFirstName() + " " + passenger.getLastName();
-                                    List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
-                                    if (departureSeatPossessions != null) {
-                                        for (SeatPossession s : departureSeatPossessions) {
-                                            if (fullName.equals(s.getPassengerName())) {
-                                                String seatCode = s.getSeatCode();
-                                                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
-                                                System.out.println(seatCode);
-                                                System.out.println(flightPicker.getDepartureTrip().getTravelClass() + "Error happened here !!!");
-                                                Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(departureFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass()));
+                                for (PassengerInformation p : passengerInformationList)
+                                {
+                                    if (!(p.getTitle().equals("infant"))) {
+                                        //try catch at this point
+                                        Passenger passenger = new Passenger();
+                                        if (!(p.getTitle().equals("infant"))){
+                                            passenger = passengerService.getPassengerByPassportId(p.getPassportNumber());
 
-                                                double departureTicketPrice = 0;
-                                                ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
-                                                if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
-                                                    departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
-                                                } else {
-                                                    departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
-                                                }
-                                                //based on this constructor --> (int ticketId, String seatCode, boolean enabled, Flight flight, Booking booking, Passenger passenger, double price, TicketType ticketType, TravelClass travelClass)
-
-                                                /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, departureTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
-                                                ticket.setEnabled(false);
-                                                ticket.setBooking(booking);
-                                                ticket.setPassenger(passenger);
-                                                ticket.setPrice(departureTicketPrice);
-
-                                                ticketService.updateTicketInformation(ticket);
-                                            }
                                         }
-                                    }
-                                    ///////
-
-                                    if (flightPicker.getTicketInformation().getTripType().equals("roundTrip")) {
-                                        Flight returnFlight = flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId());
-
-                                        List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
-                                        if (returnSeatPossessions != null) {
-                                            for (SeatPossession rs : returnSeatPossessions) {
-                                                if (fullName.equals(rs.getPassengerName())) {
-                                                    String seatCode = rs.getSeatCode();
+                                        String fullName = passenger.getFirstName() + " " + passenger.getLastName();
+                                        List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
+                                        if (departureSeatPossessions != null) {
+                                            for (SeatPossession s : departureSeatPossessions) {
+                                                if (fullName.equals(s.getPassengerName())) {
+                                                    String seatCode = s.getSeatCode();
                                                     seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
                                                     System.out.println(seatCode);
-                                                    Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(returnFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getReturnTrip().getTravelClass()));
+                                                    System.out.println(flightPicker.getDepartureTrip().getTravelClass() + "Error happened here !!!");
+                                                    Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(departureFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass()));
 
-                                                    double returnTicketPrice = 0;
+                                                    double departureTicketPrice = 0;
                                                     ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
                                                     if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
-                                                        returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                        departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
                                                     } else {
-                                                        returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                        departureTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
                                                     }
+                                                    //based on this constructor --> (int ticketId, String seatCode, boolean enabled, Flight flight, Booking booking, Passenger passenger, double price, TicketType ticketType, TravelClass travelClass)
 
-                                                    /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, returnTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
-                                                    //Update ticket information
+                                                    /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, departureTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
                                                     ticket.setEnabled(false);
                                                     ticket.setBooking(booking);
                                                     ticket.setPassenger(passenger);
-                                                    ticket.setPrice(returnTicketPrice);
+                                                    ticket.setPrice(departureTicketPrice);
 
                                                     ticketService.updateTicketInformation(ticket);
                                                 }
                                             }
                                         }
+                                        ///////
+
+                                        if (flightPicker.getTicketInformation().getTripType().equals("roundTrip")) {
+                                            Flight returnFlight = flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId());
+
+                                            List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
+                                            if (returnSeatPossessions != null) {
+                                                for (SeatPossession rs : returnSeatPossessions) {
+                                                    if (fullName.equals(rs.getPassengerName())) {
+                                                        String seatCode = rs.getSeatCode();
+                                                        seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
+                                                        System.out.println(seatCode);
+                                                        Ticket ticket = ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(returnFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getReturnTrip().getTravelClass()));
+
+                                                        double returnTicketPrice = 0;
+                                                        ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
+                                                        if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                        } else {
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                        }
+
+                                                        /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, returnTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
+                                                        //Update ticket information
+                                                        ticket.setEnabled(false);
+                                                        ticket.setBooking(booking);
+                                                        ticket.setPassenger(passenger);
+                                                        ticket.setPrice(returnTicketPrice);
+
+                                                        ticketService.updateTicketInformation(ticket);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-
+                                model.addAttribute("bookingId",booking.getBookingId());
                                 /*try {
                                     emailService.sendMail("tranvominh185@gmail.com", "Test Subject", "Test mail");
                                     System.out.println("Sent message successfully....");
@@ -249,8 +256,10 @@ public class PaymentController {
                         {
                             model.addAttribute("message", "Your Information filled in previously has something wrong...");
                             return "payment";
-                        }
+                        } finally {
+
                             return "payment-receipt";
+                        }
                     } else
                     {
                         model.addAttribute("creditCard", creditCard);

@@ -35,7 +35,12 @@ public class SystemController {
     private WebAPI webAPI;
 
     @RequestMapping(value = "/")
-    public String goToHomepage() {
+    public String goToHomepage(Model model, HttpServletRequest request) {
+        //This guy is used for ticket search engine
+        model.addAttribute("sessionId", request.getSession().getId());
+        System.out.println(request.getSession().getId());
+        model.addAttribute("ticketInformation", new TicketInformation());
+        /*----*/
         return "index";
     }
 
@@ -128,11 +133,10 @@ public class SystemController {
 
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
-        //my edit
         model.addAttribute("flightDeparture", flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
         model.addAttribute("flightReturn", flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
         //end
-
+        model.addAttribute("flightPicker", flightPicker);
         String tripType = "";
 
 
@@ -156,8 +160,10 @@ public class SystemController {
             //New Edit
             List<String> passengerNames = new ArrayList<>();
             for (PassengerInformation p: flightPicker.getPassengerInformation()){
-                passengerNames.add(p.getFirstName() + " " + p.getLastName());
-                System.out.println(p.getFirstName() + " " + p.getLastName());
+                if (!(p.getTitle().equals("infant"))) {
+                    passengerNames.add(p.getFirstName() + " " + p.getLastName());
+                    System.out.println(p.getFirstName() + " " + p.getLastName());
+                }
             }
             model.addAttribute("passengerNames", passengerNames);
 
@@ -176,16 +182,6 @@ public class SystemController {
     public String goToBookingDetails () {
         return "booking-details";
     }
-
-
-
-
-
-
-
-
-
-
 
     //For Date Time formatter
     @InitBinder

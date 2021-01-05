@@ -85,11 +85,147 @@
             $('.dropdown-menu').hide();
         });
     </script>
+
+    <%--this two scripts are used to auto suguest completion--%>
+    <%--<script type="text/javascript">
+        /*get trip type */
+
+        $(document).ready(function () {
+            sessionId = $('#sessionId').val();
+            $("#tripType").change(function () {
+                $(this).find("option:selected").each(function () {
+                    let optionValue = $(this).attr("value");
+                    if (optionValue == "oneWay") {
+                        $("#returnDate-container").hide();
+                    } else {
+                        $("#returnDate-container").show();
+                    }
+                });
+            }).change();
+
+            /*autocomplete for origin input*/
+            let value;
+            $("input#origin").on("keyup", function () {
+                value = $(this).val().toLowerCase();
+
+                /*Force user to enter origin first!!!*/
+                if ($('#destination').val() != '') {
+                    $('#destination').val('');
+                }
+                /*autocomplete*/
+                $("input#origin").autocomplete({
+                    width: 300,
+                    max: 10,
+                    delay: 0,
+                    minLength: 1,
+                    autoFocus: true,
+                    cacheLength: 1,
+                    scroll: true,
+                    highlight: false,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "origin",
+                            dataType: "json",
+                            data: request,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+                                let items = data;
+                                let data_filter = items.filter(origin => origin.toLowerCase().indexOf(value) > -1);
+                                response(data_filter);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus);
+                            }
+                        });
+                    }
+
+                });
+
+            });
+            /*Auto suggest for destination input*/
+            $("input#destination").on("keyup", function () {
+                let value2 = $(this).val().toLowerCase();
+                /*console.log(value2);*/
+                $("input#destination").autocomplete({
+                    width: 300,
+                    max: 10,
+                    delay: 0,
+                    minLength: 1,
+                    autoFocus: true,
+                    cacheLength: 1,
+                    scroll: true,
+                    highlight: false,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "destination/" + value.toString(),
+                            dataType: "json",
+                            data: request,
+                            success: function (data, textStatus, jqXHR) {
+                                let items2 = data;
+                                console.log(items2);
+                                let data_filter2 = items2.filter(origin => origin.toLowerCase().indexOf(value2) > -1);
+                                response(data_filter2);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus);
+                            }
+                        });
+                    }
+
+                });
+            });
+
+        });
+    </script>
+    <script>
+        let sessionId;
+
+        function saveFlightJsonData() {
+            let adults, children, infants;
+            let origin, destination, departureDate, returnDate, tripType;
+            origin = $('input#origin').val();
+            /*console.log(origin);*/
+            destination = $('input#destination').val();
+            console.log(destination);
+            departureDate = $('input#departureDate').val();
+            /*console.log(departureDate);*/
+            returnDate = $('input#returnDate').val();
+            console.log(returnDate);
+            adults = parseInt($('#adults').val());
+            children = parseInt($('#children').val());
+            infants = parseInt($('#infants').val());
+            tripType = $('#tripType').val();
+
+            flightPicker = {
+                ticketInformation: {
+                    origin: origin,
+                    destination: destination,
+                    tripType: tripType,
+                    departureDate: departureDate,
+                    returnDate: returnDate,
+                    adults: adults,
+                    children: children,
+                    infants: infants
+                },
+                departureTrip: {},
+                returnTrip: {},
+                passengerInformation: [],
+                totalPaymentAmount: 0,
+                contactInformation: {}
+            };
+            sessionId = $('#sessionId').val();
+            sessionStorage.setItem(sessionId, JSON.stringify(flightPicker));
+            console.log(flightPicker);
+            console.log(JSON.stringify(flightPicker));
+        }
+    </script>--%>
 </head>
 
 <body style="min-height: 1500px;font-family: 'Poppins', sans-serif;">
+<%--Session id is retrievied at this input--%>
+<input hidden type="text" value="${sessionId}" id="sessionId"/>
 <%--fixed navbar--%>
-<nav class="navbar navbar-expand-md fixed-top bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
+<nav class="navbar navbar-expand-md bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
     <a class="navbar-brand" href="#" style="font-size: 40px;font-weight: 600;color: #f39c12">
         Airpaz
     </a>
@@ -118,7 +254,7 @@
 </nav>
 <%--end nav--%>
 <%--slider--%>
-<div class="container-fluid px-0 carousel-container" style="margin-top: 75px">
+<div class="container-fluid px-0 carousel-container">
     <div id="myCarousel" class="carousel slide" style="width: 50%;margin-left: 22.5%;padding: 5% 0 5% 0" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -149,17 +285,18 @@
 </div>
 <%--end slider--%>
 <%--Search flight--%>
-<div class="container-fluid px-0 bg-white shadow" style="height: 10%">
-<%--    Choose flight style--%>
+<form:form action="ticketSearch" method="post" modelAttribute="ticketInformation">
+<div class="container-fluid px-0 bg-white shadow" style="height: 150px">
+<%--    Choose flight style // Trip type--%>
     <div class="row" style="height: 42%;margin: 0 9% 0 9%">
         <div class="custom-control custom-radio pl-0" style="margin: 1rem 0 0 0">
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx" checked>
-                <label class="custom-control-label" for="customRadio">One way</label>
+                <form:input path="tripType" type="text" class="custom-control-input" id="oneWay" name="example" value="oneWay" checked="true" />
+                <label class="custom-control-label" for="oneWay">One way</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
-                <label class="custom-control-label" for="customRadio2">Round Trip</label>
+                <%--<form:input path="tripType" type="radio" class="custom-control-input" id="roundTrip" name="example" value="roundTrip"/>--%>
+               <%-- <label class="custom-control-label" for="roundTrip">Round Trip</label>--%>
             </div>
         </div>
     </div>
@@ -168,7 +305,7 @@
     <div class="row d-flex border rounded-lg" style="height: 47%;margin: 0 9% 0 9%">
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">From</small></label>
-            <input type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Departure City">
+            <form:input path="origin" type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Departure City"/>
             <div class="dropdown-menu keep-open p-0" style="width: 259%;height: 440%;overflow-y: auto;user-select: none;">
 <%--                departure city--%>
                 <div class="dropdown-item pt-2 pl-3" style="background-color: #f7f7f7">
@@ -176,7 +313,7 @@
                         <label style="font-size: 18px;line-height: 22px;font-weight: 700;color: #59595b">Select Departure City</label>
                     </div>
                 </div>
-                <div class="dropdown-item p-0">
+               <%-- <div class="dropdown-item p-0">
                     <div class="d-flex flex-row align-items-center" style="width: 100%;height: 68px">
                         <div class="col-sm-2">
                             <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
@@ -211,13 +348,13 @@
                         </div>
                         <div class="col-sm-2">HUI</div>
                     </div>
-                </div>
+                </div>--%>
 <%--                end departure--%>
             </div>
         </div>
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">To</small></label>
-            <input type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Destination City">
+            <form:input path="destination" type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Destination City"/>
             <div class="dropdown-menu keep-open p-0" style="width: 259%;height: 440%;overflow-y: auto;user-select: none;">
 <%--                destination city--%>
                 <div class="dropdown-item pt-2 pl-3" style="background-color: #f7f7f7">
@@ -225,7 +362,7 @@
                         <label class="font-weight-bold" style="font-size: 18px;line-height: 22px;font-weight: 700;color: #59595b">Select Destination City</label>
                     </div>
                 </div>
-                <div class="dropdown-item p-0">
+                <%--<div class="dropdown-item p-0">
                     <div class="d-flex flex-row align-items-center" style="width: 100%;height: 68px">
                         <div class="col-sm-2">
                             <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
@@ -260,7 +397,7 @@
                         </div>
                         <div class="col-sm-2">HUI</div>
                     </div>
-                </div>
+                </div>--%>
 <%--                end destination city--%>
             </div>
         </div>
@@ -273,17 +410,19 @@
         <%--        Date departure and return in Round Trip--%>
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">Departure Date</small></label>
-            <input type="date" class="form-control form-control-sm border-0">
+            <%--<input type="date" class="form-control form-control-sm border-0">--%>
+            <form:input path="departureDate" type="date" id="departureDate" class="form-control form-control-sm border-0"/>
         </div>
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">Return Date</small></label>
-            <input type="date" class="form-control form-control-sm border-0">
+            <%--<input type="date" class="form-control form-control-sm border-0">--%>
+            <form:input path="returnDate" type="date" id="returnDate" class="form-control form-control-sm border-0"/>
         </div>
         <%--        end departure and return--%>
 <%--                Travel Class--%>
         <div class="form-group col-sm-1 border-right h-100">
             <label><small class="form-text text-muted">Class</small></label>
-            <input  type="text" id="travelClass" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" placeholder="All" readonly="true"/>
+            <form:input path="travelClass" type="text" id="travelClass" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" placeholder="All" readonly="true"/>
             <div class="dropdown-menu keep-open p-0" style="width: 120px;user-select: none;">
                 <div class="dropdown-item pt-2" style="background-color: #f7f7f7">
                     <div class="d-flex flex-column" style="width: 100%;height: 48px">
@@ -311,6 +450,7 @@
 <%--                Passenger--%>
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">Passenger</small></label>
+            <%--For display purpose--%>
             <input type="text" id="quantity-passengers" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" value="1 Passenger" readonly>
             <div class="dropdown-menu keep-open p-0" style="width: 400px;user-select: none;">
                 <div class="list-group-item pt-2" style="background-color: #f7f7f7">
@@ -328,7 +468,8 @@
                             <div class="d-flex flex-row">
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 minus-adults disabled" style="height: 28px"><i class="fa fa-minus"></i></button>
 <%--                                <form:input path="adults" id="adults" type="text" class="form-control mx-1 text-center bg-white" style="height: 28px" value="0" readonly="true"/>--%>
-                                <input  type="text" id="quantity-adults" class="form-control mx-1 text-center bg-white" style="height: 28px" value="1">
+                                <form:input path="adults" id="adults" class="form-control mx-1 text-center bg-white" style="height: 28px" value="1"/>
+                                <%--<input  type="text" id="adults" class="form-control mx-1 text-center bg-white" style="height: 28px" value="1">--%>
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 plus-adults" style="height: 28px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -338,14 +479,15 @@
                 <div class="dropdown-item p-0">
                     <div class="d-flex flex-row align-items-center p-1 mt-2" style="width: 100%;height: 51px">
                         <div class="col-sm-7">
-                            <label style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" class="pt-2">Childrens</label>
+                            <label style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" class="pt-2">Children</label>
                             <p class="text-muted" style="font-size: 12px;line-height: 14px;font-weight: 400;">Age 2-11</p>
                         </div>
                         <div class="col-sm-5">
                             <div class="d-flex flex-row">
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 minus-childrens disabled" style="height: 28px"><i class="fa fa-minus"></i></button>
 <%--                                <form:input path="children" id="childrens" type="text" class="form-control mx-1 text-center bg-white" style="height: 28px;" value="0" readonly="true" />--%>
-                                <input type="text" id="quantity-childrens" class="form-control mx-1 text-center bg-white" style="height: 28px;" value="0" readonly="true" />
+                                <form:input path="children" id="children" class="form-control mx-1 text-center bg-white" style="height: 28px;" value="0" readonly="true"/>
+                                <%--<input type="text" id="children" class="form-control mx-1 text-center bg-white" style="height: 28px;" value="0" readonly="true" />--%>
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 plus-childrens" style="height: 28px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -362,7 +504,8 @@
                             <div class="d-flex flex-row">
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 minus-infants disabled" style="height: 28px"><i class="fa fa-minus"></i></button>
 <%--                                <form:input path="infant" id="infants" type="text" class="form-control mx-1 text-center bg-white" style="height: 28px" value="0"  readonly="true"/>--%>
-                                <input type="text" id="quantity-infants" class="form-control mx-1 text-center bg-white" style="height: 28px" value="0"  readonly="true"/>
+                                <form:input path="infant" id="infants" class="form-control mx-1 text-center bg-white" style="height: 28px" value="0"  readonly="true"/>
+                                <%--<input type="text" id="infants" class="form-control mx-1 text-center bg-white" style="height: 28px" value="0"  readonly="true"/>--%>
                                 <button type="button" class="btn btn-sm btn-outline-danger py-0 plus-infants" style="height: 28px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -373,7 +516,7 @@
         <%--        end passenger--%>
 <%--        Button Search--%>
         <div class="form-group col-sm-1 rounded-right h-100 p-0">
-            <button type="submit" class="btn btn-danger rounded-0 border-0 h-100 w-100" placeholder="Select Return City">
+            <button type="submit" onclick="saveFlightJsonData()" class="btn btn-danger rounded-0 border-0 h-100 w-100" placeholder="Select Return City">
                 <i class="fa fa-search fa-2x"></i>
             </button>
         </div>
@@ -381,6 +524,7 @@
     </div>
 <%--    end enter infor flight--%>
 </div>
+</form:form>
 <%--end search flight--%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/js/home-page.js"></script>
