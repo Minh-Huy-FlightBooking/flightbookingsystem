@@ -1,17 +1,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 01/05/21
-  Time: 10:53 AM
+  Time: 3:30 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Booking Data</title>
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
     <jsp:include page="_head.jsp"/>
+    <script>
+        let totalPrice;
+        $(document).ready(function () {
+        })
+
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -54,16 +65,16 @@
                                 <a href="/admin/addBrand" title="Add a new Ticket" class="btn btn-sm mycolor">
                                     <i class="fa fa-plus"></i></a>
                                 <span>
-                                    <form:form modelAttribute="reportRange" action="bookingReport" method="get">
-                                        <form:input path="startDate" type="date" alt="date-from" placeholder="Date From"/>
-                                        <form:input path="endDate" type="date" alt="date-to" placeholder="Date To"/>
+                                    <form>
+                                        <input type="date" alt="date-from" placeholder="Date From">
+                                        <input type="date" alt="date-to" placeholder="Date To">
                                         <button type="submit">Search</button>
-                                    </form:form>
+                                    </form>
                                 </span>
                             </h5>
                         </div>
                         <div class="col-sm-7">
-                            <c:if test="${message=='Delete successfully.'}">
+                            <c:if test="${message=='Delete successed.'}">
                                 <div class="alert" style="background-color:#b7eb8f;color: #333">${message}</div>
                             </c:if>
                             <c:if test="${message=='Delete failed.'}">
@@ -73,50 +84,76 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-12 ">
-                            <table id="example" class="table table-hover table-bordered w-100">
+                        <div class="col-sm-12 " id="report-table-container">
+                            <table id="booking-table-container" class="table table-hover table-bordered w-100">
                                 <thead>
                                 <tr align="center">
+                                    <th>ID</th>
                                     <th>
-                                        Booking <br/> ID
+                                        Payment <br/> Status
                                     </th>
                                     <th>
-                                        Flight <br/> ID
+                                        Payment <br/> Method
                                     </th>
-                                    <th>Payment <br/> Status</th>
-                                    <th>Payment <br/> Method</th>
-                                    <th>Email</th>
-                                    <th>Name</th>
-                                    <th>Payment <br/> Date</th>
-                                    <th>Total <br/> Payment</th>
-                                    <th>Edit</th>
+                                    <th>
+                                        Card <br/> Number
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Payment <br/> Date
+                                    </th>
+                                    <th>
+                                        Total <br/> Payment
+                                    </th>
+                                    <%--<th>Edit</th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${bookingList}" var="b">
+                                <c:forEach items="${bookings}" var="b">
                                     <tr align="center">
                                         <td>${b.bookingId}</td>
                                         <td>${b.payment.status}</td>
                                         <td>${b.payment.paymentMethod}</td>
+                                        <td>${b.payment.creditCard.cardNumber}</td>
                                         <td>${b.guest.email}</td>
                                         <td>
-                                                ${b.guest.firstName}  ${b.guest.lastName}
+                                                ${b.guest.firstName} &nbsp; ${b.guest.lastName}
                                             <br/>
                                                 ${b.guest.guestId}
                                         </td>
                                         <td>
-                                            ${b.payment.paymentId}
-                                            ${b.payment.paymentDate}
+                                                ${b.payment.paymentId}
+                                                ${b.payment.paymentDate}
                                         </td>
                                         <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>
-                                        <td>
-                                            <a href="/admin/viewABookingDetails?bookingId=${b.bookingId}" class="btn btn-sm mycolor"><i
+                                       <%-- <td>
+                                            <a href="/admin/deleteBooking?id=${b.bookingId}" class="btn btn-sm mycolor"><i
                                                     class="fa fa-trash-o"></i></a>
-                                            <a href="/admin/deleteBooking?bookingId=${b.bookingId}" class="btn btn-sm mycolor"><i
-                                                    class="fa fa-trash-o"></i></a>
-                                        </td>
+                                        </td>--%>
                                     </tr>
                                 </c:forEach>
+                                <tr>
+                                    <td colspan="7">Total:</td>
+                                    <td id="totalPrice">${totalPrice} <span class="unit">$</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td>
+                                        <button onclick="">
+                                            Print Pdf
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button onclick="">
+                                            Get Excel
+                                        </button>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

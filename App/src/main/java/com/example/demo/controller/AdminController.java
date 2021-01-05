@@ -405,7 +405,7 @@ public class AdminController {
     @RequestMapping("/deleteAirport")
     public String deleteAirport (@RequestParam("id") int id, Model model) {
         if (airportService.deleteAirport(id)) {
-            model.addAttribute("message", "Delete successed.");
+            model.addAttribute("message", "Delete successfully.");
         } else {
             model.addAttribute("message", "Delete failed.");
         }
