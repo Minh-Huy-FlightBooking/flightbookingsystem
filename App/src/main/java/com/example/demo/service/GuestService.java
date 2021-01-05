@@ -22,26 +22,4 @@ public class GuestService {
     public void saveNewGuestData (Guest guest){
         guestRepository.save(guest);
     }
-    public boolean saveGuest(Guest guest){
-        try{
-            guestRepository.save(guest);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-    public boolean deleteGuest(Guest guest){
-        try {
-            guestRepository.delete(guest);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-    public Guest getGuestById(int id){
-        return guestRepository.findByGuestId(id);
-    }
-    public List<Guest> getAllGuest(){
-        return (List<Guest>) guestRepository.findAll();
-    }
 }

@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Flight;
-import com.example.demo.entity.Ticket;
 import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.restAPI.WebAPI;
 import com.example.demo.service.FlightService;
-import com.example.demo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -34,16 +32,10 @@ public class SystemController {
     private FlightService flightService;
 
     @Autowired
-    private TicketService ticketService;
-
+    private WebAPI webAPI;
 
     @RequestMapping(value = "/")
-    public String goToHomepage(Model model, HttpServletRequest request) {
-        //This guy is used for ticket search engine
-        model.addAttribute("sessionId", request.getSession().getId());
-        System.out.println(request.getSession().getId());
-        model.addAttribute("ticketInformation", new TicketInformation());
-        /*----*/
+    public String goToHomepage() {
         return "index";
     }
 
@@ -141,10 +133,11 @@ public class SystemController {
 
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
+        //my edit
         model.addAttribute("flightDeparture", flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()));
         model.addAttribute("flightReturn", flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId()));
         //end
-        model.addAttribute("flightPicker", flightPicker);
+
         String tripType = "";
 
 
@@ -168,10 +161,8 @@ public class SystemController {
             //New Edit
             List<String> passengerNames = new ArrayList<>();
             for (PassengerInformation p: flightPicker.getPassengerInformation()){
-                if (!(p.getTitle().equals("infant"))) {
-                    passengerNames.add(p.getFirstName() + " " + p.getLastName());
-                    System.out.println(p.getFirstName() + " " + p.getLastName());
-                }
+                passengerNames.add(p.getFirstName() + " " + p.getLastName());
+                System.out.println(p.getFirstName() + " " + p.getLastName());
             }
             model.addAttribute("passengerNames", passengerNames);
 
@@ -186,21 +177,18 @@ public class SystemController {
     }
 
 
-    /*http://localhost:8080/bookingDetails?booking.bookingId=14&passenger.lastName=kai*/
-    @RequestMapping(value = "/bookingDetails", method = RequestMethod.GET)
-    public String goToBookingDetails (Ticket ticket, Model model) {
-        System.out.println(ticket.getPassenger().getLastName());
-        System.out.println(ticket.getBooking().getBookingId());
-        List<Ticket> tickets = ticketService.getTicketsByBookingIdAndLowercaseLastName(ticket.getBooking().getBookingId(), ticket.getPassenger().getLastName());
-        model.addAttribute("tickets", tickets);
-        return "booking-details";
-    }
 
-    @RequestMapping(value = "/bookingSearch", method = RequestMethod.GET)
-    public String goToBookingSearch (Model model) {
-        model.addAttribute("ticket", new Ticket());
-        return "booking-search-test";
-    }
+
+
+
+
+
+
+
+
+
+
+
     //For Date Time formatter
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
