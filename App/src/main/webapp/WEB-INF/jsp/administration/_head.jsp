@@ -22,6 +22,8 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <%--    <script src="<c:url value="/resources/js/adminHome.js"/>"></script>--%>
 <%--    <link rel="stylesheet" href="<c:url value="/resources/css/adminHome.css"/>"/>--%>
     <style>
@@ -69,5 +71,7 @@
             $('#example').DataTable();
         } );
     </script>
+    <script src="/resources/js/tableToExcel.js"></script>
+    <script src="/resources/js/tableToPDF.js"></script>
 </head>
 </html>
