@@ -186,6 +186,7 @@ public class SystemController {
     }
 
 
+    /*http://localhost:8080/bookingDetails?booking.bookingId=14&passenger.lastName=kai*/
     @RequestMapping(value = "/bookingDetails", method = RequestMethod.GET)
     public String goToBookingDetails (Ticket ticket, Model model) {
         System.out.println(ticket.getPassenger().getLastName());
