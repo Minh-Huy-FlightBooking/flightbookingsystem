@@ -16,6 +16,10 @@ public class TicketService {
     @Autowired
     private TravelClassRepository travelClassRepository;
 
+
+    public List<Ticket> getTicketsByBookingIdAndLowercaseLastName (int bookingId, String lastName) {
+        return ticketRepository.findByBookingIdAndLowercaseLastName(bookingId, lastName);
+    }
     public List<Ticket> getTicketsByFlightIdAndTravelClass(int flightId, String travelClass) {
         return ticketRepository.findByFlightFlightIdAndTravelClassClassName(flightId, travelClass);
     }

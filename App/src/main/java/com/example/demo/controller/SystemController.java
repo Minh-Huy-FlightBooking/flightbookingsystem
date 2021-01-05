@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Flight;
+import com.example.demo.entity.Ticket;
 import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.restAPI.WebAPI;
 import com.example.demo.service.FlightService;
+import com.example.demo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,8 @@ public class SystemController {
     private FlightService flightService;
 
     @Autowired
-    private WebAPI webAPI;
+    private TicketService ticketService;
+
 
     @RequestMapping(value = "/")
     public String goToHomepage(Model model, HttpServletRequest request) {
@@ -184,10 +187,19 @@ public class SystemController {
 
 
     @RequestMapping(value = "/bookingDetails", method = RequestMethod.GET)
-    public String goToBookingDetails () {
+    public String goToBookingDetails (Ticket ticket, Model model) {
+        System.out.println(ticket.getPassenger().getLastName());
+        System.out.println(ticket.getBooking().getBookingId());
+        List<Ticket> tickets = ticketService.getTicketsByBookingIdAndLowercaseLastName(ticket.getBooking().getBookingId(), ticket.getPassenger().getLastName());
+        model.addAttribute("tickets", tickets);
         return "booking-details";
     }
 
+    @RequestMapping(value = "/bookingSearch", method = RequestMethod.GET)
+    public String goToBookingSearch (Model model) {
+        model.addAttribute("ticket", new Ticket());
+        return "booking-search-test";
+    }
     //For Date Time formatter
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
