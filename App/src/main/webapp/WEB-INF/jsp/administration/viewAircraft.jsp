@@ -34,14 +34,7 @@
     <div class="row">
         <div class="col-sm-2">
             <ul class="list-group">
-                <div class="list-group">
-                    <a href="/admin/viewFlight" class="list-group-item">Flight</a>
-                    <a href="/admin/viewFlightRoute" class="list-group-item" >FLight Route</a>
-                    <a href="/admin/viewAircraft" class="list-group-item">Aircraft</a>
-                    <a href="/admin/viewAirport" class="list-group-item">Airport</a>
-                    <a href="#" class="list-group-item">Customer</a>
-                    <a href="/admin/viewBrand" class="list-group-item" disabled>Brand</a>
-                </div>
+                <jsp:include page="sidebar.jsp"/>
             </ul>
         </div>
         <div class="col-sm-10">
@@ -71,6 +64,7 @@
                                 <tr align="center">
                                     <th scope="col">Id</th>
                                     <th scope="col">Model</th>
+                                    <th scope="col">Logo Airline</th>
                                     <th scope="col">Total Economy Seats</th>
                                     <th scope="col">Total Business Seats</th>
                                     <th scope="col">Brand</th>
@@ -80,15 +74,15 @@
                                 <tbody>
                                 <c:forEach var="a" items="${aircraft}">
                                     <tr align="center">
-                                        <td scope="row">${a.aircraftId}</td>
-                                        <td>${a.model}</td>
-                                        <td>${a.total_economy}</td>
-                                        <td>${a.total_business}</td>
-                                        <td>${a.brand.brandName}</td>
-                                        <td>
+                                        <td scope="row" style="vertical-align: middle">${a.aircraftId}</td>
+                                        <td style="vertical-align: middle">${a.model}</td>
+                                        <td style="vertical-align: middle"><img src="${a.logo_airline}" alt="logo" width="100px" height="100px"></td>
+                                        <td style="vertical-align: middle">${a.total_economy}</td>
+                                        <td style="vertical-align: middle">${a.total_business}</td>
+                                        <td style="vertical-align: middle">${a.brand.brandName}</td>
+                                        <td style="vertical-align: middle">
                                             <a href="/admin/editAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mt-1 mycolor" title="Edit"><i class='fa fa-pencil'></i></a>
                                             <a href="/admin/deleteAircraft?aircraftId=${a.aircraftId}" class="btn btn-sm mycolor mt-1" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -100,5 +94,6 @@
         </div>
     </div>
 </div>
+<br><br><br>
 </body>
 </html>

@@ -30,7 +30,7 @@
             color: #59595b;
             text-align: center;
         }
-        #login-btn{
+        .login-btn{
             background-color: #ffffff;
             font-weight: 600;
             color: #9a9a9d;
@@ -39,7 +39,7 @@
             line-height: 17px;
             padding: 10px 15px;
         }
-        #login-btn:hover{
+        .login-btn:hover{
             background-color: #f2f2f2;
             border-color: transparent;
             color: #9a9a9d;
@@ -73,6 +73,9 @@
             line-height: 17px;
             color: #59595b;
         }
+        .card:hover{
+            box-shadow: 0 4px 8px rgba(0,0,0,.18), 0 0 4px rgba(0,0,0,.15);
+        }
     </style>
     <script>
         $(function () {
@@ -87,11 +90,11 @@
     </script>
 </head>
 
-<body style="min-height: 1500px;font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
+<body style="min-height: 1000px;font-family: 'Poppins', sans-serif;background-color: #ffffff">
 <%--fixed navbar--%>
-<nav class="navbar navbar-expand-md fixed-top bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
+<nav class="navbar navbar-expand-md bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
     <a class="navbar-brand" href="#" style="font-size: 40px;font-weight: 600;color: #f39c12">
-        Airpaz
+        Airbook
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -99,7 +102,7 @@
     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item py-3 active">
-                <a class="nav-link" href="#">Flight</a>
+                <a class="nav-link" href="/">Flight</a>
             </li>
             <li class="nav-item py-3">
                 <a class="nav-link" href="/promo">Promo</a>
@@ -107,18 +110,15 @@
             <li class="nav-item py-3">
                 <a class="nav-link" href="#">Order</a>
             </li>
-            <li class="nav-item py-3">
-                <a class="nav-link" href="#">Booking</a>
-            </li>
         </ul>
         <div class="mt-2 mt-md-0">
-            <a href="/login" class="btn my-2 my-sm-0 shadow-sm" id="login-btn">Login</a>
+            <a href="/login" class="btn my-2 my-sm-0 shadow-sm login-btn">Login</a>
         </div>
     </div>
 </nav>
 <%--end nav--%>
 <%--slider--%>
-<div class="container-fluid px-0 carousel-container" style="margin-top: 75px">
+<div class="container-fluid px-0 carousel-container">
     <div id="myCarousel" class="carousel slide" style="width: 50%;margin-left: 22.5%;padding: 5% 0 5% 0" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -149,7 +149,7 @@
 </div>
 <%--end slider--%>
 <%--Search flight--%>
-<div class="container-fluid px-0 bg-white shadow" style="height: 10%">
+<div class="container-fluid px-0 bg-white shadow-sm" style="height: 150px">
 <%--    Choose flight style--%>
     <div class="row" style="height: 42%;margin: 0 9% 0 9%">
         <div class="custom-control custom-radio pl-0" style="margin: 1rem 0 0 0">
@@ -382,6 +382,71 @@
 <%--    end enter infor flight--%>
 </div>
 <%--end search flight--%>
+<br><br>
+<div class="container mt-3">
+    <div class="row">
+        <h5 style="color: #59595b"><strong>Recommended for you</strong></h5>
+    </div>
+    <br>
+    <div class="row">
+        <c:forEach begin="1" end="6">
+            <div class="col-sm-4 rounded-lg" style="margin-bottom: 50px">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-dark font-weight-bold" style="font-size: 20px;line-height: 17px;font-weight: 700;">${promo.eventName}</p>
+                            </div>
+                        </div>
+                        <div class="row px-3">
+                            <div class="col">
+                                <p>From <strong>Da Nang</strong><br>&#9992; <strong>Ho Chi Minh</strong></p>
+                                <hr>
+                                <small>Start from</small>
+                                <h5><strong>$ 4.03</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row px-3 pt-3">
+                            <a href="#" class="btn btn-lg w-100 my-sm-0 shadow-sm login-btn">See more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+<br>
+<div class="container flex-column">
+    <div class="row">
+        <div class="col">
+            <h5 style="color: #59595b"><strong>Airbook Airline Partners</strong></h5>
+        </div>
+    </div>
+    <br>
+    <div class="row" style="height: 100px">
+        <div class="col">
+            <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/BL.png" height="100%" width="100px" alt="">
+            <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/QH.png" height="100%" width="100px" alt="">
+            <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/VJ.png" height="100%" width="100px" alt="">
+            <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/VN.png" height="100%" width="100px" alt="">
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10">
+            <p><strong style="color: #59595b">Cheap Popular Routes : </strong></p>
+            <c:forEach begin="1" end="6">
+                <small style="line-height: 17px"> Flights From Da Nang to Ha Noi ,</small>
+            </c:forEach>
+        </div>
+    </div>
+</div>
+<br><br>
+<footer>
+    <jsp:include page="footer.jsp"/>
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/js/home-page.js"></script>
 <script>
