@@ -2,12 +2,14 @@ package com.example.demo.restAPI;
 
 import com.example.demo.entity.Airport;
 import com.example.demo.entity.Flight;
+import com.example.demo.entity.Ticket;
 import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PaymentInformation;
 import com.example.demo.object.SeatPossession;
 import com.example.demo.service.AirportService;
 import com.example.demo.service.FlightRouteService;
 import com.example.demo.service.FlightService;
+import com.example.demo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/")
@@ -30,6 +34,8 @@ public class WebAPI {
     @Autowired
     private AirportService airportService;
 
+    @Autowired
+    private TicketService ticketService;
 
     @RequestMapping(value = "/origin", method = RequestMethod.GET)
     public Object getOrigins() {
@@ -52,17 +58,17 @@ public class WebAPI {
         System.out.println(flightPicker.getDepartureTrip().getTravelClass());
         System.out.println(flightPicker.getReturnTrip().getTravelClass());
         session.setAttribute(session.getId(), flightPicker);
-        /*List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
-        if (departureSeatPossessions != null) {
-            for (SeatPossession s : departureSeatPossessions) {
-                String seatCode = s.getSeatCode();
-                System.out.println(s.getPassengerName() + ", " + seatCode);
-                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
-                System.out.println(seatCode);
-                System.out.println("I am added");
-            }
-        }*/
         return flightPicker;
+    }
+
+    @RequestMapping(value = "/seatStatus/{flightId}/{travelClass}", method = RequestMethod.GET)
+    public Object getSeatStatus (@PathVariable("flightId") int flightId, @PathVariable("travelClass") String travelClass) {
+        List<Ticket> tickets = ticketService.getTicketsByFlightIdAndTravelClass(flightId, travelClass);
+        Map<String, Boolean> ticketStatus = new HashMap<>();
+        for (Ticket t: tickets) {
+            ticketStatus.put(t.getSeatCode(), t.isEnabled());
+        }
+        return ticketStatus;
     }
 
 }

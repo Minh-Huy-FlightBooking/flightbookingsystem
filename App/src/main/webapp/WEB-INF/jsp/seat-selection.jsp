@@ -13,7 +13,8 @@
         let currentPassengerSelected;
         let departureSeatPossession = new Array();
         let returnSeatPossession = new Array();
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             let previousObject = sessionStorage.getItem(sessionId.value);
             flightData = JSON.parse(previousObject);
             console.log(flightData);
@@ -29,68 +30,130 @@
 
             let alphabet = new Array("A", "B", "C", "", "D", "E", "F");
             console.log(alphabet[1]);
+            //Get Seats' Status for departure Trip
+            $.ajax({
+                url: "seatStatus/" + flightData.departureTrip.departureFlightId + "/" + flightData.departureTrip.travelClass,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    console.log(result["A1"]);
+                    for (let i = 1; i < tr.length; i++) {
+                        for (let j = 0; j < (numberOfColumns / (tr.length - 1)); j++) {
+                            td = tr[i].getElementsByTagName("td")[j];
+                            td.setAttribute("id", "departure-seatCode-" + alphabet[j] + i);
+                            if (j != 3) {
+                                /*td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getDepartureSeatCode('" + "departure-seatCode-" + alphabet[j] + i + "')");*/
+                                $('#departure-seatCode-' + alphabet[j] + i + ' span button').attr("onclick", "getDepartureSeatCode('" + "departure-seatCode-" + alphabet[j] + i + "')");
+                                //Check the seat state
+                                let currentSeat = alphabet[j] + i;
+                                console.log("Current Seat Code : " + currentSeat);
+                                let seatState = result[currentSeat];
+                                console.log(seatState);
+                                if (seatState == false) {
+                                    $('#departure-seatCode-' + alphabet[j] + i + ' span button').attr("disabled", "true");
+                                } else if (seatState == undefined) {
+                                    $('#departure-seatCode-' + alphabet[j] + i).attr("hidden","true");
+                                }
+                                //Print text here
+                                td.append("" + alphabet[j] + i);
+                                let key = "departure-seatCode-" + alphabet[j] + i;
+                                seatBookedData.push({key: key, value: true});
+                            }
+                            if (j == 3) {
+                                td.innerHTML = "" + i;
+                            }
+                        }
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+            })
 
             /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
-            for (let i = 1; i < tr.length; i++) {
-                for (let j = 0; j < (numberOfColumns / (tr.length - 1)); j++) {
-                    td = tr[i].getElementsByTagName("td")[j];
-                    td.setAttribute("id", "departure-seatCode-" + alphabet[j] + i);
-                    if (j != 3) {
-                        td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getDepartureSeatCode('" + "departure-seatCode-" + alphabet[j] + i + "')");
-                        td.append("" + alphabet[j] + i);
-                        let key = "departure-seatCode-" + alphabet[j] + i;
-                        seatBookedData.push({key: key, value: true});
-                    }
-                    if (j == 3) {
-                        td.innerHTML = "" + i;
-                    }
-                }
-            }
+
             console.log(seatBookedData);
 
-            //Auto fill id and value for return seats
-            //Number of Rows and number of columns per row
-            let numberOfColumns2 = $('#return-table .return-seat-container td').length;
-            console.log(numberOfColumns2);
-            let table2 = document.getElementById("return-table");
-            let tr2 = table2.getElementsByTagName("tr");
-            let td2;
-            console.log(tr2.length);
-            console.log(numberOfColumns2 / (tr2.length - 1));
 
-            /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
-            for (let i = 1; i < tr2.length; i++) {
-                for (let j = 0; j < (numberOfColumns2 / (tr2.length - 1)); j++) {
-                    td2 = tr2[i].getElementsByTagName("td")[j];
-                    td2.setAttribute("id", "return-seatCode-" + alphabet[j] + i);
-                    if (j != 3) {
-                        td2.getElementsByTagName("span").namedItem("return-seat-item").setAttribute("onclick", "getReturnSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
-                        td2.append("" + alphabet[j] + i);
-                        let key = "return-seatCode-" + alphabet[j] + i;
-                        seatBookedData.push({key: key, value: true});
+            if (flightData.ticketInformation.tripType == "roundTrip") {
+                //Auto fill id and value for return seats
+                //Number of Rows and number of columns per row
+                let numberOfColumns2 = $('#return-table .return-seat-container td').length;
+                console.log(numberOfColumns2);
+                let table2 = document.getElementById("return-table");
+                let tr2 = table2.getElementsByTagName("tr");
+                let td2;
+                console.log(tr2.length);
+                console.log(numberOfColumns2 / (tr2.length - 1));
+
+                //Get Seats' Status for return Trip
+                $.ajax({
+                    url: "seatStatus/" + flightData.returnTrip.returnFlightId+ "/" + flightData.returnTrip.travelClass,
+                    dataType: "json",
+                    success: function (result) {
+                        console.log(result);
+                        for (let i = 1; i < tr2.length; i++) {
+                            for (let j = 0; j < (numberOfColumns2 / (tr2.length - 1)); j++) {
+                                td2 = tr2[i].getElementsByTagName("td")[j];
+                                td2.setAttribute("id", "return-seatCode-" + alphabet[j] + i);
+                                if (j != 3) {
+                                    /*td2.getElementsByTagName("span").namedItem("return-seat-item").setAttribute("onclick", "getReturnSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
+                                    td2.append("" + alphabet[j] + i);
+                                    let key = "return-seatCode-" + alphabet[j] + i;
+                                    seatBookedData.push({key: key, value: true});*/
+
+                                    /*td.getElementsByTagName("span").namedItem("departure-seat-item").setAttribute("onclick", "getDepartureSeatCode('" + "departure-seatCode-" + alphabet[j] + i + "')");*/
+                                    $('#return-seatCode-' + alphabet[j] + i + ' span button').attr("onclick", "getDepartureSeatCode('" + "return-seatCode-" + alphabet[j] + i + "')");
+                                    //Check the seat state
+                                    let currentSeat = alphabet[j] + i;
+                                    console.log("Current Seat Code : " + currentSeat);
+                                    let seatState = result[currentSeat];
+                                    console.log(seatState);
+                                    if (seatState == false) {
+                                        $('#return-seatCode-' + alphabet[j] + i + ' span button').attr("disabled", "true");
+                                    } else if (seatState == undefined) {
+                                        $('#return-seatCode-' + alphabet[j] + i).attr("hidden","true");
+                                    }
+                                    //Print text here
+                                    td2.append("" + alphabet[j] + i);
+                                    let key = "return-seatCode-" + alphabet[j] + i;
+                                    seatBookedData.push({key: key, value: true});
+                                }
+                                if (j == 3) {
+                                    td2.innerHTML = "" + i;
+                                }
+                            }
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
                     }
-                    if (j == 3) {
-                        td2.innerHTML = "" + i;
-                    }
+                })
+
+                /*td.getElementsByTagName("button").namedItem("seat-item").setAttribute("onclick", "getSeatCode('" + "seatCode-" + alphabet[j] + i + "')");*/
+
+
+                let returnNames = document.getElementById("returnNames").getElementsByTagName("li");
+                console.log(returnNames.length);
+                for (let i = 1; i <= returnNames.length; i++) {
+                    $('#returnNames li').eq(i - 1).attr("id", "returnPassenger-" + i);
+                    $('#returnNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('returnPassenger-" + i + "')");
                 }
+
+
             }
+
             console.log(seatBookedData);
             //Generate Id for passenger Turn
+
             let departureNames = document.getElementById("departureNames").getElementsByTagName("li");
             console.log(departureNames.length);
-            for (let i = 1; i <= departureNames.length; i++){
+            for (let i = 1; i <= departureNames.length; i++) {
                 $('#departureNames li').eq(i - 1).attr("id", "departurePassenger-" + i);
                 $('#departureNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('departurePassenger-" + i + "')");
             }
 
-            let returnNames = document.getElementById("returnNames").getElementsByTagName("li");
-            console.log(returnNames.length);
-            for (let i = 1; i <= returnNames.length; i++) {
-                $('#returnNames li').eq(i - 1).attr("id", "returnPassenger-" + i);
-                $('#returnNames li').eq(i - 1).attr("onclick", "getSeatSelectionTurn('returnPassenger-" + i + "')");
-            }
         })
-
         let seatBookedData = [];
 
         function getDepartureSeatCode(seatCode) {
@@ -248,29 +311,58 @@
                                             </tr>
                                             </thead>
                                             <tbody class="departure-seat-container">
-                                            <c:forEach begin="1" end="${flightDeparture.aircraft.total_economy/6+1}">
-                                                <tr class="seat-row">
-                                                    <c:forEach begin="1" end="3">
-                                                        <td align="center" style="padding: 0.0%">
+                                            <c:choose>
+                                                <c:when test="${flightPicker.departureTrip.travelClass == 'economy'}">
+                                                    <c:forEach begin="1" end="${flightDeparture.aircraft.total_economy/6+1}">
+                                                        <tr class="seat-row">
+                                                            <c:forEach begin="1" end="3">
+                                                                <td align="center" style="padding: 0.0%">
                                                             <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
-                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none;">
+                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none;" name="departure-seat-button">
                                                                     <img src="/resources/image/logo/s-couch.png" width="100%"/>
                                                                 </button>
                                                             </span>
-                                                        </td>
-                                                    </c:forEach>
-                                                    <td width="12%" style="text-align: center"></td>
-                                                    <c:forEach begin="1" end="3">
-                                                        <td align="center" style="padding: 0.0%">
+                                                                </td>
+                                                            </c:forEach>
+                                                            <td width="12%" style="text-align: center"></td>
+                                                            <c:forEach begin="1" end="3">
+                                                                <td align="center" style="padding: 0.0%">
                                                             <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
-                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none;">
+                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none; ">
                                                                     <img src="/resources/image/logo/s-couch.png" width="100%">
                                                                 </button>
                                                             </span>
-                                                        </td>
+                                                                </td>
+                                                            </c:forEach>
+                                                        </tr>
                                                     </c:forEach>
-                                                </tr>
-                                            </c:forEach>
+                                                </c:when>
+                                                <c:when test="${flightPicker.departureTrip.travelClass == 'business'}">
+                                                    <c:forEach begin="1" end="${flightDeparture.aircraft.total_business/6+1}">
+                                                        <tr class="seat-row">
+                                                            <c:forEach begin="1" end="3">
+                                                                <td align="center" style="padding: 0.0%">
+                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
+                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none;" name="departure-seat-button">
+                                                                    <img src="/resources/image/logo/s-couch.png" width="100%"/>
+                                                                </button>
+                                                            </span>
+                                                                </td>
+                                                            </c:forEach>
+                                                            <td width="12%" style="text-align: center"></td>
+                                                            <c:forEach begin="1" end="3">
+                                                                <td align="center" style="padding: 0.0%">
+                                                            <span class="btn btn-sm btn-outline departure-seat-item" name="departure-seat-item">
+                                                                <button class="btn btn-info" style="padding: 0; border: none; background: none; ">
+                                                                    <img src="/resources/image/logo/s-couch.png" width="100%">
+                                                                </button>
+                                                            </span>
+                                                                </td>
+                                                            </c:forEach>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:when>
+                                            </c:choose>
                                             </tbody>
                                         </table>
                                     </div>
@@ -280,7 +372,8 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${flightReturn!=null}">
+                <c:if test="${flightReturn != null}">
+
                     <div id="return" class="container tab-pane fade"><br>
                         <div class="card shadow">
                             <div class="card-body">
@@ -317,29 +410,59 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="return-seat-container">
-                                                <c:forEach begin="1" end="${flightReturn.aircraft.total_economy/6+1}">
-                                                    <tr class="seat-row">
-                                                        <c:forEach begin="1" end="3">
-                                                            <td align="center" style="padding: 0.0%">
+                                                <c:choose>
+                                                    <c:when test="${flightPicker.departureTrip.travelClass == 'economy'}">
+                                                        <c:forEach begin="1" end="${flightReturn.aircraft.total_economy/6+1}">
+                                                            <tr class="seat-row">
+                                                                <c:forEach begin="1" end="3">
+                                                                    <td align="center" style="padding: 0.0%">
                                                                 <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
-                                                                    <button class="btn btn-info" style="padding: 0; border: none; background: none;">
+                                                                    <button class="btn btn-info" style="padding: 0; border: none; background: none; " name="return-seat-button">
                                                                         <img src="/resources/image/logo/s-couch.png" width="100%"/>
                                                                     </button>
                                                                 </span>
-                                                            </td>
-                                                        </c:forEach>
-                                                        <td width="12%" style="text-align: center"></td>
-                                                        <c:forEach begin="1" end="3">
-                                                            <td align="center" style="padding: 0.0%">
+                                                                    </td>
+                                                                </c:forEach>
+                                                                <td width="12%" style="text-align: center"></td>
+                                                                <c:forEach begin="1" end="3">
+                                                                    <td align="center" style="padding: 0.0%">
                                                                 <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
                                                                     <button class="btn btn-info"  style="padding: 0; border: none; background: none;">
                                                                         <img src="/resources/image/logo/s-couch.png" width="100%"/>
                                                                     </button>
                                                                 </span>
-                                                            </td>
+                                                                    </td>
+                                                                </c:forEach>
+                                                            </tr>
                                                         </c:forEach>
-                                                    </tr>
-                                                </c:forEach>
+                                                    </c:when>
+                                                    <c:when test="${flightPicker.departureTrip.travelClass == 'business'}">
+                                                        <c:forEach begin="1" end="${flightReturn.aircraft.total_business/6+1}">
+                                                            <tr class="seat-row">
+                                                                <c:forEach begin="1" end="3">
+                                                                    <td align="center" style="padding: 0.0%">
+                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
+                                                                    <button class="btn btn-info" style="padding: 0; border: none; background: none; " name="return-seat-button">
+                                                                        <img src="/resources/image/logo/s-couch.png" width="100%"/>
+                                                                    </button>
+                                                                </span>
+                                                                    </td>
+                                                                </c:forEach>
+                                                                <td width="12%" style="text-align: center"></td>
+                                                                <c:forEach begin="1" end="3">
+                                                                    <td align="center" style="padding: 0.0%">
+                                                                <span class="btn btn-sm btn-outline return-seat-item" name="return-seat-item">
+                                                                    <button class="btn btn-info"  style="padding: 0; border: none; background: none;">
+                                                                        <img src="/resources/image/logo/s-couch.png" width="100%"/>
+                                                                    </button>
+                                                                </span>
+                                                                    </td>
+                                                                </c:forEach>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
+
                                                 </tbody>
                                             </table>
                                         </div>

@@ -279,8 +279,8 @@
             <label><small class="form-text text-muted">Return Date</small></label>
             <input type="date" class="form-control form-control-sm border-0">
         </div>
-        <%--        end departure and return--%>
-<%--                Travel Class--%>
+        <%-- end departure and return--%>
+        <%-- Travel Class--%>
         <div class="form-group col-sm-1 border-right h-100">
             <label><small class="form-text text-muted">Class</small></label>
             <input  type="text" id="travelClass" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" placeholder="All" readonly="true"/>

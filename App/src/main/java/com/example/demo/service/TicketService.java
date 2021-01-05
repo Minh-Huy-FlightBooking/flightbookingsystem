@@ -16,6 +16,15 @@ public class TicketService {
     @Autowired
     private TravelClassRepository travelClassRepository;
 
+
+    public List<Ticket> getTicketsByBookingIdAndLowercaseLastName (int bookingId, String lastName) {
+        return ticketRepository.findByBookingIdAndLowercaseLastName(bookingId, lastName);
+    }
+    public List<Ticket> getTicketsByFlightIdAndTravelClass(int flightId, String travelClass) {
+        return ticketRepository.findByFlightFlightIdAndTravelClassClassName(flightId, travelClass);
+    }
+
+
     // Tickets are automatically generated when flight is created --> who books tickets is filled in the ticket with their information
     public void updateTicketInformation (Ticket ticket) {
         ticketRepository.save(ticket);
