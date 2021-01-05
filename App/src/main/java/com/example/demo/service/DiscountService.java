@@ -13,4 +13,13 @@ public class DiscountService {
     private DiscountRepository discountRepository;
 
     public List<Discount> getAllDiscount(){return (List<Discount>) discountRepository.findAll();}
+
+    public boolean saveDiscount(Discount discount){
+        try{
+            discountRepository.save(discount);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

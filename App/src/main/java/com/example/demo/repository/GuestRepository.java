@@ -16,4 +16,5 @@ public interface GuestRepository extends CrudRepository<Guest, Integer> {
             "and g.email like %:email%")*/
     List<Guest> findAllByFirstNameLikeAndLastNameLikeAndPhoneNumberLikeAndEmailLike(String firstName, String lastName, String phoneNumber, String email);
     Guest findByFirstNameAndLastNameAndPhoneNumberAndEmail(String firstName, String lastName, String phoneNumber, String email);
+    Guest findByGuestId(int id);
 }

@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.*;
-import com.example.demo.object.ReportRange;
+import com.example.demo.repository.AccountRepository;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -14,8 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Controller
@@ -37,9 +35,17 @@ public class AdminController {
     @Autowired
     private CityService cityService;
     @Autowired
-    private BookingService bookingService;
-
-
+    private PromotionService promotionService;
+    @Autowired
+    private DiscountService discountService;
+    @Autowired
+    private TicketTypeService ticketTypeService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private GuestService guestService;
+    @Autowired
+    private UserRoleService userRoleService;
 //-----------------------------------Home---------------------------------//
     @RequestMapping(value = "/adminHome", method = RequestMethod.GET)
     public String goToAdministratorPage() {
@@ -277,43 +283,12 @@ public class AdminController {
             model.addAttribute("type","Add");
             return "administration/addFlight";
         }
-//        if(flightService.isException(flight))
-//        {
-//            model.addAttribute("message", "Invalid value OR Data is existed.");
-//            model.addAttribute("flight", new Flight());
-//            model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
-//            model.addAttribute("aircraft", aircraftService.getAllAircraft());
-//            return "administration/addFlight";
-//        }else{
-//            if (flightService.getFlightById(flight.getFlightId())!=null){
-//                if(flightService.saveFlight(flight)){
-//                    model.addAttribute("message","Save successed.");
-//                }
-//                else {
-//                    model.addAttribute("message", "Save failed.");
-//                }
-//                model.addAttribute("flight", flightService.getFlightById(flight.getFlightId()));
-//                model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
-//                model.addAttribute("aircraft", aircraftService.getAllAircraft());
-//                return "administration/addFlight";
-//            }else{
-//                if(flightService.saveFlight(flight)){
-//                    model.addAttribute("message","Save successed.");
-//                }
-//                else {
-//                    model.addAttribute("message", "Save failed.");
-//                }
-//                model.addAttribute("flight", new Flight());
-//                model.addAttribute("flightRouteList", flightRouteService.getAllFlightRoute());
-//                model.addAttribute("aircraft", aircraftService.getAllAircraft());
-//                return "administration/addFlight";
-//            }
-//        }
     }
     // For Date time formatter!!!
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
         final DateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS'Z'");
+//        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS'Z'");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(timeFormat, true));
     }
     // test ajax
@@ -413,7 +388,7 @@ public class AdminController {
             return "administration/addAirport";
         }else{
             if(airportService.isException(airport)){
-                model.addAttribute("message","Data is existed");
+                model.addAttribute("message","Data is existed.");
             }else {
                 if (airportService.saveAirport(airport)){
                     model.addAttribute("message","Save successed.");
@@ -444,50 +419,211 @@ public class AdminController {
         model.addAttribute("type", "Edit");
         return "administration/addAirport";
     }
+    // End Airport
+    //-----------------------------------Promotion---------------------------------//
 
-    /*Manage booking*/
-
-    @RequestMapping(value = "/viewBookingData", method = RequestMethod.GET)
-    public String goToBookingDataPage (Model model) {
-        model.addAttribute("bookingList",bookingService.getAllBookingsData());
-        model.addAttribute("reportRange", new ReportRange());
-        return "administration/viewBookings";
+    @RequestMapping(value = "/viewPromotion")
+    public String gotoViewPromotionPage (Model model) {
+        model.addAttribute("promotionList", promotionService.getAllPromotions());
+        return "administration/viewPromotion";
+    }
+    @RequestMapping("/addPromotion")
+    public String gotoAddPromotionPage(Model model) {
+        model.addAttribute("promotion",new Promotion());
+        model.addAttribute("type","Add");
+        return "administration/addPromotion";
     }
 
-    @RequestMapping(value = "/bookingReport", method = RequestMethod.GET)
-    public String goToBookingReportPage (Model model, ReportRange reportRange) {
-        List<Booking> bookings = bookingService.getAllBookingsByPaymentDateBetween(reportRange.getStartDate(), reportRange.getEndDate());
-
-        double totalPrice = 0;
-
-        for (Booking b: bookings) {
-            totalPrice += b.getPayment().getTotalPayment();
+    @RequestMapping("/handlingSavePromotion")
+    public String handlingSavePromotion(Promotion promotion, Model model) {
+        if (promotionService.getPromotionById(promotion.getPromotionId())!=null){
+            if(promotionService.isException(promotion)){
+                model.addAttribute("message","Invalid value.");
+            }else {
+                if (promotionService.savePromotion(promotion)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("promotion",promotionService.getPromotionById(promotion.getPromotionId()));
+            model.addAttribute("discount",new Discount());
+            model.addAttribute("promoList",promotionService.getAllPromotions());
+            model.addAttribute("type","Edit");
+            return "administration/addPromotion";
+        }else{
+            if(promotionService.isException(promotion)){
+                model.addAttribute("message","Data is existed.");
+            }else {
+                if (promotionService.savePromotion(promotion)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("promotion",new Promotion());
+            model.addAttribute("type","Add");
+            return "administration/addPromotion";
         }
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("bookings", bookings);
-        return "administration/booking-report";
     }
-
-    @RequestMapping(value = "/deleteBooking", method = RequestMethod.GET)
-    public String rejectBookingData (@RequestParam("bookingId") int bookingId, Model model) {
-        //Delete Ticket
-        boolean ticketDeleteState = ticketService.resetTicketValuesByBookingId(bookingId);
-        boolean bookingDeleteState = bookingService.deleteBookingByBookingId(bookingId);
-        if (ticketDeleteState && bookingDeleteState) {
-            model.addAttribute("message", "Delete successfully.");
+    @RequestMapping("/deletePromotion")
+    public String deletePromotion (@RequestParam("id") int id, Model model) {
+        if (promotionService.deletePromotion(id)) {
+            model.addAttribute("message", "Delete successed.");
         } else {
             model.addAttribute("message", "Delete failed.");
         }
-        model.addAttribute("bookingList",bookingService.getAllBookingsData());
-        model.addAttribute("reportRange", new ReportRange());
-        return "administration/viewBookings";
+        model.addAttribute("promotionList",promotionService.getAllPromotions());
+        return "administration/viewPromotion";
     }
-    @RequestMapping(value = "/viewABookingDetails", method = RequestMethod.GET)
-    public String viewABookingDetails (@RequestParam("bookingId") int bookingId, Model model) {
-        Booking booking = bookingService.getBookingByBookingId(bookingId);
-        model.addAttribute("bookingDetails", booking);
-        return "administration/viewBookingDetails";
+    @RequestMapping("/editPromotion")
+    public String gotoEditPromotionPage (@RequestParam("id") int id, Model model) {
+        model.addAttribute("promotion", promotionService.getPromotionById(id));
+        model.addAttribute("discount",new Discount());
+        model.addAttribute("promoList",promotionService.getAllPromotions());
+        model.addAttribute("type", "Edit");
+        return "administration/addPromotion";
     }
-    // End Airport
+    @RequestMapping("/handlingSaveDiscount")
+    public String saveDiscount(Discount discount){
+        discountService.saveDiscount(discount);
+        return "redirect:/admin/editPromotion?id=" + discount.getPromotion().getPromotionId();
+    }
+    // End Promotion
+//-----------------------------------TicketType---------------------------------//
+
+    @RequestMapping(value = "/viewTicketType")
+    public String gotoViewTicketTypePage (Model model) {
+        model.addAttribute("ticketTypeList", ticketTypeService.getAllTicketTypes());
+        return "administration/viewTicketType";
+    }
+    @RequestMapping("/addTicketType")
+    public String gotoAddTicketTypePage(Model model) {
+        model.addAttribute("ticketType",new TicketType());
+        model.addAttribute("type","Add");
+        return "administration/addTicketType";
+    }
+
+    @RequestMapping("/handlingSaveTicketType")
+    public String handlingSaveTicketType(TicketType ticketType, Model model) {
+        if (ticketTypeService.getTicketTypeById(ticketType.getTicketTypeId())!=null){
+            if(ticketTypeService.isException(ticketType)){
+                model.addAttribute("message","Data is existed.");
+            }else {
+                if (ticketTypeService.saveTicketType(ticketType)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("ticketType",ticketTypeService.getTicketTypeById(ticketType.getTicketTypeId()));
+            model.addAttribute("type","Edit");
+            return "administration/addTicketType";
+        }else{
+            if(ticketTypeService.isException(ticketType)){
+                model.addAttribute("message","Data is existed");
+            }else {
+                if (ticketTypeService.saveTicketType(ticketType)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("ticketType", new TicketType());
+            model.addAttribute("type","Add");
+            return "administration/addTicketType";
+        }
+    }
+    @RequestMapping("/deleteTicketType")
+    public String deleteTicketType (@RequestParam("id") int id, Model model) {
+        if (ticketTypeService.deleteTicketType(id)) {
+            model.addAttribute("message", "Delete successed.");
+        } else {
+            model.addAttribute("message", "Delete failed.");
+        }
+        model.addAttribute("ticketTypeList",ticketTypeService.getAllTicketTypes());
+        return "administration/viewBrand";
+    }
+    @RequestMapping("/editTicketType")
+    public String gotoEditTicketTypePage (@RequestParam("id") int id, Model model) {
+        model.addAttribute("ticketType", ticketTypeService.getTicketTypeById(id));
+        model.addAttribute("type", "Edit");
+        return "administration/addTicketType";
+    }
+    // End TicketType
+//-----------------------------------Account---------------------------------//
+    @RequestMapping(value = "/viewAccount")
+    public String gotoViewAccountPage (Model model) {
+        model.addAttribute("accountList", accountService.getAllAccounts());
+        return "administration/viewAccount";
+    }
+    @RequestMapping("/addAccount")
+    public String gotoAddAccountPage(Model model) {
+        model.addAttribute("account",new Account());
+        model.addAttribute("roles", userRoleService.getAllRoles());
+        model.addAttribute("type","Add");
+        return "administration/addAccount";
+    }
+    @RequestMapping("/handlingSaveAccount")
+    public String handlingSaveAccount(Account account, Model model) {
+        if (accountService.getAccountById(account.getAccountId())!=null){
+            if(accountService.isException(account)){
+                model.addAttribute("message","Data is existed.");
+            }else {
+                if (accountService.saveAccount(account)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("account",accountService.getAccountById(account.getAccountId()));
+            if (accountService.getAccountById(account.getAccountId()).getGuest()!=null){
+                model.addAttribute("guest", accountService.getAccountById(account.getAccountId()).getGuest());
+            }else model.addAttribute("guest", new Guest());
+            model.addAttribute("roles", userRoleService.getAllRoles());
+            model.addAttribute("type","Edit");
+            return "administration/addAccount";
+        }else{
+            if(accountService.isException(account)){
+                model.addAttribute("message","Data is existed");
+            }else {
+                if (accountService.saveAccount(account)){
+                    model.addAttribute("message","Save successed.");
+                }else {
+                    model.addAttribute("message","Save failed.");
+                }
+            }
+            model.addAttribute("account",new Account());
+            model.addAttribute("roles", userRoleService.getAllRoles());
+            model.addAttribute("type","Add");
+            return "administration/addAccount";
+        }
+    }
+    @RequestMapping("/deleteAccount")
+    public String deleteAccount (@RequestParam("id") int id, Model model) {
+        if (accountService.deleteAccount(id)) {
+            model.addAttribute("message", "Delete successed.");
+        } else {
+            model.addAttribute("message", "Delete failed.");
+        }
+        model.addAttribute("accountlist",accountService.getAllAccounts());
+        return "administration/viewAccount";
+    }
+    @RequestMapping("/editAccount")
+    public String gotoEditAccountPage (@RequestParam("id") int id, Model model) {
+        model.addAttribute("account", accountService.getAccountById(id));
+        if (accountService.getAccountById(id).getGuest()!=null){
+            model.addAttribute("guest", accountService.getAccountById(id).getGuest());
+        }else model.addAttribute("guest", new Guest());
+        model.addAttribute("roles", userRoleService.getAllRoles());
+        model.addAttribute("type", "Edit");
+        return "administration/addAccount";
+    }
+    @RequestMapping("/handlingSaveGuest")
+    public String saveGuest(Guest guest){
+        guestService.saveGuest(guest);
+        return "redirect:/admin/editAccount?id="+guest.getAccount().getAccountId();
+    }
+    // End Account
 }
 
