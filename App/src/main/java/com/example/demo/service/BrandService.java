@@ -29,4 +29,24 @@ public class BrandService {
         }
         return aircraftBrands;
     }
+    public Brand getBrandById(int id){return brandRepository.findByBrandId(id);}
+    public boolean saveBrand(Brand brand){
+        try {
+            brandRepository.save(brand);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean deleteBrand(int id){
+        try {
+            brandRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean isException(Brand brand){
+        return brandRepository.existsByBrandName(brand.getBrandName());
+    }
 }

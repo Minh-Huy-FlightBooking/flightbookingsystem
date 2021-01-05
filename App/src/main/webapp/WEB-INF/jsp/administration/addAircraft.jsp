@@ -38,9 +38,9 @@
                 <a href="/admin/viewFlight" class="list-group-item">Flight</a>
                 <a href="/admin/viewFlightRoute" class="list-group-item">FLight Route</a>
                 <a href="/admin/viewAircraft" class="list-group-item">Aircraft</a>
-                <a href="#" class="list-group-item">Airport</a>
+                <a href="/admin/viewAirport" class="list-group-item">Airport</a>
                 <a href="#" class="list-group-item">Customer</a>
-                <a href="#" class="list-group-item" disabled>Brand</a>
+                <a href="/admin/viewBrand" class="list-group-item" disabled>Brand</a>
             </div>
         </ul>
     </div>
@@ -62,7 +62,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <td>
-                                        <form:input path="aircraftId" readonly="true" class="form-control" placeholder=""/>
+                                        <form:input path="aircraftId" readonly="true" class="form-control" />
                                     </td>
                                 </tr>
                             </c:if>
@@ -73,15 +73,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Total business</th>
+                                <th>Total Economy</th>
                                 <td>
-                                    <form:input path="total_business" class="form-control" placeholder="Email"/>
+                                    <form:input path="total_economy" class="form-control" />
                                 </td>
                             </tr>
                             <tr>
-                                <th>Total Economy</th>
+                                <th>Total business</th>
                                 <td>
-                                    <form:input path="total_economy" class="form-control" placeholder="Password"/>
+                                    <form:input path="total_business" class="form-control" />
                                 </td>
                             </tr>
                             <tr>
@@ -89,7 +89,12 @@
                                 <td>
                                     <select name="brand.brandId" id="brandId" class="form-control">
                                         <c:forEach items="${brands}" var="brand">
-                                            <option value="${brand.brandId}">${brand.brandName}</option>
+                                            <c:if test="${aircraft.brand==brand}">
+                                                <option value="${brand.brandId}" selected>${brand.brandName}</option>
+                                            </c:if>
+                                            <c:if test="${aircraft.brand!=brand}">
+                                                <option value="${brand.brandId}">${brand.brandName}</option>
+                                            </c:if>
                                         </c:forEach>
                                     </select>
                                 </td>

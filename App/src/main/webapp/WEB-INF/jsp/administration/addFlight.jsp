@@ -38,9 +38,9 @@
                     <a href="/admin/viewFlight" class="list-group-item">Flight</a>
                     <a href="/admin/viewFlightRoute" class="list-group-item">FLight Route</a>
                     <a href="/admin/viewAircraft" class="list-group-item">Aircraft</a>
-                    <a href="#" class="list-group-item">Airport</a>
+                    <a href="/admin/viewAirport" class="list-group-item">Airport</a>
                     <a href="#" class="list-group-item">Customer</a>
-                    <a href="#" class="list-group-item" disabled>Brand</a>
+                    <a href="/admin/viewBrand" class="list-group-item" disabled>Brand</a>
                 </div>
             </ul>
         </div>
@@ -72,7 +72,12 @@
 <%--                                        <form:select id="flightRouteId" path="flightRoute"  cssClass="form-control" items="${flightRouteList}" required="true"/>--%>
                                         <select name="flightRoute" id="flightRouteId" class="form-control" required>
                                             <c:forEach var="route" items="${flightRouteList}">
-                                                <option value="${route.routeId}">${route.originAirport.airportName} &#9992; ${route.destinationAirport.airportName}</option>
+                                                <c:if test="${flight!=null&&flight.flightRoute.routeId==route.routeId}">
+                                                    <option value="${route.routeId}" selected>${route.originAirport.city.cityName} &#9992; ${route.destinationAirport.city.cityName}</option>
+                                                </c:if>
+                                                <c:if test="${flight.flightRoute.routeId!=route.routeId}">
+                                                    <option value="${route.routeId}">${route.originAirport.city.cityName} &#9992; ${route.destinationAirport.city.cityName}</option>
+                                                </c:if>
                                             </c:forEach>
                                         </select>
                                     </td>
@@ -98,13 +103,13 @@
                                 <tr>
                                     <th>Economy Price</th>
                                     <td>
-                                        <form:input path="economyPrice" cssClass="form-control" required="true"/>
+                                        <form:input type="text" path="economyPrice" cssClass="form-control" required="true"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Business Price</th>
                                     <td>
-                                        <form:input path="businessPrice" cssClass="form-control" required="true"/>
+                                        <form:input type="text" path="businessPrice" cssClass="form-control" required="true"/>
                                     </td>
                                 </tr>
                                 <tr>

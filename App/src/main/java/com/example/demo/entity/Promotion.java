@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "promotion")
@@ -14,15 +15,17 @@ public class Promotion {
     @Column(name = "event_name")
     private String eventName;
 
-    @Column(name = "discount_amount")
-    private double discountAmount;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    @Column(name = "end_date_of_event")
-    private LocalDate endDateOfEvent;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
-    @OneToOne
-    @JoinColumn(name = "flight_id")
-    private Flight flight;
+    @Column(name = "image")
+    private String image;
+
+    @OneToMany(mappedBy = "promotion")
+    private List<Discount> discounts;
 
     public Promotion() {
     }
@@ -43,27 +46,35 @@ public class Promotion {
         this.eventName = eventName;
     }
 
-    public double getDiscountAmount() {
-        return discountAmount;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDiscountAmount(double discountAmount) {
-        this.discountAmount = discountAmount;
+    public String getImage() {
+        return image;
     }
 
-    public LocalDate getEndDateOfEvent() {
-        return endDateOfEvent;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setEndDateOfEvent(LocalDate endDateOfEvent) {
-        this.endDateOfEvent = endDateOfEvent;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public Flight getFlight() {
-        return flight;
+    public List<Discount> getDiscounts() {
+        return discounts;
     }
 
-    public void setFlight(Flight flight) {
-        this.flight = flight;
+    public void setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
