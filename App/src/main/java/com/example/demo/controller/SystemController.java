@@ -5,7 +5,9 @@ import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.restAPI.WebAPI;
+import com.example.demo.service.AircraftService;
 import com.example.demo.service.FlightService;
+import com.example.demo.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -30,18 +32,28 @@ import java.util.List;
 public class SystemController {
     @Autowired
     private FlightService flightService;
-
+    @Autowired
+    private PromotionService promotionService;
+    @Autowired
+    private AircraftService aircraftService;
     @Autowired
     private WebAPI webAPI;
 
     @RequestMapping(value = "/")
-    public String goToHomepage() {
+    public String goToHomepage(Model model) {
+        model.addAttribute("aircraftList",aircraftService.getAllAircraft());
         return "index";
     }
 
     @RequestMapping(value = "/promo")
-    public String goToPromopage() {
+    public String goToPromopage(Model model) {
+        model.addAttribute("promotionList",promotionService.getAllPromotions());
         return "promo";
+    }
+    @RequestMapping(value = "/promo_details")
+    public String goToPromoDetailspage(@RequestParam("id")int id, Model model) {
+        model.addAttribute("promotion",promotionService.getPromotionById(id));
+        return "promo_details";
     }
 
     @RequestMapping(value = "/home")

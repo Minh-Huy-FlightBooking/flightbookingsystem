@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -15,14 +18,24 @@ public class Promotion {
     @Column(name = "event_name")
     private String eventName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
     private LocalDate startDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "end_date")
     private LocalDate endDate;
 
     @Column(name = "image")
     private String image;
+
+    @Transient
+    private String _startDate;
+    @Transient
+    private String _endDate;
+
+    @Transient
+    private double discount_amount_max;
 
     @OneToMany(mappedBy = "promotion")
     private List<Discount> discounts;
@@ -72,6 +85,25 @@ public class Promotion {
 
     public LocalDate getEndDate() {
         return endDate;
+    }
+
+    public double getDiscount_amount_max() {
+        double max = 0;
+        for (Discount d : this.discounts){
+            max = (max < d.getDiscount_amount()) ? d.getDiscount_amount() : max;
+        }
+        this.discount_amount_max = max;
+        return discount_amount_max;
+    }
+
+    public String get_startDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return this.getStartDate().format(formatter);
+    }
+
+    public String get_endDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return this.getEndDate().format(formatter);
     }
 
     public void setEndDate(LocalDate endDate) {

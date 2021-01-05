@@ -24,7 +24,7 @@
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-body">
-                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Airport</small></h3>
+                    <h3 style="color: #333333">Home <small style="color: #72849a">/ Account</small></h3>
                 </div>
             </div>
         </div>
@@ -41,12 +41,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <h5 style="color: #333;font-weight: 600">Airport List&nbsp;&nbsp;&nbsp;
-<%--                                <a href="/admin/addAirport" class="btn btn-sm mycolor">--%>
-<%--                                    <i class="fa fa-plus"></i></a>--%>
+                            <h5 style="color: #333;font-weight: 600">Account List&nbsp;&nbsp;&nbsp;
+                                <a href="/admin/addAccount" class="btn btn-sm mycolor">
+                                    <i class="fa fa-plus"></i></a>
                             </h5>
-                            <button onclick="tableToExcel('example', 'W3C Example Table')" class="btn mycolor"><i class="fa fa-print"></i> Excel</button>
-                            <button onclick="tableToPDF()" class="btn mycolor"><i class="fa fa-print"></i> PDF</button>
                         </div>
                         <div class="col-sm-7">
                             <c:if test="${message=='Delete successed.'}">
@@ -60,29 +58,38 @@
 
                     <div class="row">
                         <div class="col-sm-12 ">
-                            <table id="example" class="table table-hover table-bordered w-100"  summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="2">
+                            <table id="example" class="table table-hover table-bordered w-100">
                                 <thead>
                                 <tr align="center">
-                                    <th>ID</th>
-                                    <th>Airport Name</th>
-                                    <th>City Name</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Enable</th>
+                                    <th>Full Name</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Roles</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${airportList}" var="a">
+                                <c:forEach items="${accountList}" var="a">
                                     <tr align="center">
-                                        <td>${a.airportId}</td>
-                                        <td>${a.airportName}</td>
-                                        <td>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
-                                                <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
-                                            </svg>   ${a.city.cityName}
+                                        <td style="vertical-align: middle">${a.username}</td>
+                                        <td style="vertical-align: middle">${a.password}</td>
+                                        <td style="vertical-align: middle">${a.enabled}</td>
+                                        <td style="vertical-align: middle">${a.guest.firstName} ${a.guest.lastName}</td>
+                                        <td style="vertical-align: middle">${a.guest.address}</td>
+                                        <td style="vertical-align: middle">${a.guest.email}</td>
+                                        <td style="vertical-align: middle">${a.guest.phoneNumber}</td>
+                                        <td style="vertical-align: middle">
+                                            <c:forEach var="role" items="${a.roles}">
+                                                ${role.role}
+                                            </c:forEach>
                                         </td>
-                                        <td>
-                                            <a href="/admin/editAirport?id=${a.airportId}" class="btn btn-sm mycolor"><i class='fa fa-pencil'></i></a>
-                                            <a href="/admin/deleteAirport?id=${a.airportId}" class="btn btn-sm mycolor"><i class="fa fa-trash-o"></i></a>
+                                        <td style="vertical-align: middle">
+                                            <a href="/admin/editAccount?id=${a.accountId}" class="btn btn-sm mycolor"><i class='fa fa-pencil'></i></a>
+                                            <a href="/admin/deleteAccount?id=${a.accountId}" class="btn btn-sm mycolor"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

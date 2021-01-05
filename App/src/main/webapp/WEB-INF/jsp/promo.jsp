@@ -51,9 +51,9 @@
         }
     </style>
 </head>
-<body style="min-height: 1500px;font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
+<body style="font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
 
-<nav class="navbar navbar-expand-md fixed-top bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
+<nav class="navbar navbar-expand-md bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
     <a class="navbar-brand" href="#" style="font-size: 40px;font-weight: 600;color: #f39c12">
         Airpaz
     </a>
@@ -63,16 +63,13 @@
     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item py-3 active">
-                <a class="nav-link" href="#">Flight</a>
+                <a class="nav-link" href="/">Flight</a>
             </li>
             <li class="nav-item py-3">
                 <a class="nav-link" href="/promo">Promo</a>
             </li>
             <li class="nav-item py-3">
                 <a class="nav-link" href="#">Order</a>
-            </li>
-            <li class="nav-item py-3">
-                <a class="nav-link" href="#">Booking</a>
             </li>
         </ul>
         <div class="mt-2 mt-md-0">
@@ -81,7 +78,7 @@
     </div>
 </nav>
 
-<div class="container-fluid px-0 carousel-container" style="margin-top: 75px">
+<div class="container-fluid px-0 carousel-container">
     <div id="myCarousel" class="carousel slide" style="width: 100%" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -118,41 +115,44 @@
         </a>
     </div>
 </div>
-<div class="row bg-white" style="height: 75px">
+<div class="row bg-white mx-0" style="height: 75px; width: 100%">
 
 </div>
-<div class="container-fluid mt-3">
+<div class="container mt-3">
     <div class="row">
-        <c:forEach begin="1" end="6">
+        <c:forEach var="promo" items="${promotionList}">
             <div class="col-sm-4 rounded-lg" style="margin-bottom: 50px">
-                <a href="#">
-                    <div class="card">
-                        <img class="card-img-top mb-2" src="/resources/image/Cheap-Airline-and-Flight-Tickets-Booking-to-All-Destinations-in-January-with-Airpaz-LP-9168.jpg"/>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <p class="text-dark font-weight-bold" style="font-size: 20px;line-height: 17px;font-weight: 700;">Promotion Name</p>
-                                </div>
-                            </div>
-                            <div class="row px-3">
-                                <div class="col px-2 py-2 border border-left-0 text-center">
-                                    <p class="text-muted mt-2" style="font-weight: 400;font-size: 17px;line-height: 14px">Start</p>
-                                    <h6 class="text-dark mb-4" style="font-weight: 600;">2021-05-21</h6>
-                                </div>
-                                <div class="col px-2 py-2 border border-right-0 border-left-0 text-center">
-                                    <p class="text-muted mt-2" style="font-weight: 400;font-size: 17px;line-height: 14px">End</p>
-                                    <h6 class="text-dark mb-4" style="font-weight: 600">2021-05-21</h6>
-                                </div>
-                            </div>
-                            <div class="row px-3 pt-3">
-                                <a href="#" class="btn btn-lg w-100 my-sm-0 shadow-sm login-btn">More Details</a>
+                <div class="card">
+                    <img class="card-img-top mb-2" src="${promo.image}"/>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <p class="text-dark font-weight-bold" style="font-size: 20px;line-height: 17px;font-weight: 700;">${promo.eventName}</p>
                             </div>
                         </div>
+                        <div class="row px-3">
+                            <div class="col px-2 py-2 border border-left-0 text-center">
+                                <p class="text-muted mt-2" style="font-weight: 400;font-size: 17px;line-height: 14px">Start Date</p>
+                                <h6 class="text-dark mb-4" style="font-weight: 600;">${promo._startDate}</h6>
+                            </div>
+                            <div class="col px-2 py-2 border border-right-0 border-left-0 text-center">
+                                <p class="text-muted mt-2" style="font-weight: 400;font-size: 17px;line-height: 14px">End Date</p>
+                                <h6 class="text-dark mb-4" style="font-weight: 600">${promo._endDate}</h6>
+                            </div>
+                        </div>
+                        <div class="row px-3 pt-3">
+                            <a href="/promo_details?id=${promo.promotionId}" class="btn w-100 my-sm-0 shadow-sm login-btn">More Details</a>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         </c:forEach>
     </div>
 </div>
+
+
+<footer>
+    <jsp:include page="footer.jsp"/>
+</footer>
 </body>
 </html>
