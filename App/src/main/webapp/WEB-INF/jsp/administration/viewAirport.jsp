@@ -33,7 +33,14 @@
     <div class="row">
         <div class="col-sm-2">
             <ul class="list-group">
-                <jsp:include page="sidebar.jsp"/>
+                <div class="list-group">
+                    <a href="/admin/viewFlight" class="list-group-item">Flight</a>
+                    <a href="/admin/viewFlightRoute" class="list-group-item" >FLight Route</a>
+                    <a href="/admin/viewAircraft" class="list-group-item">Aircraft</a>
+                    <a href="/admin/viewAirport" class="list-group-item">Airport</a>
+                    <a href="#" class="list-group-item">Customer</a>
+                    <a href="/admin/viewBrand" class="list-group-item" disabled>Brand</a>
+                </div>
             </ul>
         </div>
         <div class="col-sm-10">
@@ -45,8 +52,6 @@
 <%--                                <a href="/admin/addAirport" class="btn btn-sm mycolor">--%>
 <%--                                    <i class="fa fa-plus"></i></a>--%>
                             </h5>
-                            <button onclick="tableToExcel('example', 'W3C Example Table')" class="btn mycolor"><i class="fa fa-print"></i> Excel</button>
-                            <button onclick="tableToPDF()" class="btn mycolor"><i class="fa fa-print"></i> PDF</button>
                         </div>
                         <div class="col-sm-7">
                             <c:if test="${message=='Delete successed.'}">
@@ -60,7 +65,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 ">
-                            <table id="example" class="table table-hover table-bordered w-100"  summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="2">
+                            <table id="example" class="table table-hover table-bordered w-100">
                                 <thead>
                                 <tr align="center">
                                     <th>ID</th>

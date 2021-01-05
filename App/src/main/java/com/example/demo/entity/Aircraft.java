@@ -16,8 +16,6 @@ public class Aircraft {
     private int total_economy;
     @Column(name = "total_business")
     private int total_business;
-    @Column(name = "logo_airline")
-    private String logo_airline;
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
@@ -70,14 +68,6 @@ public class Aircraft {
 
     public void setFlightList(List<Flight> flightList) {
         this.flightList = flightList;
-    }
-
-    public String getLogo_airline() {
-        return logo_airline;
-    }
-
-    public void setLogo_airline(String logo_airline) {
-        this.logo_airline = logo_airline;
     }
 
     public Aircraft() {
