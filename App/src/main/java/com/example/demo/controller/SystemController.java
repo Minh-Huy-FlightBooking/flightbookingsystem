@@ -42,12 +42,6 @@ public class SystemController {
     private TicketService ticketService;
 
 
-    @RequestMapping(value = "/")
-    public String goToHomepage(Model model) {
-        model.addAttribute("aircraftList",aircraftService.getAllAircraft());
-        return "index";
-    }
-
     @RequestMapping(value = "/promo")
     public String goToPromopage(Model model) {
         model.addAttribute("promotionList",promotionService.getAllPromotions());
@@ -66,13 +60,9 @@ public class SystemController {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
+        model.addAttribute("aircraftList",aircraftService.getAllAircraft());
         /*----*/
         return "index";
-    }
-
-    @RequestMapping(value = "/promo")
-    public String goToPromopage() {
-        return "promo";
     }
 
     @RequestMapping(value = "/home")
