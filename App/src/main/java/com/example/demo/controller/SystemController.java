@@ -144,6 +144,7 @@ public class SystemController {
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
         }
+         /*return "ticket-list-model";*/
         return "ticket-list";
     }
 
@@ -242,13 +243,13 @@ public class SystemController {
         System.out.println(ticket.getBooking().getBookingId());
         List<Ticket> tickets = ticketService.getTicketsByBookingIdAndLowercaseLastName(ticket.getBooking().getBookingId(), ticket.getPassenger().getLastName());
         model.addAttribute("tickets", tickets);
-        return "booking-details";
+        return "booking-search";
     }
 
     @RequestMapping(value = "/bookingSearch", method = RequestMethod.GET)
     public String goToBookingSearch (Model model) {
         model.addAttribute("ticket", new Ticket());
-        return "booking-search-test";
+        return "booking-search";
     }
     //For Date Time formatter
     @InitBinder

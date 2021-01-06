@@ -167,10 +167,15 @@
                     console.log("clicked!!: " + seatCode);
 
                     console.log(currentPassengerSelected);
-                    let x = $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val();
-                    console.log(x);
+                    let previousSeat = $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val();
+                    console.log(previousSeat);
 
                     $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').val(seatCode);
+                    if (previousSeat != "") {
+                        $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').attr("disabled", "true");
+                        $('#' + currentPassengerSelected + ' input[name=departureSeatCode]').removeAttr("disabled");
+                    }
+
                     let seatPossession = {
                         seatCode: "",
                         passengerName: ""

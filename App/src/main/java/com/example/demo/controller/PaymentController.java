@@ -228,10 +228,10 @@ public class PaymentController {
 
                                                         double returnTicketPrice = 0;
                                                         ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
-                                                        if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
-                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                        if (flightPicker.getReturnTrip().getTravelClass().equals("business")) {
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * returnFlight.getBusinessPrice();
                                                         } else {
-                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * returnFlight.getEconomyPrice();
                                                         }
 
                                                         /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, returnTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
@@ -249,21 +249,14 @@ public class PaymentController {
                                     }
                                 }
                                 model.addAttribute("bookingId",booking.getBookingId());
-                                /*try {
-                                    emailService.sendMail("tranvominh185@gmail.com", "Test Subject", "Test mail");
-                                    System.out.println("Sent message successfully....");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }*/
                             }
                         } catch (Exception e)
                         {
+                            e.printStackTrace();
                             model.addAttribute("message", "Your Information filled in previously has something wrong...");
                             return "payment";
-                        } finally {
-
-                            return "payment-receipt";
                         }
+                            return "payment-receipt";
                     } else
                     {
                         model.addAttribute("creditCard", creditCard);
