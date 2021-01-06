@@ -524,7 +524,7 @@
                                 <c:forEach var="f" items="${departFlights}">
                                     <tr class="border-top">
                                         <td style="padding: 0 0 0 30px">
-                                            <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/BL.png" alt="" height="75px" width="75px">
+                                            <img src="${f.aircraft.logo_airline}" alt="" height="75px" width="75px">
                                             <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${f.aircraft.model}</p>
                                             <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${f.aircraft.brand.brandName}</p>
                                         </td>
@@ -542,20 +542,21 @@
                                             <strong>${f.flightRoute.destinationAirport.city.cityName}</strong>
                                             <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${f.flightRoute.destinationAirport.airportName}</p>
                                         </td>
+                                        <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'economy'}">
                                         <td align="center">
                                             <strong>Economy</strong><br><br>
                                             <input type="radio" value=" ${f.economyPrice}" id="departPrice" name="departPrice"/>
                                             <input type="hidden" value="${f.flightId}" id="flightId" name="flightId"/>
                                             <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
-                                            <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime"
-                                                   name="departureTime"/>
+                                            <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
                                             <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                            <input type="hidden" value="${ticketInformation.children}" id="children"
-                                                   name="children"/>
+                                            <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                             <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                             <br/>
                                                 ${f.economyPrice}
                                         </td>
+                                        </c:if>
+                                        <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'business'}">
                                         <td align="center">
                                             <strong>Business</strong><br><br>
                                             <input type="radio" name="departPrice" value="${f.businessPrice}" id="departPrice"/>
@@ -563,12 +564,12 @@
                                             <input type="hidden" value="business" id="travelClass" name="travelClass"/>
                                             <input type="hidden" value="${f.departureTime.toLocalTime()}" id="departureTime"/>
                                             <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                            <input type="hidden" value="${ticketInformation.children}" id="children"
-                                                   name="children"/>
+                                            <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                             <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                             <br/>
                                                 ${f.businessPrice}
                                         </td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -584,15 +585,13 @@
                     <div class="card-body px-0">
                         <div class="col">
                             <div class="row border-bottom">
-                                <div class="col-sm-9 pb-3">
+                                <div class="col pb-3">
                                     <p style="font-size: 14px;line-height: 17px;font-weight: 400;">Selected Return Flight</p>
-                                    <strong>${f.flightRoute.originAirport.city.cityName}</strong>
+                                    <strong>${ticketInformation.destination}</strong>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                     </svg>
-                                    <strong>${f.flightRoute.destinationAirport.city.cityName}</strong>
-                                </div>
-                                <div class="col-sm-3">
+                                    <strong>${ticketInformation.origin}</strong>
                                 </div>
                             </div>
 
@@ -602,7 +601,7 @@
                                     <c:forEach var="rf" items="${returnFlights}">
                                         <tr>
                                             <td style="padding: 0 0 0 30px">
-                                                <img src="https://cdn2.airpaz.com/rel-0292/themes/img/airlines_logo_vector/BL.png" alt="" height="75px" width="75px">
+                                                <img src="${rf.aircraft.logo_airline}" alt="" height="75px" width="75px">
                                                 <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${rf.aircraft.model}</p>
                                                 <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${rf.aircraft.brand.brandName}</p>
                                             </td>
@@ -620,38 +619,34 @@
                                                 <strong>${rf.flightRoute.destinationAirport.city.cityName}</strong>
                                                 <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">${rf.flightRoute.destinationAirport.airportName}</p>
                                             </td>
+                                            <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'economy'}">
                                             <td align="center">
                                                 <strong>Economy</strong><br><br>
-                                                <input type="radio" value=" ${rf.economyPrice}" id="departPrice"
-                                                       name="returnPrice"/>
+                                                <input type="radio" value=" ${rf.economyPrice}" name="returnPrice"/>
                                                 <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
                                                 <input type="hidden" value="economy" id="travelClass" name="travelClass"/>
-                                                <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime"
-                                                       name="departureTime"/>
+                                                <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime" name="departureTime"/>
                                                 <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                                <input type="hidden" value="${ticketInformation.children}" id="children"
-                                                       name="children"/>
-                                                <input type="hidden" value="${ticketInformation.infant}" id="infants"
-                                                       name="infants"/>
+                                                <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                                <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                                 <br/>
                                                     ${rf.economyPrice}
                                             </td>
+                                            </c:if>
+                                            <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'business'}">
                                             <td align="center">
                                                 <strong>Business</strong><br><br>
-                                                <input type="radio" value=" ${rf.businessPrice}" id="departPrice"
-                                                       name="returnPrice"/>
+                                                <input type="radio" value=" ${rf.businessPrice}" name="returnPrice"/>
                                                 <input type="hidden" value="${rf.flightId}" id="flightId" name="flightId"/>
                                                 <input type="hidden" value="business" id="travelClass" name="travelClass"/>
-                                                <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime"
-                                                       name="departureTime"/>
+                                                <input type="hidden" value="${rf.departureTime.toLocalTime()}" id="departureTime"  name="departureTime"/>
                                                 <input type="hidden" value="${ticketInformation.adults}" id="adults" name="adults"/>
-                                                <input type="hidden" value="${ticketInformation.children}" id="children"
-                                                       name="children"/>
-                                                <input type="hidden" value="${ticketInformation.infant}" id="infants"
-                                                       name="infants"/>
+                                                <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
+                                                <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                                 <br/>
                                                     ${rf.businessPrice}
                                             </td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
