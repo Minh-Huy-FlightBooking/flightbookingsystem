@@ -177,6 +177,7 @@
                     /*alert("passengers are saved!!!");
                     alert(JSON.stringify(flightData));*/
                     // move to a new page
+
                     location.href = "seatSelection";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

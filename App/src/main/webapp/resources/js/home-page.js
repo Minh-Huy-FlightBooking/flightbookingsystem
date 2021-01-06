@@ -13,7 +13,7 @@ document.querySelector('.plus-adults').addEventListener("click", function(){
     document.getElementById('quantity-adults').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
     if(valueCount > 1){
         document.querySelector('.minus-adults').removeAttribute('disabled');
@@ -30,38 +30,38 @@ document.querySelector('.minus-adults').addEventListener("click", function(){
     document.getElementById('quantity-adults').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
     if(valueCount==1){
         document.querySelector('.minus-adults').setAttribute('disabled','disabled');
     }
 })
-//-----------------------------------Childrens----------------------------------------//
-document.querySelector('.minus-childrens').setAttribute("disabled","disabled");
+//-----------------------------------Children----------------------------------------//
+document.querySelector('.minus-children').setAttribute("disabled","disabled");
 var valueCount
-document.querySelector('.plus-childrens').addEventListener("click", function(){
-    valueCount = document.getElementById('quantity-childrens').value;
+document.querySelector('.plus-children').addEventListener("click", function(){
+    valueCount = document.getElementById('quantity-children').value;
     valueCount++;
-    document.getElementById('quantity-childrens').value = valueCount;
+    document.getElementById('quantity-children').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
-    if(valueCount > 0){
-        document.querySelector('.minus-childrens').removeAttribute('disabled');
-        document.querySelector('.minus-childrens').classList.remove('disabled');
+    if( valueCount > 0){
+        document.querySelector('.minus-children').removeAttribute('disabled');
+        document.querySelector('.minus-children').classList.remove('disabled');
     }
 })
-document.querySelector('.minus-childrens').addEventListener("click", function(){
-    valueCount = document.getElementById('quantity-childrens').value;
+document.querySelector('.minus-children').addEventListener("click", function(){
+    valueCount = document.getElementById('quantity-children').value;
     valueCount--;
-    document.getElementById('quantity-childrens').value = valueCount;
+    document.getElementById('quantity-children').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
     if(valueCount==0){
-        document.querySelector('.minus-childrens').setAttribute('disabled','disabled');
+        document.querySelector('.minus-children').setAttribute('disabled','disabled');
     }
 })
 //-----------------------------------Infants----------------------------------------//
@@ -73,7 +73,7 @@ document.querySelector('.plus-infants').addEventListener("click", function(){
     document.getElementById('quantity-infants').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
     if(valueCount > 0){
         document.querySelector('.minus-infants').removeAttribute('disabled');
@@ -86,7 +86,7 @@ document.querySelector('.minus-infants').addEventListener("click", function(){
     document.getElementById('quantity-infants').value = valueCount;
     // setting passenger input value
     document.getElementById('quantity-passengers').value = parseInt(document.getElementById('quantity-adults').value)
-        + parseInt(document.getElementById('quantity-childrens').value)
+        + parseInt(document.getElementById('quantity-children').value)
         + parseInt(document.getElementById('quantity-infants').value) + ' Passengers'
     if(valueCount==0){
         document.querySelector('.minus-infants').setAttribute('disabled','disabled');
