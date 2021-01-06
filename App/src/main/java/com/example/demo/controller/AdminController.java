@@ -524,7 +524,7 @@ public class AdminController {
     @RequestMapping("/handlingSaveDiscount")
     public String saveDiscount(Discount discount){
         discountService.saveDiscount(discount);
-        return "redirect:/admin/editPromotion?id=" + discount.getPromotion().getPromotionId();
+        return "redirect: /admin/editPromotion?id=" + discount.getPromotion().getPromotionId();
     }
     @RequestMapping("/deleteDiscount")
     public String deleteDiscount(@RequestParam("id") int id){

@@ -23,6 +23,7 @@ public class TicketService {
                 t.setEnabled(true);
                 t.setBooking(null);
                 t.setPassenger(null);
+                t.setPrice(0.0);
                 ticketRepository.save(t);
             }
             return true;

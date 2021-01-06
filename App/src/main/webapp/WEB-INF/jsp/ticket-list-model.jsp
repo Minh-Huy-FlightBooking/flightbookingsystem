@@ -77,12 +77,23 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <p>Selected Departure Flight</p>
+                        </div>
+                        <div class="col-sm-3">
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
+                <div class="card-body">
 
+                </div>
             </div>
         </div>
     </div>

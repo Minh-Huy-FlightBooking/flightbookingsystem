@@ -177,6 +177,7 @@
                     /*alert("passengers are saved!!!");
                     alert(JSON.stringify(flightData));*/
                     // move to a new page
+
                     location.href = "seatSelection";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -343,7 +344,7 @@
             <div class="mt-2">
                 <button><a href="ticketSearch">Back</a></button>
                 <%--<button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>--%>
-                <button id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
+                <button type="submit" id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
             </div>
         </div>
     </div>
