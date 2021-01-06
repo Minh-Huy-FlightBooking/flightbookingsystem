@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
@@ -48,6 +48,180 @@
             color: #9a9a9d;
         }
     </style>
+    <script>
+        let origin, destination, departureDate, returnDate;
+        let adults, children, infants;
+        let departurePrice, departureFlightId, departureTravelClass;
+        let returnPrice, returnFlightId, returnTravelClass;
+        let flightData;
+        let tripType;
+
+        let contactInformation;
+        $(document).ready(function () {
+            console.log("HI am ready to go!!");
+            console.log(sessionId.value);
+            let previousSessionValue = sessionStorage.getItem(sessionId.value);
+            console.log(previousSessionValue);
+
+            contactInformation = {
+                firstName: "",
+                lastName: "",
+                email: "",
+                phoneNumber: ""
+            }
+
+            if (previousSessionValue != null) {
+                flightData = JSON.parse(previousSessionValue);
+
+                adults = parseInt(flightData.ticketInformation.adults);
+                children = parseInt(flightData.ticketInformation.children);
+                infants = parseInt(flightData.ticketInformation.infants);
+
+                console.log(flightData);
+                console.log(adults);
+                console.log(children);
+                console.log(infants);
+
+
+                for (let i = 1; i <= (adults + children + infants); i++) {
+                    if (i <= adults) {
+                        $('#passenger-data-container').find("div.passenger-data-item").eq(i - 1).attr("id", "passenger-" + i);
+                        document.getElementById("passenger-" + i).getElementsByTagName("input").namedItem("sendInformationCheckbox").setAttribute("onclick", "sendDataToEmail('passenger-" + i + "')");
+                    } else if (i <= (adults + children)) {
+                        $('#passenger-data-container').find("div.passenger-data-item").eq(i - 1).attr("id", "passenger-" + i);
+                    } else {
+                        $('#passenger-data-container').find("div.passenger-data-item").eq(i - 1).attr("id", "passenger-" + i);
+                    }
+                }
+                /* let title = $('#passenger-2 #title').val();
+                 console.log(title);*/
+            }
+        })
+        let isDataSentChecked;
+
+        //Get Email/ Phones Fields for the later utilization
+        function sendDataToEmail(passengerDataItem) {
+            let inputTag = document.getElementById(passengerDataItem).getElementsByTagName("input");
+            if (inputTag.namedItem("sendInformationCheckbox").checked) {
+                inputTag.namedItem("email").removeAttribute("disabled");
+                inputTag.namedItem("phoneNumber").removeAttribute("disabled");
+                isDataSentChecked = true;
+            } else {
+                inputTag.namedItem("email").setAttribute("disabled", "true");
+                inputTag.namedItem("phoneNumber").setAttribute("disabled", "true");
+                ;
+            }
+        }
+
+        let passengerInformation = new Array();
+
+        //Send Data back to Server --> Using Ajax
+        function sendPassengerData() {
+            //Save contact Information
+            flightData.contactInformation.firstName = $('#firstName').val();
+            flightData.contactInformation.lastName = $('#lastName').val();
+            flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
+            flightData.contactInformation.email = $('#email').val();
+
+            for (let i = 1; i <= (adults + children + infants); i++) {
+                let passengerData = document.getElementById("passenger-" + i);
+                let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
+                    phoneNumber;
+
+                title = passengerData.getElementsByTagName("select").namedItem("title").value;
+
+                gender = passengerData.getElementsByTagName("select").namedItem("gender").value;
+                nationality = passengerData.getElementsByTagName("select").namedItem("nationality").value;
+
+                firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
+                lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
+                dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
+                if (title != "infant") {
+                    passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
+                    expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
+                }
+
+                if (title != "infant" && title != "child" && isDataSentChecked) {
+                    email = passengerData.getElementsByTagName("input").namedItem("email").value;
+                    phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
+                }
+
+                console.log(title);
+                console.log(firstName);
+                console.log(lastName);
+                console.log(dateOfBirth);
+                console.log(gender);
+                console.log(nationality);
+                if (title != "infant") {
+                    console.log(passportNumber);
+                    console.log(expiryDate);
+                }
+                if (i == (adults + children + infants)) {
+                    console.log("The last one");
+                } else {
+                    console.log("Not The last one");
+                }
+
+                let person = {
+                    title: title,
+                    firstName: firstName,
+                    lastName: lastName,
+                    dateOfBirth: dateOfBirth,
+                    gender: gender,
+                    nationality: nationality,
+                    passportNumber: passportNumber,
+                    expiryDate: expiryDate,
+                    email: email,
+                    phoneNumber: phoneNumber
+                };
+
+                console.log(person);
+                passengerInformation.push(person);
+            }
+            console.log((passengerInformation));
+            console.log("Before adding passengers' Information");
+            console.log(flightData);
+            flightData.passengerInformation = passengerInformation;
+            console.log(flightData);
+
+            //Send Data to Server here !! Ha ha!!
+            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
+            console.log(sessionStorage.getItem(sessionId));
+            $.ajax({
+                type: "POST",
+                url: "flightPickerHandler",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(flightData),
+                success: function (data, textStatus, jqXHR) {
+                    console.log("send data to backend successfully: ");
+                    console.log(data);
+                    /*alert("passengers are saved!!!");
+                    alert(JSON.stringify(flightData));*/
+                    // move to a new page
+
+                    /*if (!allRequired) {*/
+                    location.href = "seatSelection";
+                    /*}*/
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log("fail");
+                    alert("OOP!!! Something is wrong!!!");
+                }
+            });
+        }
+
+    </script>
+    <script>
+        /* var required = $('input,textarea,select').filter('[required]:true');
+         var allRequired = true;
+         required.each(function(){
+             if($(this).val() == ''){
+                 allRequired = false;
+             }
+         });*/
+    </script>
 </head>
 <body style="min-height: 1000px ;font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
 <input hidden type="text" value="${sessionId}" id="sessionId"/>
@@ -77,7 +251,7 @@
     </div>
 </nav>
 <br><br>
-<form id="passenger-information-container" action="seatSelection">
+<form id="passenger-information-container" <%--action="seatSelection"--%>>
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
@@ -146,7 +320,7 @@
                                                     <div class="row border-bottom">
                                                         <div class="col-sm-9 " style="padding: 20px 20px 20px 20px">
                                                             <p style="font-size: 18px;line-height: 22px;font-weight: 600;color: #59595b">
-                                                                <i class="fa fa-user"></i>&nbsp;Passenger |
+                                                                <i class="fa fa-user"></i>&nbsp;Passenger ${passengerList.indexOf(p)+1} |
                                                                 <c:choose>
                                                                     <c:when test="${p.title == 'adult'}">
                                                                         Adult
@@ -237,10 +411,10 @@
                                                                         <label style="font-size: 14px;line-height: 22px;font-weight: 600;color: #59595b">Phone Number *</label>
                                                                         <input type="text" class="form-control " name="phoneNumber" disabled/>
                                                                     </div>
-<%--                                                                    <div class="form-group">--%>
-<%--                                                                        <label>Send Booking Data to this email</label>--%>
-<%--                                                                        <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>--%>
-<%--                                                                    </div>--%>
+                                                                    <div class="form-group">
+                                                                       <label>Send Booking Data to this email</label>
+                                                                       <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>
+                                                                    </div>
                                                                 </div>
                                                             </c:if>
                                                         </div>
@@ -343,7 +517,9 @@
 <%--                                                </div>--%>
 <%--                                            </c:if>--%>
 <%--                                        </div>--%>
+                                        <br/>
                                     </c:forEach>
+
                                 </div>
                             </div>
                         </div>
@@ -400,7 +576,7 @@
                 </div>
             </div>
             <br>
-            <button type="submit" id="continue" class="btn btn-danger w-100 py-2"><a onclick="sendPassengerData()">Continue</a></button>
+            <button type="submit" id="continue" class="btn btn-danger w-100 py-2" onclick="sendPassengerData()">Continue</button>
         </div>
     </div>
 </div>

@@ -63,7 +63,7 @@
                 for (let i = 1; i <= (adults + children + infants); i++) {
                     if (i <= adults) {
                         $('#passenger-data-container').find("div.passenger-data-item").eq(i - 1).attr("id", "passenger-" + i);
-                        document.getElementById("passenger-" + i).getElementsByTagName("input").namedItem("sendInformationCheckbox").setAttribute("onclick", "sendDataToEmail('passenger-" + i + "')");
+                        /*document.getElementById("passenger-" + i).getElementsByTagName("input").namedItem("sendInformationCheckbox").setAttribute("onclick", "sendDataToEmail('passenger-" + i + "')");*/
                     } else if (i <= (adults + children)) {
                         $('#passenger-data-container').find("div.passenger-data-item").eq(i - 1).attr("id", "passenger-" + i);
                     } else {
@@ -176,10 +176,7 @@
                         /*alert("passengers are saved!!!");
                         alert(JSON.stringify(flightData));*/
                         // move to a new page
-
-                        if (!allRequired) {
-                            location.href = "seatSelection";
-                        }
+                        location.href = "seatSelection";
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(textStatus);
@@ -208,7 +205,7 @@
 <div class="container-fluid bg-danger">
     Booking Process is displayed here
 </div>
-<form id="passenger-information-container" action="seatSelection">
+<form id="passenger-information-container" >
 <div class="container border mt-2">
     <div class="row">
         <div class="col-md-3">

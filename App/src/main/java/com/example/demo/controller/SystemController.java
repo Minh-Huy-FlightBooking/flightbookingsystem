@@ -148,6 +148,7 @@ public class SystemController {
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
         }
+         /*return "ticket-list-model";*/
         return "ticket-list";
     }
 
@@ -183,8 +184,8 @@ public class SystemController {
 
         model.addAttribute("passengerList", passengerList);
         /*model.addAttribute("passenger", new PassengerInformation());*/
-        return "passenger-details";
-
+        /*return "passenger-details";*/
+        return "passenger-information-model";
     }
 
     //Seat Selection Function while booking flight ticket!!!
@@ -202,24 +203,23 @@ public class SystemController {
         model.addAttribute("flightPicker", flightPicker);
         String tripType = "";
 
-
         // get the initial values
         if (flightPicker != null) {
             //Print out to test if this is either null or not...
             System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
-            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
+            /*for (PassengerInformation p : flightPicker.getPassengerInformation()) {
                 System.out.println("Full name: " + p.getFirstName() + p.getLastName());
-            }
+            }*/
 
-            int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
+            /*int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
             System.out.println("Economy: " + numberOfEconomySeats + ", Business: " + numberOfBusinessSeats);
-
+*/
             // branch out each circumstance
-            if (tripType.equals("roundTrip")) {
+            /*if (tripType.equals("roundTrip")) {
 
 
-            }
+            }*/
             //New Edit
             List<String> passengerNames = new ArrayList<>();
             for (PassengerInformation p: flightPicker.getPassengerInformation()){
@@ -235,7 +235,6 @@ public class SystemController {
         } else {
             System.out.println("FLight Picker is null!!!");
         }
-
         System.out.println("Reach the final line of codes in this request!!!");
         return "seat-selection";
     }
@@ -248,13 +247,13 @@ public class SystemController {
         System.out.println(ticket.getBooking().getBookingId());
         List<Ticket> tickets = ticketService.getTicketsByBookingIdAndLowercaseLastName(ticket.getBooking().getBookingId(), ticket.getPassenger().getLastName());
         model.addAttribute("tickets", tickets);
-        return "booking-details";
+        return "booking-search";
     }
 
     @RequestMapping(value = "/bookingSearch", method = RequestMethod.GET)
     public String goToBookingSearch (Model model) {
         model.addAttribute("ticket", new Ticket());
-        return "booking-search-test";
+        return "booking-search";
     }
     //For Date Time formatter
     @InitBinder

@@ -63,32 +63,36 @@ public class PaymentController {
             Flight returnFlight = flightService.getFlightById(flightPicker.getReturnTrip().getReturnFlightId());
 
             //Add passenger information for departure trip
-            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
-                String passengerName = p.getFirstName() + " " + p.getLastName();
-                System.out.println(passengerName);
-                List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
-                if (departureSeatPossessions != null) {
-                    for (SeatPossession s : departureSeatPossessions) {
-                        if (s.getPassengerName().equals(passengerName)) {
-                            String seatCode = s.getSeatCode();
-                            seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
-                            paymentInformationList.add(new PaymentInformation(departureFlight, p, flightPicker.getDepartureTrip().getTravelClass(), ticketService.getTicketByFlightIdAndSeatCode(departureFlight.getFlightId(), seatCode)));
+            List<PassengerInformation> passengerInformationList = flightPicker.getPassengerInformation();
+            if (!passengerInformationList.isEmpty()) {
+                for (PassengerInformation p : passengerInformationList) {
+                    String passengerName = p.getFirstName() + " " + p.getLastName();
+                    System.out.println(passengerName);
+                    List<SeatPossession> departureSeatPossessions = flightPicker.getDepartureTrip().getDepartureSeatPossessions();
+                    if (departureSeatPossessions != null) {
+                        for (SeatPossession s : departureSeatPossessions) {
+                            if (s.getPassengerName().equals(passengerName)) {
+                                String seatCode = s.getSeatCode();
+                                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
+                                paymentInformationList.add(new PaymentInformation(departureFlight, p, flightPicker.getDepartureTrip().getTravelClass(), ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(departureFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass()))));
+                            }
                         }
                     }
+
                 }
 
-            }
-            //Add passenger information for return trip
-            for (PassengerInformation p : flightPicker.getPassengerInformation()) {
-                String passengerName = p.getFirstName() + " " + p.getLastName();
-                System.out.println(passengerName);
-                List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
-                if (returnSeatPossessions != null) {
-                    for (SeatPossession s : returnSeatPossessions) {
-                        if (s.getPassengerName().equals(passengerName)) {
-                            String seatCode = s.getSeatCode();
-                            seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
-                            paymentInformationList.add(new PaymentInformation(returnFlight, p, flightPicker.getDepartureTrip().getTravelClass(), ticketService.getTicketByFlightIdAndSeatCode(returnFlight.getFlightId(), seatCode)));
+                //Add passenger information for return trip
+                for (PassengerInformation p : passengerInformationList) {
+                    String passengerName = p.getFirstName() + " " + p.getLastName();
+                    System.out.println(passengerName);
+                    List<SeatPossession> returnSeatPossessions = flightPicker.getReturnTrip().getReturnSeatPossessions();
+                    if (returnSeatPossessions != null) {
+                        for (SeatPossession s : returnSeatPossessions) {
+                            if (s.getPassengerName().equals(passengerName)) {
+                                String seatCode = s.getSeatCode();
+                                seatCode = seatCode.substring(seatCode.lastIndexOf("-") + 1, seatCode.length());
+                                paymentInformationList.add(new PaymentInformation(returnFlight, p, flightPicker.getDepartureTrip().getTravelClass(), ticketService.getTicketByFlightIdAndSeatCodeAndTravelClass(returnFlight.getFlightId(), seatCode, travelClassService.getTravelClassByClassName(flightPicker.getReturnTrip().getTravelClass()))));
+                            }
                         }
                     }
                 }
@@ -224,10 +228,10 @@ public class PaymentController {
 
                                                         double returnTicketPrice = 0;
                                                         ticket.setTicketType(ticketTypeService.getTicketTypeByTicketTypeName(passenger.getTitle()));
-                                                        if (flightPicker.getDepartureTrip().getTravelClass().equals("business")) {
-                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getBusinessPrice();
+                                                        if (flightPicker.getReturnTrip().getTravelClass().equals("business")) {
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * returnFlight.getBusinessPrice();
                                                         } else {
-                                                            returnTicketPrice = ticket.getTicketType().getRate() * departureFlight.getEconomyPrice();
+                                                            returnTicketPrice = ticket.getTicketType().getRate() * returnFlight.getEconomyPrice();
                                                         }
 
                                                         /*ticketService.updateTicketInformation(new Ticket(ticket.getTicketId(), ticket.getSeatCode(), false, ticket.getFlight(), booking, passenger, returnTicketPrice, ticket.getTicketType(), travelClassService.getTravelClassByClassName(flightPicker.getDepartureTrip().getTravelClass())));*/
@@ -245,21 +249,14 @@ public class PaymentController {
                                     }
                                 }
                                 model.addAttribute("bookingId",booking.getBookingId());
-                                /*try {
-                                    emailService.sendMail("tranvominh185@gmail.com", "Test Subject", "Test mail");
-                                    System.out.println("Sent message successfully....");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }*/
                             }
                         } catch (Exception e)
                         {
+                            e.printStackTrace();
                             model.addAttribute("message", "Your Information filled in previously has something wrong...");
                             return "payment";
-                        } finally {
-
-                            return "payment-receipt";
                         }
+                            return "payment-receipt";
                     } else
                     {
                         model.addAttribute("creditCard", creditCard);
