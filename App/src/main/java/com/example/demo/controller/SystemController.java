@@ -45,6 +45,10 @@ public class SystemController {
     public String gotoFlightSearchModel(){
         return "ticket-list-model";
     }
+    @RequestMapping(value = "/passengerModel")
+    public String gotoFlightPassengerModel(){
+        return "passenger-information-model";
+    }
     @RequestMapping(value = "/promo")
     public String goToPromopage(Model model) {
         model.addAttribute("promotionList",promotionService.getAllPromotions());
