@@ -37,4 +37,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     List<Ticket> findByBookingIdAndLowercaseLastName (int bookingId, String lastName);
 
     List<Ticket> findByBookingBookingId(int bookingId);
+
+    List<Ticket> findByFlightAndEnabledAndTravelClassClassName(Flight flight, boolean enabled, String travelClassName);
+
 }

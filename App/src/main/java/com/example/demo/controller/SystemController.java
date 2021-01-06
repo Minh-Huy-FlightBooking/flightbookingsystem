@@ -88,7 +88,8 @@ public class SystemController {
     public String goToTicketList(@ModelAttribute("ticketForm") TicketInformation t, Model model, HttpServletRequest request) {
         model.addAttribute("sessionId", request.getSession().getId());
         /*int numberOfPeople = t.getPassengerType().getNumberOfAdults() + t.getPassengerType().getNumberOfChildren() + t.getPassengerType().getNumberOfInfant();*/
-        int numberOfPeople = t.getAdults() + t.getChildren() + t.getInfant();
+        /*int numberOfPeople = t.getAdults() + t.getChildren() + t.getInfant();*/
+        int numberOfPeople = t.getAdults() + t.getChildren();
         /////////////
         // Departure Time
         LocalDateTime initialTimeOfDepartureDate = t.getDepartureDate().atStartOfDay();
@@ -98,14 +99,39 @@ public class SystemController {
         //Format!!!
         /*System.out.println(initialTimeOfDepartureDate);*/
         model.addAttribute("ticketInformation", t);
-        if (t.getTripType().equals("oneWay")) {
-            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+        /*if (t.getTripType().equals("oneWay")) {
+            if (t.getTravelClass().equals("all")) {
+                model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+            } else {
+                model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople, t.getTravelClass()));
+            }
+            *//*model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));*//*
         } else if (t.getTripType().equals("roundTrip")) {
             //This is an easy way to show data --> upgrade later!!!
             model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
             LocalDateTime initialTimeOfReturnDate = t.getReturnDate().atStartOfDay();
             LocalDateTime endTimeOfReturnDate = t.getReturnDate().atTime(23, 59);
             model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));
+
+            //Display table return flights!!!
+            model.addAttribute("returnStatus", "true");
+        }*/
+        if (t.getTravelClass().equals("all")) {
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+        } else {
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople, t.getTravelClass()));
+        }
+            /*model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));*/
+         if (t.getTripType().equals("roundTrip")) {
+            //This is an easy way to show data --> upgrade later!!!
+            LocalDateTime initialTimeOfReturnDate = t.getReturnDate().atStartOfDay();
+            LocalDateTime endTimeOfReturnDate = t.getReturnDate().atTime(23, 59);
+
+             if (t.getTravelClass().equals("all")) {
+                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));
+             } else {
+                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople, t.getTravelClass()));
+             }
 
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
