@@ -76,6 +76,10 @@ public class SystemController {
     public String goToHome() {
         return "home";
     }
+    @RequestMapping(value = "/checkBooking")
+    public String checkBooking() {
+        return "booking-search";
+    }
 
     //////////////////////////////
     // a function to looking for a flight / ticket !!!

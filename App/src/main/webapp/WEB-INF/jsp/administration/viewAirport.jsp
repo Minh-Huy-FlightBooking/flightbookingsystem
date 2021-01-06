@@ -46,7 +46,7 @@
 <%--                                    <i class="fa fa-plus"></i></a>--%>
                             </h5>
                             <button onclick="tableToExcel('example', 'W3C Example Table')" class="btn mycolor"><i class="fa fa-print"></i> Excel</button>
-                            <button onclick="tableToPDF()" class="btn mycolor"><i class="fa fa-print"></i> PDF</button>
+                            <button onclick="tableToPDF('example')" class="btn mycolor"><i class="fa fa-print"></i> PDF</button>
                         </div>
                         <div class="col-sm-7">
                             <c:if test="${message=='Delete successed.'}">

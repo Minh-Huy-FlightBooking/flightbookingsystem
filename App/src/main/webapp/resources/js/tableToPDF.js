@@ -1,5 +1,5 @@
-function tableToPDF() {
-    html2canvas(document.getElementById('example'), {
+function tableToPDF(id) {
+    html2canvas(document.getElementById(id), {
         onrendered: function (canvas) {
             var data = canvas.toDataURL();
             var docDefinition = {
