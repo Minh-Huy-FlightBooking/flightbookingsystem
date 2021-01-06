@@ -26,7 +26,7 @@
             <img src="/resources/image/green-tick-icon.jpg" title="Succeed" alt="Succeed Icon" style="width: 50%; height: 40vh"/>
             <h5>You've Successfully booked tickets...</h5>
             <h5>Your booking Id: ${bookingId} </h5>
-            <h5>Click here to review your tickets <a>${bookingId}</a></h5>
+            <h5>Click here to review your tickets <a href="bookingDetails?booking.bookingId=${bookingId}&passenger.lastName=${lastName}">${bookingId}</a></h5>
         </div>
     </div>
 </div>

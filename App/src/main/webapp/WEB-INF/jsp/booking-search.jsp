@@ -86,9 +86,9 @@ To change this template use File | Settings | File Templates.
                     <h1 style="font-size: 18px;line-height: 22px;font-weight: 700;color: #59595b">Manage Booking</h1>
                     <p style="font-size: 12px;line-height: 14px;font-weight: 400;color: #9a9a9d">In order to receive your booking code. So, we can easily check your booking.</p>
                     <label style="font-size: 14px;line-height: 20px;font-weight: 700;color: #59595b">Booking Code *</label>
-                    <form:input path="booking.bookingId" type="text" class="form-control" id="bookingId"/>
-                    <label style="font-size: 14px;line-height: 20px;font-weight: 700;color: #59595b;margin: 15px 0 7px 0">Email *</label>
-                    <form:input path="passenger.lastName" type="text" class="form-control" id="lastName"/><br>
+                    <form:input path="booking.bookingId" type="text" class="form-control" id="bookingId" required="true"/>
+                    <label style="font-size: 14px;line-height: 20px;font-weight: 700;color: #59595b;margin: 15px 0 7px 0">Last Name *</label>
+                    <form:input path="passenger.lastName" type="text" class="form-control" id="lastName" required="true"/><br>
                     <input type="submit" class="btn btn-danger w-100 mb-3" value="Search" style="color: white;font-size: 18px;font-weight: 500;background-color: #e31f25"/>
                     </form:form>
                     <button onclick="tableToPDF('tablePDF')" class="btn w-100" style="color: white;font-size: 16px;font-weight: 500;background-color: #e67e22"><i class="fa fa-print"></i>Print</button>
