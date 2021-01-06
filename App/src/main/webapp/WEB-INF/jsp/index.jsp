@@ -158,7 +158,7 @@
         }
     </script>
 </head>
-
+<input type="hidden" id="sessionId" value="${sessionId}"/>
 <body style="min-height: 1000px;font-family: 'Poppins', sans-serif;background-color: #ffffff">
 <%--fixed navbar--%>
 <nav class="navbar navbar-expand-md bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
@@ -269,7 +269,7 @@
         <%-- Travel Class--%>
         <div class="form-group col-sm-1 border-right h-100">
             <label><small class="form-text text-muted">Class</small></label>
-            <form:input path="travelClass" value="" type="text" id="travelClass" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" placeholder="All" readonly="true"/>
+            <form:input path="travelClass" value="all" type="text" id="travelClass" class="form-control form-control-sm border-0 bg-white dropdown-toggle" data-toggle="dropdown" placeholder="All" readonly="true"/>
             <div class="dropdown-menu keep-open p-0" style="width: 120px;user-select: none;">
                 <div class="dropdown-item pt-2" style="background-color: #f7f7f7">
                     <div class="d-flex flex-column" style="width: 100%;height: 48px">

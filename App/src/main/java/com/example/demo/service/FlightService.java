@@ -37,6 +37,20 @@ public class FlightService {
         }
         return flightsFiltered;
     }
+    public List<Flight> getAllOneWayFlightsBySearchConditionsWithTravelClass (String origin, String destination, LocalDateTime departureDate,LocalDateTime departureDate2,int numberOfPeople, String travelClass){
+        List<Flight> flights = flightRepository.findFlightsByFlightRouteAndDepartureTime(origin, destination,departureDate, departureDate2);
+        List<Flight> flightsFiltered = new ArrayList<>();
+        if (!flights.isEmpty()){
+            for (Flight f: flights){
+                List<Ticket> tickets = ticketRepository.findByFlightAndEnabledAndTravelClassClassName(f, true, travelClass);
+                if (tickets.size() >= numberOfPeople) {
+                    System.out.println(f.getFlightId());
+                    flightsFiltered.add(f);
+                }
+            }
+        }
+        return flightsFiltered;
+    }
 
    /* public List<Flight> getAllFlightsTest (LocalDateTime date, LocalDateTime date2){
         return flightRepository.findByDepartureTimeHere(date, date2);
