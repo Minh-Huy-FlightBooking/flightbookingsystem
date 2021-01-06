@@ -343,7 +343,7 @@
             <div class="mt-2">
                 <button><a href="ticketSearch">Back</a></button>
                 <%--<button id="continue"><a  onclick="sendPassengerData()" href="seatSelection">Continue</a></button>--%>
-                <button id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
+                <button type="submit" id="continue"><a  onclick="sendPassengerData()">Continue</a></button>
             </div>
         </div>
     </div>
