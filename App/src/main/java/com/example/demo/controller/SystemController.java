@@ -80,6 +80,10 @@ public class SystemController {
     public String checkBooking() {
         return "booking-search";
     }
+    @RequestMapping(value = "/paymentMethodModel")
+    public String paymentMethod() {
+        return "payment-method-model";
+    }
 
     //////////////////////////////
     // a function to looking for a flight / ticket !!!

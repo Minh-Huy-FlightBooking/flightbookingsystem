@@ -28,7 +28,7 @@
             <div class="card-body" style="padding: 50px 35px 50px 35px">
                 <form:form action="j_spring_security_check" method="post" name="login">
                 <div class="card-title" style="margin-bottom: 26px;font-weight: 600;color: #59595b;font-size: 18px;line-height: 22px">Login</div>
-                <div class="card-text" style="color: #59595b;margin: 0 0 11px 0"><small>Email</small></div>
+                <div class="card-text" style="color: #59595b;margin: 0 0 11px 0"><small>Username</small></div>
                 <input type="text" name="username" placeholder="Username" class="form-control" style="margin: 0 0 23px 0" required/>
                 <div class="card-text" style="color: #59595b;margin: 0 0 11px 0"><small>Password</small></div>
                 <input type="password" name="password" placeholder="Password" class="form-control" style="margin: 0 0 50px 0" required/>
@@ -36,7 +36,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form:form>
                 <div class="card-text text-center">
-                    <p class="lead" style="font-size: 14px;line-height: 17px;font-weight: 400;">Not member? <a href="#" style="color: #59595b"><strong>Resgister now</strong></a></p>
+                    <p class="lead" style="font-size: 14px;line-height: 17px;font-weight: 400;">Not member? <a href="/register" style="color: #59595b"><strong>Resgister now</strong></a></p>
                 </div>
             </div>
         </div>

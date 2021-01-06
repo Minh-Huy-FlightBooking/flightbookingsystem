@@ -24,14 +24,19 @@ public class AccountService {
             accountRepository.save(account);
             return true;
         }catch (Exception e){
+            System.out.println(e);
             return false;
         }
     }
 
     public boolean deleteAccount(int id){
         try {
-            guestRepository.deleteById(accountRepository.findByAccountId(id).getGuest().getGuestId());
-            accountRepository.deleteById(id);
+            if (accountRepository.findByAccountId(id).getGuest()!=null){
+                guestRepository.deleteById(accountRepository.findByAccountId(id).getGuest().getGuestId());
+                accountRepository.deleteById(id);
+            }else {
+                accountRepository.deleteById(id);
+            }
             return true;
         }catch (Exception e){
             return false;
@@ -40,7 +45,12 @@ public class AccountService {
 
     public boolean isException(Account account){
         boolean ex = false;
-        if (accountRepository.existsByUsernameAndPassword(account.getUsername(),account.getPassword()))ex=true;
+        if (accountRepository.existsByUsername(account.getUsername()))ex = true;
+        System.out.println(ex);
         return ex;
+    }
+
+    public Account getAccountByUsername(String var){
+        return accountRepository.findByUsername(var);
     }
 }

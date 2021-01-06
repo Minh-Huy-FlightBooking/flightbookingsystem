@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 12/23/20
-  Time: 10:09 PM
+  User: DELL
+  Date: 1/6/2021
+  Time: 10:14 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -85,58 +84,58 @@
         <c:forEach var="p" items="${paymentInformationList}">
             <tr>
                 <td>
-                    ${p.flight.flightRoute.originAirport.airportName}
+                        ${p.flight.flightRoute.originAirport.airportName}
                     <br/>
-                    ${p.flight._departureTime}
+                        ${p.flight._departureTime}
                 </td>
                 <td>
-                    ${p.flight.flightRoute.destinationAirport.airportName}
+                        ${p.flight.flightRoute.destinationAirport.airportName}
                     <br/>
-                    ${p.flight._arrivalTime}
+                        ${p.flight._arrivalTime}
                 </td>
                 <td>
-                    ${p.passengerInformation.firstName}
+                        ${p.passengerInformation.firstName}
                     &nbsp;
-                    ${p.passengerInformation.lastName}
+                        ${p.passengerInformation.lastName}
                 </td>
                 <td>
-                    ${p.travelClass}
+                        ${p.travelClass}
                 </td>
                 <td>
-                    ${p.ticket.seatCode}
+                        ${p.ticket.seatCode}
                 </td>
                 <td>
-                    ${p.passengerInformation.title}
+                        ${p.passengerInformation.title}
                 </td>
                 <td>
-                <c:choose>
-                    <c:when test="${p.travelClass == 'economy'}">
-                        <c:choose>
-                            <c:when test="${p.passengerInformation.title} == 'infant'">
-                                ${p.flight.economyPrice * 0.1}
-                            </c:when>
-                            <c:when test="${p.passengerInformation.title} == 'child'">
-                                ${p.flight.economyPrice * 0.9}
-                            </c:when>
-                            <c:otherwise>
-                                ${p.flight.economyPrice}
-                            </c:otherwise>
-                        </c:choose>
-                    </c:when>
-                    <c:when test="${p.travelClass == 'business'}">
-                        <c:choose>
-                            <c:when test="${p.passengerInformation.title} == 'infant'">
-                                ${p.flight.businessPrice * 0.1}
-                            </c:when>
-                            <c:when test="${p.passengerInformation.title} == 'child'">
-                                ${p.flight.businessPrice * 0.9}
-                            </c:when>
-                            <c:otherwise>
-                                ${p.flight.businessPrice}
-                            </c:otherwise>
-                        </c:choose>
-                    </c:when>
-                </c:choose>
+                    <c:choose>
+                        <c:when test="${p.travelClass == 'economy'}">
+                            <c:choose>
+                                <c:when test="${p.passengerInformation.title} == 'infant'">
+                                    ${p.flight.economyPrice * 0.1}
+                                </c:when>
+                                <c:when test="${p.passengerInformation.title} == 'child'">
+                                    ${p.flight.economyPrice * 0.9}
+                                </c:when>
+                                <c:otherwise>
+                                    ${p.flight.economyPrice}
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:when test="${p.travelClass == 'business'}">
+                            <c:choose>
+                                <c:when test="${p.passengerInformation.title} == 'infant'">
+                                    ${p.flight.businessPrice * 0.1}
+                                </c:when>
+                                <c:when test="${p.passengerInformation.title} == 'child'">
+                                    ${p.flight.businessPrice * 0.9}
+                                </c:when>
+                                <c:otherwise>
+                                    ${p.flight.businessPrice}
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                    </c:choose>
                 </td>
                 <td>$</td>
             </tr>
@@ -155,11 +154,6 @@
         </tr>
         </thead>
     </table>
-</div>
-<div class="container">
-    <h1>Payment Page</h1>
-    <h1>Pay through credit card</h1>
-    <button  id="creditCardPayment" onclick="goToCreditCardPayment()">Credit Card</button>
 </div>
 </body>
 </html>
