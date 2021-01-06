@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DiscountService {
@@ -14,9 +15,20 @@ public class DiscountService {
 
     public List<Discount> getAllDiscount(){return (List<Discount>) discountRepository.findAll();}
 
+    public Discount getDiscountById(int id){
+        return discountRepository.findByDiscountId(id);
+    }
     public boolean saveDiscount(Discount discount){
         try{
             discountRepository.save(discount);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean deleteDiscount(int id){
+        try {
+            discountRepository.deleteById(id);
             return true;
         }catch (Exception e){
             return false;

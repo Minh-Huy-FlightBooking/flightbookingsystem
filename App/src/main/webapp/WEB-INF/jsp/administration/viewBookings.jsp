@@ -101,7 +101,9 @@
                                             ${b.payment.paymentId}
                                             ${b.payment.paymentDate}
                                         </td>
-                                        <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>
+<%--                                        <c:if test="${b.payment.totalPayment!=null}">--%>
+<%--                                            <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>--%>
+<%--                                        </c:if>--%>
                                         <td>
                                             <a href="/admin/viewABookingDetails?bookingId=${b.bookingId}" class="btn btn-sm mycolor"><i
                                                     class="fa fa-trash-o"></i></a>

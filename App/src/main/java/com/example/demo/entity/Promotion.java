@@ -90,7 +90,7 @@ public class Promotion {
     public double getDiscount_amount_max() {
         double max = 0;
         for (Discount d : this.discounts){
-            max = (max < d.getDiscount_amount()) ? d.getDiscount_amount() : max;
+            max = (max < d.getDiscountAmount()) ? d.getDiscountAmount() : max;
         }
         this.discount_amount_max = max;
         return discount_amount_max;

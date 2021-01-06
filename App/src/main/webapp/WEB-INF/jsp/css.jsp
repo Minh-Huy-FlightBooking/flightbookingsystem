@@ -5,7 +5,7 @@
   Time: 10:33 AM
   To change this template use File | Settings | File Templates.
 --%>
-<title>Title</title>
+<title>Airbook</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

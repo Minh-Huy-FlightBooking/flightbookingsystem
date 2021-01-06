@@ -57,9 +57,9 @@
             color: white;
             font-weight: 700;
         }
-        .card:hover{
-            box-shadow: 0 4px 8px rgba(0,0,0,.18), 0 0 4px rgba(0,0,0,.15);
-        }
+        /*.card:hover{*/
+        /*    box-shadow: 0 4px 8px rgba(0,0,0,.18), 0 0 4px rgba(0,0,0,.15);*/
+        /*}*/
         .list-group a{
             text-decoration: none;
             color: #333333;

@@ -484,6 +484,7 @@ public class AdminController {
             model.addAttribute("promotion",promotionService.getPromotionById(promotion.getPromotionId()));
             model.addAttribute("discount",new Discount());
             model.addAttribute("promoList",promotionService.getAllPromotions());
+            model.addAttribute("discountList",promotion.getDiscounts());
             model.addAttribute("type","Edit");
             return "administration/addPromotion";
         }else{
@@ -516,6 +517,7 @@ public class AdminController {
         model.addAttribute("promotion", promotionService.getPromotionById(id));
         model.addAttribute("discount",new Discount());
         model.addAttribute("promoList",promotionService.getAllPromotions());
+        model.addAttribute("discountList", promotionService.getPromotionById(id).getDiscounts());
         model.addAttribute("type", "Edit");
         return "administration/addPromotion";
     }
@@ -523,6 +525,11 @@ public class AdminController {
     public String saveDiscount(Discount discount){
         discountService.saveDiscount(discount);
         return "redirect:/admin/editPromotion?id=" + discount.getPromotion().getPromotionId();
+    }
+    @RequestMapping("/deleteDiscount")
+    public String deleteDiscount(@RequestParam("id") int id){
+        discountService.deleteDiscount(promotionService.getPromotionById(id).getDiscounts().get(0).getDiscountId());
+        return "redirect:/admin/editPromotion?id=" + id;
     }
     // End Promotion
 //-----------------------------------TicketType---------------------------------//

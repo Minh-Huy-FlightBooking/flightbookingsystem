@@ -8,16 +8,16 @@ public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "discount_id")
-    private int discount_id;
+    private int discountId;
 
     @Column(name = "discount_code")
-    private String discount_code;
+    private String discountCode;
 
     @Column(name = "discount_amount")
-    private double discount_amount;
+    private double discountAmount;
 
     @Column(name = "discount_quantity")
-    private int discount_quantity;
+    private int discountQuantity;
 
     @ManyToOne
     @JoinColumn(name = "promotion_id")
@@ -26,36 +26,36 @@ public class Discount {
     public Discount() {
     }
 
-    public int getDiscount_id() {
-        return discount_id;
+    public int getDiscountId() {
+        return discountId;
     }
 
-    public void setDiscount_id(int discount_id) {
-        this.discount_id = discount_id;
+    public void setDiscountId(int discountId) {
+        this.discountId = discountId;
     }
 
-    public String getDiscount_code() {
-        return discount_code;
+    public String getDiscountCode() {
+        return discountCode;
     }
 
-    public void setDiscount_code(String discount_code) {
-        this.discount_code = discount_code;
+    public void setDiscountCode(String discountCode) {
+        this.discountCode = discountCode;
     }
 
-    public double getDiscount_amount() {
-        return discount_amount;
+    public double getDiscountAmount() {
+        return discountAmount;
     }
 
-    public void setDiscount_amount(double discount_amount) {
-        this.discount_amount = discount_amount;
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
-    public int getDiscount_quantity() {
-        return discount_quantity;
+    public int getDiscountQuantity() {
+        return discountQuantity;
     }
 
-    public void setDiscount_quantity(int discount_quantity) {
-        this.discount_quantity = discount_quantity;
+    public void setDiscountQuantity(int discountQuantity) {
+        this.discountQuantity = discountQuantity;
     }
 
     public Promotion getPromotion() {

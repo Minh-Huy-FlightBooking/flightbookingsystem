@@ -8,4 +8,6 @@
     <a href="/admin/viewBrand" class="list-group-item">Brand</a>
     <a href="/admin/viewPromotion" class="list-group-item">Promotion</a>
     <a href="/admin/viewTicketType" class="list-group-item">TicketType</a>
+    <a href="/admin/viewBookingData" class="list-group-item">Booking</a>
+    <a href="#" class="list-group-item">Log out</a>
 </div>

@@ -41,7 +41,10 @@ public class SystemController {
     @Autowired
     private TicketService ticketService;
 
-
+    @RequestMapping(value = "/ticketSearchModel")
+    public String gotoFlightSearchModel(){
+        return "ticket-list-model";
+    }
     @RequestMapping(value = "/promo")
     public String goToPromopage(Model model) {
         model.addAttribute("promotionList",promotionService.getAllPromotions());

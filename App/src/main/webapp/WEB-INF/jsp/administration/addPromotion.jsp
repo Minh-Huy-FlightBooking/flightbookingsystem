@@ -103,7 +103,6 @@
                                     </tr>
                                 </table>
                             </form:form>
-
                         </div>
                     </div>
                 </div>
@@ -117,19 +116,19 @@
                                         <h4>Discount</h4>
                                         <tbody>
                                         <tr>
-                                            <td>Amount</td>
-                                            <td><form:input path="discount_amount" cssClass="form-control"/></td>
+                                            <th>Amount</th>
+                                            <td><form:input path="discountAmount" cssClass="form-control"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Code</td>
-                                            <td><form:input path="discount_code" cssClass="form-control"/></td>
+                                            <th>Code</th>
+                                            <td><form:input path="discountCode" cssClass="form-control"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Quantity</td>
-                                            <td><form:input path="discount_quantity" cssClass="form-control"/></td>
+                                            <th>Quantity</th>
+                                            <td><form:input path="discountQuantity" cssClass="form-control"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Promotion</td>
+                                            <th>Promotion</th>
                                             <td><form:input path="promotion" readonly="true" cssClass="form-control" value="${promotion.promotionId}"/></td>
                                         </tr>
                                         <tr>
@@ -143,6 +142,33 @@
                         </div>
                     </div>
                 </c:if>
+            </div>
+            <br><br>
+            <div class="row">
+                <table class="table table-bordered col-sm-8">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Code</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="discount" items="${discountList}">
+                        <tr>
+                            <td>${discount.discountId}</td>
+                            <td>${discount.discountCode}</td>
+                            <td>${discount.discountAmount}</td>
+                            <td>${discount.discountAmount}</td>
+                            <td style="vertical-align: middle">
+                                <a href="/admin/deleteDiscount?id=${discount.promotion.promotionId}" class="btn btn-sm mycolor"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

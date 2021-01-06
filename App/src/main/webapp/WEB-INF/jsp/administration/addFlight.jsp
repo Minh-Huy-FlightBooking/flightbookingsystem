@@ -38,7 +38,7 @@
             </ul>
         </div>
         <div class="col-sm-10">
-            <div class="container col-sm-7">
+            <div class="container col-sm-8">
                 <div class="card border">
                     <div class="card-body ">
                         <form:form action="handlingFLightAddition" modelAttribute="flight">

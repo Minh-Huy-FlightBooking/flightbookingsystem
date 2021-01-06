@@ -168,7 +168,7 @@
     <div class="row d-flex border rounded-lg" style="height: 47%;margin: 0 9% 0 9%">
         <div class="form-group col-sm-2 border-right h-100">
             <label><small class="form-text text-muted">From</small></label>
-            <input type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Departure City">
+            <input type="text" class="form-control form-control-sm border-0 dropdown-toggle" data-toggle="dropdown" placeholder="Select Departure City"/>
             <div class="dropdown-menu keep-open p-0" style="width: 259%;height: 440%;overflow-y: auto;user-select: none;">
 <%--                departure city--%>
                 <div class="dropdown-item pt-2 pl-3" style="background-color: #f7f7f7">
