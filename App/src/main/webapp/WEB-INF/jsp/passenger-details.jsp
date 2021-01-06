@@ -94,103 +94,110 @@
 
         //Send Data back to Server --> Using Ajax
         function sendPassengerData() {
-            //Save contact Information
-            flightData.contactInformation.firstName = $('#firstName').val();
-            flightData.contactInformation.lastName = $('#lastName').val();
-            flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
-            flightData.contactInformation.email = $('#email').val();
+                //Save contact Information
+                flightData.contactInformation.firstName = $('#firstName').val();
+                flightData.contactInformation.lastName = $('#lastName').val();
+                flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
+                flightData.contactInformation.email = $('#email').val();
 
+                for (let i = 1; i <= (adults + children + infants); i++) {
+                    let passengerData = document.getElementById("passenger-" + i);
+                    let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
+                        phoneNumber;
 
-            for (let i = 1; i <= (adults + children + infants); i++) {
-                let passengerData = document.getElementById("passenger-" + i);
-                let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
-                    phoneNumber;
+                    title = passengerData.getElementsByTagName("select").namedItem("title").value;
 
-                title = passengerData.getElementsByTagName("select").namedItem("title").value;
+                    gender = passengerData.getElementsByTagName("select").namedItem("gender").value;
+                    nationality = passengerData.getElementsByTagName("select").namedItem("nationality").value;
 
-                gender = passengerData.getElementsByTagName("select").namedItem("gender").value;
-                nationality = passengerData.getElementsByTagName("select").namedItem("nationality").value;
+                    firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
+                    lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
+                    dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
+                    if (title != "infant") {
+                        passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
+                        expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
+                    }
 
-                firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
-                lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
-                dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
-                if (title != "infant") {
-                    passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
-                    expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
+                    if (title != "infant" && title != "child" && isDataSentChecked) {
+                        email = passengerData.getElementsByTagName("input").namedItem("email").value;
+                        phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
+                    }
+
+                    console.log(title);
+                    console.log(firstName);
+                    console.log(lastName);
+                    console.log(dateOfBirth);
+                    console.log(gender);
+                    console.log(nationality);
+                    if (title != "infant") {
+                        console.log(passportNumber);
+                        console.log(expiryDate);
+                    }
+                    if (i == (adults + children + infants)) {
+                        console.log("The last one");
+                    } else {
+                        console.log("Not The last one");
+                    }
+
+                    let person = {
+                        title: title,
+                        firstName: firstName,
+                        lastName: lastName,
+                        dateOfBirth: dateOfBirth,
+                        gender: gender,
+                        nationality: nationality,
+                        passportNumber: passportNumber,
+                        expiryDate: expiryDate,
+                        email: email,
+                        phoneNumber: phoneNumber
+                    };
+
+                    console.log(person);
+                    passengerInformation.push(person);
                 }
+                console.log((passengerInformation));
+                console.log("Before adding passengers' Information");
+                console.log(flightData);
+                flightData.passengerInformation = passengerInformation;
+                console.log(flightData);
 
-                if (title != "infant" && title != "child" && isDataSentChecked) {
-                    email = passengerData.getElementsByTagName("input").namedItem("email").value;
-                    phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
-                }
+                //Send Data to Server here !! Ha ha!!
+                sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
+                console.log(sessionStorage.getItem(sessionId));
+                $.ajax({
+                    type: "POST",
+                    url: "flightPickerHandler",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(flightData),
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("send data to backend successfully: ");
+                        console.log(data);
+                        /*alert("passengers are saved!!!");
+                        alert(JSON.stringify(flightData));*/
+                        // move to a new page
 
-                console.log(title);
-                console.log(firstName);
-                console.log(lastName);
-                console.log(dateOfBirth);
-                console.log(gender);
-                console.log(nationality);
-                if (title != "infant") {
-                    console.log(passportNumber);
-                    console.log(expiryDate);
-                }
-                if (i == (adults + children + infants)) {
-                    console.log("The last one");
-                } else {
-                    console.log("Not The last one");
-                }
-
-                let person = {
-                    title: title,
-                    firstName: firstName,
-                    lastName: lastName,
-                    dateOfBirth: dateOfBirth,
-                    gender: gender,
-                    nationality: nationality,
-                    passportNumber: passportNumber,
-                    expiryDate: expiryDate,
-                    email: email,
-                    phoneNumber: phoneNumber
-                };
-
-                console.log(person);
-                passengerInformation.push(person);
-            }
-            console.log((passengerInformation));
-            console.log("Before adding passengers' Information");
-            console.log(flightData);
-            flightData.passengerInformation = passengerInformation;
-            console.log(flightData);
-
-            //Send Data to Server here !! Ha ha!!
-            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
-            console.log(sessionStorage.getItem(sessionId));
-            $.ajax({
-                type: "POST",
-                url: "flightPickerHandler",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(flightData),
-                success: function (data, textStatus, jqXHR) {
-                    console.log("send data to backend successfully: ");
-                    console.log(data);
-                    /*alert("passengers are saved!!!");
-                    alert(JSON.stringify(flightData));*/
-                    // move to a new page
-
-                    location.href = "seatSelection";
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
-                    console.log("fail");
-                    alert("OOP!!! Something is wrong!!!");
-                }
-            });
+                        if (!allRequired) {
+                            location.href = "seatSelection";
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log("fail");
+                        alert("OOP!!! Something is wrong!!!");
+                    }
+                });
         }
 
     </script>
     <script>
-
+       /* var required = $('input,textarea,select').filter('[required]:true');
+        var allRequired = true;
+        required.each(function(){
+            if($(this).val() == ''){
+                allRequired = false;
+            }
+        });*/
     </script>
 </head>
 <body>
@@ -201,6 +208,7 @@
 <div class="container-fluid bg-danger">
     Booking Process is displayed here
 </div>
+<form id="passenger-information-container" action="seatSelection">
 <div class="container border mt-2">
     <div class="row">
         <div class="col-md-3">
@@ -215,15 +223,14 @@
                 </h5>
             </div>
             <div id="contact-information-container" >
-                <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name: </label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Type without tones..." required>
+                            <input type="text" class="form-control required" id="firstName" placeholder="Type without tones..." required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="lastName">Last Name: </label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Type without tones..." required>
+                            <input type="text" class="form-control required" id="lastName" placeholder="Type without tones..." required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -231,14 +238,13 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" required>
+                            <input type="text" class="form-control required" id="email" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="phoneNumber">Phone Number: </label>
-                            <input type="text" class="form-control" id="phoneNumber" required>
+                            <input type="text" class="form-control required" id="phoneNumber" required>
                         </div>
                     </div>
-                </form>
             </div>
             <hr>
             <div id="passenger-data-container">
@@ -281,17 +287,17 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label>First Name:</label>
-                                <input class="form-control" name="firstName" placeholder="First Name"/>
+                                <input class="form-control required" name="firstName" placeholder="First Name" required/>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Last Name</label>
-                                <input class="form-control" name="lastName" placeholder="Last Name"/>
+                                <input class="form-control required" name="lastName" placeholder="Last Name" required/>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-2">
                                 <label>Gender</label>
-                                <select class="form-control" name="gender">
+                                <select class="form-control required" name="gender" required>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                     <option value="homosexuality">Homosexuality</option>
@@ -299,11 +305,11 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label>Date Of Birth</label>
-                                <input type="date" class="form-control" name="dateOfBirth"/>
+                                <input type="date" class="form-control required" name="dateOfBirth" required/>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Nationality</label>
-                                <select class="form-control" name="nationality">
+                                <select class="form-control required" name="nationality" required>
                                     <option value="Vietnam">Vietnam</option>
                                     <option value="USA">USA</option>
                                 </select>
@@ -313,11 +319,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label>Passport Number:</label>
-                                    <input path="passportNumber" class="form-control" name="passportNumber"/>
+                                    <input path="passportNumber" class="form-control" name="passportNumber" required/>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Expiry Date:</label>
-                                    <input type="date" class="form-control" name="expiryDate"/>
+                                    <input type="date" class="form-control" name="expiryDate" required/>
                                 </div>
                             </div>
                         </c:if>
@@ -325,16 +331,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label>Email:</label>
-                                    <input path="passportNumber" class="form-control" name="email" disabled/>
+                                    <input path="passportNumber" class="form-control " name="email" disabled/>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Phone Number:</label>
-                                    <input type="text" class="form-control" name="phoneNumber" disabled/>
+                                    <input type="text" class="form-control " name="phoneNumber" disabled/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Send Booking Data to this email</label>
-                                    <input type="checkbox" name="sendInformationCheckbox"
-                                           class="form-control  col-md-2"/>
+                                    <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>
                                 </div>
                             </div>
                         </c:if>
@@ -349,7 +354,7 @@
         </div>
     </div>
 </div>
-
+</form>
 </div>
 </body>
 </html>
