@@ -201,7 +201,7 @@
                     // move to a new page
 
                     /*if (!allRequired) {*/
-                        location.href = "seatSelection";
+                    location.href = "seatSelection";
                     /*}*/
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -411,10 +411,10 @@
                                                                         <label style="font-size: 14px;line-height: 22px;font-weight: 600;color: #59595b">Phone Number *</label>
                                                                         <input type="text" class="form-control " name="phoneNumber" disabled/>
                                                                     </div>
-<%--                                                                    <div class="form-group">--%>
-<%--                                                                        <label>Send Booking Data to this email</label>--%>
-<%--                                                                        <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>--%>
-<%--                                                                    </div>--%>
+                                                                    <div class="form-group">
+                                                                       <label>Send Booking Data to this email</label>
+                                                                       <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>
+                                                                    </div>
                                                                 </div>
                                                             </c:if>
                                                         </div>
@@ -576,7 +576,7 @@
                 </div>
             </div>
             <br>
-            <button type="submit" id="continue" class="btn btn-danger w-100 py-2"><a onclick="sendPassengerData()">Continue</a></button>
+            <button type="submit" id="continue" class="btn btn-danger w-100 py-2" onclick="sendPassengerData()">Continue</button>
         </div>
     </div>
 </div>
