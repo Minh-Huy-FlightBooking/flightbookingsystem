@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.*;
+import com.example.demo.helper.EmailService;
 import com.example.demo.object.*;
 
 import com.example.demo.service.*;
@@ -47,6 +48,9 @@ public class PaymentController {
 
     @Autowired
     private TravelClassService travelClassService;
+
+    @Autowired
+    private EmailService emailService;
 
     // Payment Method
     @RequestMapping(value = "/paymentMethod", method = RequestMethod.GET)
@@ -249,6 +253,14 @@ public class PaymentController {
                                     }
                                 }
                                 model.addAttribute("bookingId",booking.getBookingId());
+                                model.addAttribute("lastName", booking.getGuest().getLastName());
+                                emailService.sendMail(flightPicker.getContactInformation().getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='bookingDetails?booking.bookingId=" + booking.getBookingId() + "&passenger.lastName=" + flightPicker.getContactInformation().getLastName() + "'>" + "here" + "</a>" );
+                                for (PassengerInformation p : flightPicker.getPassengerInformation()) {
+                                    if (!p.getEmail().equals("")) {
+                                        emailService.sendMail(p.getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='bookingDetails?booking.bookingId=" + booking.getBookingId() + "&passenger.lastName=" + flightPicker.getContactInformation().getLastName() + "'>" + "here" + "</a>" );
+
+                                    }
+                                }
                             }
                         } catch (Exception e)
                         {
