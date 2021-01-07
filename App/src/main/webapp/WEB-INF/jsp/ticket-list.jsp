@@ -711,7 +711,7 @@
     </div>
 </div>
 <br><br>
-<footer>
+<footer class="fixed-bottom">
     <jsp:include page="footer.jsp"/>
 </footer>
 </body>

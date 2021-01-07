@@ -84,6 +84,10 @@ public class SystemController {
     public String paymentMethod() {
         return "payment-method-model";
     }
+    @RequestMapping(value = "/paymentModel")
+    public String payment() {
+        return "payment-model";
+    }
 
     //////////////////////////////
     // a function to looking for a flight / ticket !!!
