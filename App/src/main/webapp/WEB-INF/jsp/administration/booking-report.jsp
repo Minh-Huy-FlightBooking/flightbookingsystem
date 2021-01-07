@@ -60,20 +60,36 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div class="row mb-2">
-                        <div class="col-sm-5">
+                        <div class="col-sm-3">
                             <h5 style="color: #333;font-weight: 600">Booking List&nbsp;&nbsp;&nbsp;
                                 <a href="/admin/addBrand" title="Add a new Ticket" class="btn btn-sm mycolor">
                                     <i class="fa fa-plus"></i></a>
-                                <span>
-                                    <form>
-                                        <input type="date" alt="date-from" placeholder="Date From">
-                                        <input type="date" alt="date-to" placeholder="Date To">
-                                        <button type="submit">Search</button>
-                                    </form>
-                                </span>
                             </h5>
                         </div>
-                        <div class="col-sm-7">
+                        <div class="card col-sm-6">
+                            <form:form modelAttribute="reportRange" action="bookingReport" method="get">
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Date from</label>
+                                            <form:input path="startDate" type="date" alt="date-from" cssClass="form-control mr-2"/>
+                                        </div>
+                                        <div class="col">
+                                            <label>Date to</label>
+                                            <form:input path="endDate" type="date" alt="date-to" cssClass="form-control mr-2"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-6">
+                                            <button type="submit" class="btn mycolor w-100">Search</button>
+                                        </div>
+                                        <div class="col-sm-3"></div>
+                                    </div>
+                                </div>
+                            </form:form>
+                        </div>
+                        <div class="col-sm-3">
                             <c:if test="${message=='Delete successed.'}">
                                 <div class="alert" style="background-color:#b7eb8f;color: #333">${message}</div>
                             </c:if>
@@ -144,12 +160,12 @@
                                 <tr>
                                     <td colspan="6"></td>
                                     <td>
-                                        <button onclick="">
+                                        <button onclick="tableToPDF('booking-table-container')" class="btn mycolor w-100">
                                             Print Pdf
                                         </button>
                                     </td>
                                     <td>
-                                        <button onclick="">
+                                        <button onclick="tableToExcel('booking-table-container')" class="btn mycolor w-100">
                                             Get Excel
                                         </button>
                                     </td>
