@@ -68,7 +68,7 @@ To change this template use File | Settings | File Templates.
                 <a class="nav-link" href="/promo">Promo</a>
             </li>
             <li class="nav-item py-3">
-                <a class="nav-link" href="#">Order</a>
+                <a class="nav-link" href="bookingSearch">Check Booking</a>
             </li>
         </ul>
         <div class="mt-2 mt-md-0">

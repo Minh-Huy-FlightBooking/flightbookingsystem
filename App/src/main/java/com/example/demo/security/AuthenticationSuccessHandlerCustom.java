@@ -43,9 +43,9 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
         if (isAdministratorRole) {
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/adminHome");
         } else if (isEmployeeRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "employee/employeePage");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/adminHome");
         } else if (isPassengerRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "passenger/passengerPage");
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
         } else {
             throw new IllegalStateException();
         }

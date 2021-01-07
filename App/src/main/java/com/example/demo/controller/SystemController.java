@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Flight;
 import com.example.demo.entity.Ticket;
 import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
-import com.example.demo.restAPI.WebAPI;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -13,14 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +36,8 @@ public class SystemController {
 
     @Autowired
     private CountryService countryService;
-    @RequestMapping(value = "/ticketSearchModel")
-    public String gotoFlightSearchModel(){
-        return "ticket-list-model";
-    }
-    @RequestMapping(value = "/passengerModel")
-    public String gotoFlightPassengerModel(){
-        return "passenger-information-model";
-    }
+
+
     @RequestMapping(value = "/promo")
     public String goToPromopage(Model model) {
         model.addAttribute("promotionList",promotionService.getAllPromotions());
@@ -71,32 +61,15 @@ public class SystemController {
         return "index";
     }
 
-    @RequestMapping(value = "/home")
-    public String goToHome() {
-        return "home";
-    }
-    @RequestMapping(value = "/checkBooking")
-    public String checkBooking() {
-        return "booking-search";
-    }
-    @RequestMapping(value = "/paymentMethodModel")
-    public String paymentMethod() {
-        return "payment-method-model";
-    }
-    @RequestMapping(value = "/paymentModel")
-    public String payment() {
-        return "payment-model";
-    }
-
     //////////////////////////////
     // a function to looking for a flight / ticket !!!
-    @RequestMapping(value = "/ticketSearch")
+    /*@RequestMapping(value = "/ticketSearch")
     public String goToTicketSearch(Model model, HttpServletRequest request) {
         model.addAttribute("sessionId", request.getSession().getId());
         System.out.println(request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
         return "ticket-searching-test";
-    }
+    }*/
 
     // Return Ticket Searched's Results
     @RequestMapping(value = "/ticketSearch", method = RequestMethod.POST)
@@ -191,7 +164,7 @@ public class SystemController {
         model.addAttribute("countryNames", countryService.getAllCountriesName());
         /*model.addAttribute("passenger", new PassengerInformation());*/
         /*return "passenger-details";*/
-        return "passenger-information-model";
+        return "passenger-details";
     }
 
     //Seat Selection Function while booking flight ticket!!!
