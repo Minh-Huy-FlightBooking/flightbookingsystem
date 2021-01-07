@@ -91,13 +91,13 @@
                             <div class="card-body d-flex flex-column">
                                 <div class="row">
                                     <div class="col text-center">
-                                        <p style="font-weight: 700;font-size: 18px;color: #59595b">DISCOUNT RP ${discount.discount_amount} $</p>
-                                        <p style="color: #59595b" class="text-muted">quantity: ${discount.discount_quantity}</p>
+                                        <p style="font-weight: 700;font-size: 18px;color: #59595b">DISCOUNT RP ${discount.discountAmount} $</p>
+                                        <p style="color: #59595b" class="text-muted">quantity: ${discount.discountQuantity}</p>
                                     </div>
                                 </div>
                                 <div class="row py-2 px-3">
                                     <div class="col-sm-8 py-2 text-center border">
-                                        <p class="pt-2" style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${discount.discount_code}</p>
+                                        <p class="pt-2" style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${discount.discountCode}</p>
                                     </div>
                                     <div class="col-sm-4 pl-0">
                                         <button type="button" class="h-100 w-100 btn btn-danger rounded-0"><i class="fa fa-copy"></i></button>
