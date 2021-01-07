@@ -41,7 +41,8 @@ public class EmailService {
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
             message.setSubject(emailSubject);
-            message.setText(emailContent);
+            /*message.setText(emailContent);*/
+            message.setContent(emailContent ,"text/html; charset=utf-8");
             return message;
         } catch (MessagingException e) {
             e.printStackTrace();

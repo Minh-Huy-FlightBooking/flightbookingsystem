@@ -33,9 +33,10 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     List<Ticket> findByFlight_FlightId(int id);
     List<Ticket> findByFlightFlightIdAndTravelClassClassName (int flightId, String travelClass);
 
-    @Query("select t from Ticket t where t.booking.bookingId = :bookingId and lower(t.passenger.lastName) like %:lastName%")
-    List<Ticket> findByBookingIdAndLowercaseLastName (int bookingId, String lastName);
+    @Query("select t from Ticket t where t.booking.bookingId = :bookingId and t.passenger.lastName like %:lastName%")
+    List<Ticket> findByBookingIdAndLowercaseLastName (@Param(("bookingId")) int bookingId, @Param("lastName") String lastName);
 
+    /*List<Ticket> findByBookingBookingIdAndPassenger (int bookingId, String lastName);*/
     List<Ticket> findByBookingBookingId(int bookingId);
 
     List<Ticket> findByFlightAndEnabledAndTravelClassClassName(Flight flight, boolean enabled, String travelClassName);

@@ -132,10 +132,10 @@
                         <label>Card Number: </label>
                         <form:input path="cardNumber" type="text" class="form-control" id="cardNumber" placeholder="" />
                     </div>
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="expiryDate">Expiry Date: </label>
                         <input type="date" class="form-control" id="expiryDate" placeholder="" >
-                    </div>
+                    </div>--%>
                     <div class="form-group">
                         <label>Enter OTP: </label>
                         <form:input path="OTP" type="text" class="form-control" id="otp" placeholder="" />

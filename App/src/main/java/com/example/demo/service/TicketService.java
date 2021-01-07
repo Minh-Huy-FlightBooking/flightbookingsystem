@@ -16,6 +16,9 @@ public class TicketService {
     @Autowired
     private TravelClassRepository travelClassRepository;
 
+    public List<Ticket> getTicketsByBookingId (int bookingId) {
+        return ticketRepository.findByBookingBookingId(bookingId);
+    }
     public boolean resetTicketValuesByBookingId (int bookingId) {
         try {
             List<Ticket> tickets = ticketRepository.findByBookingBookingId(bookingId);

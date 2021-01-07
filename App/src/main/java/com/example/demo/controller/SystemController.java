@@ -6,10 +6,7 @@ import com.example.demo.object.FlightPicker;
 import com.example.demo.object.PassengerInformation;
 import com.example.demo.object.TicketInformation;
 import com.example.demo.restAPI.WebAPI;
-import com.example.demo.service.AircraftService;
-import com.example.demo.service.FlightService;
-import com.example.demo.service.PromotionService;
-import com.example.demo.service.TicketService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -41,6 +38,8 @@ public class SystemController {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private CountryService countryService;
     @RequestMapping(value = "/ticketSearchModel")
     public String gotoFlightSearchModel(){
         return "ticket-list-model";
@@ -187,6 +186,9 @@ public class SystemController {
         }
 
         model.addAttribute("passengerList", passengerList);
+        model.addAttribute("flightPicker", flightPicker);
+
+        model.addAttribute("countryNames", countryService.getAllCountriesName());
         /*model.addAttribute("passenger", new PassengerInformation());*/
         /*return "passenger-details";*/
         return "passenger-information-model";
@@ -211,19 +213,7 @@ public class SystemController {
         if (flightPicker != null) {
             //Print out to test if this is either null or not...
             System.out.println(flightPicker.getDepartureTrip().getDepartureFlightId());
-            /*for (PassengerInformation p : flightPicker.getPassengerInformation()) {
-                System.out.println("Full name: " + p.getFirstName() + p.getLastName());
-            }*/
 
-            /*int numberOfEconomySeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
-            int numberOfBusinessSeats = flightService.getFlightById(flightPicker.getDepartureTrip().getDepartureFlightId()).getAircraft().getTotal_economy();
-            System.out.println("Economy: " + numberOfEconomySeats + ", Business: " + numberOfBusinessSeats);
-*/
-            // branch out each circumstance
-            /*if (tripType.equals("roundTrip")) {
-
-
-            }*/
             //New Edit
             List<String> passengerNames = new ArrayList<>();
             for (PassengerInformation p: flightPicker.getPassengerInformation()){
@@ -250,6 +240,10 @@ public class SystemController {
         System.out.println(ticket.getPassenger().getLastName());
         System.out.println(ticket.getBooking().getBookingId());
         List<Ticket> tickets = ticketService.getTicketsByBookingIdAndLowercaseLastName(ticket.getBooking().getBookingId(), ticket.getPassenger().getLastName());
+        if (tickets.isEmpty()) {
+            tickets = ticketService.getTicketsByBookingId(ticket.getBooking().getBookingId());
+        }
+        System.out.println(ticket.getPassenger().getLastName().toLowerCase());
         model.addAttribute("tickets", tickets);
         return "booking-search";
     }
