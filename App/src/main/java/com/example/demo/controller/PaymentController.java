@@ -158,7 +158,7 @@ public class PaymentController {
 
                             //Payment session will last only 10 minutes !!! --> have not configured , it will be okay though baby
                             String sessionCreated = request.getSession().getId() + LocalDateTime.now().toString();
-                            paymentService.saveNewPayment(new Payment("credit", true, creditCardReceived, sessionCreated));
+                            paymentService.saveNewPayment(new Payment("credit", true, sessionCreated, totalAmount, creditCardReceived));
                             Payment payment = paymentService.getPaymentBySessionId(sessionCreated);
 
                             //Save booking data to DB
