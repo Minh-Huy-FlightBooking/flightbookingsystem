@@ -686,6 +686,7 @@ public class AdminController {
         }
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("bookings", bookings);
+        model.addAttribute("reportRange", new ReportRange());
         return "administration/booking-report";
     }
     @RequestMapping(value = "/deleteBooking", method = RequestMethod.GET)
