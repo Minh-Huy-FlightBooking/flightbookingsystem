@@ -47,6 +47,15 @@ public class Payment {
         this.creditCard = creditCard;
     }
 
+    public Payment(String paymentMethod, boolean status, String sessionId, LocalDate paymentDate, double totalPayment, CreditCard creditCard) {
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.sessionId = sessionId;
+        this.paymentDate = paymentDate;
+        this.totalPayment = totalPayment;
+        this.creditCard = creditCard;
+    }
+
     public Payment(String paymentMethod, boolean status, String sessionId, double totalPayment) {
         this.paymentMethod = paymentMethod;
         this.status = status;

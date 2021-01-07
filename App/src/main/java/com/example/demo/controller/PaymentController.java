@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +159,7 @@ public class PaymentController {
 
                             //Payment session will last only 10 minutes !!! --> have not configured , it will be okay though baby
                             String sessionCreated = request.getSession().getId() + LocalDateTime.now().toString();
-                            paymentService.saveNewPayment(new Payment("credit", true, sessionCreated, totalAmount, creditCardReceived));
+                            paymentService.saveNewPayment(new Payment("credit", true, sessionCreated, LocalDate.now(),totalAmount, creditCardReceived));
                             Payment payment = paymentService.getPaymentBySessionId(sessionCreated);
 
                             //Save booking data to DB
