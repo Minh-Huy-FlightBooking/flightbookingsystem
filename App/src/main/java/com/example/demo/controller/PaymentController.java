@@ -158,7 +158,7 @@ public class PaymentController {
 
                             //Payment session will last only 10 minutes !!! --> have not configured , it will be okay though baby
                             String sessionCreated = request.getSession().getId() + LocalDateTime.now().toString();
-                            paymentService.saveNewPayment(new Payment("credit", true, creditCardReceived, sessionCreated));
+                            paymentService.saveNewPayment(new Payment("credit", true, sessionCreated, totalAmount, creditCardReceived));
                             Payment payment = paymentService.getPaymentBySessionId(sessionCreated);
 
                             //Save booking data to DB
@@ -254,10 +254,11 @@ public class PaymentController {
                                 }
                                 model.addAttribute("bookingId",booking.getBookingId());
                                 model.addAttribute("lastName", booking.getGuest().getLastName());
-                                emailService.sendMail(flightPicker.getContactInformation().getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='bookingDetails?booking.bookingId=" + booking.getBookingId() + "&passenger.lastName=" + flightPicker.getContactInformation().getLastName() + "'>" + "here" + "</a>" );
+                                emailService.sendMail(flightPicker.getContactInformation().getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='http://localhost:8080/bookingDetails?booking.bookingId=" + booking.getBookingId() + "&passenger.lastName=" + flightPicker.getContactInformation().getLastName() + "'>" + "here" + "</a>" );
+
                                 for (PassengerInformation p : flightPicker.getPassengerInformation()) {
                                     if (!p.getEmail().equals("")) {
-                                        emailService.sendMail(p.getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='bookingDetails?booking.bookingId=" + booking.getBookingId() + "&passenger.lastName=" + flightPicker.getContactInformation().getLastName() + "'>" + "here" + "</a>" );
+                                        emailService.sendMail(p.getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='http://localhost:8080/bookingDetails?booking.bookingId=" + booking.getBookingId() + "'>" + "here" + "</a>" );
 
                                     }
                                 }

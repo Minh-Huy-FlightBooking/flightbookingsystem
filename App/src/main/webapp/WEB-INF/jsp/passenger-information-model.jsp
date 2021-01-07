@@ -384,8 +384,9 @@
                                                                 <div class="form-group">
                                                                     <label style="font-size: 14px;line-height: 22px;font-weight: 600;color: #59595b">Nationality</label>
                                                                     <select class="form-control required" name="nationality" required>
-                                                                        <option value="Vietnam">Vietnam</option>
-                                                                        <option value="USA">USA</option>
+                                                                        <c:forEach var="c" items="${countryNames}">
+                                                                            <option value="${c}">${c}</option>
+                                                                        </c:forEach>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -529,7 +530,7 @@
         </div>
 
         <div class="col-sm-4 " id="flightInformation">
-            <div class="card">
+           <%-- <div class="card">
                 <div class="card-body px-0">
                     <div class="col">
                         <div class="row border-bottom" style="padding: 0 0 0 20px">
@@ -538,19 +539,19 @@
                         </div>
                         <div class="row border-bottom" style="padding: 20px 0 0 5px">
                             <div class="col">
-                                <input type="hidden" id="tripType" name="tripType" value="${ticketInformation.tripType}">
+                                <input type="hidden" id="tripType" name="tripType" value="${flightPicker.ticketInformation.tripType}">
                                 <div id="departure-flight-information">
                                     <p><strong>Departure Trip</strong></p>
-                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.destination}</strong></p>
-                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.origin}</strong></p>
+                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.origin}</strong></p>
+                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.destination}</strong></p>
                                     <p><small></small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="departurePrice"></strong></p>
                                 </div>
                             </div>
-                            <c:if test="${ticketInformation.tripType == 'roundTrip'}">
+                            <c:if test="${flightPicker.ticketInformation.tripType == 'roundTrip'}">
                                 <div class="col">
                                     <p><strong>Return Trip</strong></p>
-                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.destination}</strong></p>
-                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.origin}</strong></p>
+                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.destination}</strong></p>
+                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.origin}</strong></p>
                                     <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="returnPrice"></strong></p>
                                 </div>
                             </c:if>
@@ -558,23 +559,23 @@
                         <div class="row" style="padding: 20px 0px 0 5px" id="passengerNumbers">
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Adults: </strong>
-                                <small>${ticketInformation.adults}</small>
-                                <input type="hidden" value="${ticketInformation.adults}" name="adults" id="adults"/>
+                                <small>${flightPicker.ticketInformation.adults}</small>
+                                <input type="hidden" value="${flightPicker.ticketInformation.adults}" name="adults" id="adults"/>
                             </div>
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Children: </strong>
-                                <small>${ticketInformation.children}</small>
-                                <input type="hidden" value="${ticketInformation.children}" name="children" id="children"/>
+                                <small>${flightPicker.ticketInformation.children}</small>
+                                <input type="hidden" value="${flightPicker.ticketInformation.children}" name="children" id="children"/>
                             </div>
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Infants: </strong>
-                                <small>${ticketInformation.infant}</small>
-                                <input type="hidden" value="${ticketInformation.infant}" name="infants" id="infants"/>
+                                <small>${flightPicker.ticketInformation.infant}</small>
+                                <input type="hidden" value="${flightPicker.ticketInformation.infant}" name="infants" id="infants"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <br>
             <button type="submit" id="continue" class="btn btn-danger w-100 py-2" onclick="sendPassengerData()">Continue</button>
         </div>

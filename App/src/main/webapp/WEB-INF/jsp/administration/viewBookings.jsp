@@ -73,14 +73,15 @@
                                     <th>
                                         Booking <br/> ID
                                     </th>
-                                    <th>
-                                        Flight <br/> ID
-                                    </th>
+
                                     <th>Payment <br/> Status</th>
                                     <th>Payment <br/> Method</th>
+
+
                                     <th>Email</th>
                                     <th>Name</th>
-                                    <th>Payment <br/> Date</th>
+                                    <th>Payment <br/> Id</th>
+
                                     <th>Total <br/> Payment</th>
                                     <th>Edit</th>
                                 </tr>
@@ -99,11 +100,11 @@
                                         </td>
                                         <td>
                                             ${b.payment.paymentId}
-                                            ${b.payment.paymentDate}
                                         </td>
-<%--                                        <c:if test="${b.payment.totalPayment!=null}">--%>
-<%--                                            <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>--%>
-<%--                                        </c:if>--%>
+
+                                        <c:if test="${b.payment.totalPayment!=null}">
+                                            <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>
+                                        </c:if>
                                         <td>
                                             <a href="/admin/viewABookingDetails?bookingId=${b.bookingId}" class="btn btn-sm mycolor"><i
                                                     class="fa fa-trash-o"></i></a>

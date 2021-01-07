@@ -307,8 +307,9 @@
                             <div class="form-group col-md-2">
                                 <label>Nationality</label>
                                 <select class="form-control required" name="nationality" required>
-                                    <option value="Vietnam">Vietnam</option>
-                                    <option value="USA">USA</option>
+                                    <c:forEach var="c" items="${countryNames}">
+                                        <option value="${c}">${c}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

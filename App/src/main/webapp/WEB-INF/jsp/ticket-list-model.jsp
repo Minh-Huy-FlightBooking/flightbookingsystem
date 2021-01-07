@@ -267,17 +267,21 @@
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Adults: </strong>
                                 <small>${ticketInformation.adults}</small>
-                                <input type="hidden" value="${ticketInformation.adults}" name="adults" id="adults"/>
+                                <input type="hidden" value="${ticketInformation.adults}" name="adults" />
                             </div>
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Children: </strong>
                                 <small>${ticketInformation.children}</small>
-                                <input type="hidden" value="${ticketInformation.children}" name="children" id="children"/>
+                                <input type="hidden" value="${ticketInformation.children}" name="children" />
                             </div>
                             <div class="col">
                                 <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Infants: </strong>
                                 <small>${ticketInformation.infant}</small>
-                                <input type="hidden" value="${ticketInformation.infant}" name="infants" id="infants"/>
+                                <input type="hidden" value="${ticketInformation.infant}" name="infants" />
+                            </div>
+                            <br/>
+                            <div>
+                                This is the stardard price per adult.
                             </div>
                         </div>
                     </div>
