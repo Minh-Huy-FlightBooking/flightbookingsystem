@@ -471,7 +471,7 @@
                 highlight: false,
                 source: function (request, response) {
                     $.ajax({
-                        url: "origin",
+                        url: "originWithCityName",/*url: "origin",*/
                         dataType: "json",
                         data: request,
                         success: function (data, textStatus, jqXHR) {
@@ -504,7 +504,7 @@
                 highlight: false,
                 source: function (request, response) {
                     $.ajax({
-                        url: "destination/" + value.toString(),
+                        url: "destinationWithCityName/" + value.toString(),
                         dataType: "json",
                         data: request,
                         success: function (data, textStatus, jqXHR) {
