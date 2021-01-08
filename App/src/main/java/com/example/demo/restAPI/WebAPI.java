@@ -37,6 +37,24 @@ public class WebAPI {
     @Autowired
     private TicketService ticketService;
 
+    @RequestMapping(value = "/originWithCityName", method = RequestMethod.GET)
+    public Object getOriginsWithCityName () {
+        List<String> cityNames = new ArrayList<>();
+        for (Airport a : airportService.getAllAirports()) {
+            cityNames.add(a.getCity().getCityName());
+        }
+        return cityNames;
+    }
+
+    @RequestMapping(value = "destinationWithCityName/{origin}", method = RequestMethod.GET)
+    public Object getDestinationWithCityName (@PathVariable("origin") String originWithCityName) {
+        List<String> destinationCityNames = new ArrayList<>();
+        destinationCityNames = flightRouteService.getAllDestinationCityNamesWithOriginCityName(originWithCityName);
+        return destinationCityNames;
+    }
+
+
+
     @RequestMapping(value = "/origin", method = RequestMethod.GET)
     public Object getOrigins() {
         List<String> airports = new ArrayList<>();

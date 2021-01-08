@@ -19,6 +19,9 @@ public class AirportService {
         return (List<Airport>) airportRepository.findAll();
     }
 
+    public Airport getAirportByCityName (String cityName) {
+        return airportRepository.findByCityCityName(cityName);
+    }
     public Map<Integer, String> getAllAirportsWithMapType() {
         List<Airport> airportList = getAllAirports();
         Map<Integer, String> airports = new HashMap<>();

@@ -37,6 +37,8 @@ public class SystemController {
     @Autowired
     private CountryService countryService;
 
+    @Autowired
+    private AirportService airportService;
 
     @RequestMapping(value = "/promo")
     public String goToPromopage(Model model) {
@@ -105,10 +107,14 @@ public class SystemController {
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
         }*/
+
+
         if (t.getTravelClass().equals("all")) {
-            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
+            /*model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));*/
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(airportService.getAirportByCityName(t.getOrigin()).getAirportName(), airportService.getAirportByCityName(t.getDestination()).getAirportName(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));
         } else {
-            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople, t.getTravelClass()));
+            /*model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople, t.getTravelClass()));*/
+            model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(airportService.getAirportByCityName(t.getOrigin()).getAirportName(), airportService.getAirportByCityName(t.getDestination()).getAirportName(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople, t.getTravelClass()));
         }
             /*model.addAttribute("departFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getOrigin(), t.getDestination(), initialTimeOfDepartureDate, endTimeOfDepartureDate, numberOfPeople));*/
          if (t.getTripType().equals("roundTrip")) {
@@ -117,16 +123,18 @@ public class SystemController {
             LocalDateTime endTimeOfReturnDate = t.getReturnDate().atTime(23, 59);
 
              if (t.getTravelClass().equals("all")) {
-                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));
+                 /*model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));*/
+                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditions(airportService.getAirportByCityName(t.getDestination()).getAirportName(), airportService.getAirportByCityName(t.getOrigin()).getAirportName(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople));
              } else {
-                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople, t.getTravelClass()));
+                 /*model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(t.getDestination(), t.getOrigin(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople, t.getTravelClass()));*/
+                 model.addAttribute("returnFlights", flightService.getAllOneWayFlightsBySearchConditionsWithTravelClass(airportService.getAirportByCityName(t.getDestination()).getAirportName(), airportService.getAirportByCityName(t.getOrigin()).getAirportName(), initialTimeOfReturnDate, endTimeOfReturnDate, numberOfPeople, t.getTravelClass()));
              }
 
             //Display table return flights!!!
             model.addAttribute("returnStatus", "true");
         }
          /*return "ticket-list-model";*/
-        return "ticket-list";
+            return "ticket-list";
     }
 
     //////////////////////////////

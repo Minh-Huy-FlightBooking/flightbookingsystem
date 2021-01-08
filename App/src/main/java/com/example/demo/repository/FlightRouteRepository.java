@@ -21,4 +21,7 @@ public interface FlightRouteRepository extends CrudRepository<FlightRoute, Integ
             "on fr.destination_airport_id = a.airport_id\n" +
             "where fr.origin_airport_id in (select airport_id from airport a2 where lower(a2.airport_name) like %:origin%)", nativeQuery = true)
     List<FlightRoute> findByOriginName(@Param("origin") String origin);
+
+    @Query("select f from FlightRoute f where f.originAirport.city.cityName like %:originCityName%")
+    List<FlightRoute> findByOriginCityName(@Param("originCityName") String originCityName);
 }

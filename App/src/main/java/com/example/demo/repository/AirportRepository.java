@@ -11,4 +11,6 @@ public interface AirportRepository extends CrudRepository<Airport, Integer> {
 //    List<Airport> findByAirportId(int id);
     Airport findByAirportId(int id);
     boolean existsByAirportName(String var);
+
+    Airport findByCityCityName(String cityName);
 }

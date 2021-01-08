@@ -20,6 +20,22 @@ public class FlightRouteService {
     @Autowired
     private AirportRepository airportRepository;
 
+    public List<FlightRoute> getAllFlightRouteByOriginCityName (String originCityName) {
+        return flightRouteRepository.findByOriginCityName(originCityName);
+    }
+
+    public List<String> getAllDestinationCityNamesWithOriginCityName (String originCityName) {
+        List<FlightRoute> flightRouteList = getAllFlightRouteByOriginCityName(originCityName);
+        List<String> destinationName = new ArrayList<>();
+
+        for (FlightRoute f: flightRouteList) {
+            destinationName.add(f.getDestinationAirport().getCity().getCityName());
+        }
+        return destinationName;
+
+    }
+
+
     public List<FlightRoute> getAllFlightRoute() {
         return (List<FlightRoute>) flightRouteRepository.findAll();
     }
