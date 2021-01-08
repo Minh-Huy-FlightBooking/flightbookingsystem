@@ -627,7 +627,7 @@ public class AdminController {
             return "administration/addAccount";
         }else{
             if(accountService.isException(account)){
-                model.addAttribute("message","Data is existed");
+                model.addAttribute("message","Data is existed.");
             }else {
                 if (accountService.saveAccount(account)){
                     model.addAttribute("message","Save successed.");
