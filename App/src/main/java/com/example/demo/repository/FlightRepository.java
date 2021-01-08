@@ -34,6 +34,8 @@ public interface FlightRepository extends CrudRepository<Flight, Integer> {
             " f.departureTime <= :departureTime2")
     List<Flight> findByDepartureTimeHere(@Param("departureTime") LocalDateTime departureTime, @Param("departureTime2") LocalDateTime departureTime2);
 
+    List<Flight> findByFlightRouteOriginAirportCityCityNameAndEconomyPriceLessThan(String var1, double var2);
+
     /*@Query("select f from Flight f" +
             " where f.departureTime = :departureTime")*/
  /*   List<Flight> findByDepartureTime(LocalDateTime date);

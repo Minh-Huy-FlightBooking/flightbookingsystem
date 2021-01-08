@@ -67,6 +67,10 @@ public class FlightService {
         return flightRepository.findByFlightId(id);
     }
 
+    public List<Flight> getAllFlightRecommend(){
+        return flightRepository.findByFlightRouteOriginAirportCityCityNameAndEconomyPriceLessThan("Da Nang",101.0);
+    }
+
     public boolean deleteFLight (int id){
 //        Flight flight = flightRepository.findByFlightId(id);
 //        if (flight.getFlightStatus().equals("On time")) return false;

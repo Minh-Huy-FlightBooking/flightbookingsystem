@@ -9,6 +9,55 @@
     <%--Javascript External Link is placed here--%>
     <%--<jsp:include page="administration/_head.jsp"/>--%>
     <jsp:include page="css.jsp"/>
+    <style>
+        .list-group a:hover{
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .list-group a{
+            text-decoration: none;
+            color: #333333;
+        }
+        li.nav-item:hover{
+            background-color: #f7f7f7;
+        }
+        li.nav-item a:hover{
+            color: #f39c12;
+        }
+        li.nav-item a{
+            font-size: 14px;
+            font-weight: 400;
+            color: #59595b;
+            text-align: center;
+        }
+        .login-btn{
+            background-color: #ffffff;
+            font-weight: 600;
+            color: #9a9a9d;
+            min-width: 95px;
+            font-size: 15px;
+            line-height: 17px;
+            padding: 10px 15px;
+        }
+        .login-btn:hover{
+            background-color: #f2f2f2;
+            border-color: transparent;
+            color: #9a9a9d;
+        }
+        .carousel-indicators li {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+        }
+        .carousel-container{
+            background: linear-gradient(180deg,transparent 79.81%,rgba(0,0,0,.3)),linear-gradient(256.23deg,#cf3c3f -1.09%,#f48c83 46.25%,#d82f33 101.02%);
+        }
+        .navbar-toggler-icon {
+            color: rgba(0,0,0,.5);
+            border-color: rgba(0,0,0,.1);
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+    </style>
     <script>
         let flightData;
         let currentPassengerSelected;
@@ -270,11 +319,35 @@
         }
     </script>
 </head>
-<body style="font-family: 'Poppins', sans-serif;">
-<input type="hidden" id="sessionId" value="${sessionId}">
+<body style="font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
+<nav class="navbar navbar-expand-md bg-white border-bottom" style="height: 75px;padding: 0 10vw 0 10vw;">
+    <a class="navbar-brand" href="#" style="font-size: 40px;font-weight: 600;color: #f39c12">
+        Airbook
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item py-3 active">
+                <a class="nav-link" href="/">Flight</a>
+            </li>
+            <li class="nav-item py-3">
+                <a class="nav-link" href="/promo">Promo</a>
+            </li>
+            <li class="nav-item py-3">
+                <a class="nav-link" href="bookingSearch">Check Booking</a>
+            </li>
+        </ul>
+        <div class="mt-2 mt-md-0">
+            <a href="/login" class="btn my-2 my-sm-0 shadow-sm login-btn">Login</a>
+        </div>
+    </div>
+</nav>
+<input type="hidden" id="sessionId" value="${sessionId}"><br><br>
 <div class="container">
     <div class="row">
-        <div class="col-sm-3 mt-3">
+        <div class="col-sm-3">
             <ul class="nav nav-pills list-group" role="tablist">
                 <div class="list-group">
                     <a href="#departure" data-toggle="pill" class="list-group-item">Departure Trip</a>
@@ -283,23 +356,25 @@
                     </c:if>
                 </div>
             </ul>
+            <br>
+            <button id="continue" class="btn btn-danger w-100" onclick="sendPassengerDataWithSeatCodes()">Continue</button>
         </div>
 
         <div class="col-sm-9">
             <div class="tab-content">
-                <div id="departure" class="container tab-pane active"><br>
-                    <div class="card shadow">
+                <div id="departure" class="container tab-pane active">
+                    <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <%--Passenger's Seat Record:--%>
                                 <div class="col-sm-5">
-                                    <h5>Click your name to start selecting a seat.</h5>
+                                    <h5 style="color: #59595b">Click your name to start selecting a seat.</h5>
                                     <ul style="list-style: none" id="departureNames">
                                         <c:forEach var="name" items="${passengerNames}">
                                             <li class="b-1 my-1">
-                                                <button class="mb-1">${name}</button>
+                                                <button class="mb-1 btn btn-outline-danger" >${name}</button>
                                                 <input type="hidden" value="${name}" name="departurePassengerName"/>
-                                                <input type="text" readonly value="" name="departureSeatCode"/>
+                                                <input type="text" class="form-control" readonly value="" name="departureSeatCode"/>
                                             </li>
                                         </c:forEach>
                                     </ul>
@@ -384,20 +459,20 @@
                 </div>
                 <c:if test="${flightReturn != null}">
 
-                    <div id="return" class="container tab-pane fade"><br>
-                        <div class="card shadow">
+                    <div id="return" class="container tab-pane fade">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <%--Passenger's Seat Record:--%>
                                     <div class="col-sm-5">
-                                        <h5>Click your name to start selecting a seat.</h5>
+                                        <h5 style="color: #59595b">Click your name to start selecting a seat.</h5>
                                         <ul style="list-style: none" id="returnNames">
                                             <c:forEach var="name" items="${passengerNames}">
                                                 <li class="b-1 my-1">
-                                                    <button class="mb-1">${name}</button>
+                                                    <button class="mb-1 btn btn-outline-danger">${name}</button>
                                                     <input type="hidden" value="${name}" name="returnPassengerName"/>
                                                     <br/>
-                                                    <input type="text" readonly value="" name="returnSeatCode"/>
+                                                    <input type="text" class="form-control" readonly value="" name="returnSeatCode"/>
                                                 </li>
                                             </c:forEach>
                                         </ul>
@@ -484,15 +559,15 @@
                 </c:if>
             </div>
         </div>
-        <div class="container">
-            <button>Back</button>
-            <%--<button id="continue"><a onclick="sendPassengerDataWithSeatCodes()" href="paymentMethod">Continue</a></button>--%>
-            <button id="continue" onclick="sendPassengerDataWithSeatCodes()">Continue</button>
-        </div>
+<%--        <div class="container">--%>
+<%--            <button>Back</button>--%>
+<%--            <button id="continue" onclick="sendPassengerDataWithSeatCodes()">Continue</button>--%>
+<%--        <button id="continue"><a onclick="sendPassengerDataWithSeatCodes()" href="paymentMethod">Continue</a></button>--%>
+<%--        </div>--%>
     </div>
 </div>
 
-<br><br><br><br>
+<br><br><br>
 </body>
 </html>
 

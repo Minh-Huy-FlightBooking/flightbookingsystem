@@ -260,7 +260,7 @@ public class PaymentController {
                                 List<PassengerInformation> passengerInformationListForEmails = flightPicker.getPassengerInformation();
                                 if (!passengerInformationListForEmails.isEmpty()) {
                                     for (PassengerInformation p : passengerInformationListForEmails) {
-                                        if (!p.getEmail().equals("")) {
+                                        if (p.getEmail()!=null) {
                                             emailService.sendMail(p.getEmail(), "Booking Details: " + booking.getBookingId(), "To see the details of your booking, click the link here  <a href='http://localhost:8080/bookingDetails?booking.bookingId=" + booking.getBookingId() + "'>" + "here" + "</a>" );
                                         }
                                     }

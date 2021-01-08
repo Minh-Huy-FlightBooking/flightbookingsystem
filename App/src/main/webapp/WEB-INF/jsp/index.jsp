@@ -373,21 +373,16 @@
     </div>
     <br>
     <div class="row">
-        <c:forEach begin="1" end="6">
+        <c:forEach var="flight" items="${flightListRecommend}">
             <div class="col-sm-4 rounded-lg" style="margin-bottom: 50px">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <p class="text-dark font-weight-bold" style="font-size: 20px;line-height: 17px;font-weight: 700;">${promo.eventName}</p>
-                            </div>
-                        </div>
                         <div class="row px-3">
                             <div class="col">
-                                <p>From <strong>Da Nang</strong><br>&#9992; <strong>Ho Chi Minh</strong></p>
+                                <p>From <strong>${flight.flightRoute.originAirport.city.cityName}</strong><br>&#9992; <strong>${flight.flightRoute.destinationAirport.city.cityName}</strong></p>
                                 <hr>
                                 <small>Start from</small>
-                                <h5><strong>$ 4.03</strong></h5>
+                                <h5><strong>$ ${flight.economyPrice}</strong></h5>
                             </div>
                         </div>
                         <div class="row px-3 pt-3">

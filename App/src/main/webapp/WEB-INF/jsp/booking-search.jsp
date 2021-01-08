@@ -124,14 +124,18 @@ To change this template use File | Settings | File Templates.
                                         ${t.flight.aircraft.model}
                                 </td>
                                 <td style="width: 15%">
+                                    ${t.flight.flightRoute.originAirport.city.cityName}
+                                        <br>
                                         ${t.flight.flightRoute.originAirport.airportName}
                                     <br/>
-                                        ${t.flight.departureTime}
+                                        ${t.flight._departureTime}
                                 </td>
                                 <td style="width: 15%">
+                                    ${t.flight.flightRoute.destinationAirport.city.cityName}
+                                        <br>
                                         ${t.flight.flightRoute.destinationAirport.airportName}
                                     <br/>
-                                        ${t.flight.arrivalTime}
+                                        ${t.flight._arrivalTime}
                                 </td>
                                 <td style="width: 10%;">${t.travelClass.className}</td>
                                 <td style="width: 10%">${t.ticketType.ticketTypeName}</td>
