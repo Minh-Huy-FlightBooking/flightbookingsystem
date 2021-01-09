@@ -122,8 +122,8 @@ public class PaymentController {
         return "payment";
     }
 
-    @RequestMapping(value = "/payment", method = RequestMethod.POST)
     @Transactional
+    @RequestMapping(value = "/payment", method = RequestMethod.POST)
     public String handlePayment(@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request) {
         System.out.println(request.getSession().getId());
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
