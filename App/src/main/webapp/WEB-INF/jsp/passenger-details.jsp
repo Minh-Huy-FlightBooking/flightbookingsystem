@@ -116,125 +116,8 @@
         let passengerInformation = new Array();
 
         //Send Data back to Server --> Using Ajax
-        let blankExistence;
-        function sendPassengerData() {
-            //Save contact Information
-            flightData.contactInformation.firstName = $('#firstName').val();
-            flightData.contactInformation.lastName = $('#lastName').val();
-            flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
-            flightData.contactInformation.email = $('#email').val();
 
-            for (let i = 1; i <= (adults + children + infants); i++) {
-                let passengerData = document.getElementById("passenger-" + i);
-                let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
-                    phoneNumber;
 
-                title = passengerData.getElementsByTagName("select").namedItem("title").value;
-
-                gender = passengerData.getElementsByTagName("select").namedItem("gender").value;
-                nationality = passengerData.getElementsByTagName("select").namedItem("nationality").value;
-
-                firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
-                lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
-                dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
-                if (title != "infant") {
-                    passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
-                    expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
-                }
-
-                if (title != "infant" && title != "child" && isDataSentChecked) {
-                    email = passengerData.getElementsByTagName("input").namedItem("email").value;
-                    phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
-                }
-
-                /*console.log(title);
-                console.log(firstName);
-                console.log(lastName);
-                console.log(dateOfBirth);
-                console.log(gender);
-                console.log(nationality);*/
-                /*if (title != "infant") {
-                    console.log(passportNumber);
-                    console.log(expiryDate);
-                }
-                if (i == (adults + children + infants)) {
-                    console.log("The last one");
-                } else {
-                    console.log("Not The last one");
-                }*/
-
-                let person = {
-                    title: title,
-                    firstName: firstName,
-                    lastName: lastName,
-                    dateOfBirth: dateOfBirth,
-                    gender: gender,
-                    nationality: nationality,
-                    passportNumber: passportNumber,
-                    expiryDate: expiryDate,
-                    email: email,
-                    phoneNumber: phoneNumber
-                };
-
-                console.log(person);
-                passengerInformation.push(person);
-            }
-            console.log((passengerInformation));
-
-            for (let k = 0; k < passengerInformation.length; k++) {
-                if (passengerInformation[k].lastName === "" || passengerInformation[k].firstName === "" || passengerInformation[k].dateOfBirth === "" || passengerInformation[k].passportNumber === "" || passengerInformation[k].expiryDate === "") {
-                    blankExistence = false;
-                    break;
-                } else {
-                    blankExistence = true;
-                }
-            }
-            console.log("Before adding passengers' Information");
-            console.log(flightData);
-            flightData.passengerInformation = passengerInformation;
-            console.log(flightData);
-
-            //Send Data to Server here !! Ha ha!!
-            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
-            /*console.log(sessionStorage.getItem(sessionId));*/
-            console.log(blankExistence);
-            if (blankExistence) {
-                $.ajax({
-                    type: "POST",
-                    url: "flightPickerHandler",
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: JSON.stringify(flightData),
-                    success: function (data, textStatus, jqXHR) {
-                        console.log("send data to backend successfully: ");
-                        console.log(data);
-                        /*alert("passengers are saved!!!");
-                        alert(JSON.stringify(flightData));*/
-                        // move to a new page
-
-                        /*if (blankExistence) {*/
-                        location.href = "seatSelection";
-                        /* }*/
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
-                        console.log("fail");
-                        alert("OOP!!! Something is wrong!!!");
-                    }
-                });
-            }
-
-        }
-
-    </script>
-    <script>
-        /* var required = $('input,textarea,select').filter('[required]:true');
-         var allRequired = true;
-         required.each(function(){
-             if($(this).val() == ''){
-                 allRequired = false;
-             }
-         });*/
     </script>
 </head>
 <body style="min-height: 1000px ;font-family: 'Poppins', sans-serif;background-color: #f7f7f7">
@@ -437,101 +320,6 @@
                                                 </div>
                                             </div>
                                         </div>
-<%--                                        <div style="border-bottom: yellow solid 2px" class="passenger-data-item">--%>
-<%--                                            <div>--%>
-<%--                                                <h5>--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${p.title == 'adult'}">--%>
-<%--                                                            Adult--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${p.title == 'child'}">--%>
-<%--                                                            Child--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${p.title == 'infant'}">--%>
-<%--                                                            Infant--%>
-<%--                                                        </c:when>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </h5>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="form-row">--%>
-<%--                                                <div class="form-group col-md-2">--%>
-<%--                                                    <label>Title</label>--%>
-<%--                                                    <select class="form-control" name="title">--%>
-<%--                                                        <c:choose>--%>
-<%--                                                            <c:when test="${p.title == 'adult'}">--%>
-<%--                                                                <option value="Mr">Mr</option>--%>
-<%--                                                                <option value="Mrs">Mrs</option>--%>
-<%--                                                                <option value="Mrs">Ms</option>--%>
-<%--                                                                <option value="Mrs">Miss</option>--%>
-<%--                                                            </c:when>--%>
-<%--                                                            <c:when test="${p.title == 'infant'}">--%>
-<%--                                                                <option value="infant">Infant</option>--%>
-<%--                                                            </c:when>--%>
-<%--                                                            <c:otherwise>--%>
-<%--                                                                <option value="child">Child</option>--%>
-<%--                                                            </c:otherwise>--%>
-<%--                                                        </c:choose>--%>
-<%--                                                    </select>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group col-md-2">--%>
-<%--                                                    <label>First Name:</label>--%>
-<%--                                                    <input class="form-control required" name="firstName" placeholder="First Name" required/>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group col-md-2">--%>
-<%--                                                    <label>Last Name</label>--%>
-<%--                                                    <input class="form-control required" name="lastName" placeholder="Last Name" required/>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="form-row">--%>
-<%--                                                <div class="form-group col-md-2">--%>
-<%--                                                    <label>Gender</label>--%>
-<%--                                                    <select class="form-control required" name="gender" required>--%>
-<%--                                                        <option value="male">Male</option>--%>
-<%--                                                        <option value="female">Female</option>--%>
-<%--                                                        <option value="homosexuality">Homosexuality</option>--%>
-<%--                                                    </select>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group col-md-4">--%>
-<%--                                                    <label>Date Of Birth</label>--%>
-<%--                                                    <input type="date" class="form-control required" name="dateOfBirth" required/>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group col-md-2">--%>
-<%--                                                    <label>Nationality</label>--%>
-<%--                                                    <select class="form-control required" name="nationality" required>--%>
-<%--                                                        <option value="Vietnam">Vietnam</option>--%>
-<%--                                                        <option value="USA">USA</option>--%>
-<%--                                                    </select>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <c:if test="${p.title == 'adult' || p.title == 'child'}">--%>
-<%--                                                <div class="form-row">--%>
-<%--                                                    <div class="form-group col-md-3">--%>
-<%--                                                        <label>Passport Number:</label>--%>
-<%--                                                        <input path="passportNumber" class="form-control" name="passportNumber" required/>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="form-group col-md-3">--%>
-<%--                                                        <label>Expiry Date:</label>--%>
-<%--                                                        <input type="date" class="form-control" name="expiryDate" required/>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </c:if>--%>
-<%--                                            <c:if test="${p.title == 'adult'}">--%>
-<%--                                                <div class="form-row">--%>
-<%--                                                    <div class="form-group col-md-3">--%>
-<%--                                                        <label>Email:</label>--%>
-<%--                                                        <input path="passportNumber" class="form-control " name="email" disabled/>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="form-group col-md-3">--%>
-<%--                                                        <label>Phone Number:</label>--%>
-<%--                                                        <input type="text" class="form-control " name="phoneNumber" disabled/>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="form-group col-md-4">--%>
-<%--                                                        <label>Send Booking Data to this email</label>--%>
-<%--                                                        <input type="checkbox" name="sendInformationCheckbox" class="form-control  col-md-2 "/>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </c:if>--%>
-<%--                                        </div>--%>
                                         <br/>
                                     </c:forEach>
 
@@ -544,52 +332,6 @@
         </div>
 
         <div class="col-sm-4 " id="flightInformation">
-           <%-- <div class="card">
-                <div class="card-body px-0">
-                    <div class="col">
-                        <div class="row border-bottom" style="padding: 0 0 0 20px">
-                            <strong class="mb-1">Flight Information</strong>
-                            <p style="font-size: 14px;line-height: 17px;font-weight: 500;color: #9a9a9d">Price is showed in dollar unit.</p>
-                        </div>
-                        <div class="row border-bottom" style="padding: 20px 0 0 5px">
-                            <div class="col">
-                                <input type="hidden" id="tripType" name="tripType" value="${flightPicker.ticketInformation.tripType}">
-                                <div id="departure-flight-information">
-                                    <p><strong>Departure Trip</strong></p>
-                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.origin}</strong></p>
-                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.destination}</strong></p>
-                                    <p><small></small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="departurePrice"></strong></p>
-                                </div>
-                            </div>
-                            <c:if test="${flightPicker.ticketInformation.tripType == 'roundTrip'}">
-                                <div class="col">
-                                    <p><strong>Return Trip</strong></p>
-                                    <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.destination}</strong></p>
-                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${flightPicker.ticketInformation.origin}</strong></p>
-                                    <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="returnPrice"></strong></p>
-                                </div>
-                            </c:if>
-                        </div>
-                        <div class="row" style="padding: 20px 0px 0 5px" id="passengerNumbers">
-                            <div class="col">
-                                <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Adults: </strong>
-                                <small>${flightPicker.ticketInformation.adults}</small>
-                                <input type="hidden" value="${flightPicker.ticketInformation.adults}" name="adults" id="adults"/>
-                            </div>
-                            <div class="col">
-                                <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Children: </strong>
-                                <small>${flightPicker.ticketInformation.children}</small>
-                                <input type="hidden" value="${flightPicker.ticketInformation.children}" name="children" id="children"/>
-                            </div>
-                            <div class="col">
-                                <strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">Infants: </strong>
-                                <small>${flightPicker.ticketInformation.infant}</small>
-                                <input type="hidden" value="${flightPicker.ticketInformation.infant}" name="infants" id="infants"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
             <br>
             <button type="submit" id="continue" class="btn btn-danger w-100 py-2" onclick="sendPassengerData()">Continue</button>
         </div>
@@ -600,5 +342,99 @@
 <footer>
     <jsp:include page="footer.jsp"/>
 </footer>
+<script>
+    let blankExistence;
+    function sendPassengerData() {
+        //Save contact Information
+        flightData.contactInformation.firstName = $('#firstName').val();
+        flightData.contactInformation.lastName = $('#lastName').val();
+        flightData.contactInformation.phoneNumber = $('#phoneNumber').val();
+        flightData.contactInformation.email = $('#email').val();
+
+        for (let i = 1; i <= (adults + children + infants); i++) {
+            let passengerData = document.getElementById("passenger-" + i);
+            let title, firstName, lastName, gender, dateOfBirth, nationality, passportNumber, expiryDate, email,
+                phoneNumber;
+
+            title = passengerData.getElementsByTagName("select").namedItem("title").value;
+
+            gender = passengerData.getElementsByTagName("select").namedItem("gender").value;
+            nationality = passengerData.getElementsByTagName("select").namedItem("nationality").value;
+
+            firstName = passengerData.getElementsByTagName("input").namedItem("firstName").value;
+            lastName = passengerData.getElementsByTagName("input").namedItem("lastName").value;
+            dateOfBirth = passengerData.getElementsByTagName("input").namedItem("dateOfBirth").value;
+            if (title != "infant") {
+                passportNumber = passengerData.getElementsByTagName("input").namedItem("passportNumber").value;
+                expiryDate = passengerData.getElementsByTagName("input").namedItem("expiryDate").value;
+            }
+
+            if (title != "infant" && title != "child" && isDataSentChecked) {
+                email = passengerData.getElementsByTagName("input").namedItem("email").value;
+                phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
+            }
+
+            let person = {
+                title: title,
+                firstName: firstName,
+                lastName: lastName,
+                dateOfBirth: dateOfBirth,
+                gender: gender,
+                nationality: nationality,
+                passportNumber: passportNumber,
+                expiryDate: expiryDate,
+                email: email,
+                phoneNumber: phoneNumber
+            };
+
+            console.log(person);
+            passengerInformation.push(person);
+        }
+        console.log((passengerInformation));
+
+        /*for (let k = 0; k < passengerInformation.length; k++) {
+            if (!passengerInformation[k].lastName.localeCompare("") || !passengerInformation[k].firstName.localeCompare("") || !passengerInformation[k].dateOfBirth.localeCompare("") || !passengerInformation[k].passportNumber.localeCompare("") || !passengerInformation[k].expiryDate.localeCompare("")) {
+                blankExistence = false;
+                console.log("Here i go : " + blankExistence);
+                break;
+            } else {
+                console.log("Here i go : " + blankExistence);
+                blankExistence = true;
+            }
+        }*/
+        console.log("Before adding passengers' Information");
+        console.log(flightData);
+        flightData.passengerInformation = passengerInformation;
+        console.log(flightData);
+
+        //Send Data to Server here !! Ha ha!!
+        sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
+        /*console.log(sessionStorage.getItem(sessionId));*/
+        /*alert(blankExistence);*/
+        /*if (blankExistence == true) {*/
+            $.ajax({
+                type: "POST",
+                url: "flightPickerHandler",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(flightData),
+                success: function (data, textStatus, jqXHR) {
+                    console.log("send data to backend successfully: ");
+                    console.log(data);
+                    // move to a new page
+
+                    /*alert("Succeed!!!");*/
+                    location.href = "seatSelection";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log("fail");
+                    alert("OOP!!! Something is wrong!!!");
+                }
+            });
+        /*}*/
+
+    }
+</script>
 </body>
 </html>

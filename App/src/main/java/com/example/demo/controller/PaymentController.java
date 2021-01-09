@@ -269,27 +269,28 @@ public class PaymentController {
                         } catch (Exception e)
                         {
                             e.printStackTrace();
+
                             model.addAttribute("message", "Your Information filled in previously has something wrong...");
-                            return "payment";
+                            return "redirect:/payment";
                         }
                             return "payment-receipt";
                     } else
                     {
                         model.addAttribute("creditCard", creditCard);
                         model.addAttribute("message", "Fail to pay for the ticket's prices --> your balance is not enough!!!");
-                        return "payment";
+                        return "redirect:/payment";
                     }
                     /////////////////////////////////////////////////////
                 } else
                 {
                     model.addAttribute("creditCard", creditCard);
                     model.addAttribute("message", "Please check your otp again...");
-                    return "payment";
+                    return "redirect:/payment";
                 }
             }
         }
         System.out.println("Opp, you should check your credit card again");
-        return "payment";
+        return "redirect:/payment";
     }
 
 
