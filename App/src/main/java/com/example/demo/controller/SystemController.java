@@ -59,6 +59,7 @@ public class SystemController {
         System.out.println(request.getSession().getId());
         model.addAttribute("ticketInformation", new TicketInformation());
         model.addAttribute("aircraftList",aircraftService.getAllAircraft());
+        model.addAttribute("flightListRecommend", flightService.getAllFlightRecommend());
         /*----*/
         return "index";
     }
