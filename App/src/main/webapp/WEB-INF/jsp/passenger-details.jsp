@@ -116,6 +116,7 @@
         let passengerInformation = new Array();
 
         //Send Data back to Server --> Using Ajax
+        let blankExistence;
         function sendPassengerData() {
             //Save contact Information
             flightData.contactInformation.firstName = $('#firstName').val();
@@ -146,13 +147,13 @@
                     phoneNumber = passengerData.getElementsByTagName("input").namedItem("phoneNumber").value;
                 }
 
-                console.log(title);
+                /*console.log(title);
                 console.log(firstName);
                 console.log(lastName);
                 console.log(dateOfBirth);
                 console.log(gender);
-                console.log(nationality);
-                if (title != "infant") {
+                console.log(nationality);*/
+                /*if (title != "infant") {
                     console.log(passportNumber);
                     console.log(expiryDate);
                 }
@@ -160,7 +161,7 @@
                     console.log("The last one");
                 } else {
                     console.log("Not The last one");
-                }
+                }*/
 
                 let person = {
                     title: title,
@@ -179,6 +180,15 @@
                 passengerInformation.push(person);
             }
             console.log((passengerInformation));
+
+            for (let k = 0; k < passengerInformation.length; k++) {
+                if (passengerInformation[k].lastName === "" || passengerInformation[k].firstName === "" || passengerInformation[k].dateOfBirth === "" || passengerInformation[k].passportNumber === "" || passengerInformation[k].expiryDate === "") {
+                    blankExistence = false;
+                    break;
+                } else {
+                    blankExistence = true;
+                }
+            }
             console.log("Before adding passengers' Information");
             console.log(flightData);
             flightData.passengerInformation = passengerInformation;
@@ -186,30 +196,34 @@
 
             //Send Data to Server here !! Ha ha!!
             sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
-            console.log(sessionStorage.getItem(sessionId));
-            $.ajax({
-                type: "POST",
-                url: "flightPickerHandler",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(flightData),
-                success: function (data, textStatus, jqXHR) {
-                    console.log("send data to backend successfully: ");
-                    console.log(data);
-                    /*alert("passengers are saved!!!");
-                    alert(JSON.stringify(flightData));*/
-                    // move to a new page
+            /*console.log(sessionStorage.getItem(sessionId));*/
+            console.log(blankExistence);
+            if (blankExistence) {
+                $.ajax({
+                    type: "POST",
+                    url: "flightPickerHandler",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(flightData),
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("send data to backend successfully: ");
+                        console.log(data);
+                        /*alert("passengers are saved!!!");
+                        alert(JSON.stringify(flightData));*/
+                        // move to a new page
 
-                    /*if (!allRequired) {*/
-                    location.href = "seatSelection";
-                    /*}*/
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
-                    console.log("fail");
-                    alert("OOP!!! Something is wrong!!!");
-                }
-            });
+                        /*if (blankExistence) {*/
+                        location.href = "seatSelection";
+                        /* }*/
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log("fail");
+                        alert("OOP!!! Something is wrong!!!");
+                    }
+                });
+            }
+
         }
 
     </script>
