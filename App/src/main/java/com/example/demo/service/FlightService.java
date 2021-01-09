@@ -75,6 +75,7 @@ public class FlightService {
 //        Flight flight = flightRepository.findByFlightId(id);
 //        if (flight.getFlightStatus().equals("On time")) return false;
         try{
+            if(flightRepository.findByFlightId(id).getFlightStatus().equals("On time"))return false;
             ticketService.deleteByFlightId(id);
             flightRepository.deleteById(id);
             return true;
