@@ -106,7 +106,7 @@
                                         Payment <br/> Method
                                     </th>
                                     <th>
-                                        Card <br/> Number
+                                        Card <br/> Code
                                     </th>
                                     <th>
                                         Email
@@ -133,11 +133,8 @@
                                         <td>${b.guest.email}</td>
                                         <td>
                                                 ${b.guest.firstName} &nbsp; ${b.guest.lastName}
-                                            <br/>
-                                                ${b.guest.guestId}
                                         </td>
                                         <td>
-                                                ${b.payment.paymentId}
                                                 ${b.payment.paymentDate}
                                         </td>
                                         <td>${b.payment.totalPayment} <pan id="unit">$</pan></td>

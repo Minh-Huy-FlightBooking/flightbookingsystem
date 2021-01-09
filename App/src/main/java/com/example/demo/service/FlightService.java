@@ -95,11 +95,16 @@ public class FlightService {
         // check time input
         if(flight.getDepartureTime().isAfter(flight.getArrivalTime())||flight.getDepartureTime().isEqual(flight.getArrivalTime())) ex = true;
         // check data existed
-        if(flightRepository.findByFlightId(flight.getFlightId())!=null){
-
-        }else {
+        if(flightRepository.findByFlightId(flight.getFlightId())==null){
             if (flightRepository.existsByDepartureTimeAndArrivalTimeAndFlightRouteAndAircraft(flight.getDepartureTime()
                     ,flight.getArrivalTime(),flight.getFlightRoute(),flight.getAircraft())) ex = true;
+            List<Flight> flightList1 = flightRepository.findByFlightRouteAndAircraft(flight.getFlightRoute(),flight.getAircraft());
+            LocalDateTime departure_time = flight.getDepartureTime();
+            LocalDateTime arrival_time = flight.getDepartureTime();
+            for(Flight f : flightList1){
+                if (departure_time.isAfter(f.getDepartureTime())&&departure_time.isBefore(f.getArrivalTime())) ex = true;
+                if (arrival_time.isAfter(f.getDepartureTime())&&arrival_time.isBefore(f.getArrivalTime())) ex = true;
+            }
         }
         if (flightRepository.findByFlightId(flight.getFlightId())!=null){
             List<Flight> flightList1 = flightRepository.findByFlightRouteAndAircraft(flight.getFlightRoute(),flight.getAircraft());
