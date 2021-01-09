@@ -553,7 +553,7 @@
                                             <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                             <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                             <br/>
-                                                ${f.economyPrice}
+                                                ${f.economyPrice} <span class="unit">$</span>
                                         </td>
                                         </c:if>
                                         <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'business'}">
@@ -567,7 +567,7 @@
                                             <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                             <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                             <br/>
-                                                ${f.businessPrice}
+                                                ${f.businessPrice} <span class="unit">$</span>
                                         </td>
                                         </c:if>
                                     </tr>
@@ -630,7 +630,7 @@
                                                 <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                                 <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                                 <br/>
-                                                    ${rf.economyPrice}
+                                                    ${rf.economyPrice} <span class="unit">$</span>
                                             </td>
                                             </c:if>
                                             <c:if test="${ticketInformation.travelClass == 'all' || ticketInformation.travelClass == 'business'}">
@@ -644,7 +644,7 @@
                                                 <input type="hidden" value="${ticketInformation.children}" id="children" name="children"/>
                                                 <input type="hidden" value="${ticketInformation.infant}" id="infants" name="infants"/>
                                                 <br/>
-                                                    ${rf.businessPrice}
+                                                    ${rf.businessPrice} <span class="unit">$</span>
                                             </td>
                                             </c:if>
                                         </tr>
@@ -673,6 +673,7 @@
                                     <p><strong>Departure Trip</strong></p>
                                     <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.destination}</strong></p>
                                     <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.origin}</strong></p>
+                                    <p><small>(Per An Adult)</small></p>
                                     <p><small></small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="departurePrice" id="departure-price-display-item"></strong></p>
                                 </div>
                             </div>
@@ -681,6 +682,7 @@
                                     <p><strong>Return Trip</strong></p>
                                     <p><small>Departure : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.destination}</strong></p>
                                     <p><small>Arrival : </small><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b">${ticketInformation.origin}</strong></p>
+                                    <p><small>(Per An Adult)</small></p>
                                     <p><strong style="font-size: 14px;line-height: 17px;font-weight: 700;color: #59595b" name="returnPrice" id="return-price-display-item"></strong></p>
                                 </div>
                             </c:if>

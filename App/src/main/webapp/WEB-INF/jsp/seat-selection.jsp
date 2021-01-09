@@ -294,28 +294,64 @@
     </script>
     <script>
         function sendPassengerDataWithSeatCodes() {
-            flightData.departureTrip.departureSeatPossessions = departureSeatPossession ;
-            flightData.returnTrip.returnSeatPossessions = returnSeatPossession;
-            console.log("Clicked!!!");
-            console.log(flightData);
-            sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
-
-            $.ajax({
-                type: "POST",
-                url: "flightPickerHandler",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(flightData),
-                success: function (data, textStatus, jqXHR) {
-                    console.log("send data to backend successfully: ");
-                    console.log(data);
-                    location.href ="paymentMethod";
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
-                    console.log("fail");
+            /*let isFilledDeparture, isFilledReturn, isFilled;
+            for (let i = 0; i < departureSeatPossession; i++) {
+                if (departureSeatPossession[i].seatCode == null) {
+                    isFilledDeparture = false;
+                    break;
+                } else {
+                    isFilledDeparture = true;
                 }
-            });
+            }
+            if (flightData.ticketInformation.tripType == "roundTrip") {
+                for (let i = 0; i < returnSeatPossession; i++) {
+                    if (returnSeatPossession[i].seatCode == null) {
+                        isFilledReturn = false;
+                        break;
+                    } else {
+                        isFilledReturn = true;
+                    }
+                }
+            }
+            if (flightData.ticketInformation.tripType == "roundTrip") {
+                if (isFilledDeparture == true && isFilledReturn == true) {
+                    isFilled = true;
+                } else {
+                    isFilled = false;
+                }
+            } else {
+                if (isFilledDeparture == true) {
+                    isFilled = true;
+                } else {
+                    isFilled = false;
+                }
+            }*/
+
+            /*if (isFilled == true) {*/
+                flightData.departureTrip.departureSeatPossessions = departureSeatPossession;
+                flightData.returnTrip.returnSeatPossessions = returnSeatPossession;
+                console.log("Clicked!!!");
+                console.log(flightData);
+                sessionStorage.setItem(sessionId.value, JSON.stringify(flightData));
+
+                $.ajax({
+                    type: "POST",
+                    url: "flightPickerHandler",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(flightData),
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("send data to backend successfully: ");
+                        console.log(data);
+                        location.href ="paymentMethod";
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log("fail");
+                    }
+                });
+            /*}*/
+
         }
     </script>
 </head>
