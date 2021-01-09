@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -122,9 +124,9 @@ public class PaymentController {
         return "payment";
     }
 
-    @RequestMapping(value = "/payment", method = RequestMethod.POST)
     @Transactional
-    public String handlePayment(@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request) {
+    @RequestMapping(value = "/payment", method = RequestMethod.POST)
+    public String handlePayment(@ModelAttribute CreditCard creditCard, Model model, HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         System.out.println(request.getSession().getId());
         FlightPicker flightPicker = (FlightPicker) session.getAttribute(request.getSession().getId());
 
